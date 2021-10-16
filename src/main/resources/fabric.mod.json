@@ -1,0 +1,29 @@
+{
+	"schemaVersion": 1,
+	"id": "ksyxis",
+	"version": "${version}",
+	"name": "Ksyxis",
+	"description": "Speed up the loading of your world.",
+	"authors": [
+		"VidTu"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/ksyxis",
+		"sources": "https://github.com/VidTuGit/Ksyxis",
+		"issues": "https://github.com/VidTuGit/Ksyxis/issues"
+	},
+	"license": "MIT",
+	"icon": "ksyxis.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"ru.vidtu.ksyxis.Ksyxis"
+		]
+	},
+	"mixins": [
+		"ksyxis.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.11.3"
+	}
+}

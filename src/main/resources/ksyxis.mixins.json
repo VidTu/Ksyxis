@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "ru.vidtu.ksyxis.mixins",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": [
+		"MinecraftServerMixin"
+	],
+	"client": [],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

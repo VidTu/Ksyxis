@@ -40,7 +40,6 @@ body:
         - Forge 1.16.5
         - Forge 1.15.2
         - Forge 1.14.4
-        - Forge 1.12.2
     validations:
       required: true
   - type: input
@@ -59,5 +58,5 @@ body:
       options:
         - label: "I'm using the latest [mod version](https://modrinth.com/mod/ksyxis)"
           required: true
-        - label: "I'm using the latest [Fabric](https://fabricmc.net/use/)"
+        - label: "I'm using the latest [Fabric](https://fabricmc.net/use/)/[Forge](https://files.minecraftforge.net/)"
           required: true

@@ -2,18 +2,17 @@ package ru.vidtu.ksyxis.mixins;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.WorldGenerationProgressListener;
+import net.minecraft.server.world.ServerChunkManager;
 import ru.vidtu.ksyxis.Ksyxis;
 
 @Mixin(MinecraftServer.class)
 public class MinecraftServerMixin {
-	@Inject(method = "prepareStartRegion", at = @At("HEAD"), cancellable = true)
-	public void onPrepareStartReg(WorldGenerationProgressListener wgpl, CallbackInfo ci) {
+	@Redirect(method = "prepareStartRegion", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerChunkManager;getTotalChunksLoadedCount()I"))
+	public int onPrepareStartReg_redirectChunksLoaded(ServerChunkManager scm) {
 		Ksyxis.LOG.info("Not the long loadi-");
-		ci.cancel();
+		return 441;
 	}
 }

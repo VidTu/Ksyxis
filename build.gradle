@@ -6,7 +6,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = "Ksyxis"
-version = "1.0"
+version = "1.1"
 
 dependencies {
 	minecraft "com.mojang:minecraft:1.16.5"

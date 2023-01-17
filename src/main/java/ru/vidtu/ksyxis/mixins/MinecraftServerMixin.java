@@ -12,7 +12,6 @@ import ru.vidtu.ksyxis.Ksyxis;
 public class MinecraftServerMixin {
 	@Redirect(method = "prepareStartRegion", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerChunkManager;getTotalChunksLoadedCount()I"))
 	public int onPrepareStartReg_redirectChunksLoaded(ServerChunkManager scm) {
-		Ksyxis.LOG.info("Not the long loadi-");
 		return 441;
 	}
 }

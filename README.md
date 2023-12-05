@@ -7,6 +7,9 @@ Vanilla Minecraft loads 21x21 (441) spawn chunks every time you load a world. Th
 
 ### FAQ
 
+**Q**: Where to download?  
+**A**: [Modrinth](https://modrinth.com/mod/ksyxis), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ksyxis), [GitHub](https://github.com/VidTu/Ksyxis).
+
 **Q**: This mod doesn't speed up anything.  
 **A**: The effect may not be noticeable on high-end PCs. This mod is designed primarily for low-end devices. There's [a video](https://www.youtube.com/watch?v=PXWdDoVU1C4) through.
 
@@ -16,7 +19,7 @@ Vanilla Minecraft loads 21x21 (441) spawn chunks every time you load a world. Th
 **Q**: Which versions are supported?  
 **A**: Minecraft 1.14 or newer. There may be a backport to older versions in the future.
 
-**Q**: Where are the Forge/Fabric/Quilt/NeoForged versions?
+**Q**: Where are the Forge/Fabric/Quilt/NeoForged versions?  
 **A**: All in the same file.
 
 **Q**: Is it open source?  
@@ -27,9 +30,6 @@ Vanilla Minecraft loads 21x21 (441) spawn chunks every time you load a world. Th
 
 **Q**: I found a bug.  
 **A**: Report it [here](https://github.com/VidTu/Ksyxis/issues).
-
-**Q**: What are the official mod sources?  
-**A**: [Modrinth](https://modrinth.com/mod/ksyxis), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ksyxis), [GitHub](https://github.com/VidTu/Ksyxis).
 
 **Q**: It says *Ksyxis: No Mixin found*.  
 **A**: If you're using ancient Forge (1.15.2 or older), you may need to to install [MixinBootstrap](https://modrinth.com/mod/mixinbootstrap), [MixinBooter](https://modrinth.com/mod/mixinbooter), [UniMixins](https://modrinth.com/mod/unimixins) **OR** any other if you find it you're using ancient Forge versions released before 1.16. If you're using Forge 1.16 or newer, any Fabric, any Quilt, or any NeoForge, you don't need to install anything and this is a bug.

@@ -1,0 +1,15 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "MIT"
+issueTrackerURL = "https://github.com/VidTu/Ksyxis/issues"
+[[mods]]
+modId = "ksyxis"
+version = "${version}"
+displayName = "Ksyxis"
+updateJSONURL = "https://raw.githubusercontent.com/VidTu/ForgeUpdater/main/ksyxis.json"
+displayURL = "https://modrinth.com/mod/ksyxis"
+logoFile = "ksyxis.png"
+credits = ""
+authors = "VidTu"
+displayTest = "IGNORE_ALL_VERSION"
+description = '''Speed up the loading of your world.'''

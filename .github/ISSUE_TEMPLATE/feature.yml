@@ -1,8 +1,6 @@
 name: Feature request
 description: Suggest an improvement for this mod
-title: "[Feature] {short feature description here}"
 labels: ["enhancement"]
-assignees: []
 body:
   - type: textarea
     id: problem

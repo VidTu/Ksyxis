@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "ru.vidtu.ksyxis",
+    "id": "ksyxis",
+    "version": "${version}",
+    "metadata": {
+      "name": "Ksyxis",
+      "description": "Speed up the loading of your world.",
+      "license": "MIT",
+      "contributors": {
+        "VidTu": "Pig"
+      },
+      "contact": {
+        "homepage": "https://modrinth.com/mod/ksyxis",
+        "sources": "https://github.com/VidTu/Ksyxis",
+        "issues": "https://github.com/VidTu/Ksyxis/issues"
+      },
+      "icon": "ksyxis.png"
+    },
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "entrypoints": {
+      "init": "ru.vidtu.ksyxis.KsyxisQuilt"
+    }
+  },
+  "mixin": "ksyxis.mixins.json"
+}

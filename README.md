@@ -26,7 +26,7 @@ Vanilla Minecraft loads 21x21 (441) spawn chunks every time you load a world. Th
 **A**: [Yes.](https://github.com/VidTu/Ksyxis) (Licensed under [MIT License](https://github.com/VidTu/Ksyxis/blob/main/LICENSE))
 
 **Q**: Is it stable for use?  
-**A**: It should be
+**A**: It should be. No guarantee though. At least it should not break your worlds, you just won't be able to load them with this mod and can uninstall it to load otherwise.
 
 **Q**: I found a bug.  
 **A**: Report it [here](https://github.com/VidTu/Ksyxis/issues).

@@ -1,0 +1,15 @@
+[
+  {
+    "modid": "ksyxis",
+    "name": "Ksyxis",
+    "description": "Speed up the loading of your world.",
+    "version": "${version}",
+    "logoFile": "ksyxis.png",
+    "url": "https://modrinth.com/mod/ksyxis",
+    "updateUrl": "https://raw.githubusercontent.com/VidTu/Meta/main/ksyxis_forge_ancient.json",
+    "updateJSON": "https://raw.githubusercontent.com/VidTu/Meta/main/ksyxis_forge_legacy.json",
+    "authorList": [
+      "VidTu"
+    ]
+  }
+]

@@ -31,10 +31,10 @@ import net.minecraftforge.fml.common.Mod;
  *
  * @author VidTu
  */
-@Mod("ksyxis")
+@Mod(value = "ksyxis", modid = "ksyxis")
 public final class KsyxisForge {
     /**
-     * Calls {@link Ksyxis#init()} to log info. (from Forge)
+     * Calls {@link Ksyxis#init()}.
      */
     public KsyxisForge() {
         Ksyxis.init();

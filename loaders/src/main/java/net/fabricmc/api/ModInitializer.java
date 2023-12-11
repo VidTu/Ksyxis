@@ -17,14 +17,15 @@
 package net.fabricmc.api;
 
 /**
- * A mod initializer.
+ * Emulated entrypoint interface of the Fabric mod.
  *
- * <p>In {@code fabric.mod.json}, the entrypoint is defined with {@code main} key.</p>
+ * @author VidTu
+ * @author FabricMC
  */
 @FunctionalInterface
 public interface ModInitializer {
     /**
-     * Runs the mod initializer.
+     * Runs the entrypoint.
      */
     void onInitialize();
 }

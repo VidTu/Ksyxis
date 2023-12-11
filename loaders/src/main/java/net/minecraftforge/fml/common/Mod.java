@@ -11,20 +11,27 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This defines a Mod to FML.
- * Any class found with this annotation applied will be loaded as a Mod. The instance that is loaded will
- * represent the mod to other Mods in the system. It will be sent various subclasses of {@code ModLifecycleEvent}
- * at pre-defined times during the loading of the game.
+ * Emulated annotation of the Forge mod.
+ *
+ * @author VidTu
+ * @author MinecraftForge
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Mod {
+    // Java annotations will simply ignore unneeded things.
+
     /**
-     * The unique mod identifier for this mod.
-     * <b>Required to be lowercased in the english locale for compatibility. Will be truncated to 64 characters long.</b>
-     * <p>
-     * This will be used to identify your mod for third parties (other mods), it will be used to identify your mod for registries such as block and item registries.
-     * By default, you will have a resource domain that matches the modid. All these uses require that constraints are imposed on the format of the modid.
+     * Gets the mod ID for modern (1.13+) Forge.
+     *
+     * @return Modern mod ID
      */
     String value();
+
+    /**
+     * Gets the mod ID for legacy (1.12) Forge.
+     *
+     * @return Legacy mod ID
+     */
+    String modid();
 }

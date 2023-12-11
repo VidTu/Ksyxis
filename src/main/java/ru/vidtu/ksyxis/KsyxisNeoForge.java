@@ -34,7 +34,7 @@ import net.neoforged.fml.common.Mod;
 @Mod("ksyxis")
 public final class KsyxisNeoForge {
     /**
-     * Calls {@link Ksyxis#init()} to log info. (from Forge)
+     * Calls {@link Ksyxis#init()}.
      */
     public KsyxisNeoForge() {
         Ksyxis.init();

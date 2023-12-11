@@ -33,10 +33,17 @@ import net.fabricmc.api.ModInitializer;
  */
 public final class KsyxisFabric implements ModInitializer {
     /**
-     * Calls {@link Ksyxis#init()} to log info. (from Fabric)
+     * Calls {@link Ksyxis#init()}.
+     */
+    public KsyxisFabric() {
+        Ksyxis.init();
+    }
+
+    /**
+     * Does nothing.
      */
     @Override
     public void onInitialize() {
-        Ksyxis.init();
+        // NO-OP
     }
 }

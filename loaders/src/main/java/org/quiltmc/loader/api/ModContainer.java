@@ -17,6 +17,13 @@
 
 package org.quiltmc.loader.api;
 
+/**
+ * Emulated QuiltMC mod container.
+ *
+ * @author VidTu
+ * @author FabricMC
+ * @author QuiltMC
+ */
 public interface ModContainer {
 	// Ksyxis: Dummy class
 }

@@ -25,16 +25,27 @@
 package ru.vidtu.ksyxis.mixins;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import ru.vidtu.ksyxis.Ksyxis;
 
 /**
- * Mixin that does some hacky things with the server.
+ * Mixin that does some hacky things with the server to skip spawn chunk loading.
  *
  * @author VidTu
  */
-@Mixin(remap = false, targets = "net.minecraft.server.MinecraftServer")
+@Mixin(targets = {
+        // Deobfuscated
+        "net.minecraft.server.MinecraftServer", // Basically everywhere (It should be deobfuscated)
+
+        // Obfuscated
+        "net.minecraft.src.C_4977_" // Forge SRG (pre-1.20) :skull:
+}, remap = false)
+@Pseudo
 public abstract class MinecraftServerMixin {
     /**
      * An instance of this class cannot be created.
@@ -45,60 +56,98 @@ public abstract class MinecraftServerMixin {
         throw new AssertionError("No instances.");
     }
 
-    // MinecraftServer -> prepareLevels -> getTickingGenerated
+    // 1.14+
 
-    @SuppressWarnings({"UnresolvedMixinReference", "UnnecessaryQualifiedMemberReference"})
+    // Injects into MinecraftServer.prepareLevels (Mojang mappings) to warn about possible pigs.
+    @SuppressWarnings({"UnresolvedMixinReference"})
     @Inject(method = {
             // Deobfuscated
-            "Lnet/minecraft/server/MinecraftServer;prepareLevels(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Official Mojang
-            "Lnet/minecraft/server/MinecraftServer;prepareStartRegion(Lnet/minecraft/server/WorldGenerationProgressListener;)V", // Fabric Yarn
-            "Lnet/minecraft/server/MinecraftServer;loadInitialChunks(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge MCP
+            "prepareLevels(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Official Mojang
+            "prepareStartRegion(Lnet/minecraft/server/WorldGenerationProgressListener;)V", // Fabric Yarn
+            "loadInitialChunks(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge MCP
 
             // Obfuscated
-            "Lnet/minecraft/server/MinecraftServer;method_3774(Lnet/minecraft/class_3949;)V", // Fabric Intermediary
-            "Lnet/minecraft/server/MinecraftServer;func_213186_a(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge SRG (1.16.x)
-            "Lnet/minecraft/server/MinecraftServer;m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
-            "Lnet/minecraft/server/MinecraftServer;m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V" // Quilt Hashed
-    }, at = @At("HEAD"), remap = false)
+            "method_3774(Lnet/minecraft/class_3949;)V", // Fabric Intermediary
+            "func_213186_a(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge SRG (1.16.x)
+            "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
+            "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V" // Quilt Hashed
+    }, at = @At("HEAD"), remap = false, require = 0)
     public void ksyxis$prepareLevels$head(CallbackInfo ci) {
         Ksyxis.world();
     }
 
-
     // Injects into MinecraftServer.prepareLevels (Mojang mappings) to prevent loading chunks at the spawn.
-    @SuppressWarnings({"UnresolvedMixinReference", "UnnecessaryQualifiedMemberReference"})
+    @SuppressWarnings({"UnresolvedMixinReference"})
     @ModifyConstant(method = {
             // Deobfuscated
-            "Lnet/minecraft/server/MinecraftServer;prepareLevels(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Official Mojang
-            "Lnet/minecraft/server/MinecraftServer;prepareStartRegion(Lnet/minecraft/server/WorldGenerationProgressListener;)V", // Fabric Yarn
-            "Lnet/minecraft/server/MinecraftServer;loadInitialChunks(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge MCP
+            "prepareLevels(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Official Mojang
+            "prepareStartRegion(Lnet/minecraft/server/WorldGenerationProgressListener;)V", // Fabric Yarn
+            "loadInitialChunks(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge MCP
 
             // Obfuscated
-            "Lnet/minecraft/server/MinecraftServer;method_3774(Lnet/minecraft/class_3949;)V", // Fabric Intermediary
-            "Lnet/minecraft/server/MinecraftServer;func_213186_a(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge SRG (1.16.x)
-            "Lnet/minecraft/server/MinecraftServer;m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
-            "Lnet/minecraft/server/MinecraftServer;m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V" // Quilt Hashed
-    }, constant = @Constant(intValue = 11), remap = false)
+            "method_3774(Lnet/minecraft/class_3949;)V", // Fabric Intermediary
+            "func_213186_a(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge SRG (1.16.x)
+            "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
+            "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V" // Quilt Hashed
+    }, constant = @Constant(intValue = 11), remap = false, require = 0)
     public int ksyxis$prepareLevels$addRegionTicket(int constant) {
+        // Add zero-level ticket.
         return 0;
     }
 
     // Injects into MinecraftServer.prepareLevels (Mojang mappings) to prevent game freezing
     // while trying to wait for 441 chunks that will never load.
-    @SuppressWarnings({"UnresolvedMixinReference", "UnnecessaryQualifiedMemberReference"})
+    @SuppressWarnings({"UnresolvedMixinReference"})
     @ModifyConstant(method = {
             // Deobfuscated
-            "Lnet/minecraft/server/MinecraftServer;prepareLevels(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Official Mojang
-            "Lnet/minecraft/server/MinecraftServer;prepareStartRegion(Lnet/minecraft/server/WorldGenerationProgressListener;)V", // Fabric Yarn
-            "Lnet/minecraft/server/MinecraftServer;loadInitialChunks(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge MCP
+            "prepareLevels(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Official Mojang
+            "prepareStartRegion(Lnet/minecraft/server/WorldGenerationProgressListener;)V", // Fabric Yarn
+            "loadInitialChunks(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge MCP
 
             // Obfuscated
-            "Lnet/minecraft/server/MinecraftServer;method_3774(Lnet/minecraft/class_3949;)V", // Fabric Intermediary
-            "Lnet/minecraft/server/MinecraftServer;func_213186_a(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge SRG (1.16.x)
-            "Lnet/minecraft/server/MinecraftServer;m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
-            "Lnet/minecraft/server/MinecraftServer;m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V" // Quilt Hashed
-    }, constant = @Constant(intValue = 441), remap = false)
+            "method_3774(Lnet/minecraft/class_3949;)V", // Fabric Intermediary
+            "func_213186_a(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge SRG (1.16.x)
+            "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
+            "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V" // Quilt Hashed
+    }, constant = @Constant(intValue = 441), remap = false, require = 0)
     public int ksyxis$prepareLevels$getTickingGenerated(int constant) {
+        // Wait for 0 chunks to load.
         return 0;
+    }
+
+    // 1.13
+
+    // Injects into MinecraftServer.initialWorldChunkLoad (Forge MCP mappings) to warn about possible pigs.
+    @SuppressWarnings({"UnresolvedMixinReference"})
+    @Inject(method = {
+            // Deobfuscated
+            "initialWorldChunkLoad(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V", // Forge MCP
+
+            // Obfuscated
+            "method_20317(Lnet/minecraft/class_4070;)V", // Legacy Fabric Intermediary
+            "func_71222_d(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V" // Forge SRG
+    }, at = @At("HEAD"), remap = false, require = 0)
+    public void ksyxis$initialWorldChunkLoad$head(CallbackInfo ci) {
+        // Warn people.
+        Ksyxis.world();
+    }
+
+    // Injects into MinecraftServer.initialWorldChunkLoad (Forge MCP mappings) to prevent loading chunks at the spawn.
+    @SuppressWarnings({"UnresolvedMixinReference"})
+    @ModifyConstant(method = {
+            // Deobfuscated
+            "initialWorldChunkLoad(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V", // Forge MCP (1.13)
+            "initialWorldChunkLoad()V", // Forge MCP (1.12)
+            "prepareWorlds()V", // Legacy Fabric Yarn (1.12)
+
+            // Obfuscated
+            "method_20317(Lnet/minecraft/class_4070;)V", // Legacy Fabric Intermediary (1.13)
+            "method_3019()V", // Legacy Fabric Intermediary (1.12)
+            "func_71222_d(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V", // Forge SRG (1.13)
+            "func_71222_d()V" // Forge SRG (1.12)
+    }, constant = {@Constant(intValue = -192), @Constant(intValue = 192)}, remap = false, require = 0)
+    public int ksyxis$initialWorldChunkLoad$loop(int constant) {
+        // Loop from 1 to -1. (don't loop)
+        return constant < 0 ? 1 : -1;
     }
 }

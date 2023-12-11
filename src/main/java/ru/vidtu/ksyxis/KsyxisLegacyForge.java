@@ -24,29 +24,45 @@
 
 package ru.vidtu.ksyxis;
 
-import org.quiltmc.loader.api.ModContainer;
-import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
+import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
+
+import java.util.Map;
 
 /**
- * Main Ksyxis class for Quilt Loader.
+ * Main Ksyxis class for Legacy Forge coremod hook.
  *
  * @author VidTu
  */
-public final class KsyxisQuilt implements ModInitializer {
+public final class KsyxisLegacyForge implements IFMLLoadingPlugin {
     /**
-     * Calls {@link Ksyxis#init()}.
+     * Calls {@link Ksyxis#legacyInit()}.
      */
-    public KsyxisQuilt() {
-        Ksyxis.init();
+    public KsyxisLegacyForge() {
+        Ksyxis.legacyInit();
     }
 
-    /**
-     * Does nothing.
-     *
-     * @param mod Mod container, ignored
-     */
     @Override
-    public void onInitialize(ModContainer mod) {
+    public String getAccessTransformerClass() {
+        return null;
+    }
+
+    @Override
+    public String[] getASMTransformerClass() {
+        return new String[0];
+    }
+
+    @Override
+    public String getModContainerClass() {
+        return null;
+    }
+
+    @Override
+    public String getSetupClass() {
+        return null;
+    }
+
+    @Override
+    public void injectData(Map<String, Object> data) {
         // NO-OP
     }
 }

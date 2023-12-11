@@ -1,12 +1,9 @@
 {
-	"required": true,
-	"minVersion": "0.8",
-	"package": "ru.vidtu.ksyxis.mixins",
-	"compatibilityLevel": "JAVA_8",
-	"mixins": [
-		"MinecraftServerMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	}
+  "minVersion": "0.8",
+  "package": "ru.vidtu.ksyxis.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "LevelMixin",
+    "MinecraftServerMixin"
+  ]
 }

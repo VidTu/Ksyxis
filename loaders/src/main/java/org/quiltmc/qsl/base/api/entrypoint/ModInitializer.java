@@ -19,20 +19,16 @@ package org.quiltmc.qsl.base.api.entrypoint;
 import org.quiltmc.loader.api.ModContainer;
 
 /**
- * A mod initializer.
- * <p>
- * In {@code quilt.mod.json}, the entrypoint is defined with {@value #ENTRYPOINT_KEY} key.
+ * Emulated entrypoint interface of the Quilt mod.
+ *
+ * @author VidTu
+ * @author FabricMC
  */
 public interface ModInitializer {
     /**
-     * Represents the key which this entrypoint is defined with, whose value is {@value}.
-     */
-    String ENTRYPOINT_KEY = "init";
-
-    /**
-     * Runs the mod initializer.
+     * Runs the entrypoint.
      *
-     * @param mod the mod which is initialized
+     * @param mod Virtual mod container, do not use
      */
     void onInitialize(ModContainer mod);
 }

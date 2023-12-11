@@ -1,34 +1,34 @@
 {
-	"schemaVersion": 1,
-	"id": "ksyxis",
-	"version": "${version}",
-	"name": "Ksyxis",
-	"description": "Speed up the loading of your world.",
-	"authors": [
-		"VidTu"
-	],
-	"contact": {
-		"homepage": "https://modrinth.com/mod/ksyxis",
-		"sources": "https://github.com/VidTu/Ksyxis",
-		"issues": "https://github.com/VidTu/Ksyxis/issues"
-	},
-	"license": "MIT",
-	"icon": "ksyxis.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"ru.vidtu.ksyxis.KsyxisFabric"
-		]
-	},
-	"mixins": [
-		"ksyxis.mixins.json"
-	],
-	"custom": {
-		"modmenu": {
-			"links": {
-				"modmenu.curseforge": "https://curseforge.com/minecraft/mc-mods/ksyxis",
-				"modmenu.modrinth": "https://modrinth.com/mod/ksyxis"
-			}
-		}
-	}
+  "schemaVersion": 1,
+  "id": "ksyxis",
+  "version": "${version}",
+  "name": "Ksyxis",
+  "description": "Speed up the loading of your world.",
+  "authors": [
+    "VidTu"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/ksyxis",
+    "sources": "https://github.com/VidTu/Ksyxis",
+    "issues": "https://github.com/VidTu/Ksyxis/issues"
+  },
+  "license": "MIT",
+  "icon": "ksyxis.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "ru.vidtu.ksyxis.KsyxisFabric"
+    ]
+  },
+  "mixins": [
+    "ksyxis.mixins.json"
+  ],
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.curseforge": "https://curseforge.com/minecraft/mc-mods/ksyxis",
+        "modmenu.modrinth": "https://modrinth.com/mod/ksyxis"
+      }
+    }
+  }
 }

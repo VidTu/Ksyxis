@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Mixin that does some hacky things with the level to allow spawn chunks to unload on older versions.
+ * Mixin that does some hacky things with the level to allow spawn chunks to unload in older versions.
  *
  * @author VidTu
  */
@@ -43,7 +43,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
         "net.minecraft.class_1150" // Legacy Yarn
 }, remap = false)
 @Pseudo
-public class LevelMixin {
+public final class LevelMixin {
     /**
      * An instance of this class cannot be created.
      *
@@ -63,7 +63,7 @@ public class LevelMixin {
             // Obfuscated
             "func_72916_c(II)Z", // Forge SRG
             "method_3671(II)Z" // Legacy Fabric Intermediary
-    }, at = @At("HEAD"), cancellable = true, require = 0)
+    }, at = @At("HEAD"), cancellable = true, require = 0, expect = 0)
     public void ksyxis$isSpawnChunk$head(CallbackInfoReturnable<Boolean> cir) {
         // Never spawn chunk.
         cir.setReturnValue(false);

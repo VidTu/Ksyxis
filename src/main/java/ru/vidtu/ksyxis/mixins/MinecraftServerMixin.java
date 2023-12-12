@@ -46,7 +46,7 @@ import ru.vidtu.ksyxis.Ksyxis;
         "net.minecraft.src.C_4977_" // Forge SRG (pre-1.20) :skull:
 }, remap = false)
 @Pseudo
-public abstract class MinecraftServerMixin {
+public final class MinecraftServerMixin {
     /**
      * An instance of this class cannot be created.
      *
@@ -69,9 +69,10 @@ public abstract class MinecraftServerMixin {
             // Obfuscated
             "method_3774(Lnet/minecraft/class_3949;)V", // Fabric Intermediary
             "func_213186_a(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge SRG (1.16.x)
+            "m_129940_(Lnet/minecraft/src/C_21_;)V", // Forge SRG (1.17.x)
             "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
             "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V" // Quilt Hashed
-    }, at = @At("HEAD"), remap = false, require = 0)
+    }, at = @At("HEAD"), remap = false, require = 0, expect = 0)
     public void ksyxis$prepareLevels$head(CallbackInfo ci) {
         Ksyxis.world();
     }
@@ -87,9 +88,10 @@ public abstract class MinecraftServerMixin {
             // Obfuscated
             "method_3774(Lnet/minecraft/class_3949;)V", // Fabric Intermediary
             "func_213186_a(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge SRG (1.16.x)
+            "m_129940_(Lnet/minecraft/src/C_21_;)V", // Forge SRG (1.17.x)
             "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
             "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V" // Quilt Hashed
-    }, constant = @Constant(intValue = 11), remap = false, require = 0)
+    }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
     public int ksyxis$prepareLevels$addRegionTicket(int constant) {
         // Add zero-level ticket.
         return 0;
@@ -107,9 +109,10 @@ public abstract class MinecraftServerMixin {
             // Obfuscated
             "method_3774(Lnet/minecraft/class_3949;)V", // Fabric Intermediary
             "func_213186_a(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge SRG (1.16.x)
+            "m_129940_(Lnet/minecraft/src/C_21_;)V", // Forge SRG (1.17.x)
             "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
             "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V" // Quilt Hashed
-    }, constant = @Constant(intValue = 441), remap = false, require = 0)
+    }, constant = @Constant(intValue = 441), remap = false, require = 0, expect = 0)
     public int ksyxis$prepareLevels$getTickingGenerated(int constant) {
         // Wait for 0 chunks to load.
         return 0;
@@ -126,7 +129,7 @@ public abstract class MinecraftServerMixin {
             // Obfuscated
             "method_20317(Lnet/minecraft/class_4070;)V", // Legacy Fabric Intermediary
             "func_71222_d(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V" // Forge SRG
-    }, at = @At("HEAD"), remap = false, require = 0)
+    }, at = @At("HEAD"), remap = false, require = 0, expect = 0)
     public void ksyxis$initialWorldChunkLoad$head(CallbackInfo ci) {
         // Warn people.
         Ksyxis.world();
@@ -145,7 +148,7 @@ public abstract class MinecraftServerMixin {
             "method_3019()V", // Legacy Fabric Intermediary (1.12)
             "func_71222_d(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V", // Forge SRG (1.13)
             "func_71222_d()V" // Forge SRG (1.12)
-    }, constant = {@Constant(intValue = -192), @Constant(intValue = 192)}, remap = false, require = 0)
+    }, constant = {@Constant(intValue = -192), @Constant(intValue = 192)}, remap = false, require = 0, expect = 0)
     public int ksyxis$initialWorldChunkLoad$loop(int constant) {
         // Loop from 1 to -1. (don't loop)
         return constant < 0 ? 1 : -1;

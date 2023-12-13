@@ -35,18 +35,11 @@ import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 public final class KsyxisQuilt implements ModInitializer {
     /**
      * Calls {@link Ksyxis#init()}.
-     */
-    public KsyxisQuilt() {
-        Ksyxis.init();
-    }
-
-    /**
-     * Does nothing.
      *
      * @param mod Mod container, ignored
      */
     @Override
     public void onInitialize(ModContainer mod) {
-        // NO-OP
+        Ksyxis.init();
     }
 }

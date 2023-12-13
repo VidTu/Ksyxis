@@ -34,13 +34,6 @@ import java.util.Map;
  * @author VidTu
  */
 public final class KsyxisLegacyForge implements IFMLLoadingPlugin {
-    /**
-     * Calls {@link Ksyxis#legacyInit()}.
-     */
-    public KsyxisLegacyForge() {
-        Ksyxis.legacyInit();
-    }
-
     @Override
     public String getAccessTransformerClass() {
         return null;
@@ -61,8 +54,13 @@ public final class KsyxisLegacyForge implements IFMLLoadingPlugin {
         return null;
     }
 
+    /**
+     * Calls {@link Ksyxis#legacyInit()}.
+     *
+     * @param data Data, ignored
+     */
     @Override
     public void injectData(Map<String, Object> data) {
-        // NO-OP
+        Ksyxis.legacyInit();
     }
 }

@@ -14,7 +14,8 @@
       "contact": {
         "homepage": "https://modrinth.com/mod/ksyxis",
         "sources": "https://github.com/VidTu/Ksyxis",
-        "issues": "https://github.com/VidTu/Ksyxis/issues"
+        "issues": "https://github.com/VidTu/Ksyxis/issues",
+        "discord": "https://dsc.gg/vidtu"
       },
       "icon": "ksyxis.png"
     },
@@ -23,5 +24,12 @@
       "init": "ru.vidtu.ksyxis.KsyxisQuilt"
     }
   },
-  "mixin": "ksyxis.mixins.json"
+  "mixin": "ksyxis.mixins.json",
+  "modmenu": {
+    "links": {
+      "modmenu.curseforge": "https://curseforge.com/minecraft/mc-mods/ksyxis",
+      "modmenu.modrinth": "https://modrinth.com/mod/ksyxis",
+      "modmenu.discord": "https://dsc.gg/vidtu"
+    }
+  }
 }

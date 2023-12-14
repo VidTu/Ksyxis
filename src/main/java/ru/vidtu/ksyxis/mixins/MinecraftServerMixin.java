@@ -115,7 +115,7 @@ public final class MinecraftServerMixin {
     }, constant = @Constant(intValue = 441), remap = false, require = 0, expect = 0)
     public int ksyxis$prepareLevels$getTickingGenerated(int constant) {
         // Wait for 0 chunks to load.
-        return 0;
+        return Ksyxis.loadedChunks();
     }
 
     // 1.13

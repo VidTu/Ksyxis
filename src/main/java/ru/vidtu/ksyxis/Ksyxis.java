@@ -30,6 +30,7 @@ import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mixins;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
@@ -52,6 +53,12 @@ public final class Ksyxis {
      * Mixin inject error message.
      */
     private static final String MIXIN_INJECT = "Ksyxis: Unable to inject the Ksyxis configuration. It's probably a bug or something, you should report it on GitHub. If you don't want any hassles and just want to load the game without solving anything, delete the Ksyxis mod.";
+
+    /**
+     * How much chunks loaded should be reported to be loaded.
+     * Usually {@code 0}.
+     */
+    private static int loadedChunks = 0;
 
     /**
      * An instance of this class cannot be created.
@@ -115,8 +122,33 @@ public final class Ksyxis {
         // Verify Mixin.
         verifyMixins();
 
+        // Try to fix compat with ModernFix.
+        try {
+            Class<?> modernFixPluginClass = Class.forName("org.embeddedt.modernfix.core.ModernFixMixinPlugin");
+            Field modernFixPluginField = modernFixPluginClass.getDeclaredField("instance");
+            Method modernFixIsOptionEnabled = modernFixPluginClass.getMethod("isOptionEnabled", String.class);
+            Object modernFix = modernFixPluginField.get(null);
+            boolean removeSpawnChunks = (boolean) modernFixIsOptionEnabled.invoke(modernFix, "perf.remove_spawn_chunks.MinecraftServer");
+            if (removeSpawnChunks) {
+                loadedChunks = 441;
+                LOG.info("Ksyxis will report 441 loaded chunks to prevent deadlocks with ModernFix.");
+            }
+        } catch (Throwable ignored) {
+            // NO-OP
+        }
+
         // Log the info.
         LOG.info("Ksyxis will speedup your world loading, but may break everything :P");
+    }
+
+    /**
+     * Gets the amount of reported loaded chunks.
+     *
+     * @return Loaded chunks, usually {@code 0}
+     * @implNote Used for compatibility with ModernFix
+     */
+    public static int loadedChunks() {
+        return loadedChunks;
     }
 
     /**

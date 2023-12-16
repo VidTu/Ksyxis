@@ -9,7 +9,7 @@ jobs:
       - name: 'Validate wrapper'
         uses: gradle/wrapper-validation-action@v1
       - name: 'Setup JDK'
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: 8
           distribution: 'temurin'

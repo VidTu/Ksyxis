@@ -14,3 +14,15 @@ bin/
 .project
 *.DS_Store
 run/
+.gradle
+.apt_generated
+.factorypath
+.settings
+.springBeans
+.sts4-cache
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+.DS_Store

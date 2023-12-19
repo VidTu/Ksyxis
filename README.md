@@ -41,11 +41,11 @@ under [MIT License](https://github.com/VidTu/Ksyxis/blob/main/LICENSE))
 with this mod and can uninstall it to load otherwise.
 
 **Q**: I found a bug.  
-**A**: Report it [here](https://github.com/VidTu/Ksyxis/issues). If you are not sure this is a bug, you can join
+**A**: Report it [here](https://github.com/VidTu/Ksyxis/issues). If you are not sure if this is a bug, you can join
 the [Discord](https://discord.gg/Q6saSVSuYQ).
 
 **Q**: It says *Ksyxis: No Mixin found*.  
-**A**: If you're using ancient Forge (1.15.2 or older), you may need to to
+**A**: If you're using ancient Forge (1.15.2 or older), you may need to
 install [MixinBootstrap](https://modrinth.com/mod/mixinbootstrap), [MixinBooter](https://modrinth.com/mod/mixinbooter), [UniMixins](https://modrinth.com/mod/unimixins)
 **OR** any other if you find it you're using ancient Forge versions released before 1.16. If you're using Forge 1.16 or
 newer, any Fabric, any Quilt, or any NeoForge, you don't need to install anything and this is a bug.

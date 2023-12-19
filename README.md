@@ -13,8 +13,7 @@ disables spawn chunks.
 **A**: You can join my [Discord server](https://discord.gg/Q6saSVSuYQ).
 
 **Q**: Where to download?  
-**A
-**: [Modrinth](https://modrinth.com/mod/ksyxis), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ksyxis), [GitHub](https://github.com/VidTu/Ksyxis).
+**A**: [Modrinth](https://modrinth.com/mod/ksyxis), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ksyxis), [GitHub](https://github.com/VidTu/Ksyxis).
 
 **Q**: This mod doesn't speed up anything.  
 **A**: The effect may not be noticeable on high-end PCs. This mod is designed primarily for low-end devices.

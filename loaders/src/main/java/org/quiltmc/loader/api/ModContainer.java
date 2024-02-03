@@ -24,6 +24,7 @@ package org.quiltmc.loader.api;
  * @author FabricMC
  * @author QuiltMC
  */
+@SuppressWarnings("MarkerInterface") // <- Stub.
 public interface ModContainer {
-	// Ksyxis: Dummy class
+    // Ksyxis: Dummy class
 }

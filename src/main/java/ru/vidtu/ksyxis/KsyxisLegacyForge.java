@@ -39,6 +39,7 @@ public final class KsyxisLegacyForge implements IFMLLoadingPlugin {
         return null;
     }
 
+    @SuppressWarnings("ZeroLengthArrayAllocation") // <- One-time.
     @Override
     public String[] getASMTransformerClass() {
         return new String[0];

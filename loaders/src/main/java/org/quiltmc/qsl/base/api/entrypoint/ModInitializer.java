@@ -24,6 +24,7 @@ import org.quiltmc.loader.api.ModContainer;
  * @author VidTu
  * @author FabricMC
  */
+@SuppressWarnings("InterfaceMayBeAnnotatedFunctional") // <- Stub.
 public interface ModInitializer {
     /**
      * Runs the entrypoint.

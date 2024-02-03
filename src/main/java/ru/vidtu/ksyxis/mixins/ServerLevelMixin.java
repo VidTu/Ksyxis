@@ -34,6 +34,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
  *
  * @author VidTu
  */
+@SuppressWarnings({"UnresolvedMixinReference", "MethodMayBeStatic", "DollarSignInName", "SpellCheckingInspection"}) // <- Multi-version and Mixin (x3).
 @Mixin(targets = {
         // Deobfuscated
         "net.minecraft.server.level.ServerLevel", // Official Mojang
@@ -57,7 +58,6 @@ public final class ServerLevelMixin {
     }
 
     // Injects into ServerLevel.setDefaultSpawnPos (Mojang mappings) to prevent loading chunks at the spawn after setting it.
-    @SuppressWarnings({"UnresolvedMixinReference"})
     @ModifyConstant(method = {
             // Deobfuscated
             "setDefaultSpawnPos(Lnet/minecraft/core/BlockPos;F)V", // Official Mojang

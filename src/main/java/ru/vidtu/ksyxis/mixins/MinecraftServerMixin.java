@@ -38,6 +38,7 @@ import ru.vidtu.ksyxis.Ksyxis;
  *
  * @author VidTu
  */
+@SuppressWarnings({"UnresolvedMixinReference", "MethodMayBeStatic", "DollarSignInName", "SpellCheckingInspection"}) // <- Multi-version and Mixin (x3).
 @Mixin(targets = {
         // Deobfuscated
         "net.minecraft.server.MinecraftServer", // Basically everywhere (It should be deobfuscated)
@@ -59,7 +60,6 @@ public final class MinecraftServerMixin {
     // 1.14+
 
     // Injects into MinecraftServer.prepareLevels (Mojang mappings) to warn about possible pigs.
-    @SuppressWarnings({"UnresolvedMixinReference"})
     @Inject(method = {
             // Deobfuscated
             "prepareLevels(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Official Mojang
@@ -78,7 +78,6 @@ public final class MinecraftServerMixin {
     }
 
     // Injects into MinecraftServer.prepareLevels (Mojang mappings) to prevent loading chunks at the spawn.
-    @SuppressWarnings({"UnresolvedMixinReference"})
     @ModifyConstant(method = {
             // Deobfuscated
             "prepareLevels(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Official Mojang
@@ -99,7 +98,6 @@ public final class MinecraftServerMixin {
 
     // Injects into MinecraftServer.prepareLevels (Mojang mappings) to prevent game freezing
     // while trying to wait for 441 chunks that will never load.
-    @SuppressWarnings({"UnresolvedMixinReference"})
     @ModifyConstant(method = {
             // Deobfuscated
             "prepareLevels(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Official Mojang
@@ -121,7 +119,6 @@ public final class MinecraftServerMixin {
     // 1.13
 
     // Injects into MinecraftServer.initialWorldChunkLoad (Forge MCP mappings) to warn about possible pigs.
-    @SuppressWarnings({"UnresolvedMixinReference"})
     @Inject(method = {
             // Deobfuscated
             "initialWorldChunkLoad(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V", // Forge MCP
@@ -136,7 +133,6 @@ public final class MinecraftServerMixin {
     }
 
     // Injects into MinecraftServer.initialWorldChunkLoad (Forge MCP mappings) to prevent loading chunks at the spawn.
-    @SuppressWarnings({"UnresolvedMixinReference"})
     @ModifyConstant(method = {
             // Deobfuscated
             "initialWorldChunkLoad(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V", // Forge MCP (1.13)

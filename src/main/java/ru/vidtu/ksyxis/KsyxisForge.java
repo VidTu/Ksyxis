@@ -31,7 +31,7 @@ import net.minecraftforge.fml.common.Mod;
  *
  * @author VidTu
  */
-@Mod(value = "ksyxis", modid = "ksyxis")
+@Mod(value = "ksyxis", modid = "ksyxis", acceptableRemoteVersions = "*")
 public final class KsyxisForge {
     /**
      * Calls {@link Ksyxis#init()}.

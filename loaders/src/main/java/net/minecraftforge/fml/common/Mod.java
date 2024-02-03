@@ -34,4 +34,11 @@ public @interface Mod {
      * @return Legacy mod ID
      */
     String modid();
+
+    /**
+     * Gets the legacy remote version acceptance range.
+     *
+     * @return Legacy remote version acceptance range
+     */
+    String acceptableRemoteVersions();
 }

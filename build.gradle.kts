@@ -10,17 +10,13 @@ description = "Speed up the loading of your world."
 
 repositories {
     mavenCentral()
-    maven("https://maven.fabricmc.net/")
-    maven("https://maven.minecraftforge.net/")
-    maven("https://libraries.minecraft.net/")
+    maven("https://repo.spongepowered.org/repository/maven-public/")
 }
 
 dependencies {
-    val log4j = project.properties["log4j"]
-    val mixin = project.properties["mixin"]
     compileOnly(project(":loaders"))
-    compileOnly("org.apache.logging.log4j:log4j-api:${log4j}")
-    compileOnly("org.spongepowered:mixin:${mixin}")
+    compileOnly("org.apache.logging.log4j:log4j-api:2.22.1")
+    compileOnly("org.spongepowered:mixin:0.8.5")
 }
 
 tasks.withType<JavaCompile> {

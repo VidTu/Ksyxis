@@ -16,7 +16,7 @@ jobs:
       - name: 'Make wrapper executable'
         run: 'chmod +x ./gradlew'
       - name: 'Setup Gradle'
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v321
       - name: 'Build'
         run: './gradlew -Dorg.gradle.daemon=false build --no-daemon'
       - name: 'Upload artifacts'

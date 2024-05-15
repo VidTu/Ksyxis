@@ -16,7 +16,7 @@ repositories {
 dependencies {
     compileOnly(project(":loaders"))
     compileOnly("org.apache.logging.log4j:log4j-api:2.23.1")
-    compileOnly("org.spongepowered:mixin:0.8.5")
+    compileOnly("org.spongepowered:mixin:0.8.6")
 }
 
 tasks.withType<JavaCompile> {

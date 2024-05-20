@@ -63,5 +63,5 @@ the [Discord](https://discord.gg/Q6saSVSuYQ).
 **Q**: It says *Ksyxis: No Mixin found*.  
 **A**: If you're using ancient Forge (1.15.2 or older), you may need to
 install [MixinBootstrap](https://modrinth.com/mod/mixinbootstrap), [MixinBooter](https://modrinth.com/mod/mixinbooter),
-[UniMixins](https://modrinth.com/mod/unimixins) **OR** any other at your choice.If you're using Forge 1.16 or newer,
+[UniMixins](https://modrinth.com/mod/unimixins) **OR** any other at your choice. If you're using Forge 1.16 or newer,
 any Fabric, any Quilt, or any NeoForge, you don't need to install anything and this is a bug.

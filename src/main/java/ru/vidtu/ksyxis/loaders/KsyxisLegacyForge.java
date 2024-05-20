@@ -22,21 +22,47 @@
  * SOFTWARE.
  */
 
-package ru.vidtu.ksyxis;
+package ru.vidtu.ksyxis.loaders;
 
-import net.fabricmc.api.ModInitializer;
+import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
+import ru.vidtu.ksyxis.Ksyxis;
+
+import java.util.Map;
 
 /**
- * Main Ksyxis class for Fabric Loader.
+ * Main Ksyxis class for Legacy Forge coremod hook.
  *
  * @author VidTu
  */
-public final class KsyxisFabric implements ModInitializer {
+public final class KsyxisLegacyForge implements IFMLLoadingPlugin {
+    @Override
+    public String getAccessTransformerClass() {
+        return null;
+    }
+
+    @SuppressWarnings("ZeroLengthArrayAllocation") // <- One-time.
+    @Override
+    public String[] getASMTransformerClass() {
+        return new String[0];
+    }
+
+    @Override
+    public String getModContainerClass() {
+        return null;
+    }
+
+    @Override
+    public String getSetupClass() {
+        return null;
+    }
+
     /**
-     * Calls {@link Ksyxis#init()}.
+     * Calls {@link Ksyxis#legacyInit(String)} with "ForgeCore".
+     *
+     * @param data Data, ignored
      */
     @Override
-    public void onInitialize() {
-        Ksyxis.init();
+    public void injectData(Map<String, Object> data) {
+        Ksyxis.legacyInit("ForgeCore");
     }
 }

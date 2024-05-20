@@ -22,24 +22,22 @@
  * SOFTWARE.
  */
 
-package ru.vidtu.ksyxis;
+package ru.vidtu.ksyxis.loaders;
 
-import org.quiltmc.loader.api.ModContainer;
-import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
+import net.neoforged.fml.common.Mod;
+import ru.vidtu.ksyxis.Ksyxis;
 
 /**
- * Main Ksyxis class for Quilt Loader.
+ * Main Ksyxis class for NeoForged.
  *
  * @author VidTu
  */
-public final class KsyxisQuilt implements ModInitializer {
+@Mod("ksyxis")
+public final class KsyxisNeoForge {
     /**
-     * Calls {@link Ksyxis#init()}.
-     *
-     * @param mod Mod container, ignored
+     * Calls {@link Ksyxis#init(String)} with "NeoForge".
      */
-    @Override
-    public void onInitialize(ModContainer mod) {
-        Ksyxis.init();
+    public KsyxisNeoForge() {
+        Ksyxis.init("NeoForge");
     }
 }

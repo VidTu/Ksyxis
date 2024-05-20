@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "ru.vidtu.ksyxis.KsyxisFabric"
+      "ru.vidtu.ksyxis.loaders.KsyxisFabric"
     ]
   },
   "mixins": [

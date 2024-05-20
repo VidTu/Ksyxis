@@ -22,46 +22,22 @@
  * SOFTWARE.
  */
 
-package ru.vidtu.ksyxis;
+package ru.vidtu.ksyxis.loaders;
 
-import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
-
-import java.util.Map;
+import net.minecraftforge.fml.common.Mod;
+import ru.vidtu.ksyxis.Ksyxis;
 
 /**
- * Main Ksyxis class for Legacy Forge coremod hook.
+ * Main Ksyxis class for Forge.
  *
  * @author VidTu
  */
-public final class KsyxisLegacyForge implements IFMLLoadingPlugin {
-    @Override
-    public String getAccessTransformerClass() {
-        return null;
-    }
-
-    @SuppressWarnings("ZeroLengthArrayAllocation") // <- One-time.
-    @Override
-    public String[] getASMTransformerClass() {
-        return new String[0];
-    }
-
-    @Override
-    public String getModContainerClass() {
-        return null;
-    }
-
-    @Override
-    public String getSetupClass() {
-        return null;
-    }
-
+@Mod(value = "ksyxis", modid = "ksyxis", acceptableRemoteVersions = "*")
+public final class KsyxisForge {
     /**
-     * Calls {@link Ksyxis#legacyInit()}.
-     *
-     * @param data Data, ignored
+     * Calls {@link Ksyxis#init(String)} with "Forge".
      */
-    @Override
-    public void injectData(Map<String, Object> data) {
-        Ksyxis.legacyInit();
+    public KsyxisForge() {
+        Ksyxis.init("Forge");
     }
 }

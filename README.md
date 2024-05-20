@@ -4,8 +4,10 @@ Speed up your world loading by not loading nearby chunks every time.
 
 ### How?
 
-Vanilla Minecraft loads 21x21 (441) spawn chunks every time you load a world. This mod disables this feature and
-disables spawn chunks.
+*1.20.4 and older*: Vanilla Minecraft loads 21x21 (441) spawn chunks every time you load a world.  
+*1.20.5 and newer*: Vanilla Minecraft loads 5x5 (25) spawn chunks every time you load a world.
+
+**This mod fully removes spawn chunks.**
 
 ### FAQ
 
@@ -20,12 +22,12 @@ disables spawn chunks.
 There's [a video](https://www.youtube.com/watch?v=PXWdDoVU1C4) through.
 
 **Q**: Which mod loaders are supported?  
-**A**: Forge, Fabric, Quilt, NeoForge(d).
+**A**: Forge, Fabric, Quilt, NeoForge, Legacy Fabric, Ornithe (both Fabric and Quilt).
 
 **Q**: Which versions are supported?  
 **A**: Minecraft 1.8 or newer. There may be a backport to older versions in the future.
 
-**Q**: Where are the Forge/Fabric/Quilt/NeoForged versions?  
+**Q**: Where are the Forge, Fabric, Quilt, NeoForge, etc. versions?  
 **A**: All in the same file.
 
 **Q**: Do I need Fabric API or Quilt Standard Libraries?  
@@ -38,6 +40,9 @@ under [MIT License](https://github.com/VidTu/Ksyxis/blob/main/LICENSE))
 **Q**: Is it stable for use?  
 **A**: It should be. No guarantee though. At least it should not break your worlds, you just won't be able to load them
 with this mod and can uninstall it to load otherwise.
+
+**Q**: How to force-load chunks for ticking if spawn chunks have been removed?  
+**A**: If you really need ticking chunks, load individual chunks with the `/forceload` vanilla command.
 
 **Q**: I found a bug.  
 **A**: Report it [here](https://github.com/VidTu/Ksyxis/issues). If you are not sure if this is a bug, you can join

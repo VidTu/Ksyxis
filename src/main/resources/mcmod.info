@@ -6,8 +6,8 @@
     "version": "${version}",
     "logoFile": "ksyxis.png",
     "url": "https://modrinth.com/mod/ksyxis",
-    "updateUrl": "https://raw.githubusercontent.com/VidTu/Meta/main/ksyxis_forge_ancient.json",
-    "updateJSON": "https://raw.githubusercontent.com/VidTu/Meta/main/ksyxis_forge_legacy.json",
+    "updateUrl": "https://raw.githubusercontent.com/VidTu/Ksyxis/main/updater_ksyxis_ancient_forge.json",
+    "updateJSON": "https://raw.githubusercontent.com/VidTu/Ksyxis/main/updater_ksyxis_legacy_forge.json",
     "authorList": [
       "VidTu"
     ]

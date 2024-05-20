@@ -22,7 +22,7 @@
     },
     "intermediate_mappings": "net.fabricmc:intermediary",
     "entrypoints": {
-      "init": "ru.vidtu.ksyxis.KsyxisQuilt"
+      "init": "ru.vidtu.ksyxis.loaders.KsyxisQuilt"
     }
   },
   "mixin": "ksyxis.mixins.json",

@@ -24,12 +24,16 @@
 
 package ru.vidtu.ksyxis.mixins;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import ru.vidtu.ksyxis.Ksyxis;
 
@@ -49,6 +53,12 @@ import ru.vidtu.ksyxis.Ksyxis;
 @Pseudo
 public final class MinecraftServerMixin {
     /**
+     * Logger. Using Log4j logger, because SLF4J may not be available in older versions.
+     */
+    @Unique
+    private static final Logger KSYXIS$LOGGER = LogManager.getLogger("Ksyxis/MinecraftServerMixin");
+
+    /**
      * An instance of this class cannot be created.
      *
      * @throws AssertionError Always
@@ -57,7 +67,30 @@ public final class MinecraftServerMixin {
         throw new AssertionError("No instances.");
     }
 
-    // 1.14+
+    // 1.20.6
+
+    // Injects into MinecraftServer.prepareLevels (Mojang mappings) to override spawnChunkRadius gamerule.
+    @ModifyVariable(method = {
+            // Deobfuscated
+            "prepareLevels(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Official Mojang
+            "prepareStartRegion(Lnet/minecraft/server/WorldGenerationProgressListener;)V", // Fabric Yarn
+            "loadInitialChunks(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge MCP
+
+            // Obfuscated
+            "method_3774(Lnet/minecraft/class_3949;)V", // Fabric Intermediary
+            "func_213186_a(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge SRG (1.16.x)
+            "m_129940_(Lnet/minecraft/src/C_21_;)V", // Forge SRG (1.17.x)
+            "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
+            "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V", // Quilt Hashed
+            "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Feather
+    }, at = @At("STORE"), remap = false, require = 0, expect = 0, index = 5)
+    public int ksyxis$prepareLevels$spawnChunkRadius$getInt(int spawnChunkRadius) {
+        // Report spawn chunks gamerule as 0.
+        KSYXIS$LOGGER.debug("Ksyxis: Reporting 0 as spawnChunkRadius gamerule instead of {} (expected 0 to 32) in MinecraftServerMixin.", spawnChunkRadius);
+        return 0;
+    }
+
+    // 1.14 -> 1.20.4
 
     // Injects into MinecraftServer.prepareLevels (Mojang mappings) to warn about possible pigs.
     @Inject(method = {
@@ -71,10 +104,11 @@ public final class MinecraftServerMixin {
             "func_213186_a(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge SRG (1.16.x)
             "m_129940_(Lnet/minecraft/src/C_21_;)V", // Forge SRG (1.17.x)
             "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
-            "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V" // Quilt Hashed
+            "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V", // Quilt Hashed
+            "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Feather
     }, at = @At("HEAD"), remap = false, require = 0, expect = 0)
     public void ksyxis$prepareLevels$head(CallbackInfo ci) {
-        Ksyxis.world();
+        KSYXIS$LOGGER.info("Ksyxis: Hey. This is Ksyxis. We will now load the world and will try to do it quickly. If the game is not responding after this, it's probably us to blame or delete for good. This message appears always, even if the mod works flawlessly. (modern)");
     }
 
     // Injects into MinecraftServer.prepareLevels (Mojang mappings) to prevent loading chunks at the spawn.
@@ -89,10 +123,12 @@ public final class MinecraftServerMixin {
             "func_213186_a(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge SRG (1.16.x)
             "m_129940_(Lnet/minecraft/src/C_21_;)V", // Forge SRG (1.17.x)
             "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
-            "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V" // Quilt Hashed
+            "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V", // Quilt Hashed
+            "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Feather
     }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
     public int ksyxis$prepareLevels$addRegionTicket(int constant) {
         // Add zero-level ticket.
+        KSYXIS$LOGGER.debug("Ksyxis: Adding zero-level ticket instead of {} (expected 11) ticket in MinecraftServerMixin.", constant);
         return 0;
     }
 
@@ -109,27 +145,37 @@ public final class MinecraftServerMixin {
             "func_213186_a(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge SRG (1.16.x)
             "m_129940_(Lnet/minecraft/src/C_21_;)V", // Forge SRG (1.17.x)
             "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
-            "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V" // Quilt Hashed
+            "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V", // Quilt Hashed
+            "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Feather
     }, constant = @Constant(intValue = 441), remap = false, require = 0, expect = 0)
     public int ksyxis$prepareLevels$getTickingGenerated(int constant) {
         // Wait for 0 chunks to load.
-        return Ksyxis.loadedChunks();
+        int report = Ksyxis.loadedChunks();
+        KSYXIS$LOGGER.debug("Ksyxis: Reporting {} (expected 0 or 441) loaded chunks instead of {} (expected 441) in MinecraftServerMixin.", report, constant);
+        return report;
     }
 
-    // 1.13
+    // 1.8 -> 1.13.2
 
     // Injects into MinecraftServer.initialWorldChunkLoad (Forge MCP mappings) to warn about possible pigs.
     @Inject(method = {
             // Deobfuscated
-            "initialWorldChunkLoad(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V", // Forge MCP
+            "initialWorldChunkLoad(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V", // Forge MCP (1.13)
+            "initialWorldChunkLoad()V", // Forge MCP (1.12)
+            "prepareWorlds()V", // Legacy Fabric Yarn (1.12)
+            "prepareWorlds(Lnet/minecraft/world/storage/DimensionDataStorage;)V", // Ornithe Feather (1.13)
 
             // Obfuscated
-            "method_20317(Lnet/minecraft/class_4070;)V", // Legacy Fabric Intermediary
-            "func_71222_d(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V" // Forge SRG
+            "method_20317(Lnet/minecraft/class_4070;)V", // Legacy Fabric Intermediary (1.13)
+            "method_3019()V", // Legacy Fabric Intermediary (1.12)
+            "func_71222_d(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V", // Forge SRG (1.13)
+            "func_71222_d()V", // Forge SRG (1.12)
+            "m_4020281(Lnet/minecraft/unmapped/C_8054043;)V", // Ornithe Feather (1.13)
+            "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Feather (1.12)
     }, at = @At("HEAD"), remap = false, require = 0, expect = 0)
     public void ksyxis$initialWorldChunkLoad$head(CallbackInfo ci) {
         // Warn people.
-        Ksyxis.world();
+        KSYXIS$LOGGER.info("Ksyxis: Hey. This is Ksyxis. We will now load the world and will try to do it quickly. If the game is not responding after this, it's probably us to blame or delete for good. This message appears always, even if the mod works flawlessly. (legacy)");
     }
 
     // Injects into MinecraftServer.initialWorldChunkLoad (Forge MCP mappings) to prevent loading chunks at the spawn.
@@ -138,15 +184,20 @@ public final class MinecraftServerMixin {
             "initialWorldChunkLoad(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V", // Forge MCP (1.13)
             "initialWorldChunkLoad()V", // Forge MCP (1.12)
             "prepareWorlds()V", // Legacy Fabric Yarn (1.12)
+            "prepareWorlds(Lnet/minecraft/world/storage/DimensionDataStorage;)V", // Ornithe Feather (1.13)
 
             // Obfuscated
             "method_20317(Lnet/minecraft/class_4070;)V", // Legacy Fabric Intermediary (1.13)
             "method_3019()V", // Legacy Fabric Intermediary (1.12)
             "func_71222_d(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V", // Forge SRG (1.13)
-            "func_71222_d()V" // Forge SRG (1.12)
+            "func_71222_d()V", // Forge SRG (1.12)
+            "m_4020281(Lnet/minecraft/unmapped/C_8054043;)V", // Ornithe (1.13)
+            "m_4020281()V" // Ornithe (1.12)
     }, constant = {@Constant(intValue = -192), @Constant(intValue = 192)}, remap = false, require = 0, expect = 0)
     public int ksyxis$initialWorldChunkLoad$loop(int constant) {
         // Loop from 1 to -1. (don't loop)
-        return constant < 0 ? 1 : -1;
+        int report = constant < 0 ? 1 : -1;
+        KSYXIS$LOGGER.debug("Ksyxis: Hijacking loop constant from {} to {} to prevent looping in MinecraftServerMixin.", constant, report);
+        return report;
     }
 }

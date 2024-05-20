@@ -24,8 +24,11 @@
 
 package ru.vidtu.ksyxis.mixins;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -41,10 +44,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
         "net.minecraft.world.World", // Forge MCP + Forge SRG
 
         // Obfuscated
-        "net.minecraft.class_1150" // Legacy Yarn
+        "net.minecraft.class_1150", // Legacy Yarn
+        "net.minecraft.unmapped.C_5553933" // Ornithe
 }, remap = false)
 @Pseudo
 public final class LevelMixin {
+    /**
+     * Logger. Using Log4j logger, because SLF4J may not be available in older versions.
+     */
+    @Unique
+    private static final Logger KSYXIS$LOGGER = LogManager.getLogger("Ksyxis/LevelMixin");
+
     /**
      * An instance of this class cannot be created.
      *
@@ -54,7 +64,7 @@ public final class LevelMixin {
         throw new AssertionError("No instances.");
     }
 
-    // 1.13
+    // 1.8 -> 1.13
 
     @Inject(method = {
             // Deobfuscated
@@ -62,9 +72,15 @@ public final class LevelMixin {
 
             // Obfuscated
             "func_72916_c(II)Z", // Forge SRG
-            "method_3671(II)Z" // Legacy Fabric Intermediary
+            "method_3671(II)Z", // Legacy Fabric Intermediary
+            "m_4821236(II)Z" // Ornithe
     }, at = @At("HEAD"), cancellable = true, require = 0, expect = 0)
-    public void ksyxis$isSpawnChunk$head(CallbackInfoReturnable<Boolean> cir) {
+    public void ksyxis$isSpawnChunk$head(int x, int z, CallbackInfoReturnable<Boolean> cir) {
+        // Log but avoid useless allocations. (wrapping ints)
+        if (KSYXIS$LOGGER.isTraceEnabled()) {
+            KSYXIS$LOGGER.trace("Ksyxis: Forcing {}/{} to be not spawn chunk in LevelMixin. (we never knew if it was spawn chunk in the first place)", x, z);
+        }
+
         // Never spawn chunk.
         cir.setReturnValue(false);
     }

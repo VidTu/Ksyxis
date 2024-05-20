@@ -22,21 +22,22 @@
  * SOFTWARE.
  */
 
-package ru.vidtu.ksyxis;
+package ru.vidtu.ksyxis.loaders;
 
-import net.minecraftforge.fml.common.Mod;
+import net.fabricmc.api.ModInitializer;
+import ru.vidtu.ksyxis.Ksyxis;
 
 /**
- * Main Ksyxis class for Forge.
+ * Main Ksyxis class for Fabric Loader.
  *
  * @author VidTu
  */
-@Mod(value = "ksyxis", modid = "ksyxis", acceptableRemoteVersions = "*")
-public final class KsyxisForge {
+public final class KsyxisFabric implements ModInitializer {
     /**
-     * Calls {@link Ksyxis#init()}.
+     * Calls {@link Ksyxis#init(String)} with "Fabric".
      */
-    public KsyxisForge() {
-        Ksyxis.init();
+    @Override
+    public void onInitialize() {
+        Ksyxis.init("Fabric");
     }
 }

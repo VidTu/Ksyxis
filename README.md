@@ -2,19 +2,30 @@
 
 Speed up your world loading by not loading nearby chunks every time.
 
-### How?
+## How?
 
 *1.20.4 and older*: Vanilla Minecraft loads 21x21 (441) spawn chunks every time you load a world.  
 *1.20.5 and newer*: Vanilla Minecraft loads 5x5 (25) spawn chunks every time you load a world.
 
 **This mod fully removes spawn chunks.**
 
-### FAQ
+## Dependencies
+
+**Fabric**: (none)  
+**Quilt**: (none)    
+**Forge 1.16 and newer**: (none)  
+**Forge 1.15.2 and older**: Any Mixin provider at your choice (such as [MixinBootstrap](https://modrinth.com/mod/mixinbootstrap), [MixinBooter](https://modrinth.com/mod/mixinbooter), [UniMixins](https://modrinth.com/mod/unimixins) or any other)  
+**NeoForge**: (none)  
+**Quilt**: (none)  
+**Legacy Fabric**: (none)  
+**Ornithe** (none)
+
+## FAQ
 
 **Q**: I need help, have questions, or something else.  
-**A**: You can join my [Discord server](https://discord.gg/Q6saSVSuYQ).
+**A**: You can join the [Discord server](https://discord.gg/Q6saSVSuYQ).
 
-**Q**: Where to download?  
+**Q**: Where can I download this mod?  
 **A**: [Modrinth](https://modrinth.com/mod/ksyxis), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ksyxis), [GitHub](https://github.com/VidTu/Ksyxis).
 
 **Q**: This mod doesn't speed up anything.  
@@ -22,7 +33,7 @@ Speed up your world loading by not loading nearby chunks every time.
 There's [a video](https://www.youtube.com/watch?v=PXWdDoVU1C4) through.
 
 **Q**: Which mod loaders are supported?  
-**A**: Forge, Fabric, Quilt, NeoForge, Legacy Fabric, Ornithe (both Fabric and Quilt).
+**A**: Forge, Fabric, Quilt, NeoForge, Legacy Fabric, Ornithe (for both Fabric and Quilt).
 
 **Q**: Which versions are supported?  
 **A**: Minecraft 1.8 or newer. There may be a backport to older versions in the future.
@@ -42,7 +53,8 @@ under [MIT License](https://github.com/VidTu/Ksyxis/blob/main/LICENSE))
 with this mod and can uninstall it to load otherwise.
 
 **Q**: How to force-load chunks for ticking if spawn chunks have been removed?  
-**A**: If you really need ticking chunks, load individual chunks with the `/forceload` vanilla command.
+**A**: If you really need ticking chunks, load individual chunks with the `/forceload` vanilla command in 1.13 or newer.
+For older versions, you can search for some mod that force-loads chunks.
 
 **Q**: I found a bug.  
 **A**: Report it [here](https://github.com/VidTu/Ksyxis/issues). If you are not sure if this is a bug, you can join

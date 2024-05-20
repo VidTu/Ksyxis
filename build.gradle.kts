@@ -25,7 +25,15 @@ tasks.withType<JavaCompile> {
 
 tasks.withType<ProcessResources> {
     inputs.property("version", project.version)
-    filesMatching(listOf("fabric.mod.json", "quilt.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml", "mcmod.info")) {
+    filesMatching(
+        listOf(
+            "fabric.mod.json",
+            "quilt.mod.json",
+            "META-INF/mods.toml",
+            "META-INF/neoforge.mods.toml",
+            "mcmod.info"
+        )
+    ) {
         expand("version" to project.version)
     }
 }
@@ -34,16 +42,16 @@ tasks.withType<Jar> {
     from("LICENSE")
     manifest {
         attributes(
-                "Specification-Title" to "Ksyxis",
-                "Specification-Version" to project.version,
-                "Specification-Vendor" to "VidTu",
-                "Implementation-Title" to "Ksyxis",
-                "Implementation-Version" to project.version,
-                "Implementation-Vendor" to "VidTu",
-                "FMLCorePlugin" to "ru.vidtu.ksyxis.KsyxisLegacyForge",
-                "FMLCorePluginContainsFMLMod" to "true",
-                "ForceLoadAsMod" to "true",
-                "MixinConfigs" to "ksyxis.mixins.json"
+            "Specification-Title" to "Ksyxis",
+            "Specification-Version" to project.version,
+            "Specification-Vendor" to "VidTu",
+            "Implementation-Title" to "Ksyxis",
+            "Implementation-Version" to project.version,
+            "Implementation-Vendor" to "VidTu",
+            "FMLCorePlugin" to "ru.vidtu.ksyxis.KsyxisLegacyForge",
+            "FMLCorePluginContainsFMLMod" to "true",
+            "ForceLoadAsMod" to "true",
+            "MixinConfigs" to "ksyxis.mixins.json"
         )
     }
 }

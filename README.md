@@ -12,7 +12,6 @@ Speed up your world loading by not loading nearby chunks every time.
 ## Dependencies
 
 **Fabric**: (none)  
-**Quilt**: (none)    
 **Forge 1.16 and newer**: (none)  
 **Forge 1.15.2 and older**: Any Mixin provider at your choice (such as [MixinBootstrap](https://modrinth.com/mod/mixinbootstrap), [MixinBooter](https://modrinth.com/mod/mixinbooter), [UniMixins](https://modrinth.com/mod/unimixins) or any other)  
 **NeoForge**: (none)  

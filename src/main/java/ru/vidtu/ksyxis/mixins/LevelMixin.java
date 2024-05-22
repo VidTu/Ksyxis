@@ -78,7 +78,7 @@ public final class LevelMixin {
     public void ksyxis$isSpawnChunk$head(int x, int z, CallbackInfoReturnable<Boolean> cir) {
         // Log but avoid useless allocations. (wrapping ints)
         if (KSYXIS$LOGGER.isTraceEnabled()) {
-            KSYXIS$LOGGER.trace("Ksyxis: Forcing {}/{} to be not spawn chunk in LevelMixin. (we never knew if it was spawn chunk in the first place)", x, z);
+            KSYXIS$LOGGER.trace("Ksyxis: Forcing {}/{} to be not spawn chunk in LevelMixin. (we never knew if it was spawn chunk in the first place)", new Object[]{x, z}); // <- Array for compat with log4j 2.0-beta.9.
         }
 
         // Never spawn chunk.

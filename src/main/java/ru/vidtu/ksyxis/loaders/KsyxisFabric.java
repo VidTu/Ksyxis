@@ -34,10 +34,10 @@ import ru.vidtu.ksyxis.Ksyxis;
  */
 public final class KsyxisFabric implements ModInitializer {
     /**
-     * Calls {@link Ksyxis#init(String)} with "Fabric".
+     * Calls {@link Ksyxis#init(String, boolean)} with "Fabric" and {@code false}.
      */
     @Override
     public void onInitialize() {
-        Ksyxis.init("Fabric");
+        Ksyxis.init("Fabric", false);
     }
 }

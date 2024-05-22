@@ -35,9 +35,9 @@ import ru.vidtu.ksyxis.Ksyxis;
 @Mod("ksyxis")
 public final class KsyxisNeoForge {
     /**
-     * Calls {@link Ksyxis#init(String)} with "NeoForge".
+     * Calls {@link Ksyxis#init(String, boolean)} with "NeoForge" and {@code false}.
      */
     public KsyxisNeoForge() {
-        Ksyxis.init("NeoForge");
+        Ksyxis.init("NeoForge", false);
     }
 }

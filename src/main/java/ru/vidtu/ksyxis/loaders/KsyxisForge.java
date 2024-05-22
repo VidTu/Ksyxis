@@ -35,9 +35,9 @@ import ru.vidtu.ksyxis.Ksyxis;
 @Mod(value = "ksyxis", modid = "ksyxis", acceptableRemoteVersions = "*")
 public final class KsyxisForge {
     /**
-     * Calls {@link Ksyxis#init(String)} with "Forge".
+     * Calls {@link Ksyxis#init(String, boolean)} with "Forge" and {@code false}.
      */
     public KsyxisForge() {
-        Ksyxis.init("Forge");
+        Ksyxis.init("Forge", false);
     }
 }

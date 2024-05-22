@@ -27,7 +27,6 @@ package ru.vidtu.ksyxis;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.launch.MixinBootstrap;
-import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mixins;
 
 import java.lang.reflect.Field;
@@ -47,12 +46,12 @@ public final class Ksyxis {
     /**
      * Mixin absent error message.
      */
-    private static final String MIXIN_ABSENT = "Ksyxis: No Mixin found. If you're using old (1.15.2 or older) Forge, please install a Mixin loader, for example MixinBootstrap, MixinBooter, UniMixins, or any other if you find. If you're using new (1.16 or newer) Forge, any Fabric, any Quilt, or any NeoForge, then something went wrong and you should report it on GitHub. If you don't want any hassles and just want to load the game without solving anything, delete the Ksyxis mod. ({})";
+    private static final String MIXIN_ABSENT = "Ksyxis: No Mixin found. If you're using old (1.15.2 or older) Forge, please install a Mixin loader, for example MixinBootstrap, MixinBooter, UniMixins, or any other at your choice. If you're using new (1.16 or newer) Forge, any Fabric, any Quilt, any Ornithe, any LegacyFabric, or any NeoForge, then something went wrong and you should report it on GitHub. Ensure to include as much information (game version, loader type, loader version, mod version, other mods, logs, etc.) in the bug report as possible, this error screen is not enough. If you don't want any hassles and just want to load the game without solving anything, delete the Ksyxis mod. (platform: %s; manual: %s)";
 
     /**
      * Mixin inject error message.
      */
-    private static final String MIXIN_INJECT = "Ksyxis: Unable to inject the Ksyxis configuration. It's probably a bug or something, you should report it on GitHub. If you don't want any hassles and just want to load the game without solving anything, delete the Ksyxis mod. ({})";
+    private static final String MIXIN_INJECT = "Ksyxis: Unable to inject the Ksyxis configuration. It's probably a bug or something, you should report it on GitHub. Ensure to include as much information (game version, loader type, loader version, mod version, other mods, logs, etc.) in the bug report as possible, this error screen is not enough. If you don't want any hassles and just want to load the game without solving anything, delete the Ksyxis mod. (platform: %s; manual: %s, mixin: %s)";
 
     /**
      * How much chunks loaded should be reported to be loaded.
@@ -70,29 +69,93 @@ public final class Ksyxis {
     }
 
     /**
-     * Initializer for super ancient loaders.
+     * Initialize the mod.
      *
      * @param platform Current platform
+     * @param manual   Whether to inject Mixin configuration manually
      */
-    public static void legacyInit(String platform) {
-        // Verify Mixin.
-        verifyMixins(platform);
-
+    public static void init(String platform, boolean manual) {
+        String mixinVersion = "UNKNOWN";
         try {
-            // Bootstrap Mixin.
-            MixinBootstrap.init();
+            // Log.
+            LOGGER.info("Ksyxis: Booting... (platform: {}, manual: {})", new Object[]{platform, manual}); // <- Array for compat with log4j 2.0-beta.9.
 
-            // Add the config.
-            Mixins.addConfiguration("ksyxis.mixins.json");
+            // Check for Mixin.
+            try {
+                // Try to load the class.
+                Class<?> clazz = Class.forName("org.spongepowered.asm.launch.MixinBootstrap");
+                Field field = clazz.getField("VERSION");
+                mixinVersion = String.valueOf(field.get(null));
+            } catch (Throwable t) {
+                // Log.
+                String message = String.format(MIXIN_ABSENT, platform, manual);
+                LOGGER.error(message, t);
+
+                // Try to display LWJGL3 message box from TinyFD.
+                try {
+                    Class<?> tinyFd = Class.forName("org.lwjgl.util.tinyfd.TinyFileDialogs");
+                    Method tinyFdMessageBox = tinyFd.getMethod("tinyfd_messageBox", CharSequence.class, CharSequence.class, CharSequence.class, CharSequence.class, boolean.class);
+                    tinyFdMessageBox.invoke(null, "Minecraft | Ksyxis Mod", message, "ok", "error", false);
+                } catch (Throwable th) {
+                    t.addSuppressed(th);
+                }
+
+                // Try to display LWJGL2 alert from Sys.
+                try {
+                    Class<?> sys = Class.forName("org.lwjgl.Sys");
+                    Method sysAlert = sys.getMethod("alert", String.class, String.class);
+                    sysAlert.invoke(null, "Minecraft | Ksyxis Mod", message);
+                } catch (Throwable th) {
+                    t.addSuppressed(th);
+                }
+
+                // Log again. (with suppressed errors)
+                LOGGER.error(message, t);
+
+                // Throw.
+                throw new RuntimeException(message, t);
+            }
+
+            // Log.
+            LOGGER.info("Ksyxis: Found Mixin library. (version: {})", new Object[]{mixinVersion}); // <- Array for compat with log4j 2.0-beta.9.
+
+            // Bootstrap Mixin and add config.
+            if (manual) {
+                MixinBootstrap.init();
+                LOGGER.debug("Ksyxis: Mixin Bootstrap success.");
+                Mixins.addConfiguration("ksyxis.mixins.json");
+                LOGGER.debug("Ksyxis: Mixin config added.");
+            }
+
+            // Try to fix compat with ModernFix.
+            try {
+                Class<?> modernFixPluginClass = Class.forName("org.embeddedt.modernfix.core.ModernFixMixinPlugin");
+                Field modernFixPluginField = modernFixPluginClass.getDeclaredField("instance");
+                Method modernFixIsOptionEnabled = modernFixPluginClass.getMethod("isOptionEnabled", String.class);
+                Object modernFix = modernFixPluginField.get(null);
+                boolean removeSpawnChunks = (boolean) modernFixIsOptionEnabled.invoke(modernFix, "perf.remove_spawn_chunks.MinecraftServer");
+                if (removeSpawnChunks) {
+                    loadedChunks = 441;
+                    LOGGER.debug("Ksyxis: Will report 441 loaded chunks to prevent deadlocks with ModernFix.");
+                } else {
+                    LOGGER.debug("Ksyxis: Not providing compat with ModernFix, removeSpawnChunks is disabled.");
+                }
+            } catch (Throwable t) {
+                LOGGER.debug("Ksyxis: Not providing compat with ModernFix, not found.", t);
+            }
+
+            // Log the info.
+            LOGGER.info("Ksyxis: Ready. As always, this mod will speed up your world loading and might or might not break it.");
         } catch (Throwable t) {
             // Log.
-            LOGGER.error(MIXIN_INJECT, platform, t);
+            String message = String.format(MIXIN_INJECT, platform, manual, mixinVersion);
+            LOGGER.error(message, t);
 
             // Try to display LWJGL3 message box from TinyFD.
             try {
                 Class<?> tinyFd = Class.forName("org.lwjgl.util.tinyfd.TinyFileDialogs");
                 Method tinyFdMessageBox = tinyFd.getMethod("tinyfd_messageBox", CharSequence.class, CharSequence.class, CharSequence.class, CharSequence.class, boolean.class);
-                tinyFdMessageBox.invoke(null, "Minecraft | Ksyxis Mod", MIXIN_INJECT, "ok", "error", false);
+                tinyFdMessageBox.invoke(null, "Minecraft | Ksyxis Mod", message, "ok", "error", false);
             } catch (Throwable th) {
                 t.addSuppressed(th);
             }
@@ -101,50 +164,17 @@ public final class Ksyxis {
             try {
                 Class<?> sys = Class.forName("org.lwjgl.Sys");
                 Method sysAlert = sys.getMethod("alert", String.class, String.class);
-                sysAlert.invoke(null, "Minecraft | Ksyxis Mod", MIXIN_INJECT);
+                sysAlert.invoke(null, "Minecraft | Ksyxis Mod", message);
             } catch (Throwable th) {
                 t.addSuppressed(th);
             }
 
             // Log again. (with suppressed errors)
-            LOGGER.error(MIXIN_INJECT, platform, t);
+            LOGGER.error(message, t);
 
             // Throw.
-            throw new RuntimeException(MIXIN_INJECT.replace("{}", platform), t);
+            throw new RuntimeException(message, t);
         }
-
-        // Log the info.
-        LOGGER.info("Ksyxis: Ready. As always, it will speed up and might or might not break your world loading. (legacy; {})", platform);
-    }
-
-    /**
-     * Checks the mixin presence and logs the info on startup.
-     *
-     * @param platform Current platform
-     */
-    public static void init(String platform) {
-        // Verify Mixin.
-        verifyMixins(platform);
-
-        // Try to fix compat with ModernFix.
-        try {
-            Class<?> modernFixPluginClass = Class.forName("org.embeddedt.modernfix.core.ModernFixMixinPlugin");
-            Field modernFixPluginField = modernFixPluginClass.getDeclaredField("instance");
-            Method modernFixIsOptionEnabled = modernFixPluginClass.getMethod("isOptionEnabled", String.class);
-            Object modernFix = modernFixPluginField.get(null);
-            boolean removeSpawnChunks = (boolean) modernFixIsOptionEnabled.invoke(modernFix, "perf.remove_spawn_chunks.MinecraftServer");
-            if (removeSpawnChunks) {
-                loadedChunks = 441;
-                LOGGER.debug("Ksyxis: Will report 441 loaded chunks to prevent deadlocks with ModernFix.");
-            } else {
-                LOGGER.debug("Ksyxis: Not providing compat with ModernFix, removeSpawnChunks is disabled.");
-            }
-        } catch (Throwable t) {
-            LOGGER.debug("Ksyxis: Not providing compat with ModernFix, not found.", t);
-        }
-
-        // Log the info.
-        LOGGER.info("Ksyxis: Ready. As always, it will speed up and might or might not break your world loading. (modern; {})", platform);
     }
 
     /**
@@ -155,49 +185,5 @@ public final class Ksyxis {
      */
     public static int loadedChunks() {
         return loadedChunks;
-    }
-
-    /**
-     * Verifies the {@link Mixin} presence.
-     *
-     * @param platform Current platform
-     * @throws RuntimeException If {@link Mixin} class can't be found
-     */
-    private static void verifyMixins(String platform) {
-        // Check for Mixin.
-        try {
-            // Try to load the class.
-            Class.forName("org.spongepowered.asm.mixin.Mixin");
-
-            // Class found.
-            LOGGER.debug("Ksyxis: Found Mixin library. ({})", platform);
-        } catch (Throwable t) {
-            // Log.
-            LOGGER.error(MIXIN_ABSENT, platform, t);
-
-            // Try to display LWJGL3 message box from TinyFD.
-            try {
-                Class<?> tinyFd = Class.forName("org.lwjgl.util.tinyfd.TinyFileDialogs");
-                Method tinyFdMessageBox = tinyFd.getMethod("tinyfd_messageBox", CharSequence.class, CharSequence.class, CharSequence.class, CharSequence.class, boolean.class);
-                tinyFdMessageBox.invoke(null, "Minecraft | Ksyxis Mod", MIXIN_ABSENT, "ok", "error", false);
-            } catch (Throwable th) {
-                t.addSuppressed(th);
-            }
-
-            // Try to display LWJGL2 alert from Sys.
-            try {
-                Class<?> sys = Class.forName("org.lwjgl.Sys");
-                Method sysAlert = sys.getMethod("alert", String.class, String.class);
-                sysAlert.invoke(null, "Minecraft | Ksyxis Mod", MIXIN_ABSENT);
-            } catch (Throwable th) {
-                t.addSuppressed(th);
-            }
-
-            // Log again. (with suppressed errors)
-            LOGGER.error(MIXIN_ABSENT, platform, t);
-
-            // Throw.
-            throw new RuntimeException(MIXIN_ABSENT.replace("{}", platform), t);
-        }
     }
 }

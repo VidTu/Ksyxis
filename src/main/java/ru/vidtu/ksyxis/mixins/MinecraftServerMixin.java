@@ -86,7 +86,7 @@ public final class MinecraftServerMixin {
     }, at = @At("STORE"), remap = false, require = 0, expect = 0, index = 5)
     public int ksyxis$prepareLevels$spawnChunkRadius$getInt(int spawnChunkRadius) {
         // Report spawn chunks gamerule as 0.
-        KSYXIS$LOGGER.debug("Ksyxis: Reporting 0 as spawnChunkRadius gamerule instead of {} (expected 0 to 32) in MinecraftServerMixin.", spawnChunkRadius);
+        KSYXIS$LOGGER.debug("Ksyxis: Reporting 0 as spawnChunkRadius gamerule instead of {} (expected 0 to 32) in MinecraftServerMixin.", new Object[]{spawnChunkRadius}); // <- Array for compat with log4j 2.0-beta.9.
         return 0;
     }
 
@@ -128,7 +128,7 @@ public final class MinecraftServerMixin {
     }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
     public int ksyxis$prepareLevels$addRegionTicket(int constant) {
         // Add zero-level ticket.
-        KSYXIS$LOGGER.debug("Ksyxis: Adding zero-level ticket instead of {} (expected 11) ticket in MinecraftServerMixin.", constant);
+        KSYXIS$LOGGER.debug("Ksyxis: Adding zero-level ticket instead of {} (expected 11) ticket in MinecraftServerMixin.", new Object[]{constant}); // <- Array for compat with log4j 2.0-beta.9.
         return 0;
     }
 
@@ -151,7 +151,7 @@ public final class MinecraftServerMixin {
     public int ksyxis$prepareLevels$getTickingGenerated(int constant) {
         // Wait for 0 chunks to load.
         int report = Ksyxis.loadedChunks();
-        KSYXIS$LOGGER.debug("Ksyxis: Reporting {} (expected 0 or 441) loaded chunks instead of {} (expected 441) in MinecraftServerMixin.", report, constant);
+        KSYXIS$LOGGER.debug("Ksyxis: Reporting {} (expected 0 or 441) loaded chunks instead of {} (expected 441) in MinecraftServerMixin.", new Object[]{report, constant}); // <- Array for compat with log4j 2.0-beta.9.
         return report;
     }
 
@@ -197,7 +197,7 @@ public final class MinecraftServerMixin {
     public int ksyxis$initialWorldChunkLoad$loop(int constant) {
         // Loop from 1 to -1. (don't loop)
         int report = constant < 0 ? 1 : -1;
-        KSYXIS$LOGGER.debug("Ksyxis: Hijacking loop constant from {} to {} to prevent looping in MinecraftServerMixin.", constant, report);
+        KSYXIS$LOGGER.debug("Ksyxis: Hijacking loop constant from {} to {} to prevent looping in MinecraftServerMixin.", new Object[]{constant, report}); // <- Array for compat with log4j 2.0-beta.9.
         return report;
     }
 }

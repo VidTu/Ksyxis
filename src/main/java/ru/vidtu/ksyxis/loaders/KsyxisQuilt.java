@@ -35,12 +35,12 @@ import ru.vidtu.ksyxis.Ksyxis;
  */
 public final class KsyxisQuilt implements ModInitializer {
     /**
-     * Calls {@link Ksyxis#init(String)} with "Quilt".
+     * Calls {@link Ksyxis#init(String, boolean)} with "Quilt" and {@code false}.
      *
      * @param mod Mod container, ignored
      */
     @Override
     public void onInitialize(ModContainer mod) {
-        Ksyxis.init("Quilt");
+        Ksyxis.init("Quilt", false);
     }
 }

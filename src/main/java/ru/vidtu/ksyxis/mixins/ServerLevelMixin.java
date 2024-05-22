@@ -95,7 +95,7 @@ public final class ServerLevelMixin {
     }, at = @At("STORE"), remap = false, require = 0, expect = 0, index = 5)
     public int ksyxis$setDefaultSpawnPos$spawnChunkRadius$getInt(int spawnChunkRadius) {
         // Report spawn chunks gamerule as 0.
-        KSYXIS$LOGGER.debug("Ksyxis: Reporting 0 as spawnChunkRadius gamerule instead of {} (expected 0 to 32) in ServerLevelMixin.", spawnChunkRadius);
+        KSYXIS$LOGGER.debug("Ksyxis: Reporting 0 as spawnChunkRadius gamerule instead of {} (expected 0 to 32) in ServerLevelMixin.", new Object[]{spawnChunkRadius}); // <- Array for compat with log4j 2.0-beta.9.
         return 0;
     }
 
@@ -125,7 +125,7 @@ public final class ServerLevelMixin {
     }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
     public int ksyxis$setDefaultSpawnPos$addRegionTicket(int constant) {
         // Add zero-level ticket.
-        KSYXIS$LOGGER.debug("Ksyxis: Adding zero-level ticket instead of {} (expected 11) ticket in ServerLevelMixin.", constant);
+        KSYXIS$LOGGER.debug("Ksyxis: Adding zero-level ticket instead of {} (expected 11) ticket in ServerLevelMixin.", new Object[]{constant}); // <- Array for compat with log4j 2.0-beta.9.
         return 0;
     }
 }

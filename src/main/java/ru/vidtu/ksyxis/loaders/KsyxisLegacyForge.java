@@ -57,12 +57,12 @@ public final class KsyxisLegacyForge implements IFMLLoadingPlugin {
     }
 
     /**
-     * Calls {@link Ksyxis#legacyInit(String)} with "ForgeCore".
+     * Calls {@link Ksyxis#init(String, boolean)} with "ForgeCore" and {@code true}.
      *
      * @param data Data, ignored
      */
     @Override
     public void injectData(Map<String, Object> data) {
-        Ksyxis.legacyInit("ForgeCore");
+        Ksyxis.init("LegacyForge", true);
     }
 }

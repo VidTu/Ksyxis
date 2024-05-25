@@ -17,14 +17,17 @@
 
 package org.quiltmc.loader.api;
 
+import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
+
 /**
- * Emulated QuiltMC mod container.
+ * Dummy QuiltMC mod container.
+ * <p>
+ * This is a dummy interface for {@link ModInitializer}.
  *
  * @author VidTu
  * @author FabricMC
  * @author QuiltMC
  */
-@SuppressWarnings("MarkerInterface") // <- Stub.
 public interface ModContainer {
     // Ksyxis: Dummy class
 }

@@ -19,17 +19,21 @@ package org.quiltmc.qsl.base.api.entrypoint;
 import org.quiltmc.loader.api.ModContainer;
 
 /**
- * Emulated entrypoint interface of the Quilt mod.
+ * Stub entrypoint interface of the Quilt mod.
+ * <p>
+ * This is an injection interface for Ksyxis for Quilt, see {@code KsyxisQuilt} class.
  *
  * @author VidTu
  * @author FabricMC
+ * @author QuiltMC
  */
-@SuppressWarnings("InterfaceMayBeAnnotatedFunctional") // <- Stub.
 public interface ModInitializer {
     /**
      * Runs the entrypoint.
+     * <p>
+     * This is an injection point for Ksyxis for Quilt, see {@code KsyxisQuilt} class.
      *
-     * @param mod Virtual mod container, do not use
+     * @param mod Dummy (stub) mod container, unused by Ksyxis
      */
     void onInitialize(ModContainer mod);
 }

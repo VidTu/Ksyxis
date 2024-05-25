@@ -39,7 +39,6 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
  *
  * @author VidTu
  */
-@SuppressWarnings({"UnresolvedMixinReference", "MethodMayBeStatic", "DollarSignInName", "SpellCheckingInspection"}) // <- Multi-version and Mixin (x3).
 @Mixin(targets = {
         // Deobfuscated
         "net.minecraft.server.level.ServerLevel", // Official Mojang

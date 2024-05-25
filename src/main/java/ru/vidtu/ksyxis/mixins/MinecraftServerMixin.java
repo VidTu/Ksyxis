@@ -42,7 +42,6 @@ import ru.vidtu.ksyxis.Ksyxis;
  *
  * @author VidTu
  */
-@SuppressWarnings({"UnresolvedMixinReference", "MethodMayBeStatic", "DollarSignInName", "SpellCheckingInspection"}) // <- Multi-version and Mixin (x3).
 @Mixin(targets = {
         // Deobfuscated
         "net.minecraft.server.MinecraftServer", // Basically everywhere (It should be deobfuscated)

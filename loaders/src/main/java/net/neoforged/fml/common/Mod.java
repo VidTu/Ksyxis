@@ -12,6 +12,8 @@ import java.lang.annotation.Target;
 
 /**
  * Emulated annotation of the NeoForge mod.
+ * <p>
+ * This is an injection annotation for Ksyxis for NeoForge 1.20.2+, see {@code KsyxisNeoForge} class.
  *
  * @author VidTu
  * @author MinecraftForge
@@ -21,9 +23,9 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface Mod {
     /**
-     * Gets the mod ID for modern (1.13+) Forge.
+     * Gets the mod ID for NeoForge.
      *
-     * @return Modern mod ID
+     * @return Modern mod ID, "{@code ksyxis}" by Ksyxis
      */
     String value();
 }

@@ -40,7 +40,6 @@ public final class KsyxisLegacyForge implements IFMLLoadingPlugin {
         return null;
     }
 
-    @SuppressWarnings("ZeroLengthArrayAllocation") // <- One-time.
     @Override
     public String[] getASMTransformerClass() {
         return new String[0];
@@ -59,7 +58,7 @@ public final class KsyxisLegacyForge implements IFMLLoadingPlugin {
     /**
      * Calls {@link Ksyxis#init(String, boolean)} with "ForgeCore" and {@code true}.
      *
-     * @param data Data, ignored
+     * @param data Injection data, ignored
      */
     @Override
     public void injectData(Map<String, Object> data) {

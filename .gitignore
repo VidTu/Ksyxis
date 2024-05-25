@@ -3,7 +3,7 @@ build/
 out/
 classes/
 *.launch
-.idea/
+.idea/**
 *.iml
 *.ipr
 *.iws
@@ -29,3 +29,7 @@ run/
 hs_err_pid*
 replay_pid*
 **~
+!.idea/inspectionProfiles
+!.idea/inspectionProfiles/**
+!.idea/codeStyles
+!.idea/codeStyles/**

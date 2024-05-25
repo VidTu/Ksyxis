@@ -13,7 +13,9 @@ Speed up your world loading by not loading nearby chunks every time.
 
 **Fabric**: (none)  
 **Forge 1.16 and newer**: (none)  
-**Forge 1.15.2 and older**: Any Mixin provider at your choice (such as [MixinBootstrap](https://modrinth.com/mod/mixinbootstrap), [MixinBooter](https://modrinth.com/mod/mixinbooter), [UniMixins](https://modrinth.com/mod/unimixins) or any other)  
+**Forge 1.15.2 and older**: Any Mixin provider at your choice (such as
+[MixinBootstrap](https://modrinth.com/mod/mixinbootstrap), [MixinBooter](https://modrinth.com/mod/mixinbooter),
+[UniMixins](https://modrinth.com/mod/unimixins) or any other)  
 **NeoForge**: (none)  
 **Quilt**: (none)  
 **Legacy Fabric**: (none)  
@@ -25,7 +27,9 @@ Speed up your world loading by not loading nearby chunks every time.
 **A**: You can join the [Discord server](https://discord.gg/Q6saSVSuYQ).
 
 **Q**: Where can I download this mod?  
-**A**: [Modrinth](https://modrinth.com/mod/ksyxis), [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ksyxis), [GitHub](https://github.com/VidTu/Ksyxis).
+**A**: [Modrinth](https://modrinth.com/mod/ksyxis),
+[CurseForge](https://www.curseforge.com/minecraft/mc-mods/ksyxis),
+[GitHub](https://github.com/VidTu/Ksyxis).
 
 **Q**: This mod doesn't speed up anything.  
 **A**: The effect may not be noticeable on high-end PCs. This mod is designed primarily for low-end devices.

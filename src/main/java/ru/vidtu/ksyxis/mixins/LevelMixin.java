@@ -38,7 +38,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  *
  * @author VidTu
  */
-@SuppressWarnings({"UnresolvedMixinReference", "MethodMayBeStatic", "DollarSignInName"}) // <- Multi-version and Mixin (x2).
 @Mixin(targets = {
         // Deobfuscated
         "net.minecraft.world.World", // Forge MCP + Forge SRG

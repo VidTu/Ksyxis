@@ -28,6 +28,9 @@ run/
 .DS_Store
 hs_err_pid*
 replay_pid*
+*.hprof
+*.log
+*.class
 **~
 !.idea/inspectionProfiles
 !.idea/inspectionProfiles/**

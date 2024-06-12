@@ -9,7 +9,15 @@ displayName = "Ksyxis"
 updateJSONURL = "https://raw.githubusercontent.com/VidTu/Ksyxis/main/updater_ksyxis_forge.json"
 displayURL = "https://modrinth.com/mod/ksyxis"
 issueTrackerURL = "https://github.com/VidTu/Ksyxis/issues"
-logoFile = "ksyxis.png"
+catalogueImageIcon = "ksyxis_64.png"
+catalogueItemIcon = "minecraft:porkchop"
+itemIcon = "minecraft:porkchop"
+logoFile = "ksyxis_240.png"
 authors = "VidTu"
 displayTest = "IGNORE_ALL_VERSION"
 description = '''Speed up the loading of your world.'''
+
+[modproperties.ksyxis]
+catalogueImageIcon = "ksyxis_64.png"
+catalogueItemIcon = "minecraft:porkchop"
+itemIcon = "minecraft:porkchop"

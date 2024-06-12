@@ -33,5 +33,12 @@
       "modmenu.github_releases": "https://github.com/VidTu/Ksyxis/releases",
       "modmenu.discord": "https://discord.gg/Q6saSVSuYQ"
     }
+  },
+  "catalogue": {
+    "icon": {
+      "image": "ksyxis_64.png",
+      "item": "minecraft:porkchop"
+    },
+    "banner": "ksyxis_240.png"
   }
 }

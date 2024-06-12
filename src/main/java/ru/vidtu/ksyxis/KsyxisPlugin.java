@@ -66,10 +66,16 @@ public final class KsyxisPlugin implements IMixinConfigPlugin {
         try {
             // Only apply if node exists.
             ClassNode node = MixinService.getService().getBytecodeProvider().getClassNode(targetClassName);
-            return node != null;
+            if (node != null) {
+                // Found - apply.
+                LOGGER.debug("Ksyxis: Applying {} to {}, class node does exist.", new Object[]{mixinClassName, targetClassName}); // <- Array for compat with log4j 2.0-beta.9.
+                return true;
+            }
+            LOGGER.debug("Ksyxis: Not applying {} to {}, class node is null.", new Object[]{mixinClassName, targetClassName}); // <- Array for compat with log4j 2.0-beta.9.
+            return false;
         } catch (ClassNotFoundException e) {
             // Not found - don't apply.
-            LOGGER.debug("Ksyxis: Not applying {} to {}, class not found.", new Object[]{mixinClassName, targetClassName, e}); // <- Array for compat with log4j 2.0-beta.9.
+            LOGGER.debug("Ksyxis: Not applying {} to {}, class node was not found.", new Object[]{mixinClassName, targetClassName, e}); // <- Array for compat with log4j 2.0-beta.9.
             return false;
         } catch (Throwable t) {
             // Try my lucky day, apply anyway.

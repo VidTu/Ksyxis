@@ -55,6 +55,11 @@ under [MIT License](https://github.com/VidTu/Ksyxis/blob/main/LICENSE))
 **A**: It should be. No guarantee though. At least it should not break your worlds, you just won't be able to load them
 with this mod and can uninstall it to load otherwise.
 
+**Q**: Is this mod client-side or server-side?  
+**A**: This mod works on logical server side. That is, it has effect in singleplayer and
+on a dedicated (standalone) server. It has no effect on the client when playing in multiplayer.
+You can install it into your client or your server without any requirements for it to be installed on the other side.
+
 **Q**: How to force-load chunks for ticking if spawn chunks have been removed?  
 **A**: If you really need ticking chunks, load individual chunks with the `/forceload` vanilla command in 1.13 or newer.
 For older versions, you can search for some mod that force-loads chunks.

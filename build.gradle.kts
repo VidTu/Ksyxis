@@ -17,7 +17,7 @@ repositories {
 dependencies {
     compileOnly(project(":loaders"))
     compileOnly("org.apache.logging.log4j:log4j-api:2.23.1")
-    compileOnly("org.spongepowered:mixin:0.8.6")
+    compileOnly("org.spongepowered:mixin:0.8.7")
     compileOnly("org.ow2.asm:asm-tree:9.7")
 }
 

@@ -1,6 +1,6 @@
 [versions]
 asm = "9.7"
-log4j = "2.24.0"
+log4j = "2.24.1"
 mixin = "0.8.7"
 
 [libraries]

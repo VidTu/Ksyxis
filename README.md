@@ -45,13 +45,13 @@ There's [a video](https://www.youtube.com/watch?v=PXWdDoVU1C4) through.
 **A**: All in the same file.
 
 **Q**: Do I need Fabric API or Quilt Standard Libraries?  
-**A**: Nope, but you can have it installed for other mods.
+**A**: No, but you can have it installed for other mods.
 
-**Q**: Is it open source?  
+**Q**: Is this mod open source?  
 **A**: [Yes.](https://github.com/VidTu/Ksyxis) (Licensed
 under [MIT License](https://github.com/VidTu/Ksyxis/blob/main/LICENSE))
 
-**Q**: Is it stable for use?  
+**Q**: Is this mod stable for use?  
 **A**: It should be. No guarantee though. At least it should not break your worlds, you just won't be able to load them
 with this mod and can uninstall it to load otherwise.
 
@@ -64,9 +64,13 @@ You can install it into your client or your server without any requirements for 
 **A**: If you really need ticking chunks, load individual chunks with the `/forceload` vanilla command in 1.13 or newer.
 For older versions, you can search for some mod that force-loads chunks.
 
-**Q**: I found a bug.  
+**Q**: I've found a bug.  
 **A**: Report it [here](https://github.com/VidTu/Ksyxis/issues). If you are not sure if this is a bug, you can join
 the [Discord](https://discord.gg/Q6saSVSuYQ).
+
+**Q**: Can I use this in my modpack?  
+**A**: Sure. Credit (e.g. a link to mod's GitHub page) is appreciated, but is not required.
+Monetization and redistributing is allowed as per the [MIT License](https://github.com/VidTu/Ksyxis/blob/main/LICENSE).
 
 **Q**: It says *Ksyxis: No Mixin found*.  
 **A**: If you're using ancient Forge (1.15.2 or older), you may need to

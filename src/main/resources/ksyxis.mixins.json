@@ -1,7 +1,7 @@
 {
   "minVersion": "0.8",
-  "package": "ru.vidtu.ksyxis.mixins",
   "compatibilityLevel": "JAVA_8",
+  "package": "ru.vidtu.ksyxis.mixins",
   "plugin": "ru.vidtu.ksyxis.KsyxisPlugin",
   "mixins": [
     "LevelMixin",

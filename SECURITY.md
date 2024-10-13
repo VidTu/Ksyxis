@@ -2,7 +2,7 @@
 
 The only supported versions are:
 
-- Latest release, that is published to GitHub, Modrinth, and/or Curseforge.
+- Latest release, that is published to the GitHub, Modrinth, and/or Curseforge.
 - Latest snapshot, that is the latest Git commit.
 
 # Reporting
@@ -10,7 +10,7 @@ The only supported versions are:
 If you think the issue you want to report can be considered a "security vulnerability" and should not be disclosed
 publicly, report it via the "Security" tab on GitHub. Please note that this modification is developed free of charge
 in my free time, so please give me a bit to respond. If you can't or don't want to use GitHub Security Tab,
-please contact me using any (or all) of the following methods (optionally using one of PGP keys listed below):
+please contact me using one (or more) of the following methods (optionally using one of PGP keys listed below):
 
 - Mail: [pig@vidtu.ru](mailto:pig@vidtu.ru)
 - Alt Mail: [imvidtu@proton.me](mailto:imvidtu@proton.me)

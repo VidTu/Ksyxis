@@ -43,7 +43,7 @@ public final class KsyxisPlugin implements IMixinConfigPlugin {
     /**
      * Logger. Using Log4j logger, because SLF4J may not be available in older versions.
      */
-    private static final Logger LOGGER = LogManager.getLogger("Ksyxis");
+    private static final Logger LOGGER = LogManager.getLogger("Ksyxis/KsyxisPlugin");
 
     @Override
     public void onLoad(String mixinPackage) {

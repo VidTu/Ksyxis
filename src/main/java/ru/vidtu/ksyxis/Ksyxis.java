@@ -78,6 +78,7 @@ public final class Ksyxis {
         String mixinVersion = "UNKNOWN";
         try {
             // Log.
+            long start = System.nanoTime();
             LOGGER.info("Ksyxis: Booting... (platform: {}, manual: {})", new Object[]{platform, manual}); // <- Array for compat with log4j 2.0-beta.9.
 
             // Check for Mixin.
@@ -145,7 +146,7 @@ public final class Ksyxis {
             }
 
             // Log the info.
-            LOGGER.info("Ksyxis: Ready. As always, this mod will speed up your world loading and might or might not break it.");
+            LOGGER.info("Ksyxis: Ready. As always, this mod will speed up your world loading and might or might not break it. ({} ms)", new Object[]{(System.nanoTime() - start) / 1_000_000L}); // <- Array for compat with log4j 2.0-beta.9.
         } catch (Throwable t) {
             // Log.
             String message = String.format(MIXIN_INJECT, platform, manual, mixinVersion);

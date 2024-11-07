@@ -17,6 +17,9 @@ authors = "VidTu"
 displayTest = "IGNORE_ALL_VERSION"
 description = '''Speed up the loading of your world.'''
 
+[[mixins]]
+config="ksyxis.mixins.json"
+
 [modproperties.ksyxis]
 catalogueImageIcon = "ksyxis_64.png"
 catalogueItemIcon = "minecraft:porkchop"

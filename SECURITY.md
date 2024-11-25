@@ -2,28 +2,28 @@
 
 The only supported versions are:
 
-- Latest release, that is published to the GitHub, Modrinth, and/or Curseforge.
-- Latest snapshot, that is the latest Git commit.
+- The latest release published to the GitHub, Modrinth, and/or Curseforge.
+- The latest pre-release published to the GitHub, Modrinth, and/or CurseForge only if it's newer than the latest published release.
+- The latest Git commit build.
 
 # Reporting
 
 If you think the issue you want to report can be considered a "security vulnerability" and should not be disclosed
-publicly, report it via the "Security" tab on GitHub. Please note that this modification is developed free of charge
-in my free time, so please give me a bit to respond. If you can't or don't want to use GitHub Security Tab,
-please contact me using one (or more) of the following methods (optionally using one of PGP keys listed below):
+publicly, **report it via the "Security" tab on GitHub**. Please note that this modification is developed free of charge
+in my free time, so please give me a bit to respond. If you *can't or don't want to use GitHub Security Tab*,
+__please contact me using one or more of the following methods__ (optionally using one of PGP keys listed below):
 
 - Mail: [pig@vidtu.ru](mailto:pig@vidtu.ru)
 - Alt Mail: [imvidtu@proton.me](mailto:imvidtu@proton.me)
-- Discord: [vidtu](https://discord.com/users/339357082602176513) (ID: `339357082602176513`)
-- Telegram: [@ImVidTu](https://t.me/ImVidTu) (ID: `1067034567`)
+- Discord: [vidtu](https://discord.com/users/339357082602176513) (Snowflake ID: `339357082602176513`)
 
-Additional contact information may or may not be present on [vidtu.ru](https://vidtu.ru).
+Additional contact information may or may not be present at [vidtu.ru](https://vidtu.ru).
 
 ## PGP keys
 
 ### ECC
 
-Also, available at: [vidtu.ru/pgp_ecc.txt](https://vidtu.ru/pgp_ecc.txt)
+Also available at: [vidtu.ru/pgp_ecc.txt](https://vidtu.ru/pgp_ecc.txt)
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -43,7 +43,7 @@ FgMFAmYXMvUCGwwACgkQqPHZbY2kFgMnOwD+NdGxF/m2r8feNtb4ehiX1AvGWceF
 
 ### RSA
 
-Also, available at: [vidtu.ru/pgp_rsa.txt](https://vidtu.ru/pgp_rsa.txt)
+Also available at: [vidtu.ru/pgp_rsa.txt](https://vidtu.ru/pgp_rsa.txt)
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----

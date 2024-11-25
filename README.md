@@ -30,6 +30,8 @@ Speed up your world loading by not loading nearby chunks every time.
 **A**: [Modrinth](https://modrinth.com/mod/ksyxis),
 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ksyxis),
 [GitHub](https://github.com/VidTu/Ksyxis).
+You can also find unstable builds at [GitHub Actions](https://github.com/VidTu/Ksyxis/actions),
+you'll need a GitHub account to download them.
 
 **Q**: This mod doesn't speed up anything.  
 **A**: The effect may not be noticeable on high-end PCs. This mod is designed primarily for low-end devices.

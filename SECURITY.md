@@ -2,7 +2,7 @@
 
 The only supported versions are:
 
-- The latest release published to the GitHub, Modrinth, and/or Curseforge.
+- The latest release published to the GitHub, Modrinth, and/or CurseForge.
 - The latest pre-release published to the GitHub, Modrinth, and/or CurseForge only if it's newer than the latest published release.
 - The latest Git commit build.
 

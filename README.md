@@ -79,3 +79,21 @@ Monetization and redistributing is allowed as per the [MIT License](https://gith
 install [MixinBootstrap](https://modrinth.com/mod/mixinbootstrap), [MixinBooter](https://modrinth.com/mod/mixinbooter),
 [UniMixins](https://modrinth.com/mod/unimixins) **OR** any other at your choice. If you're using Forge 1.16 or newer,
 any Fabric, any Quilt, or any NeoForge, you don't need to install anything and this is a bug.
+
+## License
+
+This project is provided under the MIT License.
+Check out [LICENSE](LICENSE) for more information.
+
+## Building
+
+### Preparation
+
+- Ensure JDK 8 (e.g. [Azul Zulu](https://www.azul.com/downloads/)) is installed and is on `PATH`
+  or/and in `JAVA_HOME` environmental variables. (you can have multiple JDKs on path, it'll pick up the correct one)
+- You must have at least 2 GB of available RAM, 1 GB of available disk space, and an active internet connection.
+
+### Building
+
+1. Run `./gradlew build` (`gradlew build` for Windows).
+2. Grab the JAR from the `build/libs` folder.

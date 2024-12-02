@@ -29,6 +29,7 @@ plugins {
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 java.targetCompatibility = JavaVersion.VERSION_1_8
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+
 group = "ru.vidtu.ksyxis"
 base.archivesName = "Ksyxis"
 description = "Speed up the loading of your world."

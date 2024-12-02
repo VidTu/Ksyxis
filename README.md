@@ -83,7 +83,7 @@ any Fabric, any Quilt, or any NeoForge, you don't need to install anything and t
 ## License
 
 This project is provided under the MIT License.
-Check out [LICENSE](LICENSE) for more information.
+Check out [LICENSE](https://github.com/VidTu/Ksyxis/blob/main/LICENSE) for more information.
 
 ## Building
 

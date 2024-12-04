@@ -29,8 +29,30 @@ plugins {
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 java.targetCompatibility = JavaVersion.VERSION_1_8
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+
 group = "ru.vidtu.ksyxis.loaders"
+base.archivesName = "Ksyxis-Loaders"
+description = "Module with stubs of loaders' classes for Ksyxis."
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
+    options.compilerArgs.addAll(listOf("-g", "-parameters"))
+}
+
+tasks.withType<AbstractArchiveTask> {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes(
+            "Specification-Title" to "Ksyxis",
+            "Specification-Version" to project.version,
+            "Specification-Vendor" to "VidTu",
+            "Implementation-Title" to "Ksyxis-Loaders",
+            "Implementation-Version" to project.version,
+            "Implementation-Vendor" to "VidTu, FabricMC, MinecraftForge, NeoForged, QuiltMC"
+        )
+    }
 }

@@ -52,7 +52,7 @@ tasks.withType<JavaCompile> {
 }
 
 tasks.withType<ProcessResources> {
-    inputs.property("version", project.version)
+    inputs.property("version", version)
     filesMatching(
         listOf(
             "fabric.mod.json",
@@ -62,7 +62,7 @@ tasks.withType<ProcessResources> {
             "mcmod.info"
         )
     ) {
-        expand("version" to project.version)
+        expand("version" to version)
     }
 }
 
@@ -76,10 +76,10 @@ tasks.withType<Jar> {
     manifest {
         attributes(
             "Specification-Title" to "Ksyxis",
-            "Specification-Version" to project.version,
+            "Specification-Version" to version,
             "Specification-Vendor" to "VidTu",
             "Implementation-Title" to "Ksyxis",
-            "Implementation-Version" to project.version,
+            "Implementation-Version" to version,
             "Implementation-Vendor" to "VidTu",
             "FMLCorePlugin" to "ru.vidtu.ksyxis.loaders.KsyxisLegacyForge",
             "FMLCorePluginContainsFMLMod" to "true",

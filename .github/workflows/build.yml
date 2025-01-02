@@ -25,7 +25,7 @@ on: [ pull_request, push, workflow_dispatch ]
 jobs:
   build:
     name: 'Build'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: 'Checkout'
@@ -44,7 +44,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
       - name: 'Build'
         timeout-minutes: 5
-        run: './gradlew -Dorg.gradle.daemon=false build --no-daemon'
+        run: './gradlew build'
       - name: 'Upload'
         timeout-minutes: 5
         uses: actions/upload-artifact@v4

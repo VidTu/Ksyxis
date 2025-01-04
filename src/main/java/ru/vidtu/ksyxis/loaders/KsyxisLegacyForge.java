@@ -25,43 +25,85 @@
 package ru.vidtu.ksyxis.loaders;
 
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Contract;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import ru.vidtu.ksyxis.Ksyxis;
 
 import java.util.Map;
 
 /**
- * Main Ksyxis class for Legacy Forge coremod hook.
+ * Main Ksyxis class for Legacy Forge. (coremod hook)
  *
  * @author VidTu
+ * @apiNote Internal use only
  */
+@ApiStatus.Internal
+@NullMarked
 public final class KsyxisLegacyForge implements IFMLLoadingPlugin {
+    /**
+     * Creates a new coremod.
+     */
+    @Contract(pure = true)
+    public KsyxisLegacyForge() {
+        // Empty
+    }
+
+    /**
+     * Always returns {@code null}
+     *
+     * @return Always {@code null}
+     */
+    @Contract(value = "-> null", pure = true)
     @Override
+    @Nullable
     public String getAccessTransformerClass() {
         return null;
     }
 
+    /**
+     * Always returns {@code null}
+     *
+     * @return Always {@code null}
+     */
+    @Contract(value = "-> null", pure = true)
     @Override
-    public String[] getASMTransformerClass() {
-        return new String[0];
+    public String @Nullable [] getASMTransformerClass() {
+        return null;
     }
 
+    /**
+     * Always returns {@code null}
+     *
+     * @return Always {@code null}
+     */
+    @Contract(value = "-> null", pure = true)
     @Override
+    @Nullable
     public String getModContainerClass() {
         return null;
     }
 
+    /**
+     * Always returns {@code null}
+     *
+     * @return Always {@code null}
+     */
+    @Contract(value = "-> null", pure = true)
     @Override
+    @Nullable
     public String getSetupClass() {
         return null;
     }
 
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with "ForgeCore" and {@code true}.
+     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="LegacyForge"} and {@code manual=true}.
      *
      * @param data Injection data, ignored
      */
     @Override
     public void injectData(Map<String, Object> data) {
-        Ksyxis.init("LegacyForge", true);
+        Ksyxis.init("LegacyForge", /*manual=*/true);
     }
 }

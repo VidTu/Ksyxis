@@ -13,15 +13,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Stub annotation of the Forge mod for Ksyxis hacky compat.
- * <p>
- * This is an injection annotation for Ksyxis on Forge 1.13+ and NeoForge 1.20.1, see {@code KsyxisForge} class.
- * <p>
- * This is a declarative annotation (for the mod to be listed) for Ksyxis on Forge 1.8 -> 1.12.2,
- * injection performed in {@link IFMLLoadingPlugin}.
+ * Stub annotation of the Forge mod for Ksyxis hacky compat. This is an injection annotation for Ksyxis on Forge 1.13+
+ * and NeoForge 1.20.1, see {@code KsyxisForge} class. This is a declarative annotation (for the mod to be listed) for
+ * Ksyxis on Forge 1.8 -> 1.12.2, injection performed in {@link IFMLLoadingPlugin}.
  *
  * @author VidTu
  * @author MinecraftForge
+ * @see IFMLLoadingPlugin
+ * @see net.neoforged.fml.common.Mod
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
@@ -29,7 +28,7 @@ public @interface Mod {
     // Java annotations will simply ignore unneeded things.
 
     /**
-     * Gets the mod ID for modern (1.13+) Forge.
+     * Gets the mod ID for modern (1.13+) Forge and older NeoForge (1.20.1).
      *
      * @return Modern mod ID, "{@code ksyxis}" by Ksyxis
      */
@@ -43,9 +42,8 @@ public @interface Mod {
     String modid();
 
     /**
-     * Gets the legacy remote version acceptance range. (client &lt;-&gt; server check)
-     * <p>
-     * This is set to lift the requirements for installation onto client when running on server.
+     * Gets the legacy remote version acceptance range. (client &lt;-&gt; server check). This is set to lift the
+     * requirements for installation onto client when running on server.
      *
      * @return Legacy remote version acceptance range, "{@code *}" by Ksyxis
      */

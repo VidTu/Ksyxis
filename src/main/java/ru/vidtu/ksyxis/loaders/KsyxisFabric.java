@@ -25,19 +25,33 @@
 package ru.vidtu.ksyxis.loaders;
 
 import net.fabricmc.api.ModInitializer;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Contract;
+import org.jspecify.annotations.NullMarked;
 import ru.vidtu.ksyxis.Ksyxis;
 
 /**
- * Main Ksyxis class for Fabric Loader.
+ * Main Ksyxis class for Fabric.
  *
  * @author VidTu
+ * @apiNote Internal use only
  */
+@ApiStatus.Internal
+@NullMarked
 public final class KsyxisFabric implements ModInitializer {
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with "Fabric" and {@code false}.
+     * Creates a new mod.
+     */
+    @Contract(pure = true)
+    public KsyxisFabric() {
+        // Empty
+    }
+
+    /**
+     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Fabric"} and {@code manual=false}.
      */
     @Override
     public void onInitialize() {
-        Ksyxis.init("Fabric", false);
+        Ksyxis.init("Fabric", /*manual=*/false);
     }
 }

@@ -25,19 +25,24 @@
 package ru.vidtu.ksyxis.loaders;
 
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.ApiStatus;
+import org.jspecify.annotations.NullMarked;
 import ru.vidtu.ksyxis.Ksyxis;
 
 /**
- * Main Ksyxis class for Forge.
+ * Main Ksyxis class for Forge. (modern & legacy)
  *
  * @author VidTu
+ * @apiNote Internal use only
  */
-@Mod(value = "ksyxis", modid = "ksyxis", acceptableRemoteVersions = "*")
+@ApiStatus.Internal
+@Mod(value = "ksyxis"/*(modern)*/, modid = "ksyxis"/*(legacy)*/, acceptableRemoteVersions = "*"/*(legacy)*/)
+@NullMarked
 public final class KsyxisForge {
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with "Forge" and {@code false}.
+     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Forge"} and {@code manual=false}.
      */
     public KsyxisForge() {
-        Ksyxis.init("Forge", false);
+        Ksyxis.init("Forge", /*manual=*/false);
     }
 }

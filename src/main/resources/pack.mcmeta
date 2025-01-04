@@ -1,6 +1,10 @@
 {
   "pack": {
     "description": "Ksyxis",
-    "pack_format": 1
+    "pack_format": 1,
+    "supported_formats": {
+      "min_inclusive": 0,
+      "max_inclusive": 99999
+    }
   }
 }

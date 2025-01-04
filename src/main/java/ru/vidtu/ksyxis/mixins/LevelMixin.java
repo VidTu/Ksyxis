@@ -26,6 +26,8 @@ package ru.vidtu.ksyxis.mixins;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Contract;
+import org.jspecify.annotations.NullMarked;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
@@ -34,10 +36,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Mixin that does some hacky things with the level to allow spawn chunks to unload in older versions.
+ * Mixin for {@code ServerLevel} that disables spawn chunk tickets in older versions.
  *
  * @author VidTu
+ * @apiNote Internal use only
  */
+// @ApiStatus.Internal // Can't annotate this without logging in the console.
 @Mixin(targets = {
         // Deobfuscated
         "net.minecraft.world.World", // Forge MCP + Forge SRG
@@ -47,24 +51,35 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
         "net.minecraft.unmapped.C_5553933" // Ornithe
 }, remap = false)
 @Pseudo
+@NullMarked
 public final class LevelMixin {
     /**
-     * Logger. Using Log4j logger, because SLF4J may not be available in older versions.
+     * Logger for this class. Using Log4j2 logger, because SLF4J is not available in older versions.
      */
     @Unique
-    private static final Logger KSYXIS$LOGGER = LogManager.getLogger("Ksyxis/LevelMixin");
+    private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/LevelMixin");
 
     /**
      * An instance of this class cannot be created.
      *
      * @throws AssertionError Always
+     * @deprecated Always throws
      */
+    @Deprecated
+    // @ApiStatus.ScheduledForRemoval // Can't annotate this without logging in the console.
+    @Contract(value = "-> fail", pure = true)
     private LevelMixin() {
         throw new AssertionError("No instances.");
     }
 
-    // 1.8 -> 1.13
-
+    /**
+     * Injects into {@code isSpawnChunk(int, int)} to always return {@code false} to prevent loading spawn chunks.
+     * Used before 1.13.2 (inclusive).
+     *
+     * @param x   Chunk X, used only for logging
+     * @param z   Chunk Z, used only for logging
+     * @param cir Callback data to set {@code false} into
+     */
     @Inject(method = {
             // Deobfuscated
             "isSpawnChunk(II)Z", // Forge MCP
@@ -74,13 +89,13 @@ public final class LevelMixin {
             "method_3671(II)Z", // Legacy Fabric Intermediary
             "m_4821236(II)Z" // Ornithe
     }, at = @At("HEAD"), cancellable = true, require = 0, expect = 0)
-    public void ksyxis$isSpawnChunk$head(int x, int z, CallbackInfoReturnable<Boolean> cir) {
-        // Log but avoid useless allocations. (wrapping ints)
-        if (KSYXIS$LOGGER.isTraceEnabled()) {
-            KSYXIS$LOGGER.trace("Ksyxis: Forcing {}/{} to be not spawn chunk in LevelMixin. (we never knew if it was spawn chunk in the first place)", new Object[]{x, z}); // <- Array for compat with log4j 2.0-beta.9.
+    public void ksyxis_isSpawnChunk_head(int x, int z, CallbackInfoReturnable<Boolean> cir) {
+        // Log. (**TRACE**)
+        if (KSYXIS_LOGGER.isTraceEnabled()) {
+            KSYXIS_LOGGER.trace("Ksyxis: Forcing {}/{} to be not spawn chunk in LevelMixin. (we never knew if it was spawn chunk in the first place)", new Object[]{x, z}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
         }
 
-        // Never spawn chunk.
+        // Always force false to remove any spawn chunks from the world and allow them to be unloaded.
         cir.setReturnValue(false);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Quilt Project
+ * Copyright 2016 FabricMC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,11 @@
  * limitations under the License.
  */
 
-package org.quiltmc.qsl.base.api.entrypoint;
-
-import org.quiltmc.loader.api.ModContainer;
-
 /**
- * Stub entrypoint interface of the Quilt mod. This is an injection interface for Ksyxis for Quilt,
- * see {@code KsyxisQuilt} class.
+ * Dummy Fabric mod package.
  *
  * @author VidTu
  * @author FabricMC
- * @author QuiltMC
+ * @see net.fabricmc.api.ModInitializer
  */
-public interface ModInitializer {
-    /**
-     * Runs the entrypoint. This is an injection point for Ksyxis for Quilt, see {@code KsyxisQuilt} class.
-     *
-     * @param mod Stub mod container, ignored
-     */
-    void onInitialize(ModContainer mod);
-}
+package net.fabricmc.api;

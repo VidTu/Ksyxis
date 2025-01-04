@@ -22,40 +22,14 @@
  * SOFTWARE.
  */
 
-package ru.vidtu.ksyxis.loaders;
-
-import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NullMarked;
-import org.quiltmc.loader.api.ModContainer;
-import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
-import ru.vidtu.ksyxis.Ksyxis;
-
 /**
- * Main Ksyxis class for Quilt.
+ * Main Ksyxis package.
  *
  * @author VidTu
- * @apiNote Internal use only
+ * @see ru.vidtu.ksyxis.Ksyxis
+ * @see ru.vidtu.ksyxis.KsyxisPlugin
  */
-@SuppressWarnings("unused") // <- Quilt mod.
-@ApiStatus.Internal
 @NullMarked
-public final class KsyxisQuilt implements ModInitializer {
-    /**
-     * Creates a new mod.
-     */
-    @Contract(pure = true)
-    public KsyxisQuilt() {
-        // Empty
-    }
+package ru.vidtu.ksyxis;
 
-    /**
-     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Quilt"} and {@code manual=false}.
-     *
-     * @param mod Mod container, ignored
-     */
-    @Override
-    public void onInitialize(ModContainer mod) {
-        Ksyxis.init("Quilt", /*manual=*/false);
-    }
-}
+import org.jspecify.annotations.NullMarked;

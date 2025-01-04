@@ -26,6 +26,8 @@ package ru.vidtu.ksyxis.mixins;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Contract;
+import org.jspecify.annotations.NullMarked;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
@@ -35,42 +37,54 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 /**
- * Mixin that does some hacky things with the level to allow spawn chunks to unload after changing spawn point.
+ * Mixin for {@code ServerLevel} that disables spawn chunk tickets and sets {@code spawnChunkRadius} to {@code 0}.
  *
  * @author VidTu
+ * @apiNote Internal use only
  */
+// @ApiStatus.Internal // Can't annotate this without logging in the console.
 @Mixin(targets = {
-        // Deobfuscated
+        // Deobfuscated.
         "net.minecraft.server.level.ServerLevel", // Official Mojang
         "net.minecraft.server.world.ServerWorld", // Fabric Yarn
         "net.minecraft.world.server.ServerWorld", // Forge MCP
 
-        // Obfuscated
+        // Obfuscated.
         "net.minecraft.class_3218", // Fabric Intermediary
         "net.minecraft.src.C_12_", // Forge SRG
         "net.minecraft.unmapped.C_bdwnwhiu", // Quilt Hashed
         "net.minecraft.unmapped.C_3865296" // Ornithe
 }, remap = false)
 @Pseudo
+@NullMarked
 public final class ServerLevelMixin {
     /**
-     * Logger. Using Log4j logger, because SLF4J may not be available in older versions.
+     * Logger for this class. Using Log4j2 logger, because SLF4J is not available in older versions.
      */
     @Unique
-    private static final Logger KSYXIS$LOGGER = LogManager.getLogger("Ksyxis/ServerLevelMixin");
+    private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/ServerLevelMixin");
 
     /**
      * An instance of this class cannot be created.
      *
      * @throws AssertionError Always
+     * @deprecated Always throws
      */
+    @Deprecated
+    // @ApiStatus.ScheduledForRemoval // Can't annotate this without logging in the console.
+    @Contract(value = "-> fail", pure = true)
     private ServerLevelMixin() {
         throw new AssertionError("No instances.");
     }
 
-    // 1.20.6+
-
-    // Injects into ServerLevel.setDefaultSpawnPos (Mojang mappings) to override spawnChunkRadius gamerule.
+    /**
+     * Injects into {@code ServerLevel.setDefaultSpawnPos} (Mojang mappings) to override
+     * the {@code spawnChunkRadius} gamerule. Used since 1.20.6 (inclusive).
+     *
+     * @param spawnChunkRadius Previous {@code spawnChunkRadius} value for logging
+     * @return Always {@code 0}
+     */
+    @Contract(pure = true)
     @ModifyVariable(method = {
             // Deobfuscated
             "setDefaultSpawnPos(Lnet/minecraft/core/BlockPos;F)V", // Official Mojang
@@ -92,15 +106,21 @@ public final class ServerLevelMixin {
             "m_3711633(Lnet/minecraft/unmapped/C_3674802;)V", // Ornithe
             "m_3711633(Lnet/minecraft/unmapped/C_3674802;F)V" // Ornithe
     }, at = @At("STORE"), remap = false, require = 0, expect = 0, index = 5)
-    public int ksyxis$setDefaultSpawnPos$spawnChunkRadius$getInt(int spawnChunkRadius) {
-        // Report spawn chunks gamerule as 0.
-        KSYXIS$LOGGER.debug("Ksyxis: Reporting 0 as spawnChunkRadius gamerule instead of {} (expected 0 to 32) in ServerLevelMixin.", new Object[]{spawnChunkRadius}); // <- Array for compat with log4j 2.0-beta.9.
+    public int ksyxis_setDefaultSpawnPos_spawnChunkRadius_getInt(int spawnChunkRadius) {
+        // Report spawnChunkRadius gamerule as 0. Also log. (**DEBUG**)
+        if (!KSYXIS_LOGGER.isDebugEnabled()) return 0;
+        KSYXIS_LOGGER.debug("Ksyxis: Reporting 0 as spawnChunkRadius gamerule instead of {} (expected 0 to 32) in ServerLevelMixin.", new Object[]{spawnChunkRadius}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
         return 0;
     }
 
-    // 1.14 -> 1.20.4
-
-    // Injects into ServerLevel.setDefaultSpawnPos (Mojang mappings) to prevent loading chunks at the spawn after setting it.
+    /**
+     * Injects into {@code ServerLevel.setDefaultSpawnPos} (Mojang mappings) to prevent loading chunks at the spawn
+     * after setting it. Used in 1.14 (inclusive) through 1.20.4 (inclusive). Always returns {@code 0}.
+     *
+     * @param constant Previous constant value for logging
+     * @return Always {@code 0}
+     */
+    @Contract(pure = true)
     @ModifyConstant(method = {
             // Deobfuscated
             "setDefaultSpawnPos(Lnet/minecraft/core/BlockPos;F)V", // Official Mojang
@@ -122,9 +142,10 @@ public final class ServerLevelMixin {
             "m_3711633(Lnet/minecraft/unmapped/C_3674802;)V", // Ornithe
             "m_3711633(Lnet/minecraft/unmapped/C_3674802;F)V" // Ornithe
     }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
-    public int ksyxis$setDefaultSpawnPos$addRegionTicket(int constant) {
-        // Add zero-level ticket.
-        KSYXIS$LOGGER.debug("Ksyxis: Adding zero-level ticket instead of {} (expected 11) ticket in ServerLevelMixin.", new Object[]{constant}); // <- Array for compat with log4j 2.0-beta.9.
+    public int ksyxis_setDefaultSpawnPos_addRegionTicket(int constant) {
+        // Add zero-level chunk loading ticket. Also log. (**DEBUG**)
+        if (!KSYXIS_LOGGER.isDebugEnabled()) return 0;
+        KSYXIS_LOGGER.debug("Ksyxis: Adding zero-level ticket instead of {} (expected 11) ticket in ServerLevelMixin.", new Object[]{constant}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
         return 0;
     }
 }

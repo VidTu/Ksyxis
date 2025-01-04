@@ -22,10 +22,14 @@
 
 [versions]
 asm = "9.7.1"
+jetbrains-annotations = "26.0.1"
+jspecify = "1.0.0"
 log4j = "2.24.3"
 mixin = "0.8.7"
 
 [libraries]
 asm = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
+jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
+jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecify" }
 log4j = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j" }
 mixin = { module = "org.spongepowered:mixin", version.ref = "mixin" }

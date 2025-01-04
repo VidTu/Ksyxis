@@ -36,14 +36,21 @@ description = "Speed up the loading of your world."
 
 repositories {
     mavenCentral()
+    maven("https://maven.quiltmc.org/repository/release/")
+    maven("https://maven.fabricmc.net/")
     maven("https://repo.spongepowered.org/repository/maven-public/")
 }
 
 dependencies {
+    // Annotations
+    compileOnly(libs.jspecify)
+    compileOnly(libs.jetbrains.annotations)
+
+    // Dependencies
     compileOnly(project(":loaders"))
+    compileOnly(libs.mixin)
     compileOnly(libs.asm)
     compileOnly(libs.log4j)
-    compileOnly(libs.mixin)
 }
 
 tasks.withType<JavaCompile> {

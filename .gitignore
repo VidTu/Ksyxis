@@ -32,7 +32,9 @@ replay_pid*
 *.log
 *.class
 **~
-!.idea/inspectionProfiles
-!.idea/inspectionProfiles/**
-!.idea/codeStyles
-!.idea/codeStyles/**
+!/.idea/inspectionProfiles
+!/.idea/inspectionProfiles/**
+!/.idea/codeStyles
+!/.idea/codeStyles/**
+!/.idea/copyright
+!/.idea/copyright/**

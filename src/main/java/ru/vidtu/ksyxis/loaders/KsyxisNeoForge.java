@@ -25,19 +25,24 @@
 package ru.vidtu.ksyxis.loaders;
 
 import net.neoforged.fml.common.Mod;
+import org.jetbrains.annotations.ApiStatus;
+import org.jspecify.annotations.NullMarked;
 import ru.vidtu.ksyxis.Ksyxis;
 
 /**
- * Main Ksyxis class for NeoForged.
+ * Main Ksyxis class for NeoForge.
  *
  * @author VidTu
+ * @apiNote Internal use only
  */
+@ApiStatus.Internal
 @Mod("ksyxis")
+@NullMarked
 public final class KsyxisNeoForge {
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with "NeoForge" and {@code false}.
+     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="NeoForge"} and {@code manual=false}.
      */
     public KsyxisNeoForge() {
-        Ksyxis.init("NeoForge", false);
+        Ksyxis.init("NeoForge", /*manual=*/false);
     }
 }

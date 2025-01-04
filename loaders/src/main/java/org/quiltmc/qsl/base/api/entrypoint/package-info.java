@@ -14,23 +14,12 @@
  * limitations under the License.
  */
 
-package org.quiltmc.qsl.base.api.entrypoint;
-
-import org.quiltmc.loader.api.ModContainer;
-
 /**
- * Stub entrypoint interface of the Quilt mod. This is an injection interface for Ksyxis for Quilt,
- * see {@code KsyxisQuilt} class.
+ * Dummy QuiltMC mod initializer package.
  *
  * @author VidTu
  * @author FabricMC
  * @author QuiltMC
+ * @see org.quiltmc.qsl.base.api.entrypoint.ModInitializer
  */
-public interface ModInitializer {
-    /**
-     * Runs the entrypoint. This is an injection point for Ksyxis for Quilt, see {@code KsyxisQuilt} class.
-     *
-     * @param mod Stub mod container, ignored
-     */
-    void onInitialize(ModContainer mod);
-}
+package org.quiltmc.qsl.base.api.entrypoint;

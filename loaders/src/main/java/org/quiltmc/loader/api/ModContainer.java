@@ -20,9 +20,7 @@ package org.quiltmc.loader.api;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 
 /**
- * Dummy QuiltMC mod container.
- * <p>
- * This is a dummy interface for {@link ModInitializer}.
+ * Dummy QuiltMC mod container. This is a dummy interface for {@link ModInitializer}.
  *
  * @author VidTu
  * @author FabricMC

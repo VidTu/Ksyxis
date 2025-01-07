@@ -29,7 +29,7 @@ Speed up your world loading by removing spawn chunks.
 **Q**: Where can I download this mod?  
 **A**: [Modrinth](https://modrinth.com/mod/ksyxis),
 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ksyxis),
-[GitHub](https://github.com/VidTu/Ksyxis).
+[GitHub](https://github.com/VidTu/Ksyxis/releases).
 You can also find unstable builds at [GitHub Actions](https://github.com/VidTu/Ksyxis/actions),
 you'll need a GitHub account to download them.
 

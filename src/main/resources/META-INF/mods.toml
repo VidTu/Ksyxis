@@ -16,7 +16,7 @@ itemIcon = "minecraft:porkchop"
 logoFile = "ksyxis_240.png"
 authors = "VidTu"
 displayTest = "IGNORE_ALL_VERSION"
-description = '''Speed up the loading of your world.'''
+description = '''Speed up your world loading by removing spawn chunks.'''
 
 [modproperties.ksyxis]
 catalogueImageIcon = "ksyxis_64.png"

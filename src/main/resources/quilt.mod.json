@@ -6,7 +6,7 @@
     "version": "${version}",
     "metadata": {
       "name": "Ksyxis",
-      "description": "Speed up the loading of your world.",
+      "description": "Speed up your world loading by removing spawn chunks.",
       "license": "MIT",
       "contributors": {
         "VidTu": "Owner"

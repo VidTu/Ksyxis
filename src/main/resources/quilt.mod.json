@@ -39,6 +39,7 @@
       "image": "ksyxis_64.png",
       "item": "minecraft:porkchop"
     },
-    "banner": "ksyxis_240.png"
+    "banner": "ksyxis_240.png",
+    "background": "ksyxis_background.png"
   }
 }

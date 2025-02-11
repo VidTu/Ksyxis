@@ -48,10 +48,10 @@ tasks.withType<Jar> {
     manifest {
         attributes(
             "Specification-Title" to "Ksyxis",
-            "Specification-Version" to project.version,
+            "Specification-Version" to version,
             "Specification-Vendor" to "VidTu",
             "Implementation-Title" to "Ksyxis-Loaders",
-            "Implementation-Version" to project.version,
+            "Implementation-Version" to version,
             "Implementation-Vendor" to "VidTu, FabricMC, MinecraftForge, NeoForged, QuiltMC"
         )
     }

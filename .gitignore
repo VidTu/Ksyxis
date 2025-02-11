@@ -2,9 +2,9 @@
 .idea/*
 build/
 run/
-!/.idea/inspectionProfiles
-!/.idea/inspectionProfiles/**
 !/.idea/codeStyles
 !/.idea/codeStyles/**
 !/.idea/copyright
 !/.idea/copyright/**
+!/.idea/inspectionProfiles
+!/.idea/inspectionProfiles/**

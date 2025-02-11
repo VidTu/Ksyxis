@@ -58,16 +58,8 @@ tasks.withType<JavaCompile> {
 
 tasks.withType<ProcessResources> {
     inputs.property("version", version)
-    filesMatching(
-        listOf(
-            "fabric.mod.json",
-            "quilt.mod.json",
-            "META-INF/mods.toml",
-            "META-INF/neoforge.mods.toml",
-            "mcmod.info"
-        )
-    ) {
-        expand("version" to version)
+    filesMatching(listOf("fabric.mod.json", "quilt.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml", "mcmod.info")) {
+        expand(inputs.properties)
     }
 }
 

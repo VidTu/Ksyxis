@@ -36,7 +36,7 @@ description = "Speed up the loading of your world."
 
 repositories {
     mavenCentral()
-    maven("https://repo.spongepowered.org/repository/maven-public/")
+    maven("https://repo.spongepowered.org/repository/maven-public/") // Mixin.
 }
 
 dependencies {

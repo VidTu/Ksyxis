@@ -84,7 +84,7 @@ public final class Ksyxis {
      *
      * @see #getLoadedChunks()
      */
-    // This must be below LOGGER, otherwise deadlocks will screw us up.
+    // This MUST be below LOGGER, otherwise deadlocks will screw us up.
     public static final int LOADED_CHUNKS = getLoadedChunks();
 
     /**
@@ -180,7 +180,8 @@ public final class Ksyxis {
         LOGGER.error(message, error);
         error.printStackTrace();
 
-        // Try to die. Some smart guys at Forge (1.8.9) thought it's a good idea to prevent shutting down.
+        // Try to die. Some smart guys at Forge 1.8.9 thought it's a good idea to prevent shutting down.
+        // See below how we're bypassing that restriction, because Java 8 is not encapsulated.
         try {
             System.exit(-2037852655); // "Ksyxis".hashCode()
         } catch (Throwable th) {
@@ -196,8 +197,8 @@ public final class Ksyxis {
         try {
             Class<?> shutdownClass = Class.forName("java.lang.Shutdown");
             Method shutdownMethod = shutdownClass.getDeclaredMethod("exit", int.class);
-            shutdownMethod.setAccessible(true); // "Ksyxis".hashCode()
-            shutdownMethod.invoke(null, -2037852655);
+            shutdownMethod.setAccessible(true);
+            shutdownMethod.invoke(null, -2037852655); // "Ksyxis".hashCode()
         } catch (Throwable th) {
             // Suppress for logging.
             error.addSuppressed(new RuntimeException("Unable to exit the game reflectively.", th));

@@ -240,7 +240,7 @@ public final class MinecraftServerMixin {
     }, constant = {@Constant(intValue = -192), @Constant(intValue = 192)}, remap = false, require = 0, expect = 0)
     public int ksyxis_initialWorldChunkLoad_loop(int constant) {
         // Loop from 1 to -1 to prevent looping. Also log. (**DEBUG**)
-        int report = (constant < 0) ? 1 : -1;
+        int report = ((constant < 0) ? 1 : -1);
         if (!KSYXIS_LOGGER.isDebugEnabled()) return report;
         KSYXIS_LOGGER.debug("Ksyxis: Hijacking loop constant from {} to {} to prevent looping in MinecraftServerMixin.", new Object[]{constant, report}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
         return report;

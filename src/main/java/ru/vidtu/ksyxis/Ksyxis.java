@@ -118,8 +118,8 @@ public final class Ksyxis {
             // Obtain Mixin version.
             String mixinVersion = obtainMixinVersion(platform, manual);
 
-            // Log.
-            LOGGER.info("Ksyxis: Found Mixin library. (version: {})", new Object[]{mixinVersion}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+            // Log. (**DEBUG**)
+            LOGGER.debug("Ksyxis: Found Mixin library. (mixinVersion: {})", new Object[]{mixinVersion}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
 
             // Bootstrap Mixin and add the config. (if manual)
             if (manual) {
@@ -130,7 +130,7 @@ public final class Ksyxis {
             }
 
             // Log the info.
-            LOGGER.info("Ksyxis: Ready. As always, this mod will speed up your world loading and might or might not break it. ({} ms)", new Object[]{(System.nanoTime() - start) / 1_000_000L}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+            LOGGER.info("Ksyxis: Ready. As always, this mod will speed up your world loading and might or might not break it. (mixinVersion: {}, time: {} ms)", new Object[]{mixinVersion, (System.nanoTime() - start) / 1_000_000L}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
         } catch (Throwable t) {
             // Format the message.
             String message = String.format(MIXIN_INJECT, platform, manual);
@@ -165,6 +165,10 @@ public final class Ksyxis {
             // Suppress for logging.
             error.addSuppressed(new RuntimeException("Unable to display the LWJGL3 error message. Maybe it's LWJGL2 or server here.", th));
         }
+
+        // Log again with suppressed errors.
+        LOGGER.error(message, error);
+        error.printStackTrace();
 
         // Try to display LWJGL2 alert from Sys.
         try {

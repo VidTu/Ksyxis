@@ -41,6 +41,7 @@ import java.lang.reflect.Method;
  *
  * @author VidTu
  */
+@ApiStatus.Internal
 @NullMarked
 public final class Ksyxis {
     /**

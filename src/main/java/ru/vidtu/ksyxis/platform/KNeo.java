@@ -22,40 +22,27 @@
  * SOFTWARE.
  */
 
-package ru.vidtu.ksyxis.loaders;
+package ru.vidtu.ksyxis.platform;
 
+import net.neoforged.fml.common.Mod;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
-import org.quiltmc.loader.api.ModContainer;
-import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import ru.vidtu.ksyxis.Ksyxis;
 
 /**
- * Main Ksyxis class for Quilt.
+ * Main Ksyxis class for NeoForge.
  *
  * @author VidTu
  * @apiNote Internal use only
  */
-@SuppressWarnings("unused") // <- Quilt mod.
 @ApiStatus.Internal
+@Mod("ksyxis")
 @NullMarked
-public final class KsyxisQuilt implements ModInitializer {
+public final class KNeo {
     /**
-     * Creates a new mod.
+     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="NeoForge"} and {@code manual=false}.
      */
-    @Contract(pure = true)
-    public KsyxisQuilt() {
-        // Empty
-    }
-
-    /**
-     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Quilt"} and {@code manual=false}.
-     *
-     * @param mod Mod container, ignored
-     */
-    @Override
-    public void onInitialize(ModContainer mod) {
-        Ksyxis.init("Quilt", /*manual=*/false);
+    public KNeo() {
+        Ksyxis.init("NeoForge", /*manual=*/false);
     }
 }

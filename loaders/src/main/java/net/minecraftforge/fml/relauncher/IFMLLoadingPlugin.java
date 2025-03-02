@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * Stub interface of the legacy (1.12) Forge coremod for Ksyxis hacky compat. This is an injection interface for
- * Ksyxis for Forge 1.8 -> 1.12.2, see {@code KsyxisLegacyForge} class.
+ * Ksyxis for Forge 1.8 -> 1.12.2, see {@code KCore} class.
  *
  * @author VidTu
  * @author MinecraftForge
@@ -46,7 +46,7 @@ public interface IFMLLoadingPlugin {
     String getSetupClass();
 
     /**
-     * Injects the data. This is an injection point for Ksyxis for Forge 1.8 -> 1.12.2, see {@code KsyxisLegacyForge}
+     * Injects the data. This is an injection point for Ksyxis for Forge 1.8 -> 1.12.2, see {@code KCore}
      * class. For the declaration point, see {@link Mod}.
      *
      * @param data Stub injection data, ignored by Ksyxis

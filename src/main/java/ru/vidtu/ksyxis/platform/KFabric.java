@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package ru.vidtu.ksyxis.loaders;
+package ru.vidtu.ksyxis.platform;
 
 import net.fabricmc.api.ModInitializer;
 import org.jetbrains.annotations.ApiStatus;
@@ -38,12 +38,12 @@ import ru.vidtu.ksyxis.Ksyxis;
  */
 @ApiStatus.Internal
 @NullMarked
-public final class KsyxisFabric implements ModInitializer {
+public final class KFabric implements ModInitializer {
     /**
      * Creates a new mod.
      */
     @Contract(pure = true)
-    public KsyxisFabric() {
+    public KFabric() {
         // Empty
     }
 
@@ -52,6 +52,6 @@ public final class KsyxisFabric implements ModInitializer {
      */
     @Override
     public void onInitialize() {
-        Ksyxis.init("Fabric", /*manual=*/false);
+        Ksyxis.init("Fabric/KFabric", /*manual=*/false);
     }
 }

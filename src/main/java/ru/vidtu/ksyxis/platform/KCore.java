@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package ru.vidtu.ksyxis.loaders;
+package ru.vidtu.ksyxis.platform;
 
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.jetbrains.annotations.ApiStatus;
@@ -41,12 +41,12 @@ import java.util.Map;
  */
 @ApiStatus.Internal
 @NullMarked
-public final class KsyxisLegacyForge implements IFMLLoadingPlugin {
+public final class KCore implements IFMLLoadingPlugin {
     /**
      * Creates a new coremod.
      */
     @Contract(pure = true)
-    public KsyxisLegacyForge() {
+    public KCore() {
         // Empty
     }
 
@@ -104,6 +104,6 @@ public final class KsyxisLegacyForge implements IFMLLoadingPlugin {
      */
     @Override
     public void injectData(Map<String, Object> data) {
-        Ksyxis.init("LegacyForge", /*manual=*/true);
+        Ksyxis.init("LegacyForge/KForge", /*manual=*/true);
     }
 }

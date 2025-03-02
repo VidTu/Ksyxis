@@ -20,7 +20,7 @@ import org.quiltmc.loader.api.ModContainer;
 
 /**
  * Stub entrypoint interface of the Quilt mod. This is an injection interface for Ksyxis for Quilt,
- * see {@code KsyxisQuilt} class.
+ * see {@code KQuilt} class.
  *
  * @author VidTu
  * @author FabricMC
@@ -28,7 +28,7 @@ import org.quiltmc.loader.api.ModContainer;
  */
 public interface ModInitializer {
     /**
-     * Runs the entrypoint. This is an injection point for Ksyxis for Quilt, see {@code KsyxisQuilt} class.
+     * Runs the entrypoint. This is an injection point for Ksyxis for Quilt, see {@code KQuilt} class.
      *
      * @param mod Stub mod container, ignored
      */

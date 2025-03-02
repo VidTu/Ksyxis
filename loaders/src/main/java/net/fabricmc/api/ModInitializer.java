@@ -18,14 +18,14 @@ package net.fabricmc.api;
 
 /**
  * Stub entrypoint interface of the Fabric mod. This is an injection interface for Ksyxis for Fabric,
- * see {@code KsyxisFabric} class.
+ * see {@code KFabric} class.
  *
  * @author VidTu
  * @author FabricMC
  */
 public interface ModInitializer {
     /**
-     * Runs the entrypoint. This is an injection point for Ksyxis for Fabric, see {@code KsyxisFabric} class.
+     * Runs the entrypoint. This is an injection point for Ksyxis for Fabric, see {@code KFabric} class.
      */
     void onInitialize();
 }

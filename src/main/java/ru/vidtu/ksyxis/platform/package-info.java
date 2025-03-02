@@ -29,6 +29,6 @@
  * @see ru.vidtu.ksyxis.Ksyxis#init(java.lang.String, boolean)
  */
 @NullMarked
-package ru.vidtu.ksyxis.loaders;
+package ru.vidtu.ksyxis.platform;
 
 import org.jspecify.annotations.NullMarked;

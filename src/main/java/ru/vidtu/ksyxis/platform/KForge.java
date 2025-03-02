@@ -22,27 +22,27 @@
  * SOFTWARE.
  */
 
-package ru.vidtu.ksyxis.loaders;
+package ru.vidtu.ksyxis.platform;
 
-import net.neoforged.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import ru.vidtu.ksyxis.Ksyxis;
 
 /**
- * Main Ksyxis class for NeoForge.
+ * Main Ksyxis class for Forge. (modern & legacy)
  *
  * @author VidTu
  * @apiNote Internal use only
  */
 @ApiStatus.Internal
-@Mod("ksyxis")
+@Mod(value = "ksyxis"/*(modern)*/, modid = "ksyxis"/*(legacy)*/, acceptableRemoteVersions = "*"/*(legacy)*/)
 @NullMarked
-public final class KsyxisNeoForge {
+public final class KForge {
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="NeoForge"} and {@code manual=false}.
+     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Forge"} and {@code manual=false}.
      */
-    public KsyxisNeoForge() {
-        Ksyxis.init("NeoForge", /*manual=*/false);
+    public KForge() {
+        Ksyxis.init("Forge/KForge", /*manual=*/false);
     }
 }

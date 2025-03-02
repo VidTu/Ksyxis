@@ -22,27 +22,40 @@
  * SOFTWARE.
  */
 
-package ru.vidtu.ksyxis.loaders;
+package ru.vidtu.ksyxis.platform;
 
-import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
+import org.quiltmc.loader.api.ModContainer;
+import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import ru.vidtu.ksyxis.Ksyxis;
 
 /**
- * Main Ksyxis class for Forge. (modern & legacy)
+ * Main Ksyxis class for Quilt.
  *
  * @author VidTu
  * @apiNote Internal use only
  */
+@SuppressWarnings("unused") // <- Quilt mod.
 @ApiStatus.Internal
-@Mod(value = "ksyxis"/*(modern)*/, modid = "ksyxis"/*(legacy)*/, acceptableRemoteVersions = "*"/*(legacy)*/)
 @NullMarked
-public final class KsyxisForge {
+public final class KQuilt implements ModInitializer {
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Forge"} and {@code manual=false}.
+     * Creates a new mod.
      */
-    public KsyxisForge() {
-        Ksyxis.init("Forge", /*manual=*/false);
+    @Contract(pure = true)
+    public KQuilt() {
+        // Empty
+    }
+
+    /**
+     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Quilt"} and {@code manual=false}.
+     *
+     * @param mod Mod container, ignored
+     */
+    @Override
+    public void onInitialize(ModContainer mod) {
+        Ksyxis.init("Quilt/KQuilt", /*manual=*/false);
     }
 }

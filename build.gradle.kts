@@ -78,7 +78,7 @@ tasks.withType<Jar> {
             "Implementation-Title" to "Ksyxis",
             "Implementation-Version" to version,
             "Implementation-Vendor" to "VidTu",
-            "FMLCorePlugin" to "ru.vidtu.ksyxis.loaders.KsyxisLegacyForge",
+            "FMLCorePlugin" to "ru.vidtu.ksyxis.platform.KCore",
             "FMLCorePluginContainsFMLMod" to "true",
             "ForceLoadAsMod" to "true",
             "MixinConfigs" to "ksyxis.mixins.json"

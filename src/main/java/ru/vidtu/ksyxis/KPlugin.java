@@ -48,7 +48,7 @@ import java.util.Set;
  */
 @ApiStatus.Internal
 @NullMarked
-public final class KsyxisPlugin implements IMixinConfigPlugin {
+public final class KPlugin implements IMixinConfigPlugin {
     /**
      * Mixin plugin error message. Shown in {@link #shouldApplyMixin(String, String)} when an error occurs.
      *
@@ -63,7 +63,7 @@ public final class KsyxisPlugin implements IMixinConfigPlugin {
     /**
      * Logger for this class. Using Log4j2 logger, because SLF4J is not available in older versions.
      */
-    private static final Logger LOGGER = LogManager.getLogger("Ksyxis/KsyxisPlugin");
+    private static final Logger LOGGER = LogManager.getLogger("Ksyxis/KPlugin");
 
     /**
      * Current Mixin bytecode provider.
@@ -77,7 +77,7 @@ public final class KsyxisPlugin implements IMixinConfigPlugin {
      */
     @ApiStatus.Internal
     @Contract(pure = true)
-    public KsyxisPlugin() {
+    public KPlugin() {
         // Empty
     }
 
@@ -207,7 +207,7 @@ public final class KsyxisPlugin implements IMixinConfigPlugin {
     @Contract(pure = true)
     @Override
     public String toString() {
-        return "Ksyxis/KsyxisPlugin{" +
+        return "Ksyxis/KPlugin{" +
                 "provider=" + this.provider +
                 '}';
     }

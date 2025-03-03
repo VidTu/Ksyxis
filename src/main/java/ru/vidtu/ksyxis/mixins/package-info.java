@@ -26,7 +26,7 @@
  * Ksyxis package with mixins to inject.
  *
  * @author VidTu
- * @see ru.vidtu.ksyxis.KsyxisPlugin
+ * @see ru.vidtu.ksyxis.KPlugin
  */
 @NullMarked
 package ru.vidtu.ksyxis.mixins;

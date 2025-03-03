@@ -99,6 +99,7 @@ public final class MinecraftServerMixin {
     }, at = @At("STORE"), remap = false, require = 0, expect = 0, index = 5)
     public int ksyxis_prepareLevels_spawnChunkRadius_getInt(int spawnChunkRadius) {
         // Report spawnChunkRadius gamerule as 0. Also log. (**DEBUG**)
+        if (!KSYXIS_LOGGER.isDebugEnabled()) return 0;
         KSYXIS_LOGGER.debug("Ksyxis: Reporting 0 as spawnChunkRadius gamerule instead of {} (expected 0 to 32) in MinecraftServerMixin.", new Object[]{spawnChunkRadius}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
         return 0;
     }

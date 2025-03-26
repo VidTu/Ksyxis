@@ -120,7 +120,9 @@ public final class Ksyxis {
             String mixinVersion = obtainMixinVersion(platform, manual);
 
             // Log. (**DEBUG**)
-            LOGGER.debug("Ksyxis: Found Mixin library. (mixinVersion: {})", new Object[]{mixinVersion}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Ksyxis: Found Mixin library. (mixinVersion: {})", new Object[]{mixinVersion}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+            }
 
             // Bootstrap Mixin and add the config. (if manual)
             if (manual) {

@@ -23,7 +23,7 @@ Additional contact information may or may not be present at [vidtu.ru](https://v
 
 ### ECC
 
-Also available at: [vidtu.ru/pgp_ecc.txt](https://vidtu.ru/pgp_ecc.txt)
+Should be the same as at: [vidtu.ru/pgp_ecc.txt](https://vidtu.ru/pgp_ecc.txt)
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -43,7 +43,7 @@ FgMFAmYXMvUCGwwACgkQqPHZbY2kFgMnOwD+NdGxF/m2r8feNtb4ehiX1AvGWceF
 
 ### RSA
 
-Also available at: [vidtu.ru/pgp_rsa.txt](https://vidtu.ru/pgp_rsa.txt)
+Should be the same as at: [vidtu.ru/pgp_rsa.txt](https://vidtu.ru/pgp_rsa.txt)
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----

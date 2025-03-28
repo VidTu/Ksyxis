@@ -104,6 +104,6 @@ public final class KCore implements IFMLLoadingPlugin {
      */
     @Override
     public void injectData(Map<String, Object> data) {
-        Ksyxis.init("LegacyForge/KForge", /*manual=*/true);
+        Ksyxis.init("LegacyForge/KCore", /*manual=*/true);
     }
 }

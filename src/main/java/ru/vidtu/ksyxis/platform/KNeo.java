@@ -43,6 +43,6 @@ public final class KNeo {
      * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="NeoForge"} and {@code manual=false}.
      */
     public KNeo() {
-        Ksyxis.init("NeoForge", /*manual=*/false);
+        Ksyxis.init("NeoForge/KNeo", /*manual=*/false);
     }
 }

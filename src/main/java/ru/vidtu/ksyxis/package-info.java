@@ -29,7 +29,9 @@
  * @see ru.vidtu.ksyxis.Ksyxis
  * @see ru.vidtu.ksyxis.KPlugin
  */
+@ApiStatus.Internal
 @NullMarked
 package ru.vidtu.ksyxis;
 
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;

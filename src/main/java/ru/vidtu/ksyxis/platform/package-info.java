@@ -28,7 +28,9 @@
  * @author VidTu
  * @see ru.vidtu.ksyxis.Ksyxis#init(java.lang.String, boolean)
  */
+@ApiStatus.Internal
 @NullMarked
 package ru.vidtu.ksyxis.platform;
 
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;

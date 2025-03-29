@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 [versions]
-asm = "9.7.1"
+asm = "9.8"
 jetbrains-annotations = "26.0.2"
 jspecify = "1.0.0"
 log4j = "2.24.3"

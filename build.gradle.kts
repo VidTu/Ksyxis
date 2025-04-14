@@ -24,6 +24,9 @@
  * SPDX-License-Identifier: MIT
  */
 
+import com.google.gson.Gson
+import com.google.gson.JsonElement
+
 plugins {
     id("java")
 }
@@ -62,6 +65,14 @@ tasks.withType<ProcessResources> {
     inputs.property("version", version)
     filesMatching(listOf("fabric.mod.json", "quilt.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml", "mcmod.info")) {
         expand(inputs.properties)
+    }
+    val jsonAlike = Regex("^.*\\.(?:json|mcmeta|info)$", RegexOption.IGNORE_CASE)
+    fileTree(outputs.files.asPath).forEach {
+        if (it.name.matches(jsonAlike)) {
+            doLast {
+                it.writeText(Gson().fromJson(it.readText(), JsonElement::class.java).toString())
+            }
+        }
     }
 }
 

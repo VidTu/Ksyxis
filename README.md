@@ -13,13 +13,13 @@ Speed up your world loading by removing spawn chunks.
 
 **Fabric**: (none)  
 **Forge 1.16 and newer**: (none)  
-**Forge 1.15.2 and older**: Any Mixin provider at your choice (such as
+**Forge 1.15.2 and older**: Any Mixin provider, at your choice (such as
 [MixinBootstrap](https://modrinth.com/mod/mixinbootstrap), [MixinBooter](https://modrinth.com/mod/mixinbooter),
-[UniMixins](https://modrinth.com/mod/unimixins) or any other)  
+[UniMixins](https://modrinth.com/mod/unimixins), or any other)  
 **NeoForge**: (none)  
 **Quilt**: (none)  
 **Legacy Fabric**: (none)  
-**Ornithe** (none)
+**Ornithe**: (none)
 
 ## FAQ
 
@@ -30,15 +30,15 @@ Speed up your world loading by removing spawn chunks.
 **A**: [Modrinth](https://modrinth.com/mod/ksyxis),
 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ksyxis),
 [GitHub](https://github.com/VidTu/Ksyxis/releases).
-You can also find unstable builds at [GitHub Actions](https://github.com/VidTu/Ksyxis/actions),
-you'll need a GitHub account to download them.
+You can also find unstable builds at [GitHub Actions](https://github.com/VidTu/Ksyxis/actions).
+You will need a GitHub account to download these.
 
 **Q**: This mod doesn't speed up anything.  
 **A**: The effect may not be noticeable on high-end PCs. This mod is designed primarily for low-end devices.
-There's [a video](https://www.youtube.com/watch?v=PXWdDoVU1C4) through.
+Nevertheless, there is [a video](https://www.youtube.com/watch?v=PXWdDoVU1C4).
 
 **Q**: Which mod loaders are supported?  
-**A**: Forge, Fabric, Quilt, NeoForge, Legacy Fabric, Ornithe (for both Fabric and Quilt).
+**A**: Forge, Fabric, Quilt, NeoForge, Legacy Fabric, and Ornithe (for both Fabric and Quilt).
 
 **Q**: Which versions are supported?  
 **A**: Minecraft 1.8 or newer. There may be a backport to older versions in the future.
@@ -54,11 +54,11 @@ There's [a video](https://www.youtube.com/watch?v=PXWdDoVU1C4) through.
 under [MIT License](https://github.com/VidTu/Ksyxis/blob/main/LICENSE))
 
 **Q**: Is this mod stable for use?  
-**A**: It should be. No guarantee though. At least it should not break your worlds, you just won't be able to load them
-with this mod and can uninstall it to load otherwise.
+**A**: It should be. No guarantee, though. At least it should not break your worlds.
+You can always uninstall the mod and load them without Ksyxis.
 
 **Q**: Is this mod client-side or server-side?  
-**A**: This mod works on logical server side. That is, it has effect in singleplayer and
+**A**: This mod works on the logical server side. That is, it does have an effect in singleplayer and
 on a dedicated (standalone) server. It has no effect on the client when playing in multiplayer.
 You can install it into your client or your server without any requirements for it to be installed on the other side.
 
@@ -71,14 +71,14 @@ For older versions, you can search for some mod that force-loads chunks.
 the [Discord](https://discord.gg/Q6saSVSuYQ).
 
 **Q**: Can I use this in my modpack?  
-**A**: Sure. Credit (e.g. a link to mod's GitHub page) is appreciated, but is not required.
-Monetization and redistributing is allowed as per the [MIT License](https://github.com/VidTu/Ksyxis/blob/main/LICENSE).
+**A**: Sure. Credit (e.g., a link to the mod's GitHub page) is appreciated but is not required.
+Monetization and redistribution are allowed as per the [MIT License](https://github.com/VidTu/Ksyxis/blob/main/LICENSE).
 
 **Q**: It says *Ksyxis: No Mixin found*.  
-**A**: If you're using ancient Forge (1.15.2 or older), you may need to
-install [MixinBootstrap](https://modrinth.com/mod/mixinbootstrap), [MixinBooter](https://modrinth.com/mod/mixinbooter),
-[UniMixins](https://modrinth.com/mod/unimixins) **OR** any other at your choice. If you're using Forge 1.16 or newer,
-any Fabric, any Quilt, or any NeoForge, you don't need to install anything and this is a bug.
+**A**: If you're using Forge 1.15.2 or older, you may need to install
+[MixinBootstrap](https://modrinth.com/mod/mixinbootstrap), [MixinBooter](https://modrinth.com/mod/mixinbooter),
+[UniMixins](https://modrinth.com/mod/unimixins), or any other Mixin provider of your choice. If you're using Forge 1.16
+or newer, any version Fabric/Quilt/NeoForge/Ornithe, you don't need to install anything, and this is a bug.
 
 ## License
 

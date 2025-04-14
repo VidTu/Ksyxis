@@ -42,6 +42,7 @@ import java.lang.reflect.Method;
  * Main Ksyxis class.
  *
  * @author VidTu
+ * @apiNote Internal use only
  */
 @ApiStatus.Internal
 @NullMarked

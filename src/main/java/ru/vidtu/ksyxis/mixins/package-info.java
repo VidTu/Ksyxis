@@ -28,6 +28,7 @@
  * Ksyxis package with mixins to inject.
  *
  * @author VidTu
+ * @apiNote Internal use only
  * @see ru.vidtu.ksyxis.KPlugin
  */
 @ApiStatus.Internal

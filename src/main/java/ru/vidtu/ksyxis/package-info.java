@@ -28,6 +28,7 @@
  * Main Ksyxis package.
  *
  * @author VidTu
+ * @apiNote Internal use only
  * @see ru.vidtu.ksyxis.Ksyxis
  * @see ru.vidtu.ksyxis.KPlugin
  */

@@ -129,8 +129,9 @@ public final class Ksyxis {
 
             // Bootstrap Mixin and add the config. (if manual)
             if (manual) {
+                LOGGER.debug("Ksyxis: Bootstrapping Mixin...");
                 MixinBootstrap.init();
-                LOGGER.debug("Ksyxis: Mixin Bootstrap success.");
+                LOGGER.debug("Ksyxis: Mixin Bootstrap success. Injecting config...");
                 Mixins.addConfiguration("ksyxis.mixins.json");
                 LOGGER.debug("Ksyxis: Mixin config added.");
             }
@@ -166,7 +167,8 @@ public final class Ksyxis {
             Class<?> tinyFd = Class.forName("org.lwjgl.util.tinyfd.TinyFileDialogs");
             Method tinyFdMessageBox = tinyFd.getMethod("tinyfd_messageBox", CharSequence.class,
                     CharSequence.class, CharSequence.class, CharSequence.class, boolean.class);
-            tinyFdMessageBox.invoke(null, "Minecraft | Ksyxis Mod", message, "ok", "error", false);
+            tinyFdMessageBox.invoke(null, "Minecraft | Ksyxis Mod", message, /*buttons=*/"ok",
+                    /*icon=*/"error", /*selectOkButton=*/false);
         } catch (Throwable th) {
             // Suppress for logging.
             error.addSuppressed(new RuntimeException("Unable to display the LWJGL3 error message. Maybe it's LWJGL2 or server here.", th));

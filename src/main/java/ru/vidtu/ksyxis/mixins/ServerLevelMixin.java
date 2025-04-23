@@ -37,6 +37,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import ru.vidtu.ksyxis.Ksyxis;
 
 /**
  * Mixin for {@code ServerLevel} that disables spawn chunk tickets and sets {@code spawnChunkRadius} to {@code 0}.
@@ -110,8 +111,8 @@ public final class ServerLevelMixin {
     }, at = @At("STORE"), remap = false, require = 0, expect = 0, index = 5)
     private int ksyxis_setDefaultSpawnPos_spawnChunkRadius_getInt(int spawnChunkRadius) {
         // Report spawnChunkRadius gamerule as 0. Also log. (**DEBUG**)
-        if (!KSYXIS_LOGGER.isDebugEnabled()) return 0;
-        KSYXIS_LOGGER.debug("Ksyxis: Reporting 0 as spawnChunkRadius gamerule in ServerLevelMixin. (previousSpawnChunks: {}, expectedPreviousSpawnChunks: from 0 to 32, level: {})", new Object[]{spawnChunkRadius, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+        if (!KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return 0;
+        KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Reporting 0 as spawnChunkRadius gamerule in ServerLevelMixin. (previousSpawnChunks: {}, expectedPreviousSpawnChunks: from 0 to 32, level: {})", new Object[]{spawnChunkRadius, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
         return 0;
     }
 
@@ -146,8 +147,8 @@ public final class ServerLevelMixin {
     }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
     private int ksyxis_setDefaultSpawnPos_addRegionTicket(int constant) {
         // Add zero-level chunk loading ticket. Also log. (**DEBUG**)
-        if (!KSYXIS_LOGGER.isDebugEnabled()) return 0;
-        KSYXIS_LOGGER.debug("Ksyxis: Adding zero-level ticket in ServerLevelMixin. (previousTicketLevel: {}, expectedPreviousTicketLevel: 11, level: {})", new Object[]{constant, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+        if (!KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return 0;
+        KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Adding zero-level ticket in ServerLevelMixin. (previousTicketLevel: {}, expectedPreviousTicketLevel: 11, level: {})", new Object[]{constant, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
         return 0;
     }
 }

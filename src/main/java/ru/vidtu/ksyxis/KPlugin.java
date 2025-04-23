@@ -99,8 +99,8 @@ public final class KPlugin implements IMixinConfigPlugin {
             // If the Mixin class is not from Ksyxis, don't touch it and allow it to be applied.
             if (!mixinClassName.startsWith("ru.vidtu.ksyxis.mixins.")) {
                 // Log. (**TRACE**)
-                if (!LOGGER.isTraceEnabled()) return true;
-                LOGGER.trace("Ksyxis: Applying mixin, because it's not a part of Ksyxis. (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+                if (!LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) return true;
+                LOGGER.trace(Ksyxis.KSYXIS_MARKER, "Ksyxis: Applying mixin, because it's not a part of Ksyxis. (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
                 return true;
             }
 
@@ -114,13 +114,13 @@ public final class KPlugin implements IMixinConfigPlugin {
             }
 
             // Didn't throw - class exists. Log and apply. (**DEBUG**)
-            if (!LOGGER.isDebugEnabled()) return true;
-            LOGGER.debug("Ksyxis: Bytecode provider returned a valid node, applying mixin... (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+            if (!LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return true;
+            LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Bytecode provider returned a valid node, applying mixin... (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
             return true;
         } catch (ClassNotFoundException e) {
             // Provider threw an ClassNotFoundException. Don't apply mixin to avoid warnings. Log. (**DEBUG**)
-            if (!LOGGER.isDebugEnabled()) return false;
-            LOGGER.debug("Ksyxis: Bytecode provider threw an exception, mixin WON'T be applied. (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName, e}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+            if (!LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return false;
+            LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Bytecode provider threw an exception, mixin WON'T be applied. (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName, e}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
             return false;
         } catch (Throwable t) {
             // Format the message.

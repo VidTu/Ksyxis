@@ -31,6 +31,8 @@ and loading of spawn chunks is a waste of time and performance. This mod complet
 *Note*: Spawn chunks are sometimes used by farms and technical contraptions. If you'll need them,
 you can always delete the mod later to re-enable the spawn chunks.
 
+https://github.com/user-attachments/assets/42e65893-6324-46b1-89a4-044eae77802d
+
 ## FAQ
 
 **Q**: I need help, have some questions, or have some other feedback.  

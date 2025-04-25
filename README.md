@@ -104,7 +104,7 @@ To compile the mod from the source code:
 
 1. Have 1 GB of free RAM, 1 GB of free disk space, and an active internet connection.
 2. Install Java 8 and dump it into PATH and/or JAVA_HOME.
-3. Run `./gradlew build` from the terminal/PowerShell.
+3. Run `./gradlew assemble` from the terminal/PowerShell.
 4. Grab the JAR from the `./build/libs/` folder.
 
 ### Developing/Debugging

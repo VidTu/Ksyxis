@@ -24,7 +24,7 @@ Fabric API is **NOT** required.
 
 Minecraft has a concept of [spawn chunks](https://minecraft.wiki/w/Spawn_chunk). These chunks are located at the
 world creation point (where you have been spawned for the first time) and are always loaded. Depending on the version,
-there are either 441 or 25 spawn chunks always loaded, while you're playing. Most players, however, don't need
+there are either 441 or 25 spawn chunks always loaded while you're playing. Most players, however, don't need
 these chunks as they venture far away from spawn and come back only occasionally. To these players, the creation
 and loading of spawn chunks is a waste of time and performance. This mod completely disables spawn chunks in the game.
 
@@ -116,8 +116,8 @@ Ksyxis doesn't currently offer a comprehensive development environment.
 
 Ksyxis attempts to have reproducible builds (reproducible JAR archives) for newer releases. Check out
 [GitHub Releases](https://github.com/VidTu/Ksyxis/releases) for "Reproducible Build Hash" values. If it is present
-on any release, this release's binary JAR should be reproducible. Unfortunately, due to nature of Java (Gradle)
-and Minecraft development, it is not always possible to have reproducible builds.
+on any release, this release's binary JAR should be reproducible. Unfortunately, due to the nature of Java
+(Gradle) and Minecraft development, it is not always possible to have reproducible builds.
 Reproducible release JARs are compiled with: (use these commands to create a reproducible build)
 
 1. `./gradlew clean --no-daemon --no-build-cache --no-configuration-cache`

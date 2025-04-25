@@ -96,9 +96,31 @@ or newer, or any version of Fabric/Quilt/NeoForge/Ornithe, you don't need to ins
 This project is provided under the MIT License.
 Check out [LICENSE](https://github.com/VidTu/Ksyxis/blob/main/LICENSE) for more information.
 
-## Building
+## Development
+
+### Building (Compiling)
+
+To compile the mod from the source code:
 
 1. Have 1 GB of free RAM, 1 GB of free disk space, and an active internet connection.
 2. Install Java 8 and dump it into PATH and/or JAVA_HOME.
 3. Run `./gradlew build` from the terminal/PowerShell.
 4. Grab the JAR from the `./build/libs/` folder.
+
+### Developing/Debugging
+
+Due to its multiplatform/multiversion nature and general code simplicity,
+Ksyxis doesn't currently offer a comprehensive development environment.
+
+### Reproducible Builds
+
+Ksyxis attempts to have reproducible builds (reproducible JAR archives) for newer releases. Check out
+[GitHub Releases](https://github.com/VidTu/Ksyxis/releases) for "Reproducible Build Hash" values. If it is present
+on any release, this release's binary JAR should be reproducible. Unfortunately, due to nature of Java (Gradle)
+and Minecraft development, it is not always possible to have reproducible builds.
+Reproducible release JARs are compiled with: (use these commands to create a reproducible build)
+
+1. `./gradlew clean --no-daemon --no-build-cache --no-configuration-cache`
+2. `./gradlew build --no-daemon --no-build-cache --no-configuration-cache`
+
+Currently, no dependency (integrity) validation is performed. This might change in a future version.

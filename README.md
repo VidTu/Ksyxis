@@ -112,6 +112,9 @@ To compile the mod from the source code:
 Due to its multiplatform/multiversion nature and general code simplicity,
 Ksyxis doesn't currently offer a comprehensive development environment.
 
+The recommended IDE for development is IntelliJ IDEA (Community or Ultimate) with the Minecraft Development plugin.
+This is not a strict requirement, however. Any IDE/editor should work just fine.
+
 ### Reproducible Builds
 
 Ksyxis attempts to have reproducible builds (reproducible JAR archives) for its releases. Check out

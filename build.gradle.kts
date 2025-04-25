@@ -74,9 +74,9 @@ tasks.withType<ProcessResources> {
                 it.writeText(Gson().fromJson(it.readText(), JsonElement::class.java).toString())
             } else if (it.name.endsWith(".toml", ignoreCase = true)) {
                 it.writeText(it.readLines()
-                        .filter { s -> s.isNotBlank() }
-                        .joinToString("\n")
-                        .replace(" = ", "="))
+                    .filter { s -> s.isNotBlank() }
+                    .joinToString("\n")
+                    .replace(" = ", "="))
             }
         }
     }

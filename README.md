@@ -114,7 +114,7 @@ Ksyxis doesn't currently offer a comprehensive development environment.
 
 ### Reproducible Builds
 
-Ksyxis attempts to have reproducible builds (reproducible JAR archives) for newer releases. Check out
+Ksyxis attempts to have reproducible builds (reproducible JAR archives) for its releases. Check out
 [GitHub Releases](https://github.com/VidTu/Ksyxis/releases) for "Reproducible Build Hash" values. If it is present
 on any release, this release's binary JAR should be reproducible. Unfortunately, due to the nature of Java
 (Gradle) and Minecraft development, it is not always possible to have reproducible builds.

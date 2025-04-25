@@ -120,7 +120,9 @@ on any release, this release's binary JAR should be reproducible. Unfortunately,
 (Gradle) and Minecraft development, it is not always possible to have reproducible builds.
 Reproducible release JARs are compiled with: (use these commands to create a reproducible build)
 
-1. `./gradlew clean --no-daemon --no-build-cache --no-configuration-cache`
-2. `./gradlew build --no-daemon --no-build-cache --no-configuration-cache`
+```bash
+./gradlew clean --no-daemon --no-build-cache --no-configuration-cache
+./gradlew build --no-daemon --no-build-cache --no-configuration-cache
+```
 
 Currently, no dependency (integrity) validation is performed. This might change in a future version.

@@ -77,7 +77,7 @@ public final class ServerLevelMixin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private ServerLevelMixin() {
-        throw new AssertionError("No instances.");
+        throw new AssertionError("Ksyxis: No instances.");
     }
 
     /**

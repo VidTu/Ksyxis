@@ -108,7 +108,7 @@ public final class Ksyxis {
     @ApiStatus.ScheduledForRemoval
     @Contract(value = "-> fail", pure = true)
     private Ksyxis() {
-        throw new AssertionError("No instances.");
+        throw new AssertionError("Ksyxis: No instances.");
     }
 
     /**
@@ -176,9 +176,9 @@ public final class Ksyxis {
                     CharSequence.class, CharSequence.class, CharSequence.class, boolean.class);
             tinyFdMessageBox.invoke(null, "Minecraft | Ksyxis Mod", message, /*buttons=*/"ok",
                     /*icon=*/"error", /*selectOkButton=*/false);
-        } catch (Throwable th) {
+        } catch (Throwable t) {
             // Suppress for logging.
-            error.addSuppressed(new RuntimeException("Unable to display the LWJGL3 error message. Maybe it's LWJGL2 or server here.", th));
+            error.addSuppressed(new RuntimeException("Ksyxis: Unable to display the LWJGL3 error message. Maybe it's LWJGL2 or server here.", t));
         }
 
         // Log again with suppressed errors.
@@ -190,9 +190,9 @@ public final class Ksyxis {
             Class<?> sys = Class.forName("org.lwjgl.Sys");
             Method sysAlert = sys.getMethod("alert", String.class, String.class);
             sysAlert.invoke(null, "Minecraft | Ksyxis Mod", message);
-        } catch (Throwable th) {
+        } catch (Throwable t) {
             // Suppress for logging.
-            error.addSuppressed(new RuntimeException("Unable to display the LWJGL2 error message. Maybe it's LWJGL3 or server here.", th));
+            error.addSuppressed(new RuntimeException("Ksyxis: Unable to display the LWJGL2 error message. Maybe it's LWJGL3 or server here.", t));
         }
 
         // Log again with suppressed errors.
@@ -203,9 +203,9 @@ public final class Ksyxis {
         // See below how we're bypassing that restriction, because Java 8 is not encapsulated.
         try {
             System.exit(-2037852655); // "Ksyxis".hashCode()
-        } catch (Throwable th) {
+        } catch (Throwable t) {
             // Suppress for logging.
-            error.addSuppressed(new RuntimeException("Unable to exit the game normally.", th));
+            error.addSuppressed(new RuntimeException("Ksyxis: Unable to exit the game normally.", t));
         }
 
         // Log again with suppressed errors.
@@ -218,9 +218,9 @@ public final class Ksyxis {
             Method shutdownMethod = shutdownClass.getDeclaredMethod("exit", int.class);
             shutdownMethod.setAccessible(true);
             shutdownMethod.invoke(null, -2037852655); // "Ksyxis".hashCode()
-        } catch (Throwable th) {
+        } catch (Throwable t) {
             // Suppress for logging.
-            error.addSuppressed(new RuntimeException("Unable to exit the game reflectively.", th));
+            error.addSuppressed(new RuntimeException("Ksyxis: Unable to exit the game reflectively.", t));
         }
 
         // Log again with suppressed errors.

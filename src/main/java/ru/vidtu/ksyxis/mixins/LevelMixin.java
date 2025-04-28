@@ -72,7 +72,7 @@ public final class LevelMixin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private LevelMixin() {
-        throw new AssertionError("No instances.");
+        throw new AssertionError("Ksyxis: No instances.");
     }
 
     /**

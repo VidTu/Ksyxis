@@ -36,6 +36,9 @@ import ru.vidtu.ksyxis.Ksyxis;
  *
  * @author VidTu
  * @apiNote Internal use only
+ * @see Ksyxis
+ * @see KNeo
+ * @see KCore
  */
 @ApiStatus.Internal
 @Mod(value = "ksyxis"/*(modern)*/, modid = "ksyxis"/*(legacy)*/, acceptableRemoteVersions = "*"/*(legacy)*/)
@@ -43,6 +46,8 @@ import ru.vidtu.ksyxis.Ksyxis;
 public final class KForge {
     /**
      * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Forge"} and {@code manual=false}.
+     *
+     * @see Ksyxis#init(String, boolean)
      */
     public KForge() {
         Ksyxis.init("Forge/KForge", /*manual=*/false);

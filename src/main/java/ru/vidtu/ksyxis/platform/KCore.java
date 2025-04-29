@@ -40,6 +40,8 @@ import java.util.Map;
  *
  * @author VidTu
  * @apiNote Internal use only
+ * @see Ksyxis
+ * @see KForge
  */
 @ApiStatus.Internal
 @NullMarked
@@ -53,7 +55,7 @@ public final class KCore implements IFMLLoadingPlugin {
     }
 
     /**
-     * Always returns {@code null}
+     * Does nothing. Always returns {@code null}.
      *
      * @return Always {@code null}
      */
@@ -65,7 +67,7 @@ public final class KCore implements IFMLLoadingPlugin {
     }
 
     /**
-     * Always returns {@code null}
+     * Does nothing. Always returns {@code null}.
      *
      * @return Always {@code null}
      */
@@ -76,7 +78,7 @@ public final class KCore implements IFMLLoadingPlugin {
     }
 
     /**
-     * Always returns {@code null}
+     * Does nothing. Always returns {@code null}.
      *
      * @return Always {@code null}
      */
@@ -88,7 +90,7 @@ public final class KCore implements IFMLLoadingPlugin {
     }
 
     /**
-     * Always returns {@code null}
+     * Does nothing. Always returns {@code null}.
      *
      * @return Always {@code null}
      */
@@ -103,6 +105,7 @@ public final class KCore implements IFMLLoadingPlugin {
      * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="LegacyForge"} and {@code manual=true}.
      *
      * @param data Injection data, ignored
+     * @see Ksyxis#init(String, boolean)
      */
     @Override
     public void injectData(Map<String, Object> data) {

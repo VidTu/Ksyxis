@@ -38,6 +38,8 @@ import ru.vidtu.ksyxis.Ksyxis;
  *
  * @author VidTu
  * @apiNote Internal use only
+ * @see Ksyxis
+ * @see KFabric
  */
 @SuppressWarnings("unused") // <- Quilt mod.
 @ApiStatus.Internal
@@ -55,6 +57,7 @@ public final class KQuilt implements ModInitializer {
      * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Quilt"} and {@code manual=false}.
      *
      * @param mod Mod container, ignored
+     * @see Ksyxis#init(String, boolean)
      */
     @Override
     public void onInitialize(ModContainer mod) {

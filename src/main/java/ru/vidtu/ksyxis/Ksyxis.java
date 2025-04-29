@@ -45,12 +45,16 @@ import java.lang.reflect.Method;
  *
  * @author VidTu
  * @apiNote Internal use only
+ * @see KPlugin
  */
 @ApiStatus.Internal
 @NullMarked
 public final class Ksyxis {
     /**
      * Amount of loaded spawn chunks by vanilla Minecraft before 1.20.5. {@code 441} ({@code 21x21}) chunks.
+     *
+     * @see #LOADED_CHUNKS
+     * @see #getLoadedChunks()
      */
     public static final int SPAWN_CHUNKS = (21 * 21);
 
@@ -86,13 +90,14 @@ public final class Ksyxis {
             "solving anything, delete the Ksyxis mod. (platform: %s; manual: %s)";
 
     /**
-     * Logger for this class. Using Log4j2 logger, because SLF4J is not available in older versions.
+     * Logger for this class.
      */
     private static final Logger LOGGER = LogManager.getLogger("Ksyxis");
 
     /**
      * Amount of loaded chunks to report. Usually {@code 0}, {@link #SPAWN_CHUNKS} with ModernFix.
      *
+     * @see #SPAWN_CHUNKS
      * @see #getLoadedChunks()
      */
     // This MUST be below LOGGER, otherwise deadlocks will screw us up.
@@ -104,21 +109,23 @@ public final class Ksyxis {
      * @throws AssertionError Always
      * @deprecated Always throws
      */
-    @Deprecated
     @ApiStatus.ScheduledForRemoval
+    @Deprecated
     @Contract(value = "-> fail", pure = true)
     private Ksyxis() {
         throw new AssertionError("Ksyxis: No instances.");
     }
 
     /**
-     * Initialize the mod.
+     * Initializes the mod. If {@code manual}, bootstraps the Mixin and injects its configuration.
      *
      * @param platform Current platform
-     * @param manual   Whether to inject Mixin configuration manually
-     * @throws RuntimeException If any unexpected exception occurs
+     * @param manual   Whether to bootstrap the Mixin inject Mixin configuration manually
+     * @throws RuntimeException If any unexpected exception occurs (should never be thrown, app is exited)
      * @see #obtainMixinVersion(String, boolean)
-     * @see #getLoadedChunks()
+     * @see MixinBootstrap#init()
+     * @see Mixins#addConfiguration(String)
+     * @see #handleError(String, Throwable)
      */
     public static void init(String platform, boolean manual) {
         try {
@@ -159,8 +166,10 @@ public final class Ksyxis {
      *
      * @param message Error details to log
      * @param error   Exception to log
-     * @return Never returns normally, can be used for throw block
-     * @throws RuntimeException Wrapper for {@code message} and {@code error}
+     * @return Never returns normally, can be used for throw block (should never be thrown, app is exited)
+     * @throws RuntimeException Wrapper for {@code message} and {@code error} (should never be thrown, app is exited)
+     * @see #MIXIN_ABSENT
+     * @see #MIXIN_INJECT
      */
     @Contract("_, _ -> fail")
     @CheckReturnValue
@@ -242,6 +251,7 @@ public final class Ksyxis {
      * @see MixinBootstrap#VERSION
      * @see #init(String, boolean)
      * @see #handleError(String, Throwable)
+     * @see #MIXIN_ABSENT
      */
     @CheckReturnValue
     private static String obtainMixinVersion(String platform, boolean manual) {
@@ -267,6 +277,7 @@ public final class Ksyxis {
      * but if ModernFix is installed, the value might be changed to {@link #SPAWN_CHUNKS} to prevent deadlocks.
      *
      * @return Either {@code 0} or {@link #SPAWN_CHUNKS}, depending on the configuration
+     * @see #SPAWN_CHUNKS
      * @see #LOADED_CHUNKS
      */
     @Contract(pure = true)

@@ -47,6 +47,7 @@ import java.util.Set;
  *
  * @author VidTu
  * @apiNote Internal use only
+ * @see Ksyxis
  */
 @ApiStatus.Internal
 @NullMarked
@@ -55,6 +56,7 @@ public final class KPlugin implements IMixinConfigPlugin {
      * Mixin plugin error message. Shown in {@link #shouldApplyMixin(String, String)} when an error occurs.
      *
      * @see #shouldApplyMixin(String, String)
+     * @see Ksyxis#handleError(String, Throwable)
      */
     private static final String PLUGIN_ERROR = "Ksyxis: Unable to apply the Ksyxis plugin. It`s probably a bug or " +
             "something, you should report it on GitHub. Ensure to include as much information (game version, loader " +
@@ -63,7 +65,7 @@ public final class KPlugin implements IMixinConfigPlugin {
             "anything, delete the Ksyxis mod. (provider: %s, plugin: %s, targetClassName: %s, mixinClassName: %s)";
 
     /**
-     * Logger for this class. Using Log4j2 logger, because SLF4J is not available in older versions.
+     * Logger for this class.
      */
     private static final Logger LOGGER = LogManager.getLogger("Ksyxis/KPlugin");
 
@@ -74,10 +76,7 @@ public final class KPlugin implements IMixinConfigPlugin {
 
     /**
      * Creates a new plugin.
-     *
-     * @apiNote Internal use only
      */
-    @ApiStatus.Internal
     @Contract(pure = true)
     public KPlugin() {
         // Empty
@@ -89,7 +88,11 @@ public final class KPlugin implements IMixinConfigPlugin {
      * @param targetClassName Fully qualified class name of the target class
      * @param mixinClassName  Fully qualified class name of the mixin
      * @return Whether the Mixin should be applied
-     * @throws RuntimeException If any unexpected exception occurs
+     * @throws RuntimeException If any unexpected exception occurs (should never be thrown, app is exited)
+     * @see #provider
+     * @see IClassBytecodeProvider#getClassNode(String)
+     * @see Ksyxis#handleError(String, Throwable)
+     * @see #PLUGIN_ERROR
      */
     @CheckReturnValue
     @Override
@@ -143,7 +146,7 @@ public final class KPlugin implements IMixinConfigPlugin {
     }
 
     /**
-     * Always returns {@code null}.
+     * Does nothing. Always returns {@code null}.
      *
      * @return Always {@code null}
      */
@@ -167,7 +170,7 @@ public final class KPlugin implements IMixinConfigPlugin {
     }
 
     /**
-     * Always returns {@code null}.
+     * Does nothing. Always returns {@code null}.
      *
      * @return Always {@code null}
      */

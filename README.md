@@ -131,3 +131,10 @@ Reproducible release JARs are compiled with: (use these commands to create a rep
 ```
 
 Currently, no dependency (integrity) validation is performed. This might change in a future version.
+
+#### Notice
+
+<sup>This mod is **NOT** how mods *should be written*. This was (and is, currently) an experiment to create a simple
+and portable mod with as much supported versions as possible. Its compatibility issues are probably unfixable, though
+the world loading speedup is real. Nevertheless, it's an interesting concept and it works. For the curious ones,
+the source code is very documented.</sup>

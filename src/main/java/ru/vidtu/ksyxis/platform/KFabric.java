@@ -37,6 +37,8 @@ import ru.vidtu.ksyxis.Ksyxis;
  *
  * @author VidTu
  * @apiNote Internal use only
+ * @see Ksyxis
+ * @see KQuilt
  */
 @ApiStatus.Internal
 @NullMarked
@@ -51,6 +53,8 @@ public final class KFabric implements ModInitializer {
 
     /**
      * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Fabric"} and {@code manual=false}.
+     *
+     * @see Ksyxis#init(String, boolean)
      */
     @Override
     public void onInitialize() {

@@ -59,7 +59,7 @@ import ru.vidtu.ksyxis.Ksyxis;
 @NullMarked
 public final class MinecraftServerMixin {
     /**
-     * Logger for this class. Using Log4j2 logger, because SLF4J is not available in older versions.
+     * Logger for this class.
      */
     @Unique
     private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/MinecraftServerMixin");
@@ -168,6 +168,8 @@ public final class MinecraftServerMixin {
      *
      * @param constant Previous constant value for logging
      * @return Always {@code 0} without ModernFix, always {@link Ksyxis#SPAWN_CHUNKS} with ModernFix
+     * @see Ksyxis#SPAWN_CHUNKS
+     * @see Ksyxis#LOADED_CHUNKS
      */
     @Contract(pure = true)
     @ModifyConstant(method = {

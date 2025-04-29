@@ -29,6 +29,7 @@
  *
  * @author VidTu
  * @apiNote Internal use only
+ * @see ru.vidtu.ksyxis.Ksyxis
  * @see ru.vidtu.ksyxis.Ksyxis#init(java.lang.String, boolean)
  */
 @ApiStatus.Internal

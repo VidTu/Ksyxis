@@ -36,6 +36,8 @@ import ru.vidtu.ksyxis.Ksyxis;
  *
  * @author VidTu
  * @apiNote Internal use only
+ * @see Ksyxis
+ * @see KForge
  */
 @ApiStatus.Internal
 @Mod("ksyxis")
@@ -43,6 +45,8 @@ import ru.vidtu.ksyxis.Ksyxis;
 public final class KNeo {
     /**
      * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="NeoForge"} and {@code manual=false}.
+     *
+     * @see Ksyxis#init(String, boolean)
      */
     public KNeo() {
         Ksyxis.init("NeoForge/KNeo", /*manual=*/false);

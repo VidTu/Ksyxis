@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[1,)"
+loaderVersion = "*"
 license = "MIT"
 issueTrackerURL = "https://github.com/VidTu/Ksyxis/issues"
 

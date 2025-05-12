@@ -59,7 +59,7 @@ public final class KPlugin implements IMixinConfigPlugin {
      * @see Ksyxis#handleError(String, Throwable)
      */
     private static final String PLUGIN_ERROR = "Ksyxis: Unable to apply the Ksyxis plugin. It`s probably a bug or " +
-            "something, you should report it on GitHub. Ensure to include as much information (game version, loader " +
+            "something, you should report it via GitHub. Ensure to include as much information (game version, loader " +
             "type, loader version, mod version, other mods, logs, etc.) in the bug report as possible, this error " +
             "screen is NOT enough. If you don`t want any hassles and just want to load the game without solving " +
             "anything, delete the Ksyxis mod. (provider: %s, plugin: %s, targetClassName: %s, mixinClassName: %s)";

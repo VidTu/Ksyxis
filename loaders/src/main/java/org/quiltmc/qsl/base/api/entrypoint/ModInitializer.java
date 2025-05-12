@@ -30,7 +30,7 @@ public interface ModInitializer {
     /**
      * Runs the entrypoint. This is an injection point for Ksyxis for Quilt, see {@code KQuilt} class.
      *
-     * @param mod Stub mod container, ignored
+     * @param mod A stub mod container, ignored
      */
     void onInitialize(ModContainer mod);
 }

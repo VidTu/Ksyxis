@@ -72,7 +72,7 @@ public final class Ksyxis {
     private static final String MIXIN_ABSENT = "Ksyxis: No Mixin found. If you`re using old (1.15.2 or older) Forge, " +
             "please install a Mixin loader, for example MixinBootstrap, MixinBooter, UniMixins, or any other at your " +
             "choice. If you`re using new (1.16 or newer) Forge, any Fabric, any Quilt, any Ornithe, any " +
-            "LegacyFabric, or any NeoForge, then something went wrong and you should report it on GitHub. Ensure to " +
+            "LegacyFabric, or any NeoForge, then something went wrong, you should report it via GitHub. Ensure to " +
             "include as much information (game version, loader type, loader version, mod version, other mods, logs, " +
             "etc.) in the bug report as possible, this error screen is NOT enough. If you don`t want any hassles and " +
             "just want to load the game without solving anything, delete the Ksyxis mod. (platform: %s; manual: %s)";
@@ -84,7 +84,7 @@ public final class Ksyxis {
      * @see #handleError(String, Throwable)
      */
     private static final String MIXIN_INJECT = "Ksyxis: Unable to inject the Ksyxis configuration. It`s probably a " +
-            "bug or something, you should report it on GitHub. Ensure to include as much information (game version, " +
+            "bug or something, you should report it via GitHub. Ensure to include as much information (game version, " +
             "loader type, loader version, mod version, other mods, logs, etc.) in the bug report as possible, this " +
             "error screen is NOT enough. If you don`t want any hassles and just want to load the game without " +
             "solving anything, delete the Ksyxis mod. (platform: %s; manual: %s)";

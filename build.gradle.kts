@@ -39,6 +39,12 @@ group = "ru.vidtu.ksyxis"
 base.archivesName = "Ksyxis"
 description = "Speed up the loading of your world."
 
+buildscript {
+    dependencies {
+        classpath(libs.gson)
+    }
+}
+
 repositories {
     mavenCentral()
     maven("https://repo.spongepowered.org/repository/maven-public/") // Mixin.

@@ -22,17 +22,17 @@
 #
 # SPDX-License-Identifier: MIT
 
-name: 'Build'
+name: 'Build (Main)'
 on:
   push:
-    branches: [ '!main' ]
-  pull_request:
-  workflow_dispatch:
+    branches: [ 'main' ]
 jobs:
   build:
-    name: 'Build'
+    name: 'Build (Main)'
     runs-on: 'ubuntu-24.04'
     timeout-minutes: 15
+    permissions:
+      contents: 'write'
     steps:
       - name: 'Checkout'
         timeout-minutes: 1
@@ -50,7 +50,7 @@ jobs:
         uses: 'gradle/actions/setup-gradle@8379f6a1328ee0e06e2bb424dadb7b159856a326' # v4.4.0
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-          dependency-graph: 'generate'
+          dependency-graph: 'generate-and-submit'
       - name: 'Build'
         timeout-minutes: 15
         run: './gradlew assemble'

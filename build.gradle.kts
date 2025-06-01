@@ -80,7 +80,7 @@ tasks.withType<ProcessResources> {
         expand(inputs.properties)
     }
 
-    // Minify JSON (including ".mcmeta") and ".info") and TOML files.
+    // Minify JSON (including ".mcmeta" and ".info") and TOML files.
     var files = fileTree(outputs.files.asPath)
     doLast {
         val jsonAlike = Regex("^.*\\.(?:json|mcmeta|info)$", RegexOption.IGNORE_CASE)

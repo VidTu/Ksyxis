@@ -39,6 +39,7 @@ group = "ru.vidtu.ksyxis"
 base.archivesName = "Ksyxis"
 description = "Speed up the loading of your world."
 
+// Add GSON to buildscript classpath, we use it for minifying JSON files.
 buildscript {
     dependencies {
         classpath(libs.gson)
@@ -58,20 +59,28 @@ dependencies {
     // Minecraft.
     compileOnly(project(":loaders"))
     compileOnly(libs.mixin)
-    compileOnly(libs.asm)
-    compileOnly(libs.log4j)
+    compileOnly(libs.asm) // Required for Mixin.
+    compileOnly(libs.log4j) // Not SLF4J for compatibility with pre-1.18.
 }
 
+// Compile with UTF-8, Java 8, and with all debug options.
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
     options.compilerArgs.addAll(listOf("-g", "-parameters"))
+    // JDK 8 (used by this buildscript) doesn't support the "-release" flag
+    // (at the top of the file), so we must NOT specify it or the "javac" will fail.
+    // If we ever gonna compile on newer Java versions, uncomment this line.
+    // options.release = 8
 }
 
 tasks.withType<ProcessResources> {
+    // Expand version.
     inputs.property("version", version)
     filesMatching(listOf("fabric.mod.json", "quilt.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml", "mcmod.info")) {
         expand(inputs.properties)
     }
+
+    // Minify JSON (including ".mcmeta") and ".info") and TOML files.
     var files = fileTree(outputs.files.asPath)
     doLast {
         val jsonAlike = Regex("^.*\\.(?:json|mcmeta|info)$", RegexOption.IGNORE_CASE)
@@ -88,11 +97,14 @@ tasks.withType<ProcessResources> {
     }
 }
 
+// Reproducible builds.
 tasks.withType<AbstractArchiveTask> {
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
 }
 
+// Add LICENSE and manifest into the JAR file.
+// Manifest also controls Mixin/mod loading on some loaders/versions.
 tasks.withType<Jar> {
     from("LICENSE")
     manifest {

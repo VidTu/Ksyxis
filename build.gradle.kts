@@ -51,11 +51,11 @@ repositories {
 }
 
 dependencies {
-    // Annotations
+    // Annotations.
     compileOnly(libs.jspecify)
     compileOnly(libs.jetbrains.annotations)
 
-    // Dependencies
+    // Minecraft.
     compileOnly(project(":loaders"))
     compileOnly(libs.mixin)
     compileOnly(libs.asm)

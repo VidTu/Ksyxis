@@ -23,6 +23,7 @@
 # SPDX-License-Identifier: MIT
 
 name: 'Build'
+permissions: {}
 on:
   push:
     branches: [ '!main' ]
@@ -33,6 +34,8 @@ jobs:
     name: 'Build'
     runs-on: 'ubuntu-24.04'
     timeout-minutes: 15
+    permissions:
+      contents: 'read'
     steps:
       - name: 'Checkout'
         timeout-minutes: 1

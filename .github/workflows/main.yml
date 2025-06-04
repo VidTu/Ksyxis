@@ -23,6 +23,7 @@
 # SPDX-License-Identifier: MIT
 
 name: 'Build (Main)'
+permissions: {}
 on:
   push:
     branches: [ 'main' ]

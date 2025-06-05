@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 
 /**
  * Emulated annotation of the NeoForge mod. This is an injection annotation for Ksyxis for NeoForge 1.20.2+,
- * see {@code KNeo} class.
+ * see {@code KNeoForge} class.
  *
  * @author VidTu
  * @author MinecraftForge

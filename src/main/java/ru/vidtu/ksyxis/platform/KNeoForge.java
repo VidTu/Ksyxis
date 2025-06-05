@@ -42,13 +42,13 @@ import ru.vidtu.ksyxis.Ksyxis;
 @ApiStatus.Internal
 @Mod("ksyxis")
 @NullMarked
-public final class KNeo {
+public final class KNeoForge {
     /**
      * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="NeoForge"} and {@code manual=false}.
      *
      * @see Ksyxis#init(String, boolean)
      */
-    public KNeo() {
-        Ksyxis.init("NeoForge/KNeo", /*manual=*/false);
+    public KNeoForge() {
+        Ksyxis.init("NeoForge/KNeoForge", /*manual=*/false);
     }
 }

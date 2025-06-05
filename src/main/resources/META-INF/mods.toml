@@ -19,8 +19,12 @@ authors = "VidTu"
 displayTest = "IGNORE_ALL_VERSION"
 description = '''Speed up your world loading by removing spawn chunks.'''
 
+[[mixins]]
+config = "ksyxis.mixins.json"
+
 [modproperties.ksyxis]
 catalogueImageIcon = "ksyxis_64.png"
 catalogueItemIcon = "minecraft:porkchop"
 catalogueBackground = "ksyxis_background.png"
 itemIcon = "minecraft:porkchop"
+logoFile = "ksyxis_240.png"

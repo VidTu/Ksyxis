@@ -37,7 +37,7 @@ import ru.vidtu.ksyxis.Ksyxis;
  * @author VidTu
  * @apiNote Internal use only
  * @see Ksyxis
- * @see KNeo
+ * @see KNeoForge
  * @see KCore
  */
 @ApiStatus.Internal

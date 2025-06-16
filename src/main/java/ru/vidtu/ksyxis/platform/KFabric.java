@@ -48,7 +48,7 @@ public final class KFabric implements ModInitializer {
      */
     @Contract(pure = true)
     public KFabric() {
-        // Empty
+        // Empty.
     }
 
     /**

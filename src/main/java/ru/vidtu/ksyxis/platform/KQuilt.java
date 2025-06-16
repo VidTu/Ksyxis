@@ -50,7 +50,7 @@ public final class KQuilt implements ModInitializer {
      */
     @Contract(pure = true)
     public KQuilt() {
-        // Empty
+        // Empty.
     }
 
     /**

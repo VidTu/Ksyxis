@@ -79,7 +79,7 @@ public final class KPlugin implements IMixinConfigPlugin {
      */
     @Contract(pure = true)
     public KPlugin() {
-        // Empty
+        // Empty.
     }
 
     /**

@@ -51,7 +51,7 @@ public final class KCore implements IFMLLoadingPlugin {
      */
     @Contract(pure = true)
     public KCore() {
-        // Empty
+        // Empty.
     }
 
     /**

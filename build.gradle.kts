@@ -61,11 +61,10 @@ dependencies {
     compileOnly(libs.mixin)
     compileOnly(libs.asm) // Required for Mixin.
     compileOnly(libs.log4j) { // Not SLF4J for compatibility with pre-1.18.
-        // TODO(VidTu): Log4J2 2.25.0 started shading annotation dependencies,
-        // some of which don't compile for Java 8 anymore. I'm not sure,
-        // whether this is intended or not, but transitive dependency
-        // lookup must be disabled for this to compile now.
-        isTransitive = false
+        exclude("biz.aQute.bnd")
+        exclude("com.github.spotbugs")
+        exclude("com.google.errorprone")
+        exclude("org.osgi")
     }
 }
 

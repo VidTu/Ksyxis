@@ -16,6 +16,7 @@
       <w>endlocal</w>
       <w>entrypoints</w>
       <w>errorlevel</w>
+      <w>errorprone</w>
       <w>fabricmc</w>
       <w>foojay</w>
       <w>gamerule</w>

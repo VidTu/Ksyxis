@@ -63,7 +63,7 @@ Nevertheless, there is [a video](https://www.youtube.com/watch?v=PXWdDoVU1C4).
 **A**: Forge, Fabric, Quilt, NeoForge, Legacy Fabric, and Ornithe (for both Fabric and Quilt).
 
 **Q**: Which Minecraft versions are supported?  
-**A**: Minecraft 1.8 throught 1.21.8.
+**A**: Minecraft 1.8 through 1.21.8.
 
 **Q**: Where are the Forge, Fabric, Quilt, NeoForge, etc. versions?  
 **A**: All in the same file.

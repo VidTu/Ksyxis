@@ -21,6 +21,13 @@
       "icon": "ksyxis.png"
     },
     "intermediate_mappings": "net.fabricmc:intermediary",
+    "breaks": [
+      {
+        "id": "minecraft",
+        "versions": ">1.21.8",
+        "reason": "Ksyxis doesn't support versions newer than 1.21.8. Spawn chunks were removed in the 25w31a snapshot, therefore the mod is now useless."
+      }
+    ],
     "entrypoints": {
       "init": "ru.vidtu.ksyxis.platform.KQuilt"
     }

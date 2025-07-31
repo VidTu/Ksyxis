@@ -3,8 +3,8 @@
     "description": "Ksyxis",
     "pack_format": 1,
     "supported_formats": {
-      "min_inclusive": 0,
-      "max_inclusive": 99999
+      "min_inclusive": 1,
+      "max_inclusive": 64
     }
   }
 }

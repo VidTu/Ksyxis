@@ -25,6 +25,9 @@
   "mixins": [
     "ksyxis.mixins.json"
   ],
+  "breaks": {
+    "minecraft": ">1.21.8"
+  },
   "custom": {
     "modmenu": {
       "links": {

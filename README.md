@@ -1,3 +1,13 @@
+> [!WARNING]
+> Ksyxis **won't** work for **1.21.9 and newer** versions. Mojang
+> *removed spawn chunks* in 25w31a, therefore removing spawn chunks via mods
+> is no longer needed, as this optimization is built-in into Minecraft now.
+>
+> Removing other chunks (e.g., chunks around the player in singleplayer)
+> makes no sense, they will be loaded anyway when you join the server.
+>
+> Older Minecraft versions will be supported for a reasonable time.
+
 # Ksyxis
 
 Speed up your world loading by removing spawn chunks.
@@ -13,7 +23,7 @@ Speed up your world loading by removing spawn chunks.
 This mod needs *Mixin* and nothing else. Usually, it's provided by your mod loader.
 
 - Fabric Loader, Quilt Loader, Forge, NeoForge, Legacy Fabric, or Ornithe
-- Minecraft (1.8 or newer)
+- Minecraft (1.8 -> 1.21.8)
 - **Forge 1.8-1.15.2 only**: Any Mixin provider, at your choice (such as
   [MixinBootstrap](https://modrinth.com/mod/mixinbootstrap), [MixinBooter](https://modrinth.com/mod/mixinbooter),
   [UniMixins](https://modrinth.com/mod/unimixins), or any other)
@@ -53,7 +63,7 @@ Nevertheless, there is [a video](https://www.youtube.com/watch?v=PXWdDoVU1C4).
 **A**: Forge, Fabric, Quilt, NeoForge, Legacy Fabric, and Ornithe (for both Fabric and Quilt).
 
 **Q**: Which Minecraft versions are supported?  
-**A**: Minecraft 1.8 or newer.
+**A**: Minecraft 1.8 throught 1.21.8.
 
 **Q**: Where are the Forge, Fabric, Quilt, NeoForge, etc. versions?  
 **A**: All in the same file.

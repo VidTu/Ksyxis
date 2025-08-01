@@ -103,12 +103,6 @@ tasks.withType<ProcessResources> {
     }
 }
 
-// Reproducible builds.
-tasks.withType<AbstractArchiveTask> {
-    isPreserveFileTimestamps = false
-    isReproducibleFileOrder = true
-}
-
 // Add LICENSE and manifest into the JAR file.
 // Manifest also controls Mixin/mod loading on some loaders/versions.
 tasks.withType<Jar> {

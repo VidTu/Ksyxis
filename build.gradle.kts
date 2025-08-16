@@ -79,6 +79,9 @@ tasks.withType<JavaCompile> {
 }
 
 tasks.withType<ProcessResources> {
+    // Filter with UTF-8.
+    filteringCharset = "UTF-8"
+
     // Expand version.
     inputs.property("version", version)
     filesMatching(listOf("fabric.mod.json", "quilt.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml", "mcmod.info")) {

@@ -25,7 +25,7 @@
 [versions]
 asm = "9.8"
 gson = "2.13.1"
-jetbrains-annotations = "26.0.2"
+jetbrains-annotations = "26.0.2-1"
 jspecify = "1.0.0"
 log4j = "2.25.1"
 mixin = "0.8.7"

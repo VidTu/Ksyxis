@@ -1,7 +1,7 @@
 > [!WARNING]
-> Ksyxis **won't** work for **1.21.9 and newer** versions. Mojang
-> *removed spawn chunks* in 25w31a, therefore removing spawn chunks via mods
-> is no longer needed, as this optimization is built-in into Minecraft now.
+> Ksyxis **doesn't** work for **1.21.9 and newer** versions. Mojang *removed
+> spawn chunks* in 25w31a (a 1.21.9 snapshot), therefore removing spawn chunks
+> via mods is no longer needed, as this optimization is built-in into Minecraft.
 >
 > Removing other chunks (e.g., chunks around the player in singleplayer)
 > makes no sense, they will be loaded anyway when you join the server.
@@ -72,7 +72,8 @@ primarily for low-end devices. Nevertheless, there is
 and Ornithe (for both Fabric and Quilt).
 
 **Q**: Which Minecraft versions are supported?  
-**A**: Minecraft 1.8 through 1.21.8.
+**A**: Minecraft 1.8 through 1.21.8 are supported.
+1.21.9 and newer are **not** supported.
 
 **Q**: Where are the Forge, Fabric, Quilt, NeoForge, etc. versions?  
 **A**: All in the same file.

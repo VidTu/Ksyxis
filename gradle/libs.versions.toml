@@ -23,7 +23,7 @@
 # SPDX-License-Identifier: MIT
 
 [versions]
-asm = "9.8"
+asm = "9.9"
 gson = "2.13.2"
 jetbrains-annotations = "26.0.2"
 jspecify = "1.0.0"

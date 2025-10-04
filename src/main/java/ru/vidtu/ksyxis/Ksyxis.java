@@ -171,6 +171,7 @@ public final class Ksyxis {
      * @see #MIXIN_ABSENT
      * @see #MIXIN_INJECT
      */
+    @SuppressWarnings({"CallToPrintStackTrace", "CallToSystemExit"})// <- Logger is already used, printStackTrace() is used as an alternative. System.exit() is used to shut down the game in case of deadlocks.
     @Contract("_, _ -> fail")
     @CheckReturnValue
     static RuntimeException handleError(String message, Throwable error) {

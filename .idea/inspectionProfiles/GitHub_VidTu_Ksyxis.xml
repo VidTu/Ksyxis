@@ -2543,6 +2543,8 @@
       <option name="myAllowedSuppressions">
         <list>
           <option value="unused" />
+          <option value="CallToPrintStackTrace" />
+          <option value="CallToSystemExit" />
         </list>
       </option>
     </inspection_tool>
@@ -2612,7 +2614,7 @@
       <option name="ignoreSynchronizedSuperMethods" value="true" />
     </inspection_tool>
     <inspection_tool class="SynchronizedOnLiteralObject" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
-    <inspection_tool class="SystemExit" enabled="true" level="INFORMATION" enabled_by_default="true" editorAttributes="INFORMATION_ATTRIBUTES">
+    <inspection_tool class="SystemExit" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
       <option name="ignoreInMainMethod" value="true" />
     </inspection_tool>
     <inspection_tool class="SystemGC" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
@@ -2659,7 +2661,7 @@
     <inspection_tool class="ThrowFromFinallyBlock" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="ThrowFromFinallyBlockJS" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="ThrowableNotThrown" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
-    <inspection_tool class="ThrowablePrintStackTrace" enabled="true" level="INFORMATION" enabled_by_default="true" editorAttributes="INFORMATION_ATTRIBUTES" />
+    <inspection_tool class="ThrowablePrintStackTrace" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="ThrowablePrintedToSystemOut" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="ThrowableSupplierOnlyThrowException" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="ThrownExceptionsPerMethod" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
@@ -3012,7 +3014,7 @@
         </value>
       </option>
     </inspection_tool>
-    <inspection_tool class="unused" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" method="protected" checkParameterExcludingHierarchy="false">
+    <inspection_tool class="unused" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" method="protected" parameter="protected" checkParameterExcludingHierarchy="false">
       <option name="LOCAL_VARIABLE" value="true" />
       <option name="FIELD" value="true" />
       <option name="METHOD" value="true" />

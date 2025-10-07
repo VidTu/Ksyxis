@@ -72,8 +72,8 @@ primarily for low-end devices. Nevertheless, there is
 and Ornithe (for both Fabric and Quilt).
 
 **Q**: Which Minecraft versions are supported?  
-**A**: Minecraft 1.8 through 1.21.8 are supported.
-1.21.9 and newer are **not** supported.
+**A**: Minecraft versions 1.8 through 1.21.8 are supported.
+Minecraft versions 1.21.9 and newer are **not** supported.
 
 **Q**: Where are the Forge, Fabric, Quilt, NeoForge, etc. versions?  
 **A**: All in the same file.

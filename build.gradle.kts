@@ -1,4 +1,7 @@
 /*
+ * Ksyxis is a third-party mod for Minecraft Java Edition that
+ * speed ups your world loading by removing spawn chunks.
+ *
  * MIT License
  *
  * Copyright (c) 2021-2025 VidTu
@@ -37,7 +40,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
 group = "ru.vidtu.ksyxis"
 base.archivesName = "Ksyxis"
-description = "Speed up the loading of your world."
+description = "Speed up your world loading by removing spawn chunks."
 
 // Add GSON to buildscript classpath, we use it for minifying JSON files.
 buildscript {

@@ -50,6 +50,7 @@ public final class KForge {
     /**
      * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Forge"} and {@code manual=false}.
      *
+     * @apiNote Do not call, called by Forge
      * @see Ksyxis#init(String, boolean)
      */
     public KForge() {

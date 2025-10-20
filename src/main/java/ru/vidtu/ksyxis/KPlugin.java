@@ -29,6 +29,7 @@
 
 package ru.vidtu.ksyxis;
 
+import com.google.errorprone.annotations.DoNotCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
@@ -79,6 +80,8 @@ public final class KPlugin implements IMixinConfigPlugin {
 
     /**
      * Creates a new plugin.
+     *
+     * @apiNote Do not call, called by Mixin
      */
     @Contract(pure = true)
     public KPlugin() {
@@ -92,11 +95,13 @@ public final class KPlugin implements IMixinConfigPlugin {
      * @param mixinClassName  Fully qualified class name of the mixin
      * @return Whether the Mixin should be applied
      * @throws RuntimeException If any unexpected exception occurs (should never be thrown, app is exited)
+     * @apiNote Do not call, called by Mixin
      * @see #provider
      * @see IClassBytecodeProvider#getClassNode(String)
      * @see Ksyxis#handleError(String, Throwable)
      * @see #PLUGIN_ERROR
      */
+    @DoNotCall("Called by Mixin")
     @CheckReturnValue
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
@@ -141,7 +146,9 @@ public final class KPlugin implements IMixinConfigPlugin {
      * Does nothing.
      *
      * @param mixinPackage Ignored
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @Override
     public void onLoad(String mixinPackage) {
@@ -152,7 +159,9 @@ public final class KPlugin implements IMixinConfigPlugin {
      * Does nothing. Always returns {@code null}.
      *
      * @return Always {@code null}
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Contract(value = "-> null", pure = true)
     @Override
     @Nullable
@@ -165,7 +174,9 @@ public final class KPlugin implements IMixinConfigPlugin {
      *
      * @param myTargets    Ignored
      * @param otherTargets Ignored
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @Override
     public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {
@@ -176,7 +187,9 @@ public final class KPlugin implements IMixinConfigPlugin {
      * Does nothing. Always returns {@code null}.
      *
      * @return Always {@code null}
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Contract(value = "-> null", pure = true)
     @Override
     @Nullable
@@ -191,7 +204,9 @@ public final class KPlugin implements IMixinConfigPlugin {
      * @param targetClass     Ignored
      * @param mixinClassName  Ignored
      * @param mixinInfo       Ignored
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @Override
     public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
@@ -205,7 +220,9 @@ public final class KPlugin implements IMixinConfigPlugin {
      * @param targetClass     Ignored
      * @param mixinClassName  Ignored
      * @param mixinInfo       Ignored
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {

@@ -27,6 +27,7 @@
 
 [versions]
 asm = "9.9"
+error_prone_annotations = "2.42.0"
 gson = "2.13.2"
 jetbrains-annotations = "26.0.2"
 jspecify = "1.0.0"
@@ -35,6 +36,7 @@ mixin = "0.8.7"
 
 [libraries]
 asm = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
+error_prone_annotations = { module = "com.google.errorprone:error_prone_annotations", version.ref = "error_prone_annotations" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
 jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecify" }

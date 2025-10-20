@@ -29,6 +29,7 @@
 
 package ru.vidtu.ksyxis.mixins;
 
+import com.google.errorprone.annotations.DoNotCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
@@ -89,7 +90,9 @@ public final class ServerLevelMixin {
      *
      * @param spawnChunkRadius Previous {@code spawnChunkRadius} value for logging
      * @return Always {@code 0}
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @ModifyVariable(method = {
             // Deobfuscated
@@ -125,7 +128,9 @@ public final class ServerLevelMixin {
      *
      * @param constant Previous constant value for logging
      * @return Always {@code 0}
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @ModifyConstant(method = {
             // Deobfuscated

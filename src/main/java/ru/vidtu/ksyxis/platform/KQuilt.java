@@ -29,6 +29,7 @@
 
 package ru.vidtu.ksyxis.platform;
 
+import com.google.errorprone.annotations.DoNotCall;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
@@ -50,6 +51,8 @@ import ru.vidtu.ksyxis.Ksyxis;
 public final class KQuilt implements ModInitializer {
     /**
      * Creates a new mod.
+     *
+     * @apiNote Do not call, called by Quilt
      */
     @Contract(pure = true)
     public KQuilt() {
@@ -60,8 +63,10 @@ public final class KQuilt implements ModInitializer {
      * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Quilt"} and {@code manual=false}.
      *
      * @param mod Mod container, ignored
+     * @apiNote Do not call, called by Quilt
      * @see Ksyxis#init(String, boolean)
      */
+    @DoNotCall("Called by Quilt")
     @Override
     public void onInitialize(ModContainer mod) {
         Ksyxis.init("Quilt/KQuilt", /*manual=*/false);

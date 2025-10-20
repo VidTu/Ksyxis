@@ -29,6 +29,7 @@
 
 package ru.vidtu.ksyxis.mixins;
 
+import com.google.errorprone.annotations.DoNotCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
@@ -86,7 +87,9 @@ public final class MinecraftServerMixin {
      *
      * @param spawnChunkRadius Previous {@code spawnChunkRadius} value for logging
      * @return Always {@code 0}
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @ModifyVariable(method = {
             // Deobfuscated
@@ -114,7 +117,9 @@ public final class MinecraftServerMixin {
      * Used in 1.14 (inclusive) through 1.20.4 (inclusive).
      *
      * @param ci Callback data, ignored
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @Inject(method = {
             // Deobfuscated
@@ -141,7 +146,9 @@ public final class MinecraftServerMixin {
      *
      * @param constant Previous constant value for logging
      * @return Always {@code 0}
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @ModifyConstant(method = {
             // Deobfuscated
@@ -171,9 +178,11 @@ public final class MinecraftServerMixin {
      *
      * @param constant Previous constant value for logging
      * @return Always {@code 0} without ModernFix, always {@link Ksyxis#SPAWN_CHUNKS} with ModernFix
+     * @apiNote Do not call, called by Mixin
      * @see Ksyxis#SPAWN_CHUNKS
      * @see Ksyxis#LOADED_CHUNKS
      */
+    @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @ModifyConstant(method = {
             // Deobfuscated
@@ -201,7 +210,9 @@ public final class MinecraftServerMixin {
      * Used before 1.13.2 (inclusive).
      *
      * @param ci Callback data, ignored
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @Inject(method = {
             // Deobfuscated
@@ -229,7 +240,9 @@ public final class MinecraftServerMixin {
      *
      * @param constant Previous constant value for logging
      * @return Either {@code 1} or {@code -1}
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @ModifyConstant(method = {
             // Deobfuscated

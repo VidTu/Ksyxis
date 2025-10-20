@@ -49,6 +49,7 @@ public final class KNeoForge {
     /**
      * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="NeoForge"} and {@code manual=false}.
      *
+     * @apiNote Do not call, called by NeoForge
      * @see Ksyxis#init(String, boolean)
      */
     public KNeoForge() {

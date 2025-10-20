@@ -29,6 +29,7 @@
 
 package ru.vidtu.ksyxis.mixins;
 
+import com.google.errorprone.annotations.DoNotCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
@@ -85,7 +86,9 @@ public final class LevelMixin {
      * @param x   Chunk X, used only for logging
      * @param z   Chunk Z, used only for logging
      * @param cir Callback data to set {@code false} into
+     * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
     @Inject(method = {
             // Deobfuscated
             "isSpawnChunk(II)Z", // Forge MCP

@@ -29,6 +29,7 @@
 
 package ru.vidtu.ksyxis.platform;
 
+import com.google.errorprone.annotations.DoNotCall;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
@@ -51,6 +52,8 @@ import java.util.Map;
 public final class KCore implements IFMLLoadingPlugin {
     /**
      * Creates a new coremod.
+     *
+     * @apiNote Do not call, called by FML
      */
     @Contract(pure = true)
     public KCore() {
@@ -61,7 +64,9 @@ public final class KCore implements IFMLLoadingPlugin {
      * Does nothing. Always returns {@code null}.
      *
      * @return Always {@code null}
+     * @apiNote Do not call, called by FML
      */
+    @DoNotCall("Called by FML")
     @Contract(value = "-> null", pure = true)
     @Override
     @Nullable
@@ -73,7 +78,9 @@ public final class KCore implements IFMLLoadingPlugin {
      * Does nothing. Always returns {@code null}.
      *
      * @return Always {@code null}
+     * @apiNote Do not call, called by FML
      */
+    @DoNotCall("Called by FML")
     @Contract(value = "-> null", pure = true)
     @Override
     public String @Nullable [] getASMTransformerClass() {
@@ -84,7 +91,9 @@ public final class KCore implements IFMLLoadingPlugin {
      * Does nothing. Always returns {@code null}.
      *
      * @return Always {@code null}
+     * @apiNote Do not call, called by FML
      */
+    @DoNotCall("Called by FML")
     @Contract(value = "-> null", pure = true)
     @Override
     @Nullable
@@ -96,7 +105,9 @@ public final class KCore implements IFMLLoadingPlugin {
      * Does nothing. Always returns {@code null}.
      *
      * @return Always {@code null}
+     * @apiNote Do not call, called by FML
      */
+    @DoNotCall("Called by FML")
     @Contract(value = "-> null", pure = true)
     @Override
     @Nullable
@@ -108,8 +119,10 @@ public final class KCore implements IFMLLoadingPlugin {
      * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="LegacyForge"} and {@code manual=true}.
      *
      * @param data Injection data, ignored
+     * @apiNote Do not call, called by FML
      * @see Ksyxis#init(String, boolean)
      */
+    @DoNotCall("Called by FML")
     @Override
     public void injectData(Map<String, Object> data) {
         Ksyxis.init("LegacyForge/KCore", /*manual=*/true);

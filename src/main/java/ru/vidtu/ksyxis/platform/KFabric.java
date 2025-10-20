@@ -29,6 +29,7 @@
 
 package ru.vidtu.ksyxis.platform;
 
+import com.google.errorprone.annotations.DoNotCall;
 import net.fabricmc.api.ModInitializer;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
@@ -48,6 +49,8 @@ import ru.vidtu.ksyxis.Ksyxis;
 public final class KFabric implements ModInitializer {
     /**
      * Creates a new mod.
+     *
+     * @apiNote Do not call, called by Fabric
      */
     @Contract(pure = true)
     public KFabric() {
@@ -57,8 +60,10 @@ public final class KFabric implements ModInitializer {
     /**
      * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Fabric"} and {@code manual=false}.
      *
+     * @apiNote Do not call, called by Fabric
      * @see Ksyxis#init(String, boolean)
      */
+    @DoNotCall("Called by Fabric")
     @Override
     public void onInitialize() {
         Ksyxis.init("Fabric/KFabric", /*manual=*/false);

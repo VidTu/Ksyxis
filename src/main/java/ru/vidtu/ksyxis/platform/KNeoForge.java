@@ -31,6 +31,7 @@ package ru.vidtu.ksyxis.platform;
 
 import net.neoforged.fml.common.Mod;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import ru.vidtu.ksyxis.Ksyxis;
 
@@ -54,5 +55,11 @@ public final class KNeoForge {
      */
     public KNeoForge() {
         Ksyxis.init("NeoForge/KNeoForge", /*manual=*/false);
+    }
+
+    @Contract(pure = true)
+    @Override
+    public String toString() {
+        return "Ksyxis/KNeoForge{}";
     }
 }

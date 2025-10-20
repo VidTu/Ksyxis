@@ -71,4 +71,10 @@ public final class KQuilt implements ModInitializer {
     public void onInitialize(ModContainer mod) {
         Ksyxis.init("Quilt/KQuilt", /*manual=*/false);
     }
+
+    @Contract(pure = true)
+    @Override
+    public String toString() {
+        return "Ksyxis/KQuilt{}";
+    }
 }

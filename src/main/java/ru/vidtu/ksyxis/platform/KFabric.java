@@ -68,4 +68,10 @@ public final class KFabric implements ModInitializer {
     public void onInitialize() {
         Ksyxis.init("Fabric/KFabric", /*manual=*/false);
     }
+
+    @Contract(pure = true)
+    @Override
+    public String toString() {
+        return "Ksyxis/KFabric{}";
+    }
 }

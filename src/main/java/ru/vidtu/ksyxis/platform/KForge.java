@@ -31,6 +31,7 @@ package ru.vidtu.ksyxis.platform;
 
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import ru.vidtu.ksyxis.Ksyxis;
 
@@ -55,5 +56,11 @@ public final class KForge {
      */
     public KForge() {
         Ksyxis.init("Forge/KForge", /*manual=*/false);
+    }
+
+    @Contract(pure = true)
+    @Override
+    public String toString() {
+        return "Ksyxis/KForge{}";
     }
 }

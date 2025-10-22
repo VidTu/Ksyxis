@@ -265,8 +265,7 @@ public final class Ksyxis {
             Field field = MixinBootstrap.class.getField("VERSION");
 
             // Extract the field value without javac inlining.
-            Object obj = field.get(null);
-            return String.valueOf(obj);
+            return (String) field.get(null);
         } catch (Throwable t) {
             // Format the message.
             String message = String.format(MIXIN_ABSENT, platform, manual);
@@ -291,7 +290,7 @@ public final class Ksyxis {
             Class<?> modernFixPluginClass = Class.forName("org.embeddedt.modernfix.core.ModernFixMixinPlugin");
             Field modernFixPluginField = modernFixPluginClass.getDeclaredField("instance");
             Method modernFixIsOptionEnabled = modernFixPluginClass.getMethod("isOptionEnabled", String.class);
-            Object modernFix = modernFixPluginField.get(null);
+            Object modernFix = modernFixPluginClass.cast(modernFixPluginField.get(null));
 
             // Check the removeSpawnChunks. ModernFix apparently did this too for some time, just in different way.
             boolean removeSpawnChunks = (boolean) modernFixIsOptionEnabled.invoke(modernFix, "perf.remove_spawn_chunks.MinecraftServer");

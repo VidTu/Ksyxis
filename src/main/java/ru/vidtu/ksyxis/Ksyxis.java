@@ -296,17 +296,16 @@ public final class Ksyxis {
             // Check the removeSpawnChunks. ModernFix apparently did this too for some time, just in different way.
             boolean removeSpawnChunks = (boolean) modernFixIsOptionEnabled.invoke(modernFix, "perf.remove_spawn_chunks.MinecraftServer");
 
-            // Log. (**DEBUG**)
-            if (LOGGER.isDebugEnabled(KSYXIS_MARKER)) {
-                LOGGER.debug(KSYXIS_MARKER, "Ksyxis: ModernFix's 'removeSpawnChunks' option is: {}", new Object[]{removeSpawnChunks}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
-            }
+            // Log.
+            LOGGER.info(KSYXIS_MARKER, "Ksyxis: Enabled compatibility hack with ModernFix. (removeSpawnChunks: {})", new Object[]{removeSpawnChunks}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
 
             // Check what amount of spawn chunks to report back to the game.
             // ModernFix needs 441, because of its own way of doing it.
             // Ksyxis needs 0, because we remove all spawn chunks.
             return (removeSpawnChunks ? SPAWN_CHUNKS : 0);
         } catch (Throwable t) {
-            // Log. (**DEBUG**)
+            // Log.
+            LOGGER.info(KSYXIS_MARKER, "Ksyxis: No mod compatibility hacks used.");
             LOGGER.debug(KSYXIS_MARKER, "Ksyxis: Unable to provide compat for ModernFix, it's probably not installed.", t);
 
             // No ModernFix found, it's Ksyxis only and we have 0 chunks.

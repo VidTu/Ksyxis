@@ -36,7 +36,7 @@
  */
 @ApiStatus.Internal
 @NullMarked
-package ru.vidtu.ksyxis.mixins;
+package ru.vidtu.ksyxis.mixin;
 
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;

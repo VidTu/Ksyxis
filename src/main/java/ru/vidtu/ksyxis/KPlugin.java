@@ -108,7 +108,7 @@ public final class KPlugin implements IMixinConfigPlugin {
         // Wrap to handle exceptions as a control flow.
         try {
             // If the Mixin class is not from Ksyxis, don't touch it and allow it to be applied.
-            if (!mixinClassName.startsWith("ru.vidtu.ksyxis.mixins.")) {
+            if (!mixinClassName.startsWith("ru.vidtu.ksyxis.mixin.")) {
                 // Log. (**TRACE**)
                 if (!LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) return true;
                 LOGGER.trace(Ksyxis.KSYXIS_MARKER, "Ksyxis: Applying mixin, because it's not a part of Ksyxis. (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.

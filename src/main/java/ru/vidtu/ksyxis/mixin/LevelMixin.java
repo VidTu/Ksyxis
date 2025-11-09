@@ -27,7 +27,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-package ru.vidtu.ksyxis.mixins;
+package ru.vidtu.ksyxis.mixin;
 
 import com.google.errorprone.annotations.DoNotCall;
 import org.apache.logging.log4j.LogManager;

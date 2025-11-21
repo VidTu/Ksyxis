@@ -34,9 +34,11 @@ plugins {
     id("java")
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_1_8
-java.targetCompatibility = JavaVersion.VERSION_1_8
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    toolchain.languageVersion = JavaLanguageVersion.of(8)
+}
 
 group = "ru.vidtu.ksyxis"
 base.archivesName = "Ksyxis"

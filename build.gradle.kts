@@ -34,12 +34,14 @@ plugins {
     id("java")
 }
 
+// Language.
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
     toolchain.languageVersion = JavaLanguageVersion.of(8)
 }
 
+// Metadata.
 group = "ru.vidtu.ksyxis"
 base.archivesName = "Ksyxis"
 description = "Speed up your world loading by removing spawn chunks."

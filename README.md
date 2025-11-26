@@ -128,6 +128,25 @@ This project is provided under the MIT License.
 Check out [LICENSE](https://github.com/VidTu/Ksyxis/blob/main/LICENSE)
 for more information.
 
+## Credits
+
+This mod is developed primarily by [VidTu](https://github.com/VidTu),
+but it wouldn't be possible without:
+
+- [Contributors](https://github.com/VidTu/Ksyxis/graphs/contributors).
+- [Fabric Loader](https://github.com/FabricMC/fabric-loader) by
+  [FabricMC](https://github.com/FabricMC). (and contributors)
+- [NeoForge](https://github.com/neoforged/NeoForge) by
+  [NeoForged](https://github.com/neoforged). (and contributors)
+- [Forge](https://github.com/MinecraftForge/MinecraftForge) by
+  [Minecraft Forge](https://github.com/MinecraftForge). (and contributors)
+- [Mixin](https://github.com/SpongePowered/Mixin) by
+  [SpongePowered](https://github.com/SpongePowered). (and contributors)
+- [Minecraft](https://minecraft.net/) by
+  [Mojang](https://mojang.com/).
+
+It also uses [Gradle](https://gradle.org/) and [Java](https://java.com/).
+
 ## Development
 
 ### Building (Compiling)

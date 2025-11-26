@@ -8,6 +8,8 @@
 >
 > Older Minecraft versions will be supported for a reasonable time.
 
+<img src="ksyxis.png" alt="Ksyxis Icon" width=128 height=128/>
+
 # Ksyxis
 
 Speed up your world loading by removing spawn chunks.

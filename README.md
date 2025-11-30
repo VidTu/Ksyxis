@@ -17,7 +17,7 @@ Speed up your world loading by removing spawn chunks.
 ## Downloads
 
 - [Modrinth](https://modrinth.com/mod/ksyxis)
-- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ksyxis)
+- [CurseForge](https://curseforge.com/minecraft/mc-mods/ksyxis)
 - [GitHub Releases](https://github.com/VidTu/Ksyxis/releases)
 
 ## Dependencies
@@ -115,7 +115,7 @@ is not required. Monetization and redistribution are allowed as per the
 
 **Q**: It says *Ksyxis: No Mixin found*.  
 **A**: If you're using Forge 1.15.2 or older, you may need to install
-[MixinBootstrap](https://modrinth.com/mod/mixinbootstrap)
+[MixinBootstrap](https://modrinth.com/mod/mixinbootstrap),
 [MixinBooter](https://modrinth.com/mod/mixinbooter),
 [UniMixins](https://modrinth.com/mod/unimixins), or any other Mixin provider
 of your choice. If you're using Forge 1.16 or newer, or any version of

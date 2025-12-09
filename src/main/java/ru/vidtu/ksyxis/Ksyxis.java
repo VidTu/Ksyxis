@@ -29,6 +29,7 @@
 
 package ru.vidtu.ksyxis;
 
+import com.google.errorprone.annotations.CompileTimeConstant;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
@@ -59,6 +60,7 @@ public final class Ksyxis {
      * @see #LOADED_CHUNKS
      * @see #getLoadedChunks()
      */
+    @CompileTimeConstant
     public static final int SPAWN_CHUNKS = (21 * 21);
 
     /**
@@ -67,11 +69,31 @@ public final class Ksyxis {
     public static final Marker KSYXIS_MARKER = MarkerManager.getMarker("MOD_KSYXIS");
 
     /**
+     * The amount of nanoseconds inside a millisecond.
+     * <p>
+     * Equals to {@code 1_000_000} (1 million).
+     *
+     * @see System#nanoTime()
+     */
+    @CompileTimeConstant
+    private static final long NANOS_IN_MS = 1_000_000L;
+
+    /**
+     * The exit code for erroneous situations.
+     *
+     * @see System#exit(int)
+     * @see #handleError(String, Throwable)
+     */
+    @CompileTimeConstant
+    private static final int ERROR_EXIT_CODE = -2037852655; // "Ksyxis".hashCode()
+
+    /**
      * Mixin absent error message. Shown in {@link #obtainMixinVersion(String, boolean)} when Mixin is not found.
      *
      * @see #obtainMixinVersion(String, boolean)
      * @see #handleError(String, Throwable)
      */
+    @CompileTimeConstant
     private static final String MIXIN_ABSENT = "Ksyxis: No Mixin found. If you`re using old (1.15.2 or older) Forge, " +
             "please install a Mixin loader, for example MixinBootstrap, MixinBooter, UniMixins, or any other at your " +
             "choice. If you`re using new (1.16 or newer) Forge, any Fabric, any Quilt, any Ornithe, any " +
@@ -86,6 +108,7 @@ public final class Ksyxis {
      * @see #init(String, boolean)
      * @see #handleError(String, Throwable)
      */
+    @CompileTimeConstant
     private static final String MIXIN_INJECT = "Ksyxis: Unable to inject the Ksyxis configuration. It`s probably a " +
             "bug or something, you should report it via GitHub. Ensure to include as much information (game version, " +
             "loader type, loader version, mod version, other mods, logs, etc.) in the bug report as possible, this " +
@@ -130,14 +153,14 @@ public final class Ksyxis {
      * @see Mixins#addConfiguration(String)
      * @see #handleError(String, Throwable)
      */
-    public static void init(String platform, boolean manual) {
+    public static void init(final String platform, final boolean manual) {
         try {
             // Log.
-            long start = System.nanoTime();
+            final long start = System.nanoTime();
             LOGGER.info(KSYXIS_MARKER, "Ksyxis: Booting... (platform: {}, manual: {})", new Object[]{platform, manual}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
 
             // Obtain Mixin version.
-            String mixinVersion = obtainMixinVersion(platform, manual);
+            final String mixinVersion = obtainMixinVersion(platform, manual);
 
             // Log. (**DEBUG**)
             if (LOGGER.isDebugEnabled(KSYXIS_MARKER)) {
@@ -154,10 +177,10 @@ public final class Ksyxis {
             }
 
             // Log the info.
-            LOGGER.info(KSYXIS_MARKER, "Ksyxis: Ready. As always, this mod will speed up your world loading and might or might not break it. (mixinVersion: {}, time: {} ms)", new Object[]{mixinVersion, (System.nanoTime() - start) / 1_000_000L}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
-        } catch (Throwable t) {
+            LOGGER.info(KSYXIS_MARKER, "Ksyxis: Ready. As always, this mod will speed up your world loading and might or might not break it. (mixinVersion: {}, time: {} ms)", new Object[]{mixinVersion, (System.nanoTime() - start) / NANOS_IN_MS}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+        } catch (final Throwable t) {
             // Format the message.
-            String message = String.format(MIXIN_INJECT, platform, manual);
+            final String message = String.format(MIXIN_INJECT, platform, manual);
 
             // Handle the error.
             throw handleError(message, t);
@@ -174,22 +197,22 @@ public final class Ksyxis {
      * @see #MIXIN_ABSENT
      * @see #MIXIN_INJECT
      */
-    @SuppressWarnings({"CallToPrintStackTrace", "CallToSystemExit"})// <- Logger is already used, printStackTrace() is used as an alternative. System.exit() is used to shut down the game in case of deadlocks.
+    @SuppressWarnings({"CallToPrintStackTrace", "CallToSystemExit"}) // <- Logger is already used, printStackTrace() is used as an alternative. System.exit() is used to shut down the game in case of deadlocks.
     @Contract("_, _ -> fail")
     @CheckReturnValue
-    static RuntimeException handleError(String message, Throwable error) {
+    /*package-private*/ static RuntimeException handleError(final String message, final Throwable error) {
         // Log.
         LOGGER.error(KSYXIS_MARKER, message, error);
         error.printStackTrace();
 
         // Try to display LWJGL3 message box from TinyFD.
         try {
-            Class<?> tinyFd = Class.forName("org.lwjgl.util.tinyfd.TinyFileDialogs");
-            Method tinyFdMessageBox = tinyFd.getMethod("tinyfd_messageBox", CharSequence.class,
+            final Class<?> tinyFd = Class.forName("org.lwjgl.util.tinyfd.TinyFileDialogs");
+            final Method tinyFdMessageBox = tinyFd.getMethod("tinyfd_messageBox", CharSequence.class,
                     CharSequence.class, CharSequence.class, CharSequence.class, boolean.class);
             tinyFdMessageBox.invoke(null, "Minecraft | Ksyxis Mod", message, /*buttons=*/"ok",
                     /*icon=*/"error", /*selectOkButton=*/false);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             // Suppress for logging.
             error.addSuppressed(new RuntimeException("Ksyxis: Unable to display the LWJGL3 error message. Maybe it's LWJGL2 or server here.", t));
         }
@@ -200,10 +223,10 @@ public final class Ksyxis {
 
         // Try to display LWJGL2 alert from Sys.
         try {
-            Class<?> sys = Class.forName("org.lwjgl.Sys");
-            Method sysAlert = sys.getMethod("alert", String.class, String.class);
+            final Class<?> sys = Class.forName("org.lwjgl.Sys");
+            final Method sysAlert = sys.getMethod("alert", String.class, String.class);
             sysAlert.invoke(null, "Minecraft | Ksyxis Mod", message);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             // Suppress for logging.
             error.addSuppressed(new RuntimeException("Ksyxis: Unable to display the LWJGL2 error message. Maybe it's LWJGL3 or server here.", t));
         }
@@ -215,8 +238,8 @@ public final class Ksyxis {
         // Try to die. Some smart guys at Forge 1.8.9 thought it's a good idea to prevent shutting down.
         // See below how we're bypassing that restriction, because Java 8 is not encapsulated.
         try {
-            System.exit(-2037852655); // "Ksyxis".hashCode()
-        } catch (Throwable t) {
+            System.exit(ERROR_EXIT_CODE);
+        } catch (final Throwable t) {
             // Suppress for logging.
             error.addSuppressed(new RuntimeException("Ksyxis: Unable to exit the game normally.", t));
         }
@@ -227,11 +250,11 @@ public final class Ksyxis {
 
         // Try to die via reflection.
         try {
-            Class<?> shutdownClass = Class.forName("java.lang.Shutdown");
-            Method shutdownMethod = shutdownClass.getDeclaredMethod("exit", int.class);
+            final Class<?> shutdownClass = Class.forName("java.lang.Shutdown");
+            final Method shutdownMethod = shutdownClass.getDeclaredMethod("exit", int.class);
             shutdownMethod.setAccessible(true);
-            shutdownMethod.invoke(null, -2037852655); // "Ksyxis".hashCode()
-        } catch (Throwable t) {
+            shutdownMethod.invoke(null, ERROR_EXIT_CODE);
+        } catch (final Throwable t) {
             // Suppress for logging.
             error.addSuppressed(new RuntimeException("Ksyxis: Unable to exit the game reflectively.", t));
         }
@@ -258,17 +281,17 @@ public final class Ksyxis {
      * @see #MIXIN_ABSENT
      */
     @CheckReturnValue
-    private static String obtainMixinVersion(String platform, boolean manual) {
+    private static String obtainMixinVersion(final String platform, final boolean manual) {
         // Check for Mixin.
         try {
             // Get the field.
-            Field field = MixinBootstrap.class.getField("VERSION");
+            final Field field = MixinBootstrap.class.getField("VERSION");
 
             // Extract the field value without javac inlining.
             return (String) field.get(null);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             // Format the message.
-            String message = String.format(MIXIN_ABSENT, platform, manual);
+            final String message = String.format(MIXIN_ABSENT, platform, manual);
 
             // Handle the error.
             throw handleError(message, t);
@@ -287,13 +310,13 @@ public final class Ksyxis {
     private static int getLoadedChunks() {
         try {
             // Load the ModernFix plugin config.
-            Class<?> modernFixPluginClass = Class.forName("org.embeddedt.modernfix.core.ModernFixMixinPlugin");
-            Field modernFixPluginField = modernFixPluginClass.getDeclaredField("instance");
-            Method modernFixIsOptionEnabled = modernFixPluginClass.getMethod("isOptionEnabled", String.class);
-            Object modernFix = modernFixPluginClass.cast(modernFixPluginField.get(null));
+            final Class<?> modernFixPluginClass = Class.forName("org.embeddedt.modernfix.core.ModernFixMixinPlugin");
+            final Field instance = modernFixPluginClass.getDeclaredField("instance");
+            final Method isOptionEnabled = modernFixPluginClass.getMethod("isOptionEnabled", String.class);
+            final Object modernFix = modernFixPluginClass.cast(instance.get(null));
 
             // Check the removeSpawnChunks. ModernFix apparently did this too for some time, just in different way.
-            boolean removeSpawnChunks = (boolean) modernFixIsOptionEnabled.invoke(modernFix, "perf.remove_spawn_chunks.MinecraftServer");
+            final boolean removeSpawnChunks = (boolean) isOptionEnabled.invoke(modernFix, "perf.remove_spawn_chunks.MinecraftServer");
 
             // Log.
             LOGGER.info(KSYXIS_MARKER, "Ksyxis: Enabled compatibility hack with ModernFix. (removeSpawnChunks: {})", new Object[]{removeSpawnChunks}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
@@ -302,7 +325,7 @@ public final class Ksyxis {
             // ModernFix needs 441, because of its own way of doing it.
             // Ksyxis needs 0, because we remove all spawn chunks.
             return (removeSpawnChunks ? SPAWN_CHUNKS : 0);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             // Log.
             LOGGER.info(KSYXIS_MARKER, "Ksyxis: No mod compatibility hacks used.");
             LOGGER.debug(KSYXIS_MARKER, "Ksyxis: Unable to provide compat for ModernFix, it's probably not installed.", t);

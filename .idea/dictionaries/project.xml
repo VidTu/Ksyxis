@@ -1,48 +1,41 @@
 <component name="ProjectDictionaryState">
   <dictionary name="project">
     <words>
+      <w>Dorg</w>
+      <w>Ksyxis</w>
+      <w>Modrinth</w>
+      <w>Mojang</w>
+      <w>Ornithe</w>
       <w>aarch</w>
       <w>alnum</w>
       <w>appname</w>
-      <w>bdwnwhiu</w>
       <w>cdpath</w>
       <w>cnfe</w>
       <w>configureondemand</w>
       <w>coremod</w>
-      <w>curseforge</w>
-      <w>dists</w>
-      <w>dorg</w>
-      <w>embeddedt</w>
       <w>endlocal</w>
       <w>entrypoints</w>
       <w>errorlevel</w>
-      <w>errorprone</w>
-      <w>fabricmc</w>
       <w>foojay</w>
       <w>gamerule</w>
       <w>javacmd</w>
-      <w>jnfclwgd</w>
       <w>jvmargs</w>
       <w>ksyxis</w>
-      <w>lnet</w>
       <w>mcmod</w>
-      <w>modernfix</w>
+      <w>minecraft</w>
       <w>modid</w>
       <w>modmenu</w>
-      <w>modrinth</w>
-      <w>mojang</w>
       <w>neoforge</w>
-      <w>ornithe</w>
       <w>porkchop</w>
       <w>readarray</w>
+      <w>setdefaultspawnpos</w>
       <w>setlocal</w>
+      <w>setspawnpos</w>
       <w>shellness</w>
       <w>tinyfd</w>
       <w>ulimit</w>
       <w>vidtu</w>
       <w>wcdfzsgy</w>
-      <w>спавне</w>
-      <w>чанки</w>
     </words>
   </dictionary>
 </component>

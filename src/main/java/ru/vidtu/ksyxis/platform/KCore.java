@@ -124,7 +124,7 @@ public final class KCore implements IFMLLoadingPlugin {
      */
     @DoNotCall("Called by FML")
     @Override
-    public void injectData(Map<String, Object> data) {
+    public void injectData(final Map<String, Object> data) {
         Ksyxis.init("LegacyForge/KCore", /*manual=*/true);
     }
 

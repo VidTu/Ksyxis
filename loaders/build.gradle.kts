@@ -31,24 +31,29 @@ plugins {
     id("java")
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_1_8
-java.targetCompatibility = JavaVersion.VERSION_1_8
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+// Language.
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    toolchain.languageVersion = JavaLanguageVersion.of(8)
+}
 
+// Metadata.
 group = "ru.vidtu.ksyxis.loaders"
 base.archivesName = "Ksyxis-Loaders"
 description = "Module with stubs of loaders' classes for Ksyxis."
 
+// Compile with UTF-8, Java 8, and with all debug options.
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
     options.compilerArgs.addAll(listOf("-g", "-parameters"))
+    // JDK 8 (used by this buildscript) doesn't support the "-release" flag
+    // (at the top of the file), so we must NOT specify it or the "javac" will fail.
+    // If we ever gonna compile on newer Java versions, uncomment this line.
+    // options.release = 8
 }
 
-tasks.withType<AbstractArchiveTask> {
-    isPreserveFileTimestamps = false
-    isReproducibleFileOrder = true
-}
-
+// Add LICENSE and manifest into the JAR file.
 tasks.withType<Jar> {
     manifest {
         attributes(

@@ -68,7 +68,7 @@ public final class KQuilt implements ModInitializer {
      */
     @DoNotCall("Called by Quilt")
     @Override
-    public void onInitialize(ModContainer mod) {
+    public void onInitialize(final ModContainer mod) {
         Ksyxis.init("Quilt/KQuilt", /*manual=*/false);
     }
 

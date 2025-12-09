@@ -98,7 +98,7 @@ public final class LevelMixin {
             "method_3671(II)Z", // Legacy Fabric Intermediary
             "m_4821236(II)Z" // Ornithe
     }, at = @At("HEAD"), cancellable = true, require = 0, expect = 0)
-    private void ksyxis_isSpawnChunk_head(int x, int z, CallbackInfoReturnable<Boolean> cir) {
+    private void ksyxis_isSpawnChunk_head(final int x, final int z, final CallbackInfoReturnable<Boolean> cir) {
         // Log. (**TRACE**)
         if (KSYXIS_LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) {
             KSYXIS_LOGGER.trace(Ksyxis.KSYXIS_MARKER, "Ksyxis: Forcing chunk to be not spawn chunk in LevelMixin. (x: {}, z: {}, cir: {}, level: {})", new Object[]{x, z, cir, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.

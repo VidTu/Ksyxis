@@ -115,7 +115,7 @@ public final class ServerLevelMixin {
             "m_3711633(Lnet/minecraft/unmapped/C_3674802;)V", // Ornithe
             "m_3711633(Lnet/minecraft/unmapped/C_3674802;F)V" // Ornithe
     }, at = @At("STORE"), remap = false, require = 0, expect = 0, index = 5)
-    private int ksyxis_setDefaultSpawnPos_spawnChunkRadius_getInt(int spawnChunkRadius) {
+    private int ksyxis_setDefaultSpawnPos_spawnChunkRadius_getInt(final int spawnChunkRadius) {
         // Report spawnChunkRadius gamerule as 0. Also log. (**DEBUG**)
         if (!KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return 0;
         KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Reporting 0 as spawnChunkRadius gamerule in ServerLevelMixin. (previousSpawnChunks: {}, expectedPreviousSpawnChunks: from 0 to 32, level: {})", new Object[]{spawnChunkRadius, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
@@ -153,7 +153,7 @@ public final class ServerLevelMixin {
             "m_3711633(Lnet/minecraft/unmapped/C_3674802;)V", // Ornithe
             "m_3711633(Lnet/minecraft/unmapped/C_3674802;F)V" // Ornithe
     }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
-    private int ksyxis_setDefaultSpawnPos_addRegionTicket(int constant) {
+    private int ksyxis_setDefaultSpawnPos_addRegionTicket(final int constant) {
         // Add zero-level chunk loading ticket. Also log. (**DEBUG**)
         if (!KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return 0;
         KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Adding zero-level ticket in ServerLevelMixin. (previousTicketLevel: {}, expectedPreviousTicketLevel: 11, level: {})", new Object[]{constant, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.

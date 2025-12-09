@@ -105,7 +105,7 @@ public final class MinecraftServerMixin {
             "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V", // Quilt Hashed
             "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Feather
     }, at = @At("STORE"), remap = false, require = 0, expect = 0, index = 5)
-    private int ksyxis_prepareLevels_spawnChunkRadius_getInt(int spawnChunkRadius) {
+    private int ksyxis_prepareLevels_spawnChunkRadius_getInt(final int spawnChunkRadius) {
         // Report spawnChunkRadius gamerule as 0. Also log. (**DEBUG**)
         if (!KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return 0;
         KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Reporting 0 as spawnChunkRadius gamerule in MinecraftServerMixin. (previousSpawnChunks: {}, expectedPreviousSpawnChunks: from 0 to 32, server: {})", new Object[]{spawnChunkRadius, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
@@ -135,7 +135,7 @@ public final class MinecraftServerMixin {
             "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V", // Quilt Hashed
             "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Feather
     }, at = @At("HEAD"), remap = false, require = 0, expect = 0)
-    private void ksyxis_prepareLevels_head(CallbackInfo ci) {
+    private void ksyxis_prepareLevels_head(final CallbackInfo ci) {
         // Log.
         KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: Hey. This is Ksyxis. We will now load the world and will try to do it quickly. If the game is not responding after this, it's probably us to blame or delete for good. This message appears always, even if the mod works flawlessly. (injector: modern, ci: {}, server: {})", new Object[]{ci, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
     }
@@ -164,7 +164,7 @@ public final class MinecraftServerMixin {
             "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V", // Quilt Hashed
             "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Feather
     }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
-    private int ksyxis_prepareLevels_addRegionTicket(int constant) {
+    private int ksyxis_prepareLevels_addRegionTicket(final int constant) {
         // Add zero-level ticket. Also log. (**DEBUG**)
         if (!KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return 0;
         KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Adding zero-level ticket in MinecraftServerMixin. (previousTicketLevel: {}, expectedPreviousTicketLevel: 11, server: {})", new Object[]{constant, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
@@ -198,7 +198,7 @@ public final class MinecraftServerMixin {
             "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V", // Quilt Hashed
             "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Feather
     }, constant = @Constant(intValue = Ksyxis.SPAWN_CHUNKS), remap = false, require = 0, expect = 0)
-    private int ksyxis_prepareLevels_getTickingGenerated(int constant) {
+    private int ksyxis_prepareLevels_getTickingGenerated(final int constant) {
         // Wait for 0 chunks to load. Also log. (**DEBUG**)
         if (!KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return Ksyxis.LOADED_CHUNKS;
         KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Reporting fake loaded chunks in MinecraftServerMixin. (fakeLoaded: {}, expectedFakeLoaded: 0 or 441, reallyLoaded: {}, expectedReallyLoaded: 441, server: {})", new Object[]{Ksyxis.LOADED_CHUNKS, constant, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
@@ -229,7 +229,7 @@ public final class MinecraftServerMixin {
             "m_4020281(Lnet/minecraft/unmapped/C_8054043;)V", // Ornithe Feather (1.13)
             "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Feather (1.12)
     }, at = @At("HEAD"), remap = false, require = 0, expect = 0)
-    private void ksyxis_initialWorldChunkLoad_head(CallbackInfo ci) {
+    private void ksyxis_initialWorldChunkLoad_head(final CallbackInfo ci) {
         // Log.
         KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: Hey. This is Ksyxis. We will now load the world and will try to do it quickly. If the game is not responding after this, it's probably us to blame or delete for good. This message appears always, even if the mod works flawlessly. (injector: legacy, ci: {}, server: {})", new Object[]{ci, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
     }
@@ -259,9 +259,9 @@ public final class MinecraftServerMixin {
             "m_4020281(Lnet/minecraft/unmapped/C_8054043;)V", // Ornithe (1.13)
             "m_4020281()V" // Ornithe (1.12)
     }, constant = {@Constant(intValue = -192), @Constant(intValue = 192)}, remap = false, require = 0, expect = 0)
-    private int ksyxis_initialWorldChunkLoad_loop(int constant) {
+    private int ksyxis_initialWorldChunkLoad_loop(final int constant) {
         // Loop from 1 to -1 to prevent looping. Also log. (**DEBUG**)
-        int report = ((constant < 0) ? 1 : -1);
+        final int report = ((constant < 0) ? 1 : -1);
         if (!KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return report;
         KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Hijacking loop constant to prevent looping in MinecraftServerMixin. (from: {}, to: {}, server: {})", new Object[]{constant, report, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
         return report;

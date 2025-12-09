@@ -104,20 +104,20 @@ public final class KPlugin implements IMixinConfigPlugin {
     @DoNotCall("Called by Mixin")
     @CheckReturnValue
     @Override
-    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+    public boolean shouldApplyMixin(final String targetClassName, final String mixinClassName) {
         // Wrap to handle exceptions as a control flow.
         try {
             // If the Mixin class is not from Ksyxis, don't touch it and allow it to be applied.
-            if (!mixinClassName.startsWith("ru.vidtu.ksyxis.mixin.")) {
+            if (!mixinClassName.startsWith("ru.vidtu.ksyxis.mixin.")) { // Implicit NPE for 'mixinClassName'
                 // Log. (**TRACE**)
                 if (!LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) return true;
-                LOGGER.trace(Ksyxis.KSYXIS_MARKER, "Ksyxis: Applying mixin, because it's not a part of Ksyxis. (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+                LOGGER.trace(Ksyxis.KSYXIS_MARKER, "Ksyxis: Skipping and applying mixin, because it's not a part of Ksyxis... (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
                 return true;
             }
 
             // Get the node. This method should never return null. It returns the class node, if the class exists.
             // It throws ClassNotFoundException if the class doesn't exist. We handle the exception below.
-            ClassNode node = this.provider.getClassNode(targetClassName);
+            final ClassNode node = this.provider.getClassNode(targetClassName); // Implicit NPE for 'targetClassName'
 
             // It returned null...
             if (node == null) {
@@ -126,16 +126,16 @@ public final class KPlugin implements IMixinConfigPlugin {
 
             // Didn't throw - class exists. Log and apply. (**DEBUG**)
             if (!LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return true;
-            LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Bytecode provider returned a valid node, applying mixin... (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+            LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Bytecode provider returned a valid node, mixin WILL be applied. (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
             return true;
-        } catch (ClassNotFoundException cnfe) {
+        } catch (final ClassNotFoundException cnfe) {
             // Provider threw an ClassNotFoundException. Don't apply mixin to avoid warnings. Log. (**DEBUG**)
             if (!LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return false;
             LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Bytecode provider threw an exception, mixin WON'T be applied. (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName, cnfe}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
             return false;
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             // Format the message.
-            String message = String.format(PLUGIN_ERROR, this.provider, this, targetClassName, mixinClassName);
+            final String message = String.format(PLUGIN_ERROR, this.provider, this, targetClassName, mixinClassName);
 
             // Handle the error.
             throw Ksyxis.handleError(message, t);
@@ -151,7 +151,7 @@ public final class KPlugin implements IMixinConfigPlugin {
     @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @Override
-    public void onLoad(String mixinPackage) {
+    public void onLoad(final String mixinPackage) {
         // NO-OP
     }
 
@@ -179,7 +179,7 @@ public final class KPlugin implements IMixinConfigPlugin {
     @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @Override
-    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {
+    public void acceptTargets(final Set<String> myTargets, final Set<String> otherTargets) {
         // NO-OP
     }
 
@@ -209,7 +209,8 @@ public final class KPlugin implements IMixinConfigPlugin {
     @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @Override
-    public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+    public void preApply(final String targetClassName, final ClassNode targetClass,
+                         final String mixinClassName, final IMixinInfo mixinInfo) {
         // NO-OP
     }
 
@@ -225,7 +226,8 @@ public final class KPlugin implements IMixinConfigPlugin {
     @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @Override
-    public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+    public void postApply(final String targetClassName, final ClassNode targetClass,
+                          final String mixinClassName, final IMixinInfo mixinInfo) {
         // NO-OP
     }
 

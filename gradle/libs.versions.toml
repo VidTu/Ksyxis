@@ -31,7 +31,7 @@ error_prone_annotations = "2.45.0"
 gson = "2.13.2"
 jetbrains-annotations = "26.0.2"
 jspecify = "1.0.0"
-log4j = "2.25.2"
+log4j = "2.25.3"
 mixin = "0.8.7"
 
 [libraries]

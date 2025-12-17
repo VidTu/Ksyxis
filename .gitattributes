@@ -26,4 +26,3 @@
 # SPDX-License-Identifier: MIT
 
 * text=auto eol=lf
-*.bat text eol=crlf

@@ -3022,6 +3022,7 @@
     </inspection_tool>
     <inspection_tool class="WithStatementJS" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="WrapUnaryOperator" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
+    <inspection_tool class="WrapWithConditionTargetsNonVoid" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="WrapperTypeMayBePrimitive" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="WriteOnlyObject" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="WrongEntityDataParameterClass" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
@@ -3059,7 +3060,7 @@
         </value>
       </option>
     </inspection_tool>
-    <inspection_tool class="unused" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" method="protected" parameter="protected" ignoreAccessors="true" checkParameterExcludingHierarchy="true">
+    <inspection_tool class="unused" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" klass="protected" method="protected" parameter="protected" ignoreAccessors="true" checkParameterExcludingHierarchy="true">
       <option name="LOCAL_VARIABLE" value="true" />
       <option name="FIELD" value="true" />
       <option name="METHOD" value="true" />

@@ -80,8 +80,9 @@ dependencies {
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
     options.compilerArgs.addAll(listOf("-g", "-parameters"))
-    // JDK 8 (used by this buildscript) doesn't support the "-release" flag
-    // (at the top of the file), so we must NOT specify it or the "javac" will fail.
+    // JDK 8 (used by this project) doesn't support the "-release" flag and
+    // uses "-source" and "-target" ones (see the top of the file),
+    // so we must NOT specify it, or the "javac" will fail.
     // If we ever gonna compile on newer Java versions, uncomment this line.
     // options.release = 8
 }
@@ -117,7 +118,15 @@ tasks.withType<ProcessResources> {
 // Add LICENSE and manifest into the JAR file.
 // Manifest also controls Mixin/mod loading on some loaders/versions.
 tasks.withType<Jar> {
+    // Add LICENSE.
     from("LICENSE")
+
+    // Remove package-info.class, unless package debug is on. (to save space)
+    if (!"${findProperty("ru.vidtu.ksyxis.debug.package")}".toBoolean()) {
+        exclude("**/package-info.class")
+    }
+
+    // Add manifest.
     manifest {
         attributes(
             "Specification-Title" to "Ksyxis",
@@ -126,10 +135,10 @@ tasks.withType<Jar> {
             "Implementation-Title" to "Ksyxis",
             "Implementation-Version" to version,
             "Implementation-Vendor" to "VidTu",
-            "FMLCorePlugin" to "ru.vidtu.ksyxis.platform.KCore",
-            "FMLCorePluginContainsFMLMod" to "true",
-            "ForceLoadAsMod" to "true",
-            "MixinConfigs" to "ksyxis.mixins.json"
+            "FMLCorePlugin" to "ru.vidtu.ksyxis.platform.KCore", // Forge pre-1.13.
+            "FMLCorePluginContainsFMLMod" to "true", // Forge pre-1.13.
+            "ForceLoadAsMod" to "true", // Forge pre-1.13.
+            "MixinConfigs" to "ksyxis.mixins.json" // Forge and old NeoForge.
         )
     }
 }

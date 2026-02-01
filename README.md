@@ -94,7 +94,7 @@ worlds. You can always uninstall the mod and load worlds without Ksyxis.
 **Q**: Is this mod client-side or server-side?  
 **A**: This mod works on the logical server side. That is, it does have an
 effect in singleplayer and on a dedicated (standalone) server. It has no effect
-on the client when playing in multiplayer. You can install it into your client
+on the client when playing in multiplayer. You can install it into your client,
 or your server without any need for it to be installed on the other side.
 
 **Q**: How to force-load chunks if the spawn chunks have been removed?  
@@ -190,5 +190,5 @@ This might change in a future version.
 This mod is **NOT** how mods *should be written*. This was (and is, currently)
 an experiment to create a simple and portable mod with as much supported
 versions as possible. Its compatibility issues are probably unfixable, though
-the world loading speedup is real. Nevertheless, it's an interesting concept
+the world loading speedup is real. Nevertheless, it's an interesting concept,
 and it works. For the curious ones, the source code is very documented.

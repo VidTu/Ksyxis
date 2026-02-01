@@ -45,7 +45,6 @@ import ru.vidtu.ksyxis.Ksyxis;
  * @see Ksyxis
  * @see KFabric
  */
-@SuppressWarnings("unused") // <- Quilt mod.
 @ApiStatus.Internal
 @NullMarked
 public final class KQuilt implements ModInitializer {

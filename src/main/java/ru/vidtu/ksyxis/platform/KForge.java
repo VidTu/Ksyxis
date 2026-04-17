@@ -49,13 +49,13 @@ import ru.vidtu.ksyxis.Ksyxis;
 @NullMarked
 public final class KForge {
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Forge"} and {@code manual=false}.
+     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="forge"} and {@code manual=false}.
      *
      * @apiNote Do not call, called by Forge
      * @see Ksyxis#init(String, boolean)
      */
     public KForge() {
-        Ksyxis.init("Forge/KForge", /*manual=*/false);
+        Ksyxis.init("forge", /*manual=*/false);
     }
 
     @Contract(pure = true)

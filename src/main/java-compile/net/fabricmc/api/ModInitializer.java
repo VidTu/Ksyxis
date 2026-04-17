@@ -1,6 +1,5 @@
 /*
  * Copyright 2016 FabricMC
- * Copyright 2022-2023 QuiltMC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +14,18 @@
  * limitations under the License.
  */
 
-package org.quiltmc.loader.api;
-
-import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
+package net.fabricmc.api;
 
 /**
- * Dummy QuiltMC mod container. This is a dummy interface for {@link ModInitializer}.
+ * Stub entrypoint interface of the Fabric mod. This is an injection
+ * interface for Ksyxis for Fabric, see {@code KFabric} class.
  *
  * @author VidTu
  * @author FabricMC
- * @author QuiltMC
  */
-public interface ModContainer {
-    // Ksyxis: Dummy class
+public interface ModInitializer {
+    /**
+     * Runs the entrypoint. This is an injection point for Ksyxis for Fabric, see {@code KFabric} class.
+     */
+    void onInitialize();
 }

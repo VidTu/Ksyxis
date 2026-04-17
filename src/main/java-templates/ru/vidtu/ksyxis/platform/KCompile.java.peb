@@ -29,51 +29,52 @@
 
 package ru.vidtu.ksyxis.platform;
 
-import com.google.errorprone.annotations.DoNotCall;
+import com.google.errorprone.annotations.CompileTimeConstant;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
-import org.quiltmc.loader.api.ModContainer;
-import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
-import ru.vidtu.ksyxis.Ksyxis;
 
 /**
- * Main Ksyxis class for Quilt.
+ * A class that contains compile-time variables.
+ * <p>
+ * <b>Note:</b> This class is NEVER found in the final JAR. It <b>MUST NOT</b>
+ * contain any references that are not inlined by the Java compiler.
  *
  * @author VidTu
  * @apiNote Internal use only
- * @see Ksyxis
- * @see KFabric
+ * @see <a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.28">Compile-time References</a>
  */
 @ApiStatus.Internal
 @NullMarked
-public final class KQuilt implements ModInitializer {
+public final class KCompile {
     /**
-     * Creates a new mod.
-     *
-     * @apiNote Do not call, called by Quilt
+     * Mod version.
      */
-    @Contract(pure = true)
-    public KQuilt() {
-        // Empty.
-    }
+    @CompileTimeConstant
+    public static final String VERSION = "{{ version }}";
 
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Quilt"} and {@code manual=false}.
-     *
-     * @param mod Mod container, ignored
-     * @apiNote Do not call, called by Quilt
-     * @see Ksyxis#init(String, boolean)
+     * Whether the additional Java assertions are enabled.
      */
-    @DoNotCall("Called by Quilt")
-    @Override
-    public void onInitialize(final ModContainer mod) {
-        Ksyxis.init("Quilt/KQuilt", /*manual=*/false);
-    }
+    @CompileTimeConstant
+    public static final boolean DEBUG_ASSERTS = {{ debugAsserts }};
 
-    @Contract(pure = true)
-    @Override
-    public String toString() {
-        return "Ksyxis/KQuilt{}";
+    /**
+     * Whether the {@code DEBUG} and {@code TRACE} logs are generated.
+     */
+    @CompileTimeConstant
+    public static final boolean DEBUG_LOGS = {{ debugLogs }};
+
+    /**
+     * An instance of this class cannot be created.
+     *
+     * @throws AssertionError Always
+     * @deprecated Always throws
+     */
+    @ApiStatus.ScheduledForRemoval
+    @Deprecated
+    @Contract(value = "-> fail", pure = true)
+    private KCompile() {
+        throw new AssertionError("Ksyxis: No instances.");
     }
 }

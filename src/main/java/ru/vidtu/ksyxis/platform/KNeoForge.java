@@ -48,13 +48,13 @@ import ru.vidtu.ksyxis.Ksyxis;
 @NullMarked
 public final class KNeoForge {
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="NeoForge"} and {@code manual=false}.
+     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="neoforge"} and {@code manual=false}.
      *
      * @apiNote Do not call, called by NeoForge
      * @see Ksyxis#init(String, boolean)
      */
     public KNeoForge() {
-        Ksyxis.init("NeoForge/KNeoForge", /*manual=*/false);
+        Ksyxis.init("neoforge", /*manual=*/false);
     }
 
     @Contract(pure = true)

@@ -27,8 +27,9 @@
  * SPDX-License-Identifier: MIT
  */
 
-package ru.vidtu.ksyxis;
+package ru.vidtu.ksyxis.platform;
 
+import com.google.errorprone.annotations.CompileTimeConstant;
 import com.google.errorprone.annotations.DoNotCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,7 +43,9 @@ import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import org.spongepowered.asm.service.IClassBytecodeProvider;
 import org.spongepowered.asm.service.MixinService;
+import ru.vidtu.ksyxis.Ksyxis;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Set;
 
@@ -57,16 +60,13 @@ import java.util.Set;
 @NullMarked
 public final class KPlugin implements IMixinConfigPlugin {
     /**
-     * Mixin plugin error message. Shown in {@link #shouldApplyMixin(String, String)} when an error occurs.
+     * The exit code for erroneous situations.
      *
+     * @see System#exit(int)
      * @see #shouldApplyMixin(String, String)
-     * @see Ksyxis#handleError(String, Throwable)
      */
-    private static final String PLUGIN_ERROR = "Ksyxis: Unable to apply the Ksyxis plugin. It`s probably a bug or " +
-            "something, you should report it via GitHub. Ensure to include as much information (game version, loader " +
-            "type, loader version, mod version, other mods, logs, etc.) in the bug report as possible, this error " +
-            "screen is NOT enough. If you don`t want any hassles and just want to load the game without solving " +
-            "anything, delete the Ksyxis mod. (provider: %s, plugin: %s, targetClassName: %s, mixinClassName: %s)";
+    @CompileTimeConstant
+    private static final int ERROR_EXIT_CODE = -2037852655; // "Ksyxis".hashCode()
 
     /**
      * Logger for this class.
@@ -89,17 +89,15 @@ public final class KPlugin implements IMixinConfigPlugin {
     }
 
     /**
-     * Checks if the mixin should be applied. A mixin is applied, if its class node exists.
+     * Checks if the mixin should be applied. A mixin is applied, if its class node exists. The existence of
+     * the class node is checked via {@link IClassBytecodeProvider#getClassNode(String)} from {@link #provider}.
      *
      * @param targetClassName Fully qualified class name of the target class
      * @param mixinClassName  Fully qualified class name of the mixin
      * @return Whether the Mixin should be applied
-     * @throws RuntimeException If any unexpected exception occurs (should never be thrown, app is exited)
      * @apiNote Do not call, called by Mixin
      * @see #provider
      * @see IClassBytecodeProvider#getClassNode(String)
-     * @see Ksyxis#handleError(String, Throwable)
-     * @see #PLUGIN_ERROR
      */
     @DoNotCall("Called by Mixin")
     @CheckReturnValue
@@ -107,38 +105,68 @@ public final class KPlugin implements IMixinConfigPlugin {
     public boolean shouldApplyMixin(final String targetClassName, final String mixinClassName) {
         // Wrap to handle exceptions as a control flow.
         try {
+            // Validate.
+            if (KCompile.DEBUG_ASSERTS) {
+                assert (targetClassName != null) : "Ksyxis: Parameter 'targetClassName' is null. (mixinClassName: " + mixinClassName + ", plugin: " + this + ')';
+                assert (mixinClassName != null) : "Ksyxis: Parameter 'mixinClassName' is null. (targetClassName: " + targetClassName + ", plugin: " + this + ')';
+            }
+
             // If the Mixin class is not from Ksyxis, don't touch it and allow it to be applied.
             if (!mixinClassName.startsWith("ru.vidtu.ksyxis.mixin.")) { // Implicit NPE for 'mixinClassName'
                 // Log. (**TRACE**)
-                if (!LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) return true;
-                LOGGER.trace(Ksyxis.KSYXIS_MARKER, "Ksyxis: Skipping and applying mixin, because it's not a part of Ksyxis... (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+                if (KCompile.DEBUG_LOGS && LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) {
+                    LOGGER.trace(Ksyxis.KSYXIS_MARKER, "Ksyxis: Skipping and applying mixin, because it's not a part of Ksyxis... (targetClassName: {}, mixinClassName: {}, plugin: {})", new Object[]{targetClassName, mixinClassName, this}); // <- Array for compat with older Log4j2.
+                }
+
+                // Unconditionally apply.
                 return true;
             }
 
-            // Get the node. This method should never return null. It returns the class node, if the class exists.
-            // It throws ClassNotFoundException if the class doesn't exist. We handle the exception below.
-            final ClassNode node = this.provider.getClassNode(targetClassName); // Implicit NPE for 'targetClassName'
+            // Get the node:
+            // - It returns the class node, if the class exists.
+            // - It throws ClassNotFoundException if the class doesn't exist.
+            this.provider.getClassNode(targetClassName); // Implicit NPE for 'targetClassName'
 
-            // It returned null...
-            if (node == null) {
-                throw new NullPointerException("Ksyxis: Bytecode provider returned null. (provider: " + this.provider + ", plugin: " + this + ", targetClassName: " + targetClassName + ", mixinClassName: " + mixinClassName + ')');
+            // Log. (**DEBUG**)
+            if (KCompile.DEBUG_LOGS && LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
+                LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Bytecode provider returned a valid node, mixin WILL be applied. (targetClassName: {}, mixinClassName: {}, plugin: {})", new Object[]{targetClassName, mixinClassName, this}); // <- Array for compat with older Log4j2.
             }
 
-            // Didn't throw - class exists. Log and apply. (**DEBUG**)
-            if (!LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return true;
-            LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Bytecode provider returned a valid node, mixin WILL be applied. (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+            // Didn't throw - class exists.
             return true;
         } catch (final ClassNotFoundException cnfe) {
-            // Provider threw an ClassNotFoundException. Don't apply mixin to avoid warnings. Log. (**DEBUG**)
-            if (!LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return false;
-            LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Bytecode provider threw an exception, mixin WON'T be applied. (provider: {}, plugin: {}, targetClassName: {}, mixinClassName: {})", new Object[]{this.provider, this, targetClassName, mixinClassName, cnfe}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+            // Log. (**DEBUG**)
+            if (KCompile.DEBUG_LOGS && LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
+                LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Bytecode provider threw an CNFE, mixin WON'T be applied. (targetClassName: {}, mixinClassName: {}, plugin: {})", new Object[]{targetClassName, mixinClassName, this, cnfe}); // <- Array for compat with older Log4j2.
+            }
+
+            // Provider threw an ClassNotFoundException. Don't apply mixin to avoid warnings. 
             return false;
         } catch (final Throwable t) {
-            // Format the message.
-            final String message = String.format(PLUGIN_ERROR, this.provider, this, targetClassName, mixinClassName);
+            // Log. (**ERROR**)
+            LOGGER.error(Ksyxis.KSYXIS_MARKER, "Ksyxis: Unexpected error in Mixin plugin. (targetClassName: {}, mixinClassName: {}, plugin: {})", new Object[]{targetClassName, mixinClassName, this, t}); // <- Array for compat with older Log4j2.
 
-            // Handle the error.
-            throw Ksyxis.handleError(message, t);
+            // Die. (normal way)
+            try {
+                System.exit(ERROR_EXIT_CODE);
+            } catch (final Throwable th) {
+                // Suppress.
+                t.addSuppressed(th);
+
+                // Die. (FML way)
+                try {
+                    final Class<?> shutdownClass = Class.forName("java.lang.Shutdown");
+                    final Method exitMethod = shutdownClass.getDeclaredMethod("exit", int.class);
+                    exitMethod.setAccessible(true);
+                    exitMethod.invoke(null, ERROR_EXIT_CODE);
+                } catch (final Throwable thr) {
+                    // Suppress.
+                    th.addSuppressed(thr);
+                }
+            }
+
+            // Rethrow.
+            throw new RuntimeException("Ksyxis: Unexpected error in Mixin plugin. (targetClassName: " + targetClassName + ", mixinClassName: " + mixinClassName + ", plugin: " + this + ')', t);
         }
     }
 
@@ -152,6 +180,11 @@ public final class KPlugin implements IMixinConfigPlugin {
     @Contract(pure = true)
     @Override
     public void onLoad(final String mixinPackage) {
+        // Validate.
+        if (KCompile.DEBUG_ASSERTS) {
+            assert (mixinPackage != null) : "Ksyxis: Parameter 'mixinPackage' is null. (plugin: " + this + ')';
+        }
+
         // NO-OP
     }
 
@@ -180,6 +213,12 @@ public final class KPlugin implements IMixinConfigPlugin {
     @Contract(pure = true)
     @Override
     public void acceptTargets(final Set<String> myTargets, final Set<String> otherTargets) {
+        // Validate.
+        if (KCompile.DEBUG_ASSERTS) {
+            assert (myTargets != null) : "Ksyxis: Parameter 'myTargets' is null. (otherTargets: " + otherTargets + ", plugin: " + this + ')';
+            assert (otherTargets != null) : "Ksyxis: Parameter 'otherTargets' is null. (myTargets: " + myTargets + ", plugin: " + this + ')';
+        }
+
         // NO-OP
     }
 
@@ -211,6 +250,14 @@ public final class KPlugin implements IMixinConfigPlugin {
     @Override
     public void preApply(final String targetClassName, final ClassNode targetClass,
                          final String mixinClassName, final IMixinInfo mixinInfo) {
+        // Validate.
+        if (KCompile.DEBUG_ASSERTS) {
+            assert (targetClassName != null) : "Ksyxis: Parameter 'targetClassName' is null. (targetClass: " + targetClass + ", mixinClassName: " + mixinClassName + ", mixinInfo: " + mixinInfo + ", plugin: " + this + ')';
+            assert (targetClass != null) : "Ksyxis: Parameter 'targetClass' is null. (targetClassName: " + targetClassName + ", mixinClassName: " + mixinClassName + ", mixinInfo: " + mixinInfo + ", plugin: " + this + ')';
+            assert (mixinClassName != null) : "Ksyxis: Parameter 'mixinClassName' is null. (targetClassName: " + targetClassName + ", targetClass: " + targetClass + ", mixinInfo: " + mixinInfo + ", plugin: " + this + ')';
+            assert (mixinInfo != null) : "Ksyxis: Parameter 'mixinInfo' is null. (targetClassName: " + targetClassName + ", targetClass: " + targetClass + ", mixinClassName: " + mixinClassName + ", plugin: " + this + ')';
+        }
+
         // NO-OP
     }
 
@@ -228,6 +275,14 @@ public final class KPlugin implements IMixinConfigPlugin {
     @Override
     public void postApply(final String targetClassName, final ClassNode targetClass,
                           final String mixinClassName, final IMixinInfo mixinInfo) {
+        // Validate.
+        if (KCompile.DEBUG_ASSERTS) {
+            assert (targetClassName != null) : "Ksyxis: Parameter 'targetClassName' is null. (targetClass: " + targetClass + ", mixinClassName: " + mixinClassName + ", mixinInfo: " + mixinInfo + ", plugin: " + this + ')';
+            assert (targetClass != null) : "Ksyxis: Parameter 'targetClass' is null. (targetClassName: " + targetClassName + ", mixinClassName: " + mixinClassName + ", mixinInfo: " + mixinInfo + ", plugin: " + this + ')';
+            assert (mixinClassName != null) : "Ksyxis: Parameter 'mixinClassName' is null. (targetClassName: " + targetClassName + ", targetClass: " + targetClass + ", mixinInfo: " + mixinInfo + ", plugin: " + this + ')';
+            assert (mixinInfo != null) : "Ksyxis: Parameter 'mixinInfo' is null. (targetClassName: " + targetClassName + ", targetClass: " + targetClass + ", mixinClassName: " + mixinClassName + ", plugin: " + this + ')';
+        }
+
         // NO-OP
     }
 

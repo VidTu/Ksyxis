@@ -42,7 +42,6 @@ import ru.vidtu.ksyxis.Ksyxis;
  * @author VidTu
  * @apiNote Internal use only
  * @see Ksyxis
- * @see KQuilt
  */
 @ApiStatus.Internal
 @NullMarked
@@ -66,7 +65,7 @@ public final class KFabric implements ModInitializer {
     @DoNotCall("Called by Fabric")
     @Override
     public void onInitialize() {
-        Ksyxis.init("Fabric/KFabric", /*manual=*/false);
+        Ksyxis.init("fabric", /*manual=*/false);
     }
 
     @Contract(pure = true)

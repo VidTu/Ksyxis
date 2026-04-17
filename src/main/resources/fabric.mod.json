@@ -39,10 +39,10 @@
     },
     "catalogue": {
       "icon": {
-        "image": "ksyxis_64.png",
-        "item": "minecraft:porkchop"
+        "image": "ksyxis.png",
+        "item": "porkchop"
       },
-      "banner": "ksyxis_240.png",
+      "banner": "ksyxis.png",
       "background": "ksyxis_background.png"
     }
   }

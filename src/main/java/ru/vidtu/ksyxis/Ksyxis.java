@@ -35,11 +35,12 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.CheckReturnValue;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.Mixins;
+import ru.vidtu.ksyxis.platform.KCompile;
+import ru.vidtu.ksyxis.platform.KPlugin;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -79,43 +80,6 @@ public final class Ksyxis {
     private static final long NANOS_IN_MS = 1_000_000L;
 
     /**
-     * The exit code for erroneous situations.
-     *
-     * @see System#exit(int)
-     * @see #handleError(String, Throwable)
-     */
-    @CompileTimeConstant
-    private static final int ERROR_EXIT_CODE = -2037852655; // "Ksyxis".hashCode()
-
-    /**
-     * Mixin absent error message. Shown in {@link #obtainMixinVersion(String, boolean)} when Mixin is not found.
-     *
-     * @see #obtainMixinVersion(String, boolean)
-     * @see #handleError(String, Throwable)
-     */
-    @CompileTimeConstant
-    private static final String MIXIN_ABSENT = "Ksyxis: No Mixin found. If you`re using old (1.15.2 or older) Forge, " +
-            "please install a Mixin loader, for example MixinBootstrap, MixinBooter, UniMixins, or any other at your " +
-            "choice. If you`re using new (1.16 or newer) Forge, any Fabric, any Quilt, any Ornithe, any " +
-            "LegacyFabric, or any NeoForge, then something went wrong, you should report it via GitHub. Ensure to " +
-            "include as much information (game version, loader type, loader version, mod version, other mods, logs, " +
-            "etc.) in the bug report as possible, this error screen is NOT enough. If you don`t want any hassles and " +
-            "just want to load the game without solving anything, delete the Ksyxis mod. (platform: %s; manual: %s)";
-
-    /**
-     * Mixin inject error message. Shown in {@link #init(String, boolean)} when an error occurs.
-     *
-     * @see #init(String, boolean)
-     * @see #handleError(String, Throwable)
-     */
-    @CompileTimeConstant
-    private static final String MIXIN_INJECT = "Ksyxis: Unable to inject the Ksyxis configuration. It`s probably a " +
-            "bug or something, you should report it via GitHub. Ensure to include as much information (game version, " +
-            "loader type, loader version, mod version, other mods, logs, etc.) in the bug report as possible, this " +
-            "error screen is NOT enough. If you don`t want any hassles and just want to load the game without " +
-            "solving anything, delete the Ksyxis mod. (platform: %s; manual: %s)";
-
-    /**
      * Logger for this class.
      */
     private static final Logger LOGGER = LogManager.getLogger("Ksyxis");
@@ -147,154 +111,60 @@ public final class Ksyxis {
      *
      * @param platform Current platform
      * @param manual   Whether to bootstrap the Mixin inject Mixin configuration manually
-     * @throws RuntimeException If any unexpected exception occurs (should never be thrown, app is exited)
-     * @see #obtainMixinVersion(String, boolean)
      * @see MixinBootstrap#init()
      * @see Mixins#addConfiguration(String)
-     * @see #handleError(String, Throwable)
      */
     public static void init(final String platform, final boolean manual) {
         try {
             // Log.
             final long start = System.nanoTime();
-            LOGGER.info(KSYXIS_MARKER, "Ksyxis: Booting... (platform: {}, manual: {})", new Object[]{platform, manual}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+            LOGGER.info(KSYXIS_MARKER, "Ksyxis: Loading... (platform: {}, version: " + KCompile.VERSION + ", manual: {})", new Object[]{platform, manual}); // <- Array for compat with older Log4j2.
 
-            // Obtain Mixin version.
-            final String mixinVersion = obtainMixinVersion(platform, manual);
+            // Get the Mixin version field.
+            final Field mixinVersionField = MixinBootstrap.class.getField("VERSION");
+
+            // Get the Mixin version field value without javac constant inlining.
+            final String mixinVersion = (String) mixinVersionField.get(null);
 
             // Log. (**DEBUG**)
-            if (LOGGER.isDebugEnabled(KSYXIS_MARKER)) {
-                LOGGER.debug(KSYXIS_MARKER, "Ksyxis: Found Mixin library. (mixinVersion: {})", new Object[]{mixinVersion}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+            if (KCompile.DEBUG_LOGS && LOGGER.isDebugEnabled(KSYXIS_MARKER)) {
+                LOGGER.debug(KSYXIS_MARKER, "Ksyxis: Found Mixin library. (mixinVersion: {})", new Object[]{mixinVersion}); // <- Array for compat with older Log4j2.
             }
 
-            // Bootstrap Mixin and add the config. (if manual)
+            // Do manual Mixin injections, if enabled.
             if (manual) {
-                LOGGER.debug(KSYXIS_MARKER, "Ksyxis: Bootstrapping Mixin...");
+                // Log. (**DEBUG**)
+                if (KCompile.DEBUG_LOGS) {
+                    LOGGER.debug(KSYXIS_MARKER, "Ksyxis: Bootstrapping Mixin...");
+                }
+
+                // Bootstrap Mixin.
                 MixinBootstrap.init();
-                LOGGER.debug(KSYXIS_MARKER, "Ksyxis: Mixin Bootstrap success. Injecting config...");
+
+                // Log. (**DEBUG**)
+                if (KCompile.DEBUG_LOGS) {
+                    LOGGER.debug(KSYXIS_MARKER, "Ksyxis: Mixin bootstrapped. Adding the config...");
+                }
+
+                // Add the config.
                 Mixins.addConfiguration("ksyxis.mixins.json");
-                LOGGER.debug(KSYXIS_MARKER, "Ksyxis: Mixin config added.");
+
+                // Log. (**DEBUG**)
+                if (KCompile.DEBUG_LOGS) {
+                    LOGGER.debug(KSYXIS_MARKER, "Ksyxis: Mixin config added.");
+                }
             }
 
             // Log the info.
             LOGGER.info(KSYXIS_MARKER, "Ksyxis: Ready. As always, this mod will speed up your world loading and might or might not break it. (mixinVersion: {}, time: {} ms)", new Object[]{mixinVersion, (System.nanoTime() - start) / NANOS_IN_MS}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
         } catch (final Throwable t) {
-            // Format the message.
-            final String message = String.format(MIXIN_INJECT, platform, manual);
+            // Check if Mixin is absent.
+            if ((t.getClass() == NoClassDefFoundError.class) && "org/spongepowered/asm/launch/MixinBootstrap".equals(t.getMessage())) {
+                throw new RuntimeException("Ksyxis: Unexpected init error. !?!?!?!?!!?!?!?!?! HEY YOU! YES YOU! YOU PROBABLY FORGOT TO INSTALL MIXIN PROVIDER! PLEASE INSTALL IT BEFORE REPORTING ANY ISSUES! !?!?!?!?!!?!?!?!?!", t);
+            }
 
-            // Handle the error.
-            throw handleError(message, t);
-        }
-    }
-
-    /**
-     * Logs the error, shows the friendly UI if possible, and throws the exception.
-     *
-     * @param message Error details to log
-     * @param error   Exception to log
-     * @return Never returns normally, can be used for throw block (should never be thrown, app is exited)
-     * @throws RuntimeException Wrapper for {@code message} and {@code error} (should never be thrown, app is exited)
-     * @see #MIXIN_ABSENT
-     * @see #MIXIN_INJECT
-     */
-    @SuppressWarnings({"CallToPrintStackTrace", "CallToSystemExit"}) // <- Logger is already used, printStackTrace() is used as an alternative. System.exit() is used to shut down the game in case of deadlocks.
-    @Contract("_, _ -> fail")
-    @CheckReturnValue
-    /*package-private*/ static RuntimeException handleError(final String message, final Throwable error) {
-        // Log.
-        LOGGER.error(KSYXIS_MARKER, message, error);
-        error.printStackTrace();
-
-        // Try to display LWJGL3 message box from TinyFD.
-        try {
-            final Class<?> tinyFd = Class.forName("org.lwjgl.util.tinyfd.TinyFileDialogs");
-            final Method tinyFdMessageBox = tinyFd.getMethod("tinyfd_messageBox", CharSequence.class,
-                    CharSequence.class, CharSequence.class, CharSequence.class, boolean.class);
-            tinyFdMessageBox.invoke(null, "Minecraft | Ksyxis Mod", message, /*buttons=*/"ok",
-                    /*icon=*/"error", /*selectOkButton=*/false);
-        } catch (final Throwable t) {
-            // Suppress for logging.
-            error.addSuppressed(new RuntimeException("Ksyxis: Unable to display the LWJGL3 error message. Maybe it's LWJGL2 or server here.", t));
-        }
-
-        // Log again with suppressed errors.
-        LOGGER.error(KSYXIS_MARKER, message, error);
-        error.printStackTrace();
-
-        // Try to display LWJGL2 alert from Sys.
-        try {
-            final Class<?> sys = Class.forName("org.lwjgl.Sys");
-            final Method sysAlert = sys.getMethod("alert", String.class, String.class);
-            sysAlert.invoke(null, "Minecraft | Ksyxis Mod", message);
-        } catch (final Throwable t) {
-            // Suppress for logging.
-            error.addSuppressed(new RuntimeException("Ksyxis: Unable to display the LWJGL2 error message. Maybe it's LWJGL3 or server here.", t));
-        }
-
-        // Log again with suppressed errors.
-        LOGGER.error(KSYXIS_MARKER, message, error);
-        error.printStackTrace();
-
-        // Try to die. Some smart guys at Forge 1.8.9 thought it's a good idea to prevent shutting down.
-        // See below how we're bypassing that restriction, because Java 8 is not encapsulated.
-        try {
-            System.exit(ERROR_EXIT_CODE);
-        } catch (final Throwable t) {
-            // Suppress for logging.
-            error.addSuppressed(new RuntimeException("Ksyxis: Unable to exit the game normally.", t));
-        }
-
-        // Log again with suppressed errors.
-        LOGGER.error(KSYXIS_MARKER, message, error);
-        error.printStackTrace();
-
-        // Try to die via reflection.
-        try {
-            final Class<?> shutdownClass = Class.forName("java.lang.Shutdown");
-            final Method shutdownMethod = shutdownClass.getDeclaredMethod("exit", int.class);
-            shutdownMethod.setAccessible(true);
-            shutdownMethod.invoke(null, ERROR_EXIT_CODE);
-        } catch (final Throwable t) {
-            // Suppress for logging.
-            error.addSuppressed(new RuntimeException("Ksyxis: Unable to exit the game reflectively.", t));
-        }
-
-        // Log again with suppressed errors.
-        LOGGER.error(KSYXIS_MARKER, message, error);
-        error.printStackTrace();
-
-        // Throw.
-        throw new RuntimeException(message, error);
-    }
-
-    /**
-     * Tries to obtain current Mixin version from {@link MixinBootstrap#VERSION} without javac inlining.
-     * If Mixin is not found, logs the error, shows the friendly UI if possible, and throws the exception.
-     *
-     * @param platform Current platform (for errors and logging)
-     * @param manual   Whether the Mixin configuration will be injected manually (for errors and logging)
-     * @return Current Mixin version
-     * @throws RuntimeException If Mixin is not installed or Mixin version can't be obtained
-     * @see MixinBootstrap#VERSION
-     * @see #init(String, boolean)
-     * @see #handleError(String, Throwable)
-     * @see #MIXIN_ABSENT
-     */
-    @CheckReturnValue
-    private static String obtainMixinVersion(final String platform, final boolean manual) {
-        // Check for Mixin.
-        try {
-            // Get the field.
-            final Field field = MixinBootstrap.class.getField("VERSION");
-
-            // Extract the field value without javac inlining.
-            return (String) field.get(null);
-        } catch (final Throwable t) {
-            // Format the message.
-            final String message = String.format(MIXIN_ABSENT, platform, manual);
-
-            // Handle the error.
-            throw handleError(message, t);
+            // Rethrow.
+            throw new RuntimeException("Ksyxis: Unexpected init error.", t);
         }
     }
 

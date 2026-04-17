@@ -27,9 +27,10 @@
  * SPDX-License-Identifier: MIT
  */
 
+// Plugins.
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
+// Project.
 rootProject.name = "Ksyxis"
-include("loaders")

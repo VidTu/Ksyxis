@@ -13,9 +13,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Stub annotation of the Forge mod for Ksyxis hacky compat. This is an injection annotation for Ksyxis on Forge 1.13+
- * and NeoForge 1.20.1, see {@code KForge} class. This is a declarative annotation (for the mod to be listed) for
- * Ksyxis on Forge 1.8 -> 1.12.2, injection performed in {@link IFMLLoadingPlugin}.
+ * Stub annotation of the Forge mod for Ksyxis hacky compat. This is an injection annotation for Ksyxis on
+ * Forge 1.13+ and NeoForge 1.20.1, see {@code KForge} class. This is a declarative annotation (for the mod
+ * to be listed) for Ksyxis on Forge 1.8 -> 1.12.2, injection performed in {@link IFMLLoadingPlugin}.
  *
  * @author VidTu
  * @author MinecraftForge
@@ -42,8 +42,8 @@ public @interface Mod {
     String modid();
 
     /**
-     * Gets the legacy remote version acceptance range. (client &lt;-&gt; server check). This is set to lift the
-     * requirements for installation on a client when running on the server.
+     * Gets the legacy remote version acceptance range. (client &lt;-&gt; server check). This
+     * is set to lift the requirements for installation on a client when running on the server.
      *
      * @return Legacy remote version acceptance range, "{@code *}" by Ksyxis
      */

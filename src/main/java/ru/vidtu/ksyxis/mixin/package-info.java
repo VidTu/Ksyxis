@@ -32,7 +32,7 @@
  *
  * @author VidTu
  * @apiNote Internal use only
- * @see ru.vidtu.ksyxis.KPlugin
+ * @see ru.vidtu.ksyxis.platform.KPlugin
  */
 @ApiStatus.Internal
 @NullMarked

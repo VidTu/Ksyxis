@@ -30,8 +30,10 @@
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 
+// Plugins.
 plugins {
     id("java")
+    alias(libs.plugins.blossom)
 }
 
 // Language.
@@ -65,7 +67,6 @@ dependencies {
     compileOnly(libs.error.prone.annotations)
 
     // Minecraft.
-    compileOnly(project(":loaders"))
     compileOnly(libs.mixin)
     compileOnly(libs.asm) // Required for Mixin.
     compileOnly(libs.log4j) { // Not SLF4J for compatibility with pre-1.18.
@@ -87,13 +88,26 @@ tasks.withType<JavaCompile> {
     // options.release = 8
 }
 
+sourceSets.main {
+    // Add compile-time stub classes.
+    java.srcDir("src/main/java-compile")
+
+    // Expand compile-time variables.
+    blossom.javaSources {
+        val fallbackProvider = providers.gradleProperty("ru.vidtu.ksyxis.debug").orElse("false")
+        property("debugAsserts", providers.gradleProperty("ru.vidtu.ksyxis.debug.asserts").orElse(fallbackProvider))
+        property("debugLogs", providers.gradleProperty("ru.vidtu.ksyxis.debug.logs").orElse(fallbackProvider))
+        property("version", providers.gradleProperty("version").orElse("${version}"))
+    }
+}
+
 tasks.withType<ProcessResources> {
     // Filter with UTF-8.
     filteringCharset = "UTF-8"
 
     // Expand version.
     inputs.property("version", version)
-    filesMatching(listOf("fabric.mod.json", "quilt.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml", "mcmod.info")) {
+    filesMatching(listOf("fabric.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml", "mcmod.info")) {
         expand(inputs.properties)
     }
 
@@ -115,11 +129,13 @@ tasks.withType<ProcessResources> {
     }
 }
 
-// Add LICENSE and manifest into the JAR file.
-// Manifest also controls Mixin/mod loading on some loaders/versions.
 tasks.withType<Jar> {
     // Add LICENSE.
     from("LICENSE")
+
+    // Exclude compile-only code.
+    exclude("net/**")
+    exclude("ru/vidtu/ksyxis/platform/KCompile.class")
 
     // Remove package-info.class, unless package debug is on. (to save space)
     if (!"${findProperty("ru.vidtu.ksyxis.debug.package")}".toBoolean()) {
@@ -129,12 +145,6 @@ tasks.withType<Jar> {
     // Add manifest.
     manifest {
         attributes(
-            "Specification-Title" to "Ksyxis",
-            "Specification-Version" to version,
-            "Specification-Vendor" to "VidTu",
-            "Implementation-Title" to "Ksyxis",
-            "Implementation-Version" to version,
-            "Implementation-Vendor" to "VidTu",
             "FMLCorePlugin" to "ru.vidtu.ksyxis.platform.KCore", // Forge pre-1.13.
             "FMLCorePluginContainsFMLMod" to "true", // Forge pre-1.13.
             "ForceLoadAsMod" to "true", // Forge pre-1.13.

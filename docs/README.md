@@ -4,7 +4,7 @@
 > via mods is no longer needed, as this optimization is built-in into Minecraft.
 >
 > Removing other chunks (e.g., chunks around the player in singleplayer)
-> makes no sense, they will be loaded anyway when you join the server.
+> makes no sense, they will be loaded anyway when you join the game.
 >
 > Older Minecraft versions will be supported for a reasonable time.
 
@@ -13,6 +13,11 @@
 # Ksyxis
 
 Speed up your world loading by removing spawn chunks.
+
+## Language
+
+- **English** 🇬🇧 🇺🇸
+- [Русский 🇷🇺](README_ru.md)
 
 ## Downloads
 
@@ -31,7 +36,7 @@ Speed up your world loading by removing spawn chunks.
 
 ## About
 
-Minecraft has a concept of [spawn chunks](https://minecraft.wiki/w/Spawn_chunk).
+Minecraft has a concept of [spawn chunks](https://minecraft.wiki/w/Spawn_chunks).
 These chunks are located at the world creation point (where you have been
 spawned for the first time) and are always loaded. Depending on the version,
 there are either 441 or 25 spawn chunks always loaded while you're playing.
@@ -40,8 +45,8 @@ spawn and come back only occasionally. To these players, the creation and
 loading of spawn chunks is a waste of time and performance. This mod
 completely disables spawn chunks in the game.
 
-*Note*: Spawn chunks are sometimes used by farms and technical contraptions.
-If you'll need them, you can always delete
+*Note*: Spawn chunks are sometimes used by farms and technical
+contraptions. If you'll need these chunks, you can always delete
 the mod later to re-enable the spawn chunks.
 
 https://github.com/user-attachments/assets/42e65893-6324-46b1-89a4-044eae77802d
@@ -112,7 +117,7 @@ versions, you can search for some mod that force-loads chunks.
 [MixinBooter](https://modrinth.com/mod/mixinbooter),
 [UniMixins](https://modrinth.com/mod/unimixins), or any other
 Mixin provider of your choice. If you're using Forge 1.16
-or newer, or any version of Fabric/Quilt/NeoForge/Ornithe,
+or newer, or any version of Fabric/NeoForge/Quilt/Ornithe,
 you don't need to install anything, and this is a bug.
 
 ### For Developers
@@ -161,6 +166,8 @@ This mod is developed primarily by [VidTu](https://github.com/VidTu),
 but it wouldn't be possible without:
 
 - [Contributors](https://github.com/VidTu/Ksyxis/graphs/contributors).
+- [Blossom](https://github.com/KyoriPowered/blossom) by
+  [Kyori](https://github.com/KyoriPowered). (and contributors)
 - [Fabric Loader](https://github.com/FabricMC/fabric-loader) by
   [FabricMC](https://github.com/FabricMC). (and contributors)
 - [NeoForge](https://github.com/neoforged/NeoForge) by

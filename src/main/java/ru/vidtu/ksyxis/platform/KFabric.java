@@ -57,7 +57,7 @@ public final class KFabric implements ModInitializer {
     }
 
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="Fabric"} and {@code manual=false}.
+     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="fabric"} and {@code manual=false}.
      *
      * @apiNote Do not call, called by Fabric
      * @see Ksyxis#init(String, boolean)

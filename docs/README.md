@@ -127,7 +127,7 @@ Because writing READMEs is easier than writing actual code.
 
 **Q**: Do you use AI/LLM/Code Generation/Copilot/etc.?  
 **A**: No, the code is 99.67% human-written, because AI is generating dumb stuff,
-especially for Minecraft. If you (or some contributors) will use AI and it will
+especially for Minecraft. If you (or some contributors) will use AI, and it will
 magically® work™, good for you. I don't promote AI nor am I against it.
 
 **Q**: Does Ksyxis have a public API?  
@@ -146,7 +146,7 @@ changes may and will occur even between minor and patch versions.
 **Q**: Why use these shenanigans with Minecraft-less build when
 it's much easier to develop and test with Minecraft present?  
 **A**: When this was developed, I had a goal of targeting
-as much versions and loaders as possible using Mixin and
+as many versions and loaders as possible using Mixin and
 nothing else. This is a bad idea, but it is what it is.
 
 ## License

@@ -116,7 +116,7 @@ public final class KCore implements IFMLLoadingPlugin {
     }
 
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="LegacyForge"} and {@code manual=true}.
+     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="fml"} and {@code manual=true}.
      *
      * @param data Injection data, ignored
      * @apiNote Do not call, called by FML
@@ -125,7 +125,7 @@ public final class KCore implements IFMLLoadingPlugin {
     @DoNotCall("Called by FML")
     @Override
     public void injectData(final Map<String, Object> data) {
-        Ksyxis.init("coremod", /*manual=*/true);
+        Ksyxis.init("fml", /*manual=*/true);
     }
 
     @Contract(pure = true)

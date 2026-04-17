@@ -16,23 +16,23 @@
       <w>endlocal</w>
       <w>entrypoints</w>
       <w>errorlevel</w>
-      <w>foojay</w>
+      <w>fmlcoreplugin</w>
+      <w>fmlcoreplugincontainsfmlmod</w>
       <w>gamerule</w>
       <w>javacmd</w>
       <w>jvmargs</w>
       <w>ksyxis</w>
-      <w>mcmod</w>
       <w>minecraft</w>
       <w>modid</w>
       <w>modmenu</w>
       <w>neoforge</w>
       <w>porkchop</w>
       <w>readarray</w>
+      <w>readmes</w>
       <w>setdefaultspawnpos</w>
       <w>setlocal</w>
       <w>setspawnpos</w>
       <w>shellness</w>
-      <w>tinyfd</w>
       <w>ulimit</w>
       <w>vidtu</w>
       <w>wcdfzsgy</w>

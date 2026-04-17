@@ -42,6 +42,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import ru.vidtu.ksyxis.Ksyxis;
+import ru.vidtu.ksyxis.platform.KCompile;
 
 /**
  * Mixin for {@code ServerLevel} that disables spawn chunk tickets and sets {@code spawnChunkRadius} to {@code 0}.
@@ -85,10 +86,10 @@ public final class ServerLevelMixin {
     }
 
     /**
-     * Injects into {@code ServerLevel.setDefaultSpawnPos} (Mojang mappings) to override
-     * the {@code spawnChunkRadius} gamerule. Used since 1.20.6 (inclusive).
+     * Injects into {@code ServerLevel.setDefaultSpawnPos} (Mojang mappings) to
+     * override the {@code spawnChunkRadius} gamerule. Used since 1.20.6 (inclusive).
      *
-     * @param spawnChunkRadius Previous {@code spawnChunkRadius} value for logging
+     * @param spawnChunks Previous {@code spawnChunkRadius} value for logging
      * @return Always {@code 0}
      * @apiNote Do not call, called by Mixin
      */
@@ -115,18 +116,21 @@ public final class ServerLevelMixin {
             "m_3711633(Lnet/minecraft/unmapped/C_3674802;)V", // Ornithe
             "m_3711633(Lnet/minecraft/unmapped/C_3674802;F)V" // Ornithe
     }, at = @At("STORE"), remap = false, require = 0, expect = 0, index = 5)
-    private int ksyxis_setDefaultSpawnPos_spawnChunkRadius_getInt(final int spawnChunkRadius) {
-        // Report spawnChunkRadius gamerule as 0. Also log. (**DEBUG**)
-        if (!KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return 0;
-        KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Reporting 0 as spawnChunkRadius gamerule in ServerLevelMixin. (previousSpawnChunks: {}, expectedPreviousSpawnChunks: from 0 to 32, level: {})", new Object[]{spawnChunkRadius, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+    private int ksyxis_setDefaultSpawnPos_spawnChunkRadius_getInt(final int spawnChunks) {
+        // Log. (**DEBUG**)
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
+            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Reporting 0 as spawnChunkRadius gamerule in ServerLevelMixin. (spawnChunks: {}, level: {})", new Object[]{spawnChunks, this}); // <- Array for compat with older Log4j2.
+        }
+
+        // Report spawnChunkRadius gamerule as 0.
         return 0;
     }
 
     /**
-     * Injects into {@code ServerLevel.setDefaultSpawnPos} (Mojang mappings) to prevent loading chunks at the spawn
-     * after setting it. Used in 1.14 (inclusive) through 1.20.4 (inclusive). Always returns {@code 0}.
+     * Injects into {@code ServerLevel.setDefaultSpawnPos} (Mojang mappings) to prevent loading chunks at the
+     * spawn after setting it. Used in 1.14 (inclusive) through 1.20.4 (inclusive). Always returns {@code 0}.
      *
-     * @param constant Previous constant value for logging
+     * @param ticket Previous constant value for logging
      * @return Always {@code 0}
      * @apiNote Do not call, called by Mixin
      */
@@ -153,10 +157,13 @@ public final class ServerLevelMixin {
             "m_3711633(Lnet/minecraft/unmapped/C_3674802;)V", // Ornithe
             "m_3711633(Lnet/minecraft/unmapped/C_3674802;F)V" // Ornithe
     }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
-    private int ksyxis_setDefaultSpawnPos_addRegionTicket(final int constant) {
-        // Add zero-level chunk loading ticket. Also log. (**DEBUG**)
-        if (!KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) return 0;
-        KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Adding zero-level ticket in ServerLevelMixin. (previousTicketLevel: {}, expectedPreviousTicketLevel: 11, level: {})", new Object[]{constant, this}); // <- Array for compat with Log4j2 2.0-beta.9 used in older MC versions.
+    private int ksyxis_setDefaultSpawnPos_addRegionTicket(final int ticket) {
+        // Log. (**DEBUG**)
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
+            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Adding zero-level ticket in ServerLevelMixin. (ticket: {}, level: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
+        }
+
+        // Add zero-level chunk loading ticket.
         return 0;
     }
 }

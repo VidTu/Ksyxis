@@ -38,11 +38,11 @@ https://github.com/user-attachments/assets/42e65893-6324-46b1-89a4-044eae77802d
 
 ## Versions
 
-| Version         | Effect        | Note                                                                                                                                           |
-|-----------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1.21.9+         | Insignificant | A 7x7 area of chunks won't be loaded around the player when they join, and a fake 500ms world creation delay in single-player will be removed. |
-| 1.20.5 - 1.21.8 | Low           | A 5x5 area of spawn chunks won't be loaded constantly in the background.                                                                       |
-| 1.8 - 1.20.4    | Extreme       | A 21x21 area of spawn chunks won't be loaded constantly in the background.                                                                     |
+| Version       | Effect        | Note                                                                                                                                           |
+|---------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.21.9+       | Insignificant | A 7x7 area of chunks won't be loaded around the player when they join, and a fake 500ms world creation delay in single-player will be removed. |
+| 1.20.5-1.21.8 | Low           | A 5x5 area of spawn chunks won't be loaded constantly in the background.                                                                       |
+| 1.8-1.20.4    | Extreme       | A 21x21 area of spawn chunks won't be loaded constantly in the background.                                                                     |
 
 ## FAQ
 

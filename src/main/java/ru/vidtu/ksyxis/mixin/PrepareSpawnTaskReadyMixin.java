@@ -93,7 +93,7 @@ public final class PrepareSpawnTaskReadyMixin {
             "tick()V", // Fabric Yarn
 
             // Obfuscated.
-            "method_72297()V" // Fabric Intermediary
+            "method_72302()V" // Fabric Intermediary
     }, constant = @Constant(intValue = 3), remap = false, require = 0, expect = 0)
     private int ksyxis_keepAlive_addTicketAndLoadWithRadius(final int ticket) {
         // Assert.
@@ -124,9 +124,9 @@ public final class PrepareSpawnTaskReadyMixin {
             "spawn(Lnet/minecraft/network/Connection;Lnet/minecraft/server/network/CommonListenerCookie;)Lnet/minecraft/server/level/ServerPlayer;", // Official Mojang
             "onReady(Lnet/minecraft/network/ClientConnection;Lnet/minecraft/server/network/ConnectedClientData;)Lnet/minecraft/server/network/ServerPlayerEntity;", // Fabric Yarn
 
-            // Obfuscated
-            "method_72305(Lnet/minecraft/class_2535;Lnet/minecraft/class_8675;)Lnet/minecraft/class_3222;"
-    }, constant = @Constant(intValue = 3), remap = false, require = 1, expect = 1)
+            // Obfuscated.
+            "method_72305(Lnet/minecraft/class_2535;Lnet/minecraft/class_8792;)Lnet/minecraft/class_3222;" // Fabric Intermediary
+    }, constant = @Constant(intValue = 3), remap = false, require = 0, expect = 0)
     private int ksyxis_spawn_waitForEntities(final int ticket) {
         // Assert.
         if (KCompile.DEBUG_ASSERTS) {

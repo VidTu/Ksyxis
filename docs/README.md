@@ -60,7 +60,7 @@ You can also find unstable builds at
 You will need a GitHub account to download these.
 
 **Q**: Which mod loaders are supported?  
-**A**: Fabric, Forge, Fabric, Quilt, Legacy Fabric, and Ornithe.
+**A**: Fabric, Forge, NeoForge, Quilt, Legacy Fabric, and Ornithe.
 
 **Q**: Which Minecraft versions are supported?  
 **A**: Minecraft versions 1.8 through 1.21.8 are supported.
@@ -72,7 +72,7 @@ Minecraft versions 1.21.9 and newer are **not** supported.
 **Q**: Do I need Fabric API or Quilt Standard Libraries?  
 **A**: Not necessarily.
 
-**Q**: Where are the Forge, Fabric, Quilt, NeoForge, etc. versions?  
+**Q**: Where are the Fabric, Forge, NeoForge, Quilt, etc. versions?  
 **A**: All in the same file.
 
 **Q**: Is this mod client-side or server-side?  

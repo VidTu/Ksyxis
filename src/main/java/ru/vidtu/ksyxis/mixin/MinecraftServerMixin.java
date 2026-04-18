@@ -155,7 +155,7 @@ public final class MinecraftServerMixin {
         if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
             KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: Speeding up the world loading... Delete the mod, if it got stuck after this message. (ci: {}, server: {})", new Object[]{ci, this}); // <- Array for compat with older Log4j2.
         } else {
-            KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: Speeding up the world loading... Delete the mod, if it got stuck after this message. ({}{})", new Object[]{this.getClass(), ci.getId()}); // <- Array for compat with older Log4j2.
+            KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: Speeding up the world loading... Delete the mod, if it got stuck after this message. ({} {})", new Object[]{this.getClass().getName(), ci.getId()}); // <- Array for compat with older Log4j2.
         }
     }
 

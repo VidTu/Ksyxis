@@ -1,18 +1,8 @@
-> [!WARNING]
-> Ksyxis **doesn't** work for **1.21.9 and newer** versions. Mojang *removed
-> spawn chunks* in 25w31a (a 1.21.9 snapshot), therefore removing spawn chunks
-> via mods is no longer needed, as this optimization is built-in into Minecraft.
->
-> Removing other chunks (e.g., chunks around the player in singleplayer)
-> makes no sense, they will be loaded anyway when you join the game.
->
-> Older Minecraft versions will be supported for a reasonable time.
-
 <img alt src=ksyxis.png>
 
 # Ksyxis
 
-Speed up your world loading by removing spawn chunks.
+Speed up your world loading by removing unneeded chunks.
 
 ## Language
 
@@ -28,7 +18,7 @@ Speed up your world loading by removing spawn chunks.
 ## Dependencies
 
 - Fabric, Forge, NeoForge, Quilt, Legacy Fabric, or Ornithe
-- Minecraft (1.8 -> 1.21.8)
+- Minecraft (1.8 or newer)
 - **Forge 1.8-1.15.2 only**: Any Mixin provider, at your choice (such as
   [MixinBootstrap](https://modrinth.com/mod/mixinbootstrap),
   [MixinBooter](https://modrinth.com/mod/mixinbooter),
@@ -36,20 +26,23 @@ Speed up your world loading by removing spawn chunks.
 
 ## About
 
-Minecraft has a concept of [spawn chunks](https://minecraft.wiki/w/Spawn_chunks).
-These chunks are located at the world creation point (where you have been
-spawned for the first time) and are always loaded. Depending on the version,
-there are either 441 or 25 spawn chunks always loaded while you're playing.
-Most players, however, don't need these chunks as they venture far away from
-spawn and come back only occasionally. To these players, the creation and
-loading of spawn chunks is a waste of time and performance. This mod
-completely disables spawn chunks in the game.
+Depending on your game version, Minecraft loads some [chunks](https://minecraft.wiki/w/Chunks) when you
+create your world. Sometimes, these chunks are always loaded in the background. Either way, whether
+these chunks being loaded is a one-time performance slowdown, or a constant performance penalty,
+most players don't need any of these chunks. This mod completely disables unneeded chunks in the game.
 
-*Note*: Spawn chunks are sometimes used by farms and technical
-contraptions. If you'll need these chunks, you can always delete
-the mod later to re-enable the spawn chunks.
+*Note*: Unneeded chunks are sometimes used by farms and technical contraptions. If you'll
+need these chunks, you can always delete the mod later to re-enable these chunks.
 
 https://github.com/user-attachments/assets/42e65893-6324-46b1-89a4-044eae77802d
+
+## Versions
+
+| Version         | Effect        | Note                                                                                                                                           |
+|-----------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.21.9+         | Insignificant | A 7x7 area of chunks won't be loaded around the player when they join, and a fake 500ms world creation delay in single-player will be removed. |
+| 1.20.5 - 1.21.8 | Low           | A 5x5 area of spawn chunks won't be loaded constantly in the background.                                                                       |
+| 1.8 - 1.20.4    | Extreme       | A 21x21 area of spawn chunks won't be loaded constantly in the background.                                                                     |
 
 ## FAQ
 

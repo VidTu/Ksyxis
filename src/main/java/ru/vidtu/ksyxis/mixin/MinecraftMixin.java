@@ -29,7 +29,6 @@
 
 package ru.vidtu.ksyxis.mixin;
 
-import com.google.errorprone.annotations.DoNotCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
@@ -37,14 +36,13 @@ import org.jspecify.annotations.NullMarked;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import ru.vidtu.ksyxis.Ksyxis;
 import ru.vidtu.ksyxis.platform.KCompile;
 
 /**
- * Mixin for {@code ServerLevel} that disables spawn chunk tickets in older versions.
+ * Mixin for {@code Minecraft} that disables fake load screens for single-player.
  *
  * @author VidTu
  * @apiNote Internal use only
@@ -52,20 +50,20 @@ import ru.vidtu.ksyxis.platform.KCompile;
 // @ApiStatus.Internal // Can't annotate this without logging in the console.
 @Mixin(targets = {
         // Deobfuscated.
-        "net.minecraft.world.World", // Forge MCP + Forge SRG
+        "net.minecraft.client.Minecraft", // Official Mojang
+        "net.minecraft.client.MinecraftClient", // Fabric Yarn
 
         // Obfuscated.
-        "net.minecraft.class_1150", // Legacy Yarn
-        "net.minecraft.unmapped.C_5553933" // Ornithe
+        "net.minecraft.class_310" // Fabric Intermediary
 }, remap = false)
 @Pseudo
 @NullMarked
-public final class LevelMixin {
+public final class MinecraftMixin {
     /**
      * Logger for this class.
      */
     @Unique
-    private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/LevelMixin");
+    private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/MinecraftMixin");
 
     /**
      * An instance of this class cannot be created.
@@ -76,36 +74,41 @@ public final class LevelMixin {
     // @ApiStatus.ScheduledForRemoval // Can't annotate this without logging in the console.
     @Deprecated
     @Contract(value = "-> fail", pure = true)
-    private LevelMixin() {
+    private MinecraftMixin() {
         throw new AssertionError("Ksyxis: No instances.");
     }
 
     /**
-     * Injects into {@code isSpawnChunk(int, int)} to always return {@code false}
-     * to prevent loading spawn chunks. Used before 1.13.2 (inclusive).
+     * Injects into {@code Minecraft.doWorldLoad} (Mojang mappings) to prevent
+     * fake 500ms delay when creating the world. Used since 1.21.9 (inclusive).
      *
-     * @param x   Chunk X, used only for logging
-     * @param z   Chunk Z, used only for logging
-     * @param cir Callback data to set {@code false} into
+     * @param delay Previous constant value for logging
+     * @return Always {@code 0}
      * @apiNote Do not call, called by Mixin
      */
-    @DoNotCall("Called by Mixin")
-    @Inject(method = {
+    @ModifyConstant(method = {
             // Deobfuscated.
-            "isSpawnChunk(II)Z", // Forge MCP
+            "doWorldLoad(Lnet/minecraft/world/level/storage/LevelStorageSource$LevelStorageAccess;Lnet/minecraft/server/packs/repository/PackRepository;Lnet/minecraft/server/WorldStem;Ljava/util/Optional;Z)V", // Official Mojang (26.1)
+            "doWorldLoad(Lnet/minecraft/world/level/storage/LevelStorageSource$LevelStorageAccess;Lnet/minecraft/server/packs/repository/PackRepository;Lnet/minecraft/server/WorldStem;Z)V", // Official Mojang
+            "startIntegratedServer(Lnet/minecraft/world/level/storage/LevelStorage$Session;Lnet/minecraft/resource/ResourcePackManager;Lnet/minecraft/server/SaveLoader;Z)V", // Fabric Yarn
 
             // Obfuscated.
-            "func_72916_c(II)Z", // Forge SRG
-            "method_3671(II)Z", // Legacy Fabric Intermediary
-            "m_4821236(II)Z" // Ornithe
-    }, at = @At("HEAD"), cancellable = true, require = 0, expect = 0)
-    private void ksyxis_isSpawnChunk_head(final int x, final int z, final CallbackInfoReturnable<Boolean> cir) {
-        // Log. (**TRACE**)
-        if (KCompile.DEBUG_ASSERTS && KSYXIS_LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) {
-            KSYXIS_LOGGER.trace(Ksyxis.KSYXIS_MARKER, "Ksyxis: Forcing chunk to be not spawn chunk in LevelMixin. (x: {}, z: {}, cir: {}, level: {})", new Object[]{x, z, cir, this}); // <- Array for compat with older Log4j2.
+            "method_29610(Lnet/minecraft/class_32$class_5143;Lnet/minecraft/class_3283;Lnet/minecraft/class_6904;Z)V" // Fabric Intermediary
+    }, constant = @Constant(longValue = 500L), remap = false, require = 1, expect = 1)
+    private long ksyxis_doWorldLoad_closeDelayMs(final long delay) {
+        // Assert.
+        if (KCompile.DEBUG_ASSERTS) {
+            // Should never happen on practice, constant Mixin.
+            assert (delay == 500L) : "Ksyxis: Fake delay is not 500 in MinecraftMixin. (delay: " + delay + ", client: " + this + ')';
         }
 
-        // Always force false to remove any spawn chunks from the world and allow them to be unloaded.
-        cir.setReturnValue(false);
+        // Log. (**DEBUG**)
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
+            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Removing fake delay in MinecraftMixin. (delay: {}, client: {})", new Object[]{delay, this}); // <- Array for compat with older Log4j2.
+        }
+
+        // Remove fake delay.
+        return 0L;
     }
 }
+

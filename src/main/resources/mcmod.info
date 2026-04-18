@@ -2,7 +2,7 @@
   {
     "modid": "ksyxis",
     "name": "Ksyxis",
-    "description": "Speed up your world loading by removing spawn chunks.",
+    "description": "Speed up your world loading by removing unneeded chunks.",
     "version": "${version}",
     "logoFile": "ksyxis.png",
     "url": "https://modrinth.com/mod/ksyxis",

@@ -1,6 +1,6 @@
 /*
  * Ksyxis is a third-party mod for Minecraft Java Edition that
- * speed ups your world loading by removing spawn chunks.
+ * speed ups your world loading by removing unneeded chunks.
  *
  * MIT License
  *
@@ -34,6 +34,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
+import org.embeddedt.modernfix.core.ModernFixMixinPlugin;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
@@ -43,7 +44,6 @@ import ru.vidtu.ksyxis.platform.KCompile;
 import ru.vidtu.ksyxis.platform.KPlugin;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 /**
  * Main Ksyxis class.
@@ -168,14 +168,8 @@ public final class Ksyxis {
     @Contract(pure = true)
     private static int getLoadedChunks() {
         try {
-            // Load the ModernFix plugin config.
-            final Class<?> modernFixPluginClass = Class.forName("org.embeddedt.modernfix.core.ModernFixMixinPlugin");
-            final Field instance = modernFixPluginClass.getDeclaredField("instance");
-            final Method isOptionEnabled = modernFixPluginClass.getMethod("isOptionEnabled", String.class);
-            final Object modernFix = modernFixPluginClass.cast(instance.get(null));
-
             // Check the removeSpawnChunks. ModernFix apparently did this too for some time, just in different way.
-            final boolean removeSpawnChunks = (boolean) isOptionEnabled.invoke(modernFix, "perf.remove_spawn_chunks.MinecraftServer");
+            final boolean removeSpawnChunks = ModernFixMixinPlugin.instance.isOptionEnabled("perf.remove_spawn_chunks.MinecraftServer");
 
             // Log.
             LOGGER.info(KSYXIS_MARKER, "Ksyxis: Enabled compatibility hack with ModernFix. (removeSpawnChunks: {})", new Object[]{removeSpawnChunks}); // <- Array for compat with older Log4j2.
@@ -186,8 +180,11 @@ public final class Ksyxis {
             return (removeSpawnChunks ? 441 : 0);
         } catch (final Throwable t) {
             // Log.
-            LOGGER.info(KSYXIS_MARKER, "Ksyxis: No mod compatibility hacks used.");
-            LOGGER.debug(KSYXIS_MARKER, "Ksyxis: Unable to provide compat for ModernFix, it's probably not installed.", t);
+            if (KCompile.DEBUG_LOGS && LOGGER.isDebugEnabled(KSYXIS_MARKER)) {
+                LOGGER.info(KSYXIS_MARKER, "Ksyxis: No compatibility hacks were used.", t);
+            } else {
+                LOGGER.info(KSYXIS_MARKER, "Ksyxis: No compatibility hacks were used.");
+            }
 
             // No ModernFix found, it's Ksyxis only, and we have 0 chunks.
             return 0;

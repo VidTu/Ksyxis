@@ -1,0 +1,145 @@
+/*
+ * Ksyxis is a third-party mod for Minecraft Java Edition that
+ * speed ups your world loading by removing unneeded chunks.
+ *
+ * MIT License
+ *
+ * Copyright (c) 2021-2026 VidTu
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+package ru.vidtu.ksyxis.mixin;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Contract;
+import org.jspecify.annotations.NullMarked;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import ru.vidtu.ksyxis.Ksyxis;
+import ru.vidtu.ksyxis.platform.KCompile;
+
+/**
+ * Mixin for {@code PrepareSpawnTask$Ready} that disables spawn chunk tickets after removal of
+ * spawn chunks and disables waiting for entities nearby the (now-disabled) loaded position.
+ *
+ * @author VidTu
+ * @apiNote Internal use only
+ */
+// @ApiStatus.Internal // Can't annotate this without logging in the console.
+@Mixin(targets = {
+        // Deobfuscated.
+        "net.minecraft.server.network.config.PrepareSpawnTask$Ready", // Official Mojang
+        "net.minecraft.server.network.PrepareSpawnTask$PlayerSpawn", // Fabric Yarn
+
+        // Obfuscated.
+        "net.minecraft.class_11549$class_11551" // Fabric Intermediary
+}, remap = false)
+@Pseudo
+@NullMarked
+public final class PrepareSpawnTaskReadyMixin {
+    /**
+     * Logger for this class.
+     */
+    @Unique
+    private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/PrepareSpawnTaskReadyMixin");
+
+    /**
+     * An instance of this class cannot be created.
+     *
+     * @throws AssertionError Always
+     * @deprecated Always throws
+     */
+    // @ApiStatus.ScheduledForRemoval // Can't annotate this without logging in the console.
+    @Deprecated
+    @Contract(value = "-> fail", pure = true)
+    private PrepareSpawnTaskReadyMixin() {
+        throw new AssertionError("Ksyxis: No instances.");
+    }
+
+    /**
+     * Injects into {@code PrepareSpawnTask$Ready.keepAlive} (Mojang mappings) to prevent
+     * loading chunks when logging in the player. Used since 1.21.9 (inclusive).
+     *
+     * @param ticket Previous constant value for logging
+     * @return Always {@code 0}
+     * @apiNote Do not call, called by Mixin
+     */
+    @ModifyConstant(method = {
+            // Deobfuscated.
+            "keepAlive()V", // Official Mojang
+            "tick()V", // Fabric Yarn
+
+            // Obfuscated.
+            "method_72297()V" // Fabric Intermediary
+    }, constant = @Constant(intValue = 3), remap = false, require = 1, expect = 1)
+    private int ksyxis_keepAlive_addTicketAndLoadWithRadius(final int ticket) {
+        // Assert.
+        if (KCompile.DEBUG_ASSERTS) {
+            // Should never happen on practice, constant Mixin.
+            assert (ticket == 3) : "Ksyxis: Added ticket level is not 3 in PrepareSpawnTaskReadyMixin. (ticket: " + ticket + ", server: " + this + ')';
+        }
+
+        // Log. (**DEBUG**)
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
+            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Adding zero-level ticket in PrepareSpawnTaskReadyMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
+        }
+
+        // Add zero-level ticket.
+        return 0;
+    }
+
+    /**
+     * Injects into {@code PrepareSpawnTask$Ready.spawn} (Mojang mappings) to prevent
+     * waiting for entities when logging in the player. Used since 1.21.9 (inclusive).
+     *
+     * @param ticket Previous constant value for logging
+     * @return Always {@code 0}
+     * @apiNote Do not call, called by Mixin
+     */
+    @ModifyConstant(method = {
+            // Deobfuscated.
+            "spawn(Lnet/minecraft/network/Connection;Lnet/minecraft/server/network/CommonListenerCookie;)Lnet/minecraft/server/level/ServerPlayer;", // Official Mojang
+            "onReady(Lnet/minecraft/network/ClientConnection;Lnet/minecraft/server/network/ConnectedClientData;)Lnet/minecraft/server/network/ServerPlayerEntity;", // Fabric Yarn
+
+            // Obfuscated
+            "method_72305(Lnet/minecraft/class_2535;Lnet/minecraft/class_8675;)Lnet/minecraft/class_3222;"
+    }, constant = @Constant(intValue = 3), remap = false, require = 1, expect = 1)
+    private int ksyxis_spawn_waitForEntities(final int ticket) {
+        // Assert.
+        if (KCompile.DEBUG_ASSERTS) {
+            // Should never happen on practice, constant Mixin.
+            assert (ticket == 3) : "Ksyxis: Waited-for ticket level is not 3 in PrepareSpawnTaskReadyMixin. (ticket: " + ticket + ", server: " + this + ')';
+        }
+
+        // Log. (**DEBUG**)
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
+            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Waiting for zero-level ticket in PrepareSpawnTaskReadyMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
+        }
+
+        // Wait for zero-level ticket.
+        return 0;
+    }
+}

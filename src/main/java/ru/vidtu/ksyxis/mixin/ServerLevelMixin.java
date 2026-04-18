@@ -1,6 +1,6 @@
 /*
  * Ksyxis is a third-party mod for Minecraft Java Edition that
- * speed ups your world loading by removing spawn chunks.
+ * speed ups your world loading by removing unneeded chunks.
  *
  * MIT License
  *
@@ -96,27 +96,19 @@ public final class ServerLevelMixin {
     @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @ModifyVariable(method = {
-            // Deobfuscated
+            // Deobfuscated.
             "setDefaultSpawnPos(Lnet/minecraft/core/BlockPos;F)V", // Official Mojang
-            "setDefaultSpawnPos(Lnet/minecraft/core/BlockPos;)V", // Official Mojang (Old)
             "setSpawnPos(Lnet/minecraft/util/math/BlockPos;F)V", // Fabric Yarn
-            "setSpawnPos(Lnet/minecraft/util/math/BlockPos;)V", // Fabric Yarn (Old)
-            "setSpawnLocation(Lnet/minecraft/util/math/BlockPos;F)V", // Forge MCP
-            "setSpawnLocation(Lnet/minecraft/util/math/BlockPos;)V", // Forge MCP (Old)
-            "setSpawnPoint(Lnet/minecraft/util/math/BlockPos;F)V", // Ornithe
-            "setSpawnPoint(Lnet/minecraft/util/math/BlockPos;)V", // Ornithe (Old)
 
-            // Obfuscated
-            "method_8554(Lnet/minecraft/class_2338;F)V", // Fabric Intermediary
-            "method_8554(Lnet/minecraft/class_2338;)V", // Fabric Intermediary (Old)
-            "m_8733_(Lnet/minecraft/core/BlockPos;F)V", // Forge SRG (1.20.x)
-            "m_8733_(Lnet/minecraft/src/C_4675_;F)V", // Forge SRG (1.17.x)
-            "func_241124_a__(Lnet/minecraft/util/math/BlockPos;F)V", // Forge SRG (1.16.x)
-            "func_241124_a__(Lnet/minecraft/util/math/BlockPos;)V", // Forge SRG (1.16.x/Old)
-            "m_3711633(Lnet/minecraft/unmapped/C_3674802;)V", // Ornithe
-            "m_3711633(Lnet/minecraft/unmapped/C_3674802;F)V" // Ornithe
+            // Obfuscated.
+            "method_8554(Lnet/minecraft/class_2338;F)V" // Fabric Intermediary
     }, at = @At("STORE"), remap = false, require = 0, expect = 0, index = 5)
     private int ksyxis_setDefaultSpawnPos_spawnChunkRadius_getInt(final int spawnChunks) {
+        // Assert.
+        if (KCompile.DEBUG_ASSERTS) {
+            assert ((spawnChunks >= 0) && (spawnChunks <= 32)) : "Ksyxis: Gamerule 'spawnChunkRadius' is not in the [0..32] range in ServerLevelMixin. (spawnChunks: " + spawnChunks + ", server: " + this + ')';
+        }
+
         // Log. (**DEBUG**)
         if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
             KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Reporting 0 as spawnChunkRadius gamerule in ServerLevelMixin. (spawnChunks: {}, level: {})", new Object[]{spawnChunks, this}); // <- Array for compat with older Log4j2.
@@ -137,7 +129,7 @@ public final class ServerLevelMixin {
     @DoNotCall("Called by Mixin")
     @Contract(pure = true)
     @ModifyConstant(method = {
-            // Deobfuscated
+            // Deobfuscated.
             "setDefaultSpawnPos(Lnet/minecraft/core/BlockPos;F)V", // Official Mojang
             "setDefaultSpawnPos(Lnet/minecraft/core/BlockPos;)V", // Official Mojang (Old)
             "setSpawnPos(Lnet/minecraft/util/math/BlockPos;F)V", // Fabric Yarn
@@ -147,7 +139,7 @@ public final class ServerLevelMixin {
             "setSpawnPoint(Lnet/minecraft/util/math/BlockPos;F)V", // Ornithe
             "setSpawnPoint(Lnet/minecraft/util/math/BlockPos;)V", // Ornithe (Old)
 
-            // Obfuscated
+            // Obfuscated.
             "method_8554(Lnet/minecraft/class_2338;F)V", // Fabric Intermediary
             "method_8554(Lnet/minecraft/class_2338;)V", // Fabric Intermediary (Old)
             "m_8733_(Lnet/minecraft/core/BlockPos;F)V", // Forge SRG (1.20.x)
@@ -158,6 +150,12 @@ public final class ServerLevelMixin {
             "m_3711633(Lnet/minecraft/unmapped/C_3674802;F)V" // Ornithe
     }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
     private int ksyxis_setDefaultSpawnPos_addRegionTicket(final int ticket) {
+        // Assert.
+        if (KCompile.DEBUG_ASSERTS) {
+            // Should never happen on practice, constant Mixin.
+            assert (ticket == 11) : "Ksyxis: Added ticket level is not 11 in ServerLevelMixin. (ticket: " + ticket + ", level: " + this + ')';
+        }
+
         // Log. (**DEBUG**)
         if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
             KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Adding zero-level ticket in ServerLevelMixin. (ticket: {}, level: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.

@@ -3,7 +3,7 @@
   "id": "ksyxis",
   "version": "${version}",
   "name": "Ksyxis",
-  "description": "Speed up your world loading by removing spawn chunks.",
+  "description": "Speed up your world loading by removing unneeded chunks.",
   "authors": [
     "VidTu"
   ],
@@ -25,9 +25,6 @@
   "mixins": [
     "ksyxis.mixins.json"
   ],
-  "breaks": {
-    "minecraft": ">1.21.8"
-  },
   "custom": {
     "modmenu": {
       "links": {

@@ -1,5 +1,5 @@
 # Ksyxis is a third-party mod for Minecraft Java Edition that
-# speed ups your world loading by removing spawn chunks.
+# speed ups your world loading by removing unneeded chunks.
 #
 # MIT License
 #
@@ -44,19 +44,10 @@ itemIcon = "porkchop"
 logoFile = "ksyxis.png"
 authors = "VidTu"
 displayTest = "IGNORE_ALL_VERSION"
-description = "Speed up your world loading by removing spawn chunks."
+description = "Speed up your world loading by removing unneeded chunks."
 
 [[mixins]]
 config = "ksyxis.mixins.json"
-
-[[dependencies.ksyxis]]
-modId = "minecraft"
-type = "required"
-reason = "Ksyxis doesn't support versions newer than 1.21.8. Spawn chunks were removed in the 25w31a snapshot, therefore the mod is now useless."
-mandatory = true
-versionRange = "[,1.21.8]"
-ordering = "NONE"
-side = "BOTH"
 
 [modproperties.ksyxis]
 catalogueImageIcon = "ksyxis.png"

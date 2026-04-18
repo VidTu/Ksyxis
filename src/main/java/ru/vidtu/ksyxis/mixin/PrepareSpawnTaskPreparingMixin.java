@@ -29,7 +29,6 @@
 
 package ru.vidtu.ksyxis.mixin;
 
-import com.google.errorprone.annotations.DoNotCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
@@ -37,14 +36,13 @@ import org.jspecify.annotations.NullMarked;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import ru.vidtu.ksyxis.Ksyxis;
 import ru.vidtu.ksyxis.platform.KCompile;
 
 /**
- * Mixin for {@code ServerLevel} that disables spawn chunk tickets in older versions.
+ * Mixin for {@code PrepareSpawnTask$Preparing} that disables spawn chunk tickets after removal of spawn chunks.
  *
  * @author VidTu
  * @apiNote Internal use only
@@ -52,20 +50,20 @@ import ru.vidtu.ksyxis.platform.KCompile;
 // @ApiStatus.Internal // Can't annotate this without logging in the console.
 @Mixin(targets = {
         // Deobfuscated.
-        "net.minecraft.world.World", // Forge MCP + Forge SRG
+        "net.minecraft.server.network.config.PrepareSpawnTask$Preparing", // Official Mojang
+        "net.minecraft.server.network.PrepareSpawnTask$LoadPlayerChunks", // Fabric Yarn
 
         // Obfuscated.
-        "net.minecraft.class_1150", // Legacy Yarn
-        "net.minecraft.unmapped.C_5553933" // Ornithe
+        "net.minecraft.class_11549$class_11550" // Fabric Intermediary
 }, remap = false)
 @Pseudo
 @NullMarked
-public final class LevelMixin {
+public final class PrepareSpawnTaskPreparingMixin {
     /**
      * Logger for this class.
      */
     @Unique
-    private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/LevelMixin");
+    private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/PrepareSpawnTaskPreparingMixin");
 
     /**
      * An instance of this class cannot be created.
@@ -76,36 +74,38 @@ public final class LevelMixin {
     // @ApiStatus.ScheduledForRemoval // Can't annotate this without logging in the console.
     @Deprecated
     @Contract(value = "-> fail", pure = true)
-    private LevelMixin() {
+    private PrepareSpawnTaskPreparingMixin() {
         throw new AssertionError("Ksyxis: No instances.");
     }
 
     /**
-     * Injects into {@code isSpawnChunk(int, int)} to always return {@code false}
-     * to prevent loading spawn chunks. Used before 1.13.2 (inclusive).
+     * Injects into a lambda in {@code PrepareSpawnTask$Ready.tick} (Mojang mappings) to
+     * prevent loading chunks when logging in the player. Used since 1.21.9 (inclusive).
      *
-     * @param x   Chunk X, used only for logging
-     * @param z   Chunk Z, used only for logging
-     * @param cir Callback data to set {@code false} into
+     * @param ticket Previous constant value for logging
+     * @return Always {@code 0}
      * @apiNote Do not call, called by Mixin
      */
-    @DoNotCall("Called by Mixin")
-    @Inject(method = {
+    @ModifyConstant(method = {
             // Deobfuscated.
-            "isSpawnChunk(II)Z", // Forge MCP
+            "lambda$tick$0(Lnet/minecraft/world/level/ChunkPos;)V", // Official Mojang
 
             // Obfuscated.
-            "func_72916_c(II)Z", // Forge SRG
-            "method_3671(II)Z", // Legacy Fabric Intermediary
-            "m_4821236(II)Z" // Ornithe
-    }, at = @At("HEAD"), cancellable = true, require = 0, expect = 0)
-    private void ksyxis_isSpawnChunk_head(final int x, final int z, final CallbackInfoReturnable<Boolean> cir) {
-        // Log. (**TRACE**)
-        if (KCompile.DEBUG_ASSERTS && KSYXIS_LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) {
-            KSYXIS_LOGGER.trace(Ksyxis.KSYXIS_MARKER, "Ksyxis: Forcing chunk to be not spawn chunk in LevelMixin. (x: {}, z: {}, cir: {}, level: {})", new Object[]{x, z, cir, this}); // <- Array for compat with older Log4j2.
+            "method_72300(Lnet/minecraft/class_1923;)V" // Fabric Intermediary
+    }, constant = @Constant(intValue = 3), remap = false, require = 1, expect = 1)
+    private int ksyxis_lambdaTick0_addTicketAndLoadWithRadius(final int ticket) {
+        // Assert.
+        if (KCompile.DEBUG_ASSERTS) {
+            // Should never happen on practice, constant Mixin.
+            assert (ticket == 3) : "Ksyxis: Added ticket level is not 3 in PrepareSpawnTaskPreparingMixin. (ticket: " + ticket + ", server: " + this + ')';
         }
 
-        // Always force false to remove any spawn chunks from the world and allow them to be unloaded.
-        cir.setReturnValue(false);
+        // Log. (**DEBUG**)
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
+            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Adding zero-level ticket in PrepareSpawnTaskPreparingMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
+        }
+
+        // Add zero-level ticket.
+        return 0;
     }
 }

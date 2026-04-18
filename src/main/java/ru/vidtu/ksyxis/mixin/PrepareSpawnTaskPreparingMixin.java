@@ -92,7 +92,7 @@ public final class PrepareSpawnTaskPreparingMixin {
 
             // Obfuscated.
             "method_72300(Lnet/minecraft/class_1923;)V" // Fabric Intermediary
-    }, constant = @Constant(intValue = 3), remap = false, require = 1, expect = 1)
+    }, constant = @Constant(intValue = 3), remap = false, require = 0, expect = 0)
     private int ksyxis_lambdaTick0_addTicketAndLoadWithRadius(final int ticket) {
         // Assert.
         if (KCompile.DEBUG_ASSERTS) {

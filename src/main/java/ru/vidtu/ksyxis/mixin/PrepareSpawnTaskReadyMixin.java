@@ -94,7 +94,7 @@ public final class PrepareSpawnTaskReadyMixin {
 
             // Obfuscated.
             "method_72297()V" // Fabric Intermediary
-    }, constant = @Constant(intValue = 3), remap = false, require = 1, expect = 1)
+    }, constant = @Constant(intValue = 3), remap = false, require = 0, expect = 0)
     private int ksyxis_keepAlive_addTicketAndLoadWithRadius(final int ticket) {
         // Assert.
         if (KCompile.DEBUG_ASSERTS) {

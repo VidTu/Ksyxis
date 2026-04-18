@@ -94,7 +94,7 @@ public final class MinecraftMixin {
 
             // Obfuscated.
             "method_29610(Lnet/minecraft/class_32$class_5143;Lnet/minecraft/class_3283;Lnet/minecraft/class_6904;Z)V" // Fabric Intermediary
-    }, constant = @Constant(longValue = 500L), remap = false, require = 1, expect = 1)
+    }, constant = @Constant(longValue = 500L), remap = false, require = 0, expect = 0)
     private long ksyxis_doWorldLoad_closeDelayMs(final long delay) {
         // Assert.
         if (KCompile.DEBUG_ASSERTS) {

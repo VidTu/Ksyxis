@@ -73,8 +73,8 @@ https://github.com/user-attachments/assets/42e65893-6324-46b1-89a4-044eae77802d
 **В**: Нужно ли мне ставить Fabric API или Quilt Standard Libraries?  
 **А**: Необязательно.
 
-**В**: Where are the Fabric, Forge, NeoForge, Quilt, etc. versions?  
-**А**: All in the same file.
+**В**: Где версии для Fabric, Forge, NeoForge, Quilt, и т.д.?  
+**А**: Все в одном файле.
 
 **В**: Этот мод нужно ставить на клиент или на сервер?  
 **А**: Этот мод работает на сервере и на клиенте в одиночной игре.

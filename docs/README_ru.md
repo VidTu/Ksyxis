@@ -54,7 +54,7 @@ https://github.com/user-attachments/assets/42e65893-6324-46b1-89a4-044eae77802d
 
 **В**: Где я могу скачать этот мод?  
 **А**: На [Modrinth](https://modrinth.com/mod/ksyxis),
-[CurseForge](https://www.curseforge.com/minecraft/mc-mods/ksyxis)
+[CurseForge](https://curseforge.com/minecraft/mc-mods/ksyxis)
 или [GitHub Releases](https://github.com/VidTu/Ksyxis/releases).
 Нестабильные версии можно скачать на
 [GitHub Actions](https://github.com/VidTu/Ksyxis/actions).
@@ -85,9 +85,9 @@ https://github.com/user-attachments/assets/42e65893-6324-46b1-89a4-044eae77802d
 просто удалите его и ваши миры будут в порядке.
 
 **В**: Я нашёл баг.  
-**А**: Отправляйте все баги [сюда](https://github.com/VidTu/Ksyxis/issues) на
-английском языке (пожалуйста). Если вы не уверены, баг это или нет, вы можете
-зайти в [Discord](https://discord.gg/Q6saSVSuYQ). На уязвимости в моде можно
+**А**: Отправляйте все баги [сюда](https://github.com/VidTu/Ksyxis/issues) (на
+английском языке). Если вы не уверены, баг это или нет, вы можете зайти в
+[Discord](https://discord.gg/Q6saSVSuYQ). На уязвимости в моде можно
 пожаловаться [сюда](https://github.com/VidTu/Ksyxis/security).
 
 **В**: Можно я закину это в свою сборку?  

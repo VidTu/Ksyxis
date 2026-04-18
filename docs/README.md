@@ -53,7 +53,7 @@ https://github.com/user-attachments/assets/42e65893-6324-46b1-89a4-044eae77802d
 
 **Q**: Where can I download this mod?  
 **A**: [Modrinth](https://modrinth.com/mod/ksyxis),
-[CurseForge](https://www.curseforge.com/minecraft/mc-mods/ksyxis),
+[CurseForge](https://curseforge.com/minecraft/mc-mods/ksyxis),
 or [GitHub Releases](https://github.com/VidTu/Ksyxis/releases).
 You can also find unstable builds at
 [GitHub Actions](https://github.com/VidTu/Ksyxis/actions).

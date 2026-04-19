@@ -52,11 +52,11 @@ import ru.vidtu.ksyxis.platform.KCompile;
 // @ApiStatus.Internal // Can't annotate this without logging in the console.
 @Mixin(targets = {
         // Deobfuscated.
-        "net.minecraft.world.World", // Forge MCP + Forge SRG
+        "net.minecraft.world.World", // Forge MCP + Forge SRG + Legacy Fabric Yarn + Ornithe Feather
 
         // Obfuscated.
-        "net.minecraft.class_1150", // Legacy Yarn
-        "net.minecraft.unmapped.C_5553933" // Ornithe
+        "net.minecraft.class_1150", // Legacy Fabric Intermediary
+        "net.minecraft.unmapped.C_5553933" // Ornithe Intermediary
 }, remap = false)
 @Pseudo
 @NullMarked
@@ -92,16 +92,17 @@ public final class LevelMixin {
     @DoNotCall("Called by Mixin")
     @Inject(method = {
             // Deobfuscated.
-            "isSpawnChunk(II)Z", // Forge MCP
+            "isSpawnChunk(II)Z", // Forge MCP + Ornithe Feather
+            "isChunkInsideSpawnChunks(II)Z", // Legacy Fabric Yarn
 
             // Obfuscated.
             "func_72916_c(II)Z", // Forge SRG
             "method_3671(II)Z", // Legacy Fabric Intermediary
-            "m_4821236(II)Z" // Ornithe
+            "m_4821236(II)Z" // Ornithe Intermediary
     }, at = @At("HEAD"), cancellable = true, require = 0, expect = 0)
     private void ksyxis_isSpawnChunk_head(final int x, final int z, final CallbackInfoReturnable<Boolean> cir) {
         // Log. (**TRACE**)
-        if (KCompile.DEBUG_ASSERTS && KSYXIS_LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) {
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) {
             KSYXIS_LOGGER.trace(Ksyxis.KSYXIS_MARKER, "Ksyxis: Forcing chunk to be not spawn chunk in LevelMixin. (x: {}, z: {}, cir: {}, level: {})", new Object[]{x, z, cir, this}); // <- Array for compat with older Log4j2.
         }
 

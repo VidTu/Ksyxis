@@ -29,6 +29,7 @@
 
 package ru.vidtu.ksyxis.mixin;
 
+import com.google.errorprone.annotations.DoNotCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
@@ -86,6 +87,8 @@ public final class PrepareSpawnTaskPreparingMixin {
      * @return Always {@code 0}
      * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
+    @Contract(pure = true)
     @ModifyConstant(method = {
             // Deobfuscated.
             "lambda$tick$0(Lnet/minecraft/world/level/ChunkPos;)V", // Official Mojang

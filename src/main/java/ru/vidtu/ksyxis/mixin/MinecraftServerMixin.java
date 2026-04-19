@@ -143,8 +143,8 @@ public final class MinecraftServerMixin {
             "m_129940_(Lnet/minecraft/src/C_21_;)V", // Forge SRG (1.17.x)
             "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
             "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V", // Quilt Hashed
-            "m_4020281(Lnet/minecraft/unmapped/C_8054043;)V", // Ornithe Feather (1.13)
-            "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V", // Ornithe Feather (1.12)
+            "m_4020281(Lnet/minecraft/unmapped/C_8054043;)V", // Ornithe Intermediary (1.13)
+            "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V", // Ornithe Intermediary (1.12)
             "method_20317(Lnet/minecraft/class_4070;)V", // Legacy Fabric Intermediary (1.13)
             "method_3019()V", // Legacy Fabric Intermediary (1.12)
             "func_71222_d(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V", // Forge SRG (1.13)
@@ -173,7 +173,7 @@ public final class MinecraftServerMixin {
             // Deobfuscated.
             "prepareLevels(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Official Mojang
             "prepareStartRegion(Lnet/minecraft/server/WorldGenerationProgressListener;)V", // Fabric Yarn
-            "loadInitialChunks(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge MCP,
+            "loadInitialChunks(Lnet/minecraft/world/chunk/listener/IChunkStatusListener;)V", // Forge MCP
 
             // Obfuscated.
             "method_3774(Lnet/minecraft/class_3949;)V", // Fabric Intermediary
@@ -181,7 +181,7 @@ public final class MinecraftServerMixin {
             "m_129940_(Lnet/minecraft/src/C_21_;)V", // Forge SRG (1.17.x)
             "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
             "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V", // Quilt Hashed
-            "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Feather
+            "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Intermediary
     }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
     private int ksyxis_prepareLevels_addRegionTicket(final int ticket) {
         // Assert.
@@ -223,7 +223,7 @@ public final class MinecraftServerMixin {
             "m_129940_(Lnet/minecraft/src/C_21_;)V", // Forge SRG (1.17.x)
             "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
             "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V", // Quilt Hashed
-            "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Feather
+            "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Intermediary
     }, constant = @Constant(intValue = 441), remap = false, require = 0, expect = 0)
     private int ksyxis_prepareLevels_getTickingGenerated(final int oldChunks) {
         // Assert.
@@ -266,8 +266,8 @@ public final class MinecraftServerMixin {
             "method_3019()V", // Legacy Fabric Intermediary (1.12)
             "func_71222_d(Lnet/minecraft/world/storage/WorldSavedDataStorage;)V", // Forge SRG (1.13)
             "func_71222_d()V", // Forge SRG (1.12)
-            "m_4020281(Lnet/minecraft/unmapped/C_8054043;)V", // Ornithe (1.13)
-            "m_4020281()V" // Ornithe (1.12)
+            "m_4020281(Lnet/minecraft/unmapped/C_8054043;)V", // Ornithe Intermediary (1.13)
+            "m_4020281()V" // Ornithe Intermediary (1.12)
     }, constant = {@Constant(intValue = -192), @Constant(intValue = 192)}, remap = false, require = 0, expect = 0)
     private int ksyxis_initialWorldChunkLoad_loop(final int oldLoop) {
         // Assert.

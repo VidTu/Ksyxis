@@ -29,6 +29,7 @@
 
 package ru.vidtu.ksyxis.mixin;
 
+import com.google.errorprone.annotations.DoNotCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
@@ -86,6 +87,8 @@ public final class MinecraftMixin {
      * @return Always {@code 0}
      * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
+    @Contract(pure = true)
     @ModifyConstant(method = {
             // Deobfuscated.
             "doWorldLoad(Lnet/minecraft/world/level/storage/LevelStorageSource$LevelStorageAccess;Lnet/minecraft/server/packs/repository/PackRepository;Lnet/minecraft/server/WorldStem;Ljava/util/Optional;Z)V", // Official Mojang (26.1)

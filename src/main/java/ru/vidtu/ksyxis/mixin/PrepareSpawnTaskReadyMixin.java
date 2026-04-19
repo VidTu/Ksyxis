@@ -29,6 +29,7 @@
 
 package ru.vidtu.ksyxis.mixin;
 
+import com.google.errorprone.annotations.DoNotCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
@@ -87,6 +88,8 @@ public final class PrepareSpawnTaskReadyMixin {
      * @return Always {@code 0}
      * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
+    @Contract(pure = true)
     @ModifyConstant(method = {
             // Deobfuscated.
             "keepAlive()V", // Official Mojang
@@ -119,6 +122,8 @@ public final class PrepareSpawnTaskReadyMixin {
      * @return Always {@code 0}
      * @apiNote Do not call, called by Mixin
      */
+    @DoNotCall("Called by Mixin")
+    @Contract(pure = true)
     @ModifyConstant(method = {
             // Deobfuscated.
             "spawn(Lnet/minecraft/network/Connection;Lnet/minecraft/server/network/CommonListenerCookie;)Lnet/minecraft/server/level/ServerPlayer;", // Official Mojang

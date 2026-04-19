@@ -146,8 +146,7 @@ public final class ServerLevelMixin {
             "m_8733_(Lnet/minecraft/src/C_4675_;F)V", // Forge SRG (1.17.x)
             "func_241124_a__(Lnet/minecraft/util/math/BlockPos;F)V", // Forge SRG (1.16.x)
             "func_241124_a__(Lnet/minecraft/util/math/BlockPos;)V", // Forge SRG (1.16.x/Old)
-            "m_3711633(Lnet/minecraft/unmapped/C_3674802;)V", // Ornithe Intermediary
-            "m_3711633(Lnet/minecraft/unmapped/C_3674802;F)V" // Ornithe Intermediary
+            "m_3711633(Lnet/minecraft/unmapped/C_3674802;)V" // Ornithe Intermediary
     }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
     private int ksyxis_setDefaultSpawnPos_addRegionTicket(final int ticket) {
         // Assert.

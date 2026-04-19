@@ -35,13 +35,15 @@ import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import ru.vidtu.ksyxis.Ksyxis;
 import ru.vidtu.ksyxis.platform.KCompile;
+
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
 
 /**
  * Mixin for {@code EntityMixin} that sets the changes the first entity ID from 0 to 1 on legacy
@@ -69,22 +71,6 @@ public final class EntityMixin {
     private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/EntityMixin");
 
     /**
-     * Shared entity ID network synchronization field. (static!)
-     */
-    @Shadow(aliases = {
-            // Deobfuscated.
-            "nextEntityID", // Forge MCP
-            "entityCount", // Legacy Fabric Yarn
-            "nextNetworkId", // Ornithe Feather
-
-            // Obfuscated.
-            "field_70152_a", // Forge SRG
-            "field_3219", // Legacy Fabric Intermediary
-            "f_7990365" // Ornithe Intermediary
-    }, remap = false)
-    private static int ksyxis_nextEntityID;
-
-    /**
      * An instance of this class cannot be created.
      *
      * @throws AssertionError Always
@@ -98,21 +84,52 @@ public final class EntityMixin {
     }
 
     /**
-     * Changes {@link #ksyxis_nextEntityID} to {@code 1} if it is equal to {@code 0},
-     * which can be the player entity if it's equal to zero.
+     * Changes {@code nextEntityId} to {@code 1} so it is not {@code 0},
+     * which can be lead to various issues if player's ID is {@code 0}.
      *
      * @param ci Callback data, ignored
      */
     @Inject(method = "<clinit>", at = @At("RETURN"), remap = false)
     private static void ksyxis_clinit_return(final CallbackInfo ci) {
         // Log. (**DEBUG**)
-        final int nextEntityId = ksyxis_nextEntityID;
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
-            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Initializing Entity class, making sure first entity ID is not zero. (nextEntityId: {})", new Object[]{nextEntityId}); // <- Array for compat with older Log4j2.
+        if (KCompile.DEBUG_LOGS) {
+            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Initializing Entity class, making sure first entity ID is not zero. Searching for the field in EntityMixin...");
         }
 
-        // If zero, set to one.
-        if (nextEntityId != 0) return;
-        ksyxis_nextEntityID = 1;
+        // Create the lookup object.
+        final MethodHandles.Lookup lookup = MethodHandles.lookup();
+        final Class<?> currentClass = lookup.lookupClass();
+
+        // Search all fields.
+        for (final String field : new String[]{
+                // Deobfuscated.
+                "nextEntityID", // Forge MCP
+                "entityCount", // Legacy Fabric Yarn
+                "nextNetworkId", // Ornithe Feather
+
+                // Obfuscated.
+                "field_70152_a", // Forge SRG
+                "field_3219", // Legacy Fabric Intermediary
+                "f_7990365" // Ornithe Intermediary
+        }) {
+            try {
+                // Attempt to find and set to one.
+                final MethodHandle setter = lookup.findStaticSetter(currentClass, field, int.class);
+                setter.invokeExact((int) 1);
+
+                // Log. (**DEBUG**)
+                if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
+                    KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Set first entity ID to one in EntityMixin. (field: {}, setter: {})", new Object[]{field, setter}); // <- Array for compat with older Log4j2.
+                }
+
+                // Done.
+                return;
+            } catch (final Throwable t) {
+                // Log. (**TRACE**)
+                if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) {
+                    KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Field error, skipping in EntityMixin. (field: {})", new Object[]{field, t}); // <- Array for compat with older Log4j2.
+                }
+            }
+        }
     }
 }

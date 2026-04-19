@@ -5,10 +5,12 @@
   "plugin": "ru.vidtu.ksyxis.platform.KPlugin",
   "mixins": [
     "LevelMixin",
-    "MinecraftMixin",
     "MinecraftServerMixin",
     "PrepareSpawnTaskPreparingMixin",
     "PrepareSpawnTaskReadyMixin",
     "ServerLevelMixin"
+  ],
+  "client": [
+    "MinecraftMixin"
   ]
 }

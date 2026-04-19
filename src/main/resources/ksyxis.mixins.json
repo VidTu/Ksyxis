@@ -4,6 +4,7 @@
   "package": "ru.vidtu.ksyxis.mixin",
   "plugin": "ru.vidtu.ksyxis.platform.KPlugin",
   "mixins": [
+    "EntityMixin",
     "LevelMixin",
     "MinecraftServerMixin",
     "PrepareSpawnTaskPreparingMixin",

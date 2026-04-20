@@ -139,7 +139,7 @@ public final class Ksyxis {
         } catch (final Throwable t) {
             // Check if Mixin is absent.
             if ((t.getClass() == NoClassDefFoundError.class) && "org/spongepowered/asm/launch/MixinBootstrap".equals(t.getMessage())) {
-                throw new RuntimeException("Ksyxis: Unexpected init error. !?!?!?!?!!?!?!?!?! HEY YOU! YES YOU! YOU PROBABLY FORGOT TO INSTALL MIXIN PROVIDER! PLEASE INSTALL IT BEFORE REPORTING ANY ISSUES! !?!?!?!?!!?!?!?!?!", t);
+                throw new RuntimeException("Ksyxis: No Mixin found.", t);
             }
 
             // Rethrow.

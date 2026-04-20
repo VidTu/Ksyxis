@@ -135,7 +135,7 @@ public final class Ksyxis {
             }
 
             // Log the info.
-            LOGGER.info(KSYXIS_MARKER, "Ksyxis: Ready. As always, this mod will speed up your world loading and might or might not break it. (mixinVersion: {}, time: {} ms)", new Object[]{mixinVersion, (System.nanoTime() - start) / 1_000_000L}); // <- Array for compat with older Log4j2.
+            LOGGER.info(KSYXIS_MARKER, "Ksyxis: Ready to remove unneeded chunks. (mixinVersion: {}, time: {} ms)", new Object[]{mixinVersion, (System.nanoTime() - start) / 1_000_000L}); // <- Array for compat with older Log4j2.
         } catch (final Throwable t) {
             // Check if Mixin is absent.
             if ((t.getClass() == NoClassDefFoundError.class) && "org/spongepowered/asm/launch/MixinBootstrap".equals(t.getMessage())) {

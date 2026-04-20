@@ -29,7 +29,6 @@
 
 package ru.vidtu.ksyxis.platform;
 
-import com.google.errorprone.annotations.CompileTimeConstant;
 import com.google.errorprone.annotations.DoNotCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -59,15 +58,6 @@ import java.util.Set;
 @ApiStatus.Internal
 @NullMarked
 public final class KPlugin implements IMixinConfigPlugin {
-    /**
-     * The exit code for erroneous situations.
-     *
-     * @see System#exit(int)
-     * @see #shouldApplyMixin(String, String)
-     */
-    @CompileTimeConstant
-    private static final int ERROR_EXIT_CODE = -2037852655; // "Ksyxis".hashCode()
-
     /**
      * Logger for this class.
      */
@@ -148,7 +138,7 @@ public final class KPlugin implements IMixinConfigPlugin {
 
             // Die. (normal way)
             try {
-                System.exit(ERROR_EXIT_CODE);
+                System.exit(-2037852655); // "Ksyxis".hashCode()
             } catch (final Throwable th) {
                 // Suppress.
                 t.addSuppressed(th);
@@ -158,7 +148,7 @@ public final class KPlugin implements IMixinConfigPlugin {
                     final Class<?> shutdownClass = Class.forName("java.lang.Shutdown");
                     final Method exitMethod = shutdownClass.getDeclaredMethod("exit", int.class);
                     exitMethod.setAccessible(true);
-                    exitMethod.invoke(null, ERROR_EXIT_CODE);
+                    exitMethod.invoke(null, -2037852655); // "Ksyxis".hashCode()
                 } catch (final Throwable thr) {
                     // Suppress.
                     th.addSuppressed(thr);

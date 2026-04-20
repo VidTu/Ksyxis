@@ -24,7 +24,10 @@
     <inspection_tool class="AddOperatorModifier" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="AddVarianceModifier" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="AddedEnumConstantsNamePattern" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" validNameFixSearch="^.+$" />
-    <inspection_tool class="AddedMixinMembersNamePattern" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" validNameFormat=".+[_$].+" validNameFixSearch="^.+$" />
+    <inspection_tool class="AddedMixinMembersNamePattern" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" validNameFormat=".+[_$].+" validNameFixSearch="^.+$">
+      <option name="reportFields" value="Always" />
+      <option name="reportMethods" value="Always" />
+    </inspection_tool>
     <inspection_tool class="AlphaUnsortedPropertiesFile" enabled="true" level="INFORMATION" enabled_by_default="true" editorAttributes="INFORMATION_ATTRIBUTES" />
     <inspection_tool class="AmbiguousExpressionInWhenBranchMigration" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="AmbiguousFieldAccess" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
@@ -506,7 +509,9 @@
     <inspection_tool class="CssUnresolvedClassInComposesRule" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="CssUnresolvedCustomProperty" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="CssUnusedSymbol" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
-    <inspection_tool class="CtorHeadNoUnsafe" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
+    <inspection_tool class="CtorHeadNoUnsafe" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
+      <option name="ignoreForFabric" value="false" />
+    </inspection_tool>
     <inspection_tool class="CtorHeadPostInit" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="CtorHeadUsedForNonConstructor" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="CustomClassloader" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
@@ -1187,7 +1192,9 @@
     <inspection_tool class="InfixCallToOrdinary" enabled="true" level="INFORMATION" enabled_by_default="true" editorAttributes="INFORMATION_ATTRIBUTES" />
     <inspection_tool class="InjectCancellableBeforeSuperConstructorCall" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="InjectCouldBeOverwrite" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
-    <inspection_tool class="InjectIntoConstructor" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
+    <inspection_tool class="InjectIntoConstructor" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
+      <option name="allowOnFabric" value="false" />
+    </inspection_tool>
     <inspection_tool class="InjectLocalCaptureCanBeReplacedWithLocal" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="InjectedReferences" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="InjectionNotApplicable" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
@@ -2904,7 +2911,9 @@
     <inspection_tool class="UnnecessaryUnaryMinus" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="UnnecessaryUnboxing" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="UnnecessaryUnicodeEscape" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
-    <inspection_tool class="UnnecessaryUnsafe" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
+    <inspection_tool class="UnnecessaryUnsafe" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
+      <option name="alwaysUnnecessaryOnFabric" value="false" />
+    </inspection_tool>
     <inspection_tool class="UnnecessaryVariable" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="UnparsedCustomBeanInspection" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="UnpredictableBigDecimalConstructorCall" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">

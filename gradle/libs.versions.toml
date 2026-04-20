@@ -30,6 +30,7 @@ asm = "9.9.1"
 blossom = "2.2.0"
 error_prone_annotations = "2.49.0"
 gson = "2.13.2"
+idea-ext = "1.4.1"
 jetbrains-annotations = "26.1.0"
 jspecify = "1.0.0"
 log4j = "2.25.4"
@@ -37,6 +38,7 @@ mixin = "0.8.7"
 
 [plugins]
 blossom = { id = "net.kyori.blossom", version.ref = "blossom" }
+idea-ext = { id = "org.jetbrains.gradle.plugin.idea-ext", version.ref = "idea-ext" }
 
 [libraries]
 asm = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }

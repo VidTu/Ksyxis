@@ -34,6 +34,7 @@ import com.google.gson.JsonElement
 plugins {
     id("java")
     alias(libs.plugins.blossom)
+    alias(libs.plugins.idea.ext)
 }
 
 // Language.

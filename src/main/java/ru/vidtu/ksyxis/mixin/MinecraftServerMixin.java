@@ -32,6 +32,7 @@ package ru.vidtu.ksyxis.mixin;
 import com.google.errorprone.annotations.DoNotCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.embeddedt.modernfix.core.ModernFixMixinPlugin;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.spongepowered.asm.mixin.Mixin;
@@ -68,6 +69,15 @@ public final class MinecraftServerMixin {
      */
     @Unique
     private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/MinecraftServerMixin");
+
+    /**
+     * Amount of loaded chunks to report. Usually {@code 0}, {@code 441} with ModernFix.
+     *
+     * @see #getLoadedChunks()
+     */
+    // This MUST be below LOGGER, otherwise deadlocks will screw us up.
+    @Unique
+    private static final int KSYXIS_REPORT_CHUNKS = ksyxis_compatHackReportChunks();
 
     /**
      * An instance of this class cannot be created.
@@ -233,7 +243,7 @@ public final class MinecraftServerMixin {
         }
 
         // Get the amount of chunks to wait.
-        final int chunks = Ksyxis.LOADED_CHUNKS;
+        final int chunks = KSYXIS_REPORT_CHUNKS;
 
         // Log. (**DEBUG**)
         if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
@@ -286,5 +296,39 @@ public final class MinecraftServerMixin {
 
         // Return.
         return loop;
+    }
+
+    /**
+     * Evaluates and returns the amount of loaded chunks to report. Usually {@code 0}, because we have no spawn chunks,
+     * but if ModernFix is installed, the value might be changed to {@code 441} to prevent deadlocks.
+     *
+     * @return Either {@code 0} or {@code 441}, depending on the configuration
+     * @see #LOADED_CHUNKS
+     */
+    @Contract(pure = true)
+    @Unique
+    private static int ksyxis_compatHackReportChunks() {
+        try {
+            // Check the removeSpawnChunks. ModernFix apparently did this too for some time, just in different way.
+            final boolean removeSpawnChunks = ModernFixMixinPlugin.instance.isOptionEnabled("perf.remove_spawn_chunks.MinecraftServer");
+
+            // Log.
+            KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: Enabled compatibility hack with ModernFix. (removeSpawnChunks: {})", new Object[]{removeSpawnChunks}); // <- Array for compat with older Log4j2.
+
+            // Check what amount of spawn chunks to report back to the game.
+            // ModernFix needs 441, because of its own way of doing it.
+            // Ksyxis needs 0, because we remove all spawn chunks.
+            return (removeSpawnChunks ? 441 : 0);
+        } catch (final Throwable t) {
+            // Log.
+            if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
+                KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: No compatibility hacks were used.", t);
+            } else {
+                KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: No compatibility hacks were used.");
+            }
+
+            // No ModernFix found, it's Ksyxis only, and we have 0 chunks.
+            return 0;
+        }
     }
 }

@@ -14,7 +14,7 @@ public final class ModernFixMixinPlugin {
     /**
      * Singleton instance.
      */
-    public static ModernFixMixinPlugin instance;
+    public static /*non-final*/ ModernFixMixinPlugin instance;
 
     /**
      * An instance of this class cannot be created.

@@ -33,7 +33,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
-import org.embeddedt.modernfix.core.ModernFixMixinPlugin;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
@@ -65,14 +64,6 @@ public final class Ksyxis {
     private static final Logger LOGGER = LogManager.getLogger("Ksyxis");
 
     /**
-     * Amount of loaded chunks to report. Usually {@code 0}, {@code 441} with ModernFix.
-     *
-     * @see #getLoadedChunks()
-     */
-    // This MUST be below LOGGER, otherwise deadlocks will screw us up.
-    public static final int LOADED_CHUNKS = getLoadedChunks();
-
-    /**
      * An instance of this class cannot be created.
      *
      * @throws AssertionError Always
@@ -95,6 +86,11 @@ public final class Ksyxis {
      */
     public static void init(final String platform, final boolean manual) {
         try {
+            // Validate.
+            if (KCompile.DEBUG_ASSERTS) {
+                assert (platform != null) : "Ksyxis: Parameter 'platform' is null. (manual: " + manual + ')';
+            }
+
             // Log.
             final long start = System.nanoTime();
             LOGGER.info(KSYXIS_MARKER, "Ksyxis: Loading... (platform: {}, version: " + KCompile.VERSION + ", manual: {})", new Object[]{platform, manual}); // <- Array for compat with older Log4j2.
@@ -144,39 +140,6 @@ public final class Ksyxis {
 
             // Rethrow.
             throw new RuntimeException("Ksyxis: Unexpected init error.", t);
-        }
-    }
-
-    /**
-     * Evaluates and returns the amount of loaded chunks to report. Usually {@code 0}, because we have no spawn chunks,
-     * but if ModernFix is installed, the value might be changed to {@code 441} to prevent deadlocks.
-     *
-     * @return Either {@code 0} or {@code 441}, depending on the configuration
-     * @see #LOADED_CHUNKS
-     */
-    @Contract(pure = true)
-    private static int getLoadedChunks() {
-        try {
-            // Check the removeSpawnChunks. ModernFix apparently did this too for some time, just in different way.
-            final boolean removeSpawnChunks = ModernFixMixinPlugin.instance.isOptionEnabled("perf.remove_spawn_chunks.MinecraftServer");
-
-            // Log.
-            LOGGER.info(KSYXIS_MARKER, "Ksyxis: Enabled compatibility hack with ModernFix. (removeSpawnChunks: {})", new Object[]{removeSpawnChunks}); // <- Array for compat with older Log4j2.
-
-            // Check what amount of spawn chunks to report back to the game.
-            // ModernFix needs 441, because of its own way of doing it.
-            // Ksyxis needs 0, because we remove all spawn chunks.
-            return (removeSpawnChunks ? 441 : 0);
-        } catch (final Throwable t) {
-            // Log.
-            if (KCompile.DEBUG_LOGS && LOGGER.isDebugEnabled(KSYXIS_MARKER)) {
-                LOGGER.info(KSYXIS_MARKER, "Ksyxis: No compatibility hacks were used.", t);
-            } else {
-                LOGGER.info(KSYXIS_MARKER, "Ksyxis: No compatibility hacks were used.");
-            }
-
-            // No ModernFix found, it's Ksyxis only, and we have 0 chunks.
-            return 0;
         }
     }
 }

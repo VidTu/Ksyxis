@@ -37,7 +37,6 @@ import org.jetbrains.annotations.CheckReturnValue;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -116,7 +115,7 @@ public final class KPlugin implements IMixinConfigPlugin {
             // Get the node:
             // - It returns the class node, if the class exists.
             // - It throws ClassNotFoundException if the class doesn't exist.
-            this.provider.getClassNode(targetClassName, /*runTransformers=*/false, ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES); // Implicit NPE for 'targetClassName'
+            this.provider.getClassNode(targetClassName); // Implicit NPE for 'targetClassName'
 
             // Log. (**DEBUG**)
             if (KCompile.DEBUG_LOGS && LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {

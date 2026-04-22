@@ -74,7 +74,9 @@ public final class Ksyxis {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private Ksyxis() {
-        throw new AssertionError("Ksyxis: No instances.");
+        if (KCompile.DEBUG_ASSERTS) {
+            throw new AssertionError("Ksyxis: No instances.");
+        }
     }
 
     /**
@@ -149,7 +151,6 @@ public final class Ksyxis {
      * but if ModernFix is installed, the value might be changed to {@code 441} to prevent deadlocks.
      *
      * @return Either {@code 0} or {@code 441}, depending on the configuration
-     * @see #LOADED_CHUNKS
      */
     @Contract(pure = true)
     public static int compatHackReportChunks() {

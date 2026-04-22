@@ -76,7 +76,9 @@ public final class MinecraftMixin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private MinecraftMixin() {
-        throw new AssertionError("Ksyxis: No instances.");
+        if (KCompile.DEBUG_ASSERTS) {
+            throw new AssertionError("Ksyxis: No instances.");
+        }
     }
 
     /**

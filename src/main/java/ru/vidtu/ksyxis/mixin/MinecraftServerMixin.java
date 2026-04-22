@@ -72,7 +72,7 @@ public final class MinecraftServerMixin {
     /**
      * Amount of loaded chunks to report. Usually {@code 0}, {@code 441} with ModernFix.
      *
-     * @see #getLoadedChunks()
+     * @see Ksyxis#compatHackReportChunks()
      */
     // This MUST be below LOGGER, otherwise deadlocks will screw us up.
     @Unique
@@ -88,7 +88,9 @@ public final class MinecraftServerMixin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private MinecraftServerMixin() {
-        throw new AssertionError("Ksyxis: No instances.");
+        if (KCompile.DEBUG_ASSERTS) {
+            throw new AssertionError("Ksyxis: No instances.");
+        }
     }
 
     /**
@@ -161,7 +163,7 @@ public final class MinecraftServerMixin {
     }, at = @At("HEAD"), remap = false, require = 0, expect = 0)
     private void ksyxis_prepareLevels_head(final CallbackInfo ci) {
         // Log.
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
+        if (KCompile.DEBUG_LOGS) {
             KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: Speeding up the world loading... Delete the mod, if it got stuck after this message. (ci: {}, server: {})", new Object[]{ci, this}); // <- Array for compat with older Log4j2.
         } else {
             KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: Speeding up the world loading... Delete the mod, if it got stuck after this message. ({} {})", new Object[]{this.getClass().getName(), ci.getId()}); // <- Array for compat with older Log4j2.

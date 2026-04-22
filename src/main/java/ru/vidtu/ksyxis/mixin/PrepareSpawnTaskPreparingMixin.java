@@ -76,7 +76,9 @@ public final class PrepareSpawnTaskPreparingMixin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private PrepareSpawnTaskPreparingMixin() {
-        throw new AssertionError("Ksyxis: No instances.");
+        if (KCompile.DEBUG_ASSERTS) {
+            throw new AssertionError("Ksyxis: No instances.");
+        }
     }
 
     /**

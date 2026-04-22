@@ -80,7 +80,9 @@ public final class EntityMixin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private EntityMixin() {
-        throw new AssertionError("Ksyxis: No instances.");
+        if (KCompile.DEBUG_ASSERTS) {
+            throw new AssertionError("Ksyxis: No instances.");
+        }
     }
 
     /**

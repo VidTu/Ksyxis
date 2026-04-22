@@ -320,12 +320,13 @@ public final class MinecraftServerMixin {
             // Ksyxis needs 0, because we remove all spawn chunks.
             return (removeSpawnChunks ? 441 : 0);
         } catch (final Throwable t) {
-            // Log.
+            // Log. (**DEBUG**)
             if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
-                KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: No compatibility hacks were used.", t);
-            } else {
-                KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: No compatibility hacks were used.");
+                KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: ModernFix compatibility hack skipped.", new Object[]{t}); // <- Array for compat with older Log4j2.
             }
+
+            // Log.
+            KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: No compatibility hacks were used.");
 
             // No ModernFix found, it's Ksyxis only, and we have 0 chunks.
             return 0;

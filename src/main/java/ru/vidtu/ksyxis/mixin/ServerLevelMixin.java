@@ -70,7 +70,7 @@ public final class ServerLevelMixin {
      * Logger for this class.
      */
     @Unique
-    private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/ServerLevelMixin");
+    private static final Logger KSYXIS_LOGGER = (KCompile.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/ServerLevelMixin") : null);
 
     /**
      * An instance of this class cannot be created.

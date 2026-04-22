@@ -64,7 +64,7 @@ public final class PrepareSpawnTaskPreparingMixin {
      * Logger for this class.
      */
     @Unique
-    private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/PrepareSpawnTaskPreparingMixin");
+    private static final Logger KSYXIS_LOGGER = (KCompile.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/PrepareSpawnTaskPreparingMixin") : null);
 
     /**
      * An instance of this class cannot be created.

@@ -68,7 +68,7 @@ public final class EntityMixin {
      * Logger for this class.
      */
     @Unique
-    private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/EntityMixin");
+    private static final Logger KSYXIS_LOGGER = (KCompile.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/EntityMixin") : null);
 
     /**
      * An instance of this class cannot be created.

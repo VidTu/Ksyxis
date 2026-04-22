@@ -65,7 +65,7 @@ public final class LevelMixin {
      * Logger for this class.
      */
     @Unique
-    private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/LevelMixin");
+    private static final Logger KSYXIS_LOGGER = (KCompile.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/LevelMixin") : null);
 
     /**
      * An instance of this class cannot be created.

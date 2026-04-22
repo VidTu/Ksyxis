@@ -33,6 +33,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
+import org.embeddedt.modernfix.core.ModernFixMixinPlugin;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
@@ -140,6 +141,35 @@ public final class Ksyxis {
 
             // Rethrow.
             throw new RuntimeException("Ksyxis: Unexpected init error.", t);
+        }
+    }
+
+    /**
+     * Evaluates and returns the amount of loaded chunks to report. Usually {@code 0}, because we have no spawn chunks,
+     * but if ModernFix is installed, the value might be changed to {@code 441} to prevent deadlocks.
+     *
+     * @return Either {@code 0} or {@code 441}, depending on the configuration
+     * @see #LOADED_CHUNKS
+     */
+    @Contract(pure = true)
+    public static int compatHackReportChunks() {
+        try {
+            // Check the removeSpawnChunks. ModernFix apparently did this too for some time, just in different way.
+            final boolean removeSpawnChunks = ModernFixMixinPlugin.instance.isOptionEnabled("perf.remove_spawn_chunks.MinecraftServer");
+
+            // Log.
+            LOGGER.info(KSYXIS_MARKER, "Ksyxis: Enabled compatibility hack with ModernFix. (removeSpawnChunks: {})", new Object[]{removeSpawnChunks}); // <- Array for compat with older Log4j2.
+
+            // Check what amount of spawn chunks to report back to the game.
+            // ModernFix needs 441, because of its own way of doing it.
+            // Ksyxis needs 0, because we remove all spawn chunks.
+            return (removeSpawnChunks ? 441 : 0);
+        } catch (final Throwable t) {
+            // Log.
+            LOGGER.info(KSYXIS_MARKER, "Ksyxis: No compatibility hacks were used.");
+
+            // No ModernFix found, it's Ksyxis only, and we have 0 chunks.
+            return 0;
         }
     }
 }

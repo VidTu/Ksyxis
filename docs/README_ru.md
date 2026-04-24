@@ -64,8 +64,7 @@ https://github.com/user-attachments/assets/42e65893-6324-46b1-89a4-044eae77802d
 **А**: Fabric, Forge, NeoForge, Quilt, Legacy Fabric и Ornithe.
 
 **В**: Какие версии Minecraft поддерживаются?  
-**А**: Поддерживаются Minecraft версии с 1.8 до 1.21.8.
-Версии Minecraft 1.21.9 и новее **не** поддерживаются.
+**А**: Поддерживаются Minecraft версии с 1.8 и новее.
 
 **В**: Зачем поддерживать столько версий Minecraft?  
 **А**: Потому что я могу.

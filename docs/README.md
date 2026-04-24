@@ -63,8 +63,7 @@ You will need a GitHub account to download these.
 **A**: Fabric, Forge, NeoForge, Quilt, Legacy Fabric, and Ornithe.
 
 **Q**: Which Minecraft versions are supported?  
-**A**: Minecraft versions 1.8 through 1.21.8 are supported.
-Minecraft versions 1.21.9 and newer are **not** supported.
+**A**: Minecraft versions 1.8 and newer.
 
 **Q**: Why support so many Minecraft versions?  
 **A**: Because I can.

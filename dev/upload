@@ -1,0 +1,135 @@
+#!/bin/sh
+#
+# Ksyxis is a third-party mod for Minecraft Java Edition that
+# speed ups your world loading by removing unneeded chunks.
+#
+# MIT License
+#
+# Copyright (c) 2021-2026 VidTu
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#
+# SPDX-License-Identifier: MIT
+
+# Fail on error, fail on unbound variable, pipefail mode.
+set -euo pipefail
+
+# Begin.
+echo 'Uploading Ksyxis...'
+
+# Source version.
+UPLOAD_VERSION=$(grep -F 'version=' '../gradle.properties' | sed 's/version=//g')
+UPLOAD_VERSION_JSON=$(echo "${UPLOAD_VERSION}" | jq --raw-input --compact-output)
+echo "Version: ${UPLOAD_VERSION}"
+
+# Create name.
+UPLOAD_NAME="Ksyxis ${UPLOAD_VERSION}"
+UPLOAD_NAME_JSON=$(echo "${UPLOAD_NAME}" | jq --raw-input --compact-output)
+echo "Name: ${UPLOAD_VERSION}"
+
+# Guess version type.
+UPLOAD_VERSION_PRE='false'
+UPLOAD_VERSION_TYPE='release'
+echo "${UPLOAD_VERSION}" | grep -Eiq -- '-(beta|rc)' && UPLOAD_VERSION_TYPE='beta'
+echo "${UPLOAD_VERSION}" | grep -Eiq -- '-(alpha|snapshot)' && UPLOAD_VERSION_TYPE='alpha'
+[ "${UPLOAD_VERSION_TYPE}" != 'release' ] && UPLOAD_VERSION_PRE='true'
+echo "Version Pre-Release (GitHub): ${UPLOAD_VERSION_PRE}"
+echo "Version Type (Modrinth/CurseForge): ${UPLOAD_VERSION_TYPE}"
+
+# Select the JAR.
+echo 'Checking JAR file...'
+UPLOAD_FILENAME="Ksyxis-${UPLOAD_VERSION}.jar"
+UPLOAD_FILE="../build/libs/${UPLOAD_FILENAME}"
+[ ! -f "${UPLOAD_FILE}" ] && echo "Missing '${UPLOAD_FILENAME}' JAR file." && exit 1
+echo "JAR file '${UPLOAD_FILENAME}' found at '${UPLOAD_FILE}'."
+
+# Source the '.env' file.
+if [ -f '.env' ]; then
+    echo "Sourcing '.env'..."
+    . ./.env
+    echo "Sourced '.env'."
+else
+    echo "Missing '.env', not sourced."
+fi
+
+# Verify.
+echo 'Checking tokens...'
+#[ -z "${UPLOAD_GITHUB_TOKEN:-}" ] && echo "Missing UPLOAD_GITHUB_TOKEN. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
+#[ -z "${UPLOAD_MODRINTH_TOKEN:-}" ] && echo "Missing UPLOAD_MODRINTH_TOKEN. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
+#[ -z "${UPLOAD_CURSEFORGE_TOKEN:-}" ] && echo "Missing UPLOAD_CURSEFORGE_TOKEN. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
+[ -z "${UPLOAD_DISCORD_WEBHOOK:-}" ] && echo "Missing UPLOAD_DISCORD_WEBHOOK. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
+echo 'All tokens found.'
+
+# Confirm.
+read -rp 'Press Enter to confirm, terminate (CTRL+C) to cancel.' _
+echo
+
+# Create a temporary file for changelog.
+UPLOAD_CHANGELOG_FILE=$(mktemp -t ksyxis.upload-changelog.XXXXXXX.md)
+
+# Hint for changelog.
+echo "What's new:
+
+- [CHANGELOG]
+
+**Full Changelog**: [PREV]...${UPLOAD_VERSION}" > "${UPLOAD_CHANGELOG_FILE}"
+
+# Edit that file with an editor. (fallback to an unquittable one)
+"${EDITOR:-vi}" "${UPLOAD_CHANGELOG_FILE}"
+
+# Read the changelog.
+UPLOAD_CHANGELOG=$(sed -e '/^Enter the changelog: (Markdown)$/d' -e 's/Enter the changelog: (Markdown)//g' "${UPLOAD_CHANGELOG_FILE}")
+UPLOAD_CHANGELOG_JSON=$(echo "${UPLOAD_CHANGELOG}" | jq --raw-input --slurp --compact-output)
+UPLOAD_CHANGELOG_MODIFIED=$(echo "${UPLOAD_CHANGELOG}" | sed -Ee 's/^\*\*Full Changelog\*\*: (.*)$/**Full Changelog**: [\1](https:\/\/github.com\/VidTu\/Ksyxis\/compare\/\1)/g' -e 's/(issue|PR): #([0-9]+)/\1: [#\2](https:\/\/github.com\/VidTu\/Ksyxis\/issues\/\2)/g')
+UPLOAD_CHANGELOG_MODIFIED_JSON=$(echo "${UPLOAD_CHANGELOG_MODIFIED}" | jq --raw-input --slurp --compact-output)
+UPLOAD_CHANGELOG_DISCORD=$(echo "${UPLOAD_CHANGELOG_MODIFIED}" | tr '\n' '\r' | sed 's/\r\r/\r/g' | tr '\r' '\n')
+UPLOAD_CHANGELOG_DISCORD_JSON=$(echo "${UPLOAD_CHANGELOG_DISCORD}" | jq --raw-input --slurp --compact-output)
+
+# Create a GitHub release draft.
+echo 'Creating a GitHub release draft...'
+#UPLOAD_GITHUB_DRAFT=$(curl --fail-with-body --max-time 30 --retry 3 --request POST --header 'Content-Type: application/json' --header "Authorization: Bearer ${UPLOAD_GITHUB_TOKEN}" --data-raw "{\"tag_name\":${UPLOAD_VERSION_JSON},\"name\":${UPLOAD_NAME_JSON},\"body\":${UPLOAD_CHANGELOG_JSON},\"draft\":true,\"prerelease\":${UPLOAD_VERSION_PRE}}" 'https://api.github.com/repos/VidTu/Ksyxis/releases')
+echo 'Created a GitHub release draft.'
+
+# Extract the ID.
+echo 'Extracting the GitHub release draft ID...'
+#UPLOAD_GITHUB_ID=$(echo "${UPLOAD_GITHUB_DRAFT}" | jq --raw-output '.id')
+#echo "Extracted the GitHub release draft ID: ${UPLOAD_GITHUB_ID}"
+
+# Upload the file to the GitHub release draft.
+echo 'Uploading file to the GitHub release draft...'
+#curl --fail-with-body --max-time 30 --retry 3 --request POST --header 'Content-Type: application/java-archive' --header "Authorization: Bearer ${UPLOAD_GITHUB_TOKEN}" --data-binary "@${UPLOAD_FILE}" "https://uploads.github.com/repos/VidTu/Ksyxis/releases/${UPLOAD_GITHUB_ID}/assets?name=${UPLOAD_FILENAME}"
+echo 'Uploaded file to the GitHub release draft.'
+
+# Publish a GitHub release from the draft.
+echo 'Publishing a GitHub release from the draft...'
+#curl --fail-with-body --max-time 30 --retry 3 --request PATCH --header 'Content-Type: application/json' --header "Authorization: Bearer ${UPLOAD_GITHUB_TOKEN}" --data-raw "{\"draft\":false}" "https://api.github.com/repos/VidTu/Ksyxis/releases/${UPLOAD_GITHUB_ID}"
+echo 'Published a GitHub release from the draft.'
+
+# Create a Modrinth release.
+echo 'Publishing a Modrinth release...'
+#curl --fail-with-body --max-time 30 --retry 3 --request POST --header "Authorization: ${UPLOAD_MODRINTH_TOKEN}" --form-string "data={\"name\":${UPLOAD_NAME_JSON},\"version_number\":${UPLOAD_VERSION_JSON},\"changelog\":${UPLOAD_CHANGELOG_MODIFIED_JSON},\"dependencies\":[],\"game_versions\":[\"26.1.2\",\"26.1.1\",\"26.1\",\"1.21.11\",\"1.21.10\",\"1.21.9\",\"1.21.8\",\"1.21.7\",\"1.21.6\",\"1.21.5\",\"1.21.4\",\"1.21.3\",\"1.21.2\",\"1.21.1\",\"1.21\",\"1.20.6\",\"1.20.5\",\"1.20.4\",\"1.20.3\",\"1.20.2\",\"1.20.1\",\"1.20\",\"1.19.4\",\"1.19.3\",\"1.19.2\",\"1.19.1\",\"1.19\",\"1.18.2\",\"1.18.1\",\"1.18\",\"1.17.1\",\"1.17\",\"1.16.5\",\"1.16.4\",\"1.16.3\",\"1.16.2\",\"1.16.1\",\"1.16\",\"1.15.2\",\"1.15.1\",\"1.15\",\"1.14.4\",\"1.14.3\",\"1.14.2\",\"1.14.1\",\"1.14\",\"1.13.2\",\"1.13.1\",\"1.13\",\"1.12.2\",\"1.12.1\",\"1.12\",\"1.11.2\",\"1.11.1\",\"1.11\",\"1.10.2\",\"1.10.1\",\"1.10\",\"1.9.4\",\"1.9.3\",\"1.9.2\",\"1.9.1\",\"1.9\",\"1.8.9\",\"1.8.8\",\"1.8.7\",\"1.8.6\",\"1.8.5\",\"1.8.4\",\"1.8.3\",\"1.8.2\",\"1.8.1\",\"1.8\"],\"version_type\":\"${UPLOAD_VERSION_TYPE}\",\"loaders\":[\"fabric\",\"forge\",\"neoforge\",\"quilt\",\"legacy-fabric\",\"ornithe\"],\"featured\":false,\"status\":\"draft\",\"requested_status\":\"draft\",\"project_id\":\"2ecVyZ49\",\"file_parts\":[\"${UPLOAD_FILENAME}\"],\"primary_file\":\"${UPLOAD_FILENAME}\"}" --form "${UPLOAD_FILENAME}=@${UPLOAD_FILE}" 'https://api.modrinth.com/v2/version'
+echo 'Published a Modrinth release.'
+
+# TODO CURSEFORGE.
+
+# Notify via Discord webhook.
+echo 'Publishing a Discord webhook...'
+UPLOAD_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:00.000Z")
+curl --fail-with-body --max-time 30 --retry 3 --request POST --header 'Content-Type: application/json' --data-raw "{\"embeds\":[{\"title\":${UPLOAD_NAME_JSON},\"description\":${UPLOAD_CHANGELOG_DISCORD_JSON},\"color\":65280,\"fields\":[{\"name\":\"Download\",\"value\":\"<:modrinth:1495154733017595964> Modrinth: https://modrinth.com/mod/ksyxis\n<:curseforge:1495193223180718241> CurseForge: https://curseforge.com/minecraft/mc-mods/ksyxis\n<:github:1495153741412696216> GitHub: https://github.com/VidTu/Ksyxis/releases\"}],\"author\":{\"name\":\"VidTu\",\"url\":\"https://github.com/VidTu\",\"icon_url\":\"https://cdn.discordapp.com/avatars/339357082602176513/f82f8e810b31903775ed304d07319b1f.png?size=2048\"},\"footer\":{\"text\":\"Ksyxis: Speed up your world loading.\",\"icon_url\":\"https://cdn.discordapp.com/avatars/1495197205030768684/8fba8dee41472c524c06b2c4d54aa61f.png?size=2048\"},\"timestamp\":\"${UPLOAD_TIMESTAMP}\"}],\"components\":[{\"type\":1,\"components\":[{\"type\":2,\"style\":5,\"label\":\"Modrinth\",\"url\":\"https://modrinth.com/mod/ksyxis\",\"emoji\":{\"name\":\"modrinth\",\"id\":1495154733017595964}},{\"type\":2,\"style\":5,\"label\":\"CurseForge\",\"url\":\"https://curseforge.com/minecraft/mc-mods/ksyxis\",\"emoji\":{\"name\":\"curseforge\",\"id\":1495193223180718241}},{\"type\":2,\"style\":5,\"url\":\"https://github.com/VidTu/Ksyxis/releases\",\"label\":\"GitHub\",\"emoji\":{\"name\":\"github\",\"id\":1495153741412696216}}]}]}" "${UPLOAD_DISCORD_WEBHOOK}?with_components=true"
+echo "Published a Discord webhook. !!! DON'T FORGET TO CLICK 'PUBLISH' ON IT. !!!"

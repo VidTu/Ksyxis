@@ -55,6 +55,7 @@ jobs:
         timeout-minutes: 5
         uses: 'gradle/actions/setup-gradle@50e97c2cd7a37755bbfafc9c5b7cafaece252f6e' # v6.1.0
         with:
+          cache-read-only: true
           dependency-graph: 'generate'
       - name: 'Build'
         timeout-minutes: 15

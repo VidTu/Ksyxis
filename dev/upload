@@ -40,9 +40,10 @@
 #     - Other versions will become Release on GitHub/Modrinth/CurseForge.
 # 4.  Locates and checks the JAR file in the 'build/libs' folder.
 # 5.  Sources the authentication tokens from the environment.
-#     - GitHub token is sources from UPLOAD_CURSEFORGE_TOKEN.
+#     - GitHub token is sourced from UPLOAD_CURSEFORGE_TOKEN.
 #     - Modrinth token is sourced from UPLOAD_MODRINTH_TOKEN.
 #     - CurseForge token is sourced from UPLOAD_CURSEFORGE_TOKEN.
+#     - Discord webhook URL is sourced from UPLOAD_DISCORD_WEBHOOK.
 #     - Additional sourcing is done by executing 'dev/.env' file. It is
 #       an optional Git-ignored shell script, you can paste tokens
 #       as-is or do custom sourcing (like from a password manager).

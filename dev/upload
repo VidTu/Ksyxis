@@ -27,14 +27,61 @@
 #
 # SPDX-License-Identifier: MIT
 
+# This script helps me publish Ksyxis effortlessly on GitHub,
+# Modrinth, CurseForge, and Discord. It does the following:
+#
+# 1.  Checks that all required (CLI) tools are installed.
+# 2.  Extracts the actual mod version from 'gradle.properties'.
+# 3.  Guesses the version flavor based on the version string:
+#     - "alpha" or "snapshot" versions will become Alpha
+#        on Modrinth/CurseForge and Pre-Release on GitHub.
+#     - "beta" or "rc" versions will become Beta on
+#        Modrinth/CurseForge and Pre-Release on GitHub.
+#     - Other versions will become Release on GitHub/Modrinth/CurseForge.
+# 4.  Locates and checks the JAR file in the 'build/libs' folder.
+# 5.  Sources the authentication tokens from the environment.
+#     - GitHub token is sources from UPLOAD_CURSEFORGE_TOKEN.
+#     - Modrinth token is sourced from UPLOAD_MODRINTH_TOKEN.
+#     - CurseForge token is sourced from UPLOAD_CURSEFORGE_TOKEN.
+#     - Additional sourcing is done by executing 'dev/.env' file. It is
+#       an optional Git-ignored shell script, you can paste tokens
+#       as-is or do custom sourcing (like from a password manager).
+# 6.  If tokens aren't found, errors and stops.
+# 7.  Asks the user for the Markdown changelog in some $EDITOR. (vim/nano)
+# 8.  Does some hackery to make changelogs on Modrinth/CurseForge/Discord
+#     appear the same as they do on GitHub. (e.g., adds the issue/PR hyperlinks,
+#     "Full Changelog" Git tag comparisons on GitHub hyperlinks and more)
+# 9.  Shows the changelog and asks for the final confirmation.
+# 10. Publishes to GitHub. (In multiple steps to support Immutable Releases)
+#     - Creates a Draft release, attaches all metadata but files. (mutable)
+#     - Attaches the file asset to the release.
+#     - Publishes it, making it immutable.
+# 11. Uploads to Modrinth.
+# 12. Uploads to CurseForge.
+#     - Funny part: Uploading might fail, because CurseForge API(!) endpoint
+#       designed for CI/CD and programmatic access in general might show a
+#       Cloudflare Turnstile CAPTCHA page. If that happens, it will ask user
+#       if they wanna do a "shady tactic", that is, use a Chromium/Chrome
+#       browser to solve the antibot challenge and retrieve the "clearance"
+#       cookie to attempt a second upload pretending to be a human.
+#     - The process is fully automated (including navigating to the CAPTCHA
+#       page, extracting the cookies, closing the browser), except the CAPTCHA
+#       solving, although it might solve on it self via Cloudflare magic.
+# 13. Notifies via the webhook on Discord.
+#
+# This script is original, but will probably be used in my other Minecraft mods.
+# If it will be used in other projects, it might be adapted to their needs.
+# You can use it (or parts of it) too under the MIT License. Some other
+# projects of mine have it relicensed, but in general, credit me and it's fine.
+
 # Fail on error, fail on unbound variable, pipefail mode.
 set -euo pipefail
 
-# This function downloads and opens the Chromium browser (yes, you read that
-# right), in case CurseForge's API(!!!) endpoint returns a Cloudflare Turnstile
-# antibot page. I have NO idea who put TURNSTILE ONTO AN API ENDPOINT, but here
-# we are. After challenge is passed, cookies from the Chromium are extracted
-# and used to obtain clearance from the Cloudflare. Minecraft modding is something.
+# This function downloads and opens the Chromium browser (yes, you read
+# that right), in case CurseForge's API(!!!) endpoint returns a Cloudflare
+# Turnstile anti-bot page. I have NO idea who put TURNSTILE ONTO AN API
+# ENDPOINT, but here we are. After challenge is passed, cookies from the
+# Chromium are extracted and used to obtain clearance from the Cloudflare.
 upload_curseforge_clearance() {
     # Shady mode enabled.
     echo '>>>>> SHADY MODE ENABLED <<<<<'

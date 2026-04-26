@@ -37,10 +37,14 @@ set -euo pipefail
 # and used to obtain clearance from the Cloudflare. Minecraft modding is something.
 upload_curseforge_clearance() {
     # Shady mode enabled.
-    echo '>>>>> SHADY MODE ENABLED. <<<<<'
+    echo '>>>>> SHADY MODE ENABLED <<<<<'
 
-    # Find Chromium/Chrome on path.
-    echo 'Searching for installed Chromium/Chrome...'
+    # Test shady tools.
+    echo 'Checking shady tools...'
+    UPLOAD_CURSEFORGE_SHADY_TOOLS='kill mkfifo websocat'
+    for UPLOAD_CURSEFORGE_SHADY_TOOL in $UPLOAD_CURSEFORGE_SHADY_TOOLS; do
+        command -v "${UPLOAD_CURSEFORGE_SHADY_TOOL}" >/dev/null || { echo "ERROR: Missing command '${UPLOAD_CURSEFORGE_SHADY_TOOL}'. All needed tools: ${UPLOAD_CURSEFORGE_SHADY_TOOLS} (+ Chromium or Chrome)"; exit 1; }
+    done
     if command -v 'chromium' >/dev/null; then
         UPLOAD_CURSEFORGE_SHADY_CHROME='chromium'
         echo 'Chromium found.'
@@ -48,9 +52,10 @@ upload_curseforge_clearance() {
         UPLOAD_CURSEFORGE_SHADY_CHROME='chrome'
         echo 'Chrome found.'
     else
-        echo "ERROR: Install 'chrome' or 'chromium' into PATH for CurseForge Clearance."
-        return 1
+        echo "ERROR: Missing command 'chrome' OR 'chromium'. All needed tools: ${UPLOAD_CURSEFORGE_SHADY_TOOLS} (+ Chromium or Chrome)"
+        exit 1
     fi
+    echo 'Found all needed shady tools.'
 
     # Create temporary working directory.
     echo 'Creating a working directory...'
@@ -60,7 +65,7 @@ upload_curseforge_clearance() {
     # Launch Chromium.
     echo 'Launching Chromium...'
     "${UPLOAD_CURSEFORGE_SHADY_CHROME}" --app='http://0.0.0.0:0/' --user-data-dir="${UPLOAD_CURSEFORGE_SHADY_DIR}/data" --remote-debugging-port=9222 --incognito &
-    UPLOAD_CURSEFORGE_SHADY_ID1=$!
+    UPLOAD_CURSEFORGE_SHADY_ID1="${!}"
     echo "Launched Chromium: ${UPLOAD_CURSEFORGE_SHADY_ID1}"
 
     # Extract socket data.
@@ -81,13 +86,13 @@ upload_curseforge_clearance() {
     echo '{"id":1,"method":"Page.enable"}
 {"id":2,"method":"Network.enable"}
 {"id":3,"method":"Page.navigate","params":{"url":"https://minecraft.curseforge.com/api/"}}' | websocat --no-close "${UPLOAD_CURSEFORGE_SHADY_ENDPOINT}" > "${UPLOAD_CURSEFORGE_SHADY_FIFO1}" &
-    UPLOAD_CURSEFORGE_SHADY_ID2=$!
+    UPLOAD_CURSEFORGE_SHADY_ID2="${!}"
     echo "Opened a websocket: ${UPLOAD_CURSEFORGE_SHADY_ID2}"
 
     # Start data extractor.
     echo 'Starting data extractor...'
     cat "${UPLOAD_CURSEFORGE_SHADY_FIFO1}" | jq --unbuffered --compact-output 'select(.method == "Network.requestWillBeSentExtraInfo") | select(.params?.headers?.cookie) | select(.params?.headers?.cookie | test("cf_clearance=")) | select(.params.headers.":method" == "GET") | .params.headers | with_entries(select(.key | startswith(":") | not))' > "${UPLOAD_CURSEFORGE_SHADY_FIFO2}" &
-    UPLOAD_CURSEFORGE_SHADY_ID3=$!
+    UPLOAD_CURSEFORGE_SHADY_ID3="${!}"
     echo "Started data extractor: ${UPLOAD_CURSEFORGE_SHADY_ID3}"
 
     # Wait.
@@ -120,7 +125,7 @@ upload_curseforge_clearance() {
     echo "Shady cookie(s): ${UPLOAD_CURSEFORGE_SHADY_COOKIE}"
 
     # Shady mode disabled.
-    echo '<<<<< SHADY MODE DISABLED. >>>>>'
+    echo '<<<<< SHADY MODE DISABLED >>>>>'
 }
 
 # Begin.
@@ -128,11 +133,11 @@ echo 'NOTE: Uploading Ksyxis...'
 
 # Test tools.
 echo 'Checking tools...'
-tools='grep sed cat tr jq mktemp curl websocat uname'
-for tool in $tools; do
-    command -v "${tool}" >/dev/null || { echo "ERROR: Missing command '${tool}'. All needed tools: ${tools}"; exit 1; }
+UPLOAD_TOOLS='cat curl grep jq mktemp sed tr'
+for UPLOAD_TOOL in $UPLOAD_TOOLS; do
+    command -v "${UPLOAD_TOOL}" >/dev/null || { echo "ERROR: Missing command '${UPLOAD_TOOL}'. All needed tools: ${UPLOAD_TOOLS}"; exit 1; }
 done
-command -v "${EDITOR:-vi}" || { echo "ERROR: Missing editor set via EDITOR: ${EDITOR:-vi}"; exit 1; }
+command -v "${EDITOR:-vi}" >/dev/null || { echo "ERROR: Missing editor set via EDITOR: ${EDITOR:-vi}"; exit 1; }
 echo 'Found all needed tools.'
 
 # Source version.

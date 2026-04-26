@@ -30,33 +30,137 @@
 # Fail on error, fail on unbound variable, pipefail mode.
 set -euo pipefail
 
+# This function downloads and opens the Chromium browser (yes, you read that
+# right), in case CurseForge's API(!!!) endpoint returns a Cloudflare Turnstile
+# antibot page. I have NO idea who put TURNSTILE ONTO AN API ENDPOINT, but here
+# we are. After challenge is passed, cookies from the Chromium are extracted
+# and used to obtain clearance from the Cloudflare. Minecraft modding is something.
+upload_curseforge_clearance() {
+    # Shady mode enabled.
+    echo '>>>>> SHADY MODE ENABLED. <<<<<'
+
+    # Find Chromium/Chrome on path.
+    echo 'Searching for installed Chromium/Chrome...'
+    if command -v 'chromium' >/dev/null; then
+        UPLOAD_CURSEFORGE_SHADY_CHROME='chromium'
+        echo 'Chromium found.'
+    elif command -v 'chrome' >/dev/null; then
+        UPLOAD_CURSEFORGE_SHADY_CHROME='chrome'
+        echo 'Chrome found.'
+    else
+        echo "ERROR: Install 'chrome' or 'chromium' into PATH for CurseForge Clearance."
+        return 1
+    fi
+
+    # Create temporary working directory.
+    echo 'Creating a working directory...'
+    UPLOAD_CURSEFORGE_SHADY_DIR=$(mktemp -dt ksyxis.upload-shady.XXXXXXX)
+    echo "Created a working directory: ${UPLOAD_CURSEFORGE_SHADY_DIR}"
+
+    # Launch Chromium.
+    echo 'Launching Chromium...'
+    "${UPLOAD_CURSEFORGE_SHADY_CHROME}" --app='http://0.0.0.0:0/' --user-data-dir="${UPLOAD_CURSEFORGE_SHADY_DIR}/data" --remote-debugging-port=9222 --incognito &
+    UPLOAD_CURSEFORGE_SHADY_ID1=$!
+    echo "Launched Chromium: ${UPLOAD_CURSEFORGE_SHADY_ID1}"
+
+    # Extract socket data.
+    echo 'Extracting the debug endpoint...'
+    UPLOAD_CURSEFORGE_SHADY_ENDPOINT=$(curl --fail-with-body --retry 5 --retry-all-errors --max-time 30 'http://localhost:9222/json' | jq --raw-output '.[].webSocketDebuggerUrl')
+    echo "Extracted the debug endpoint: ${UPLOAD_CURSEFORGE_SHADY_ENDPOINT}"
+
+    # Create helper FIFOs.
+    echo 'Creating helper FIFOs...'
+    UPLOAD_CURSEFORGE_SHADY_FIFO1="${UPLOAD_CURSEFORGE_SHADY_DIR}/wsfifo1"
+    UPLOAD_CURSEFORGE_SHADY_FIFO2="${UPLOAD_CURSEFORGE_SHADY_DIR}/wsfifo2"
+    mkfifo "${UPLOAD_CURSEFORGE_SHADY_FIFO1}"
+    mkfifo "${UPLOAD_CURSEFORGE_SHADY_FIFO2}"
+    echo "Created helper FIFOs: ${UPLOAD_CURSEFORGE_SHADY_FIFO1} ${UPLOAD_CURSEFORGE_SHADY_FIFO2}"
+
+    # Open a websocket.
+    echo 'Opening a websocket...'
+    echo '{"id":1,"method":"Page.enable"}
+{"id":2,"method":"Network.enable"}
+{"id":3,"method":"Page.navigate","params":{"url":"https://minecraft.curseforge.com/api/"}}' | websocat --no-close "${UPLOAD_CURSEFORGE_SHADY_ENDPOINT}" > "${UPLOAD_CURSEFORGE_SHADY_FIFO1}" &
+    UPLOAD_CURSEFORGE_SHADY_ID2=$!
+    echo "Opened a websocket: ${UPLOAD_CURSEFORGE_SHADY_ID2}"
+
+    # Start data extractor.
+    echo 'Starting data extractor...'
+    cat "${UPLOAD_CURSEFORGE_SHADY_FIFO1}" | jq --unbuffered --compact-output 'select(.method == "Network.requestWillBeSentExtraInfo") | select(.params?.headers?.cookie) | select(.params?.headers?.cookie | test("cf_clearance=")) | select(.params.headers.":method" == "GET") | .params.headers | with_entries(select(.key | startswith(":") | not))' > "${UPLOAD_CURSEFORGE_SHADY_FIFO2}" &
+    UPLOAD_CURSEFORGE_SHADY_ID3=$!
+    echo "Started data extractor: ${UPLOAD_CURSEFORGE_SHADY_ID3}"
+
+    # Wait.
+    echo 'Waiting for challenge solution...'
+    UPLOAD_CURSEFORGE_SHADY_HEADERS=$(head -n1 "${UPLOAD_CURSEFORGE_SHADY_FIFO2}")
+    echo "Challenge solved: ${UPLOAD_CURSEFORGE_SHADY_HEADERS}"
+
+    # Kill the websocket.
+    echo 'Killing the websocket...'
+    kill -15 "${UPLOAD_CURSEFORGE_SHADY_ID2}"
+    wait -f "${UPLOAD_CURSEFORGE_SHADY_ID3}" "${UPLOAD_CURSEFORGE_SHADY_ID2}" >/dev/null 2>&1 || true
+    echo 'Killed the websocket.'
+
+    # Kill the Chromium.
+    echo 'Killing Chromium...'
+    kill -1 "${UPLOAD_CURSEFORGE_SHADY_ID1}"
+    wait -f "${UPLOAD_CURSEFORGE_SHADY_ID1}" >/dev/null 2>&1 || true
+    echo 'Killed Chromium.'
+
+    # Clean the workdir.
+    echo 'Cleaning the working directory...'
+    rm -rf -- "${UPLOAD_CURSEFORGE_SHADY_DIR}"
+    echo 'Cleaned the working directory.'
+
+    # Extract the User-Agent and Cookies.
+    echo 'Extracting headers...'
+    UPLOAD_CURSEFORGE_SHADY_USER_AGENT=$(echo "${UPLOAD_CURSEFORGE_SHADY_HEADERS}" | jq --raw-output '."user-agent"')
+    UPLOAD_CURSEFORGE_SHADY_COOKIE=$(echo "${UPLOAD_CURSEFORGE_SHADY_HEADERS}" | jq --raw-output '.cookie')
+    echo "Shady user agent: ${UPLOAD_CURSEFORGE_SHADY_USER_AGENT}"
+    echo "Shady cookie(s): ${UPLOAD_CURSEFORGE_SHADY_COOKIE}"
+
+    # Shady mode disabled.
+    echo '<<<<< SHADY MODE DISABLED. >>>>>'
+}
+
 # Begin.
-echo 'Uploading Ksyxis...'
+echo 'NOTE: Uploading Ksyxis...'
+
+# Test tools.
+echo 'Checking tools...'
+tools='grep sed cat tr jq mktemp curl websocat uname'
+for tool in $tools; do
+    command -v "${tool}" >/dev/null || { echo "ERROR: Missing command '${tool}'. All needed tools: ${tools}"; exit 1; }
+done
+command -v "${EDITOR:-vi}" || { echo "ERROR: Missing editor set via EDITOR: ${EDITOR:-vi}"; exit 1; }
+echo 'Found all needed tools.'
 
 # Source version.
+echo "Extracting version from 'gradle.properties'..."
 UPLOAD_VERSION=$(grep -F 'version=' '../gradle.properties' | sed 's/version=//g')
 UPLOAD_VERSION_JSON=$(echo "${UPLOAD_VERSION}" | jq --raw-input --compact-output)
-echo "Version: ${UPLOAD_VERSION}"
+echo "NOTE: Version: ${UPLOAD_VERSION}"
 
 # Create name.
 UPLOAD_NAME="Ksyxis ${UPLOAD_VERSION}"
 UPLOAD_NAME_JSON=$(echo "${UPLOAD_NAME}" | jq --raw-input --compact-output)
-echo "Name: ${UPLOAD_VERSION}"
+echo "NOTE: Name: ${UPLOAD_VERSION}"
 
 # Guess version type.
+echo 'Guessing version type...'
 UPLOAD_VERSION_PRE='false'
 UPLOAD_VERSION_TYPE='release'
 echo "${UPLOAD_VERSION}" | grep -Eiq -- '-(beta|rc)' && UPLOAD_VERSION_TYPE='beta'
 echo "${UPLOAD_VERSION}" | grep -Eiq -- '-(alpha|snapshot)' && UPLOAD_VERSION_TYPE='alpha'
 [ "${UPLOAD_VERSION_TYPE}" != 'release' ] && UPLOAD_VERSION_PRE='true'
-echo "Version Pre-Release (GitHub): ${UPLOAD_VERSION_PRE}"
-echo "Version Type (Modrinth/CurseForge): ${UPLOAD_VERSION_TYPE}"
+echo "NOTE: Version Pre-Release (GitHub): ${UPLOAD_VERSION_PRE}"
+echo "NOTE: Version Type (Modrinth/CurseForge): ${UPLOAD_VERSION_TYPE}"
 
 # Select the JAR.
 echo 'Checking JAR file...'
 UPLOAD_FILENAME="Ksyxis-${UPLOAD_VERSION}.jar"
 UPLOAD_FILE="../build/libs/${UPLOAD_FILENAME}"
-[ ! -f "${UPLOAD_FILE}" ] && echo "Missing '${UPLOAD_FILENAME}' JAR file." && exit 1
+[ ! -f "${UPLOAD_FILE}" ] && echo "ERROR: Missing '${UPLOAD_FILENAME}' JAR file." && exit 1
 echo "JAR file '${UPLOAD_FILENAME}' found at '${UPLOAD_FILE}'."
 
 # Source the '.env' file.
@@ -70,38 +174,55 @@ fi
 
 # Verify.
 echo 'Checking tokens...'
-[ -z "${UPLOAD_GITHUB_TOKEN:-}" ] && echo "Missing UPLOAD_GITHUB_TOKEN. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
-[ -z "${UPLOAD_MODRINTH_TOKEN:-}" ] && echo "Missing UPLOAD_MODRINTH_TOKEN. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
-[ -z "${UPLOAD_CURSEFORGE_TOKEN:-}" ] && echo "Missing UPLOAD_CURSEFORGE_TOKEN. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
-[ -z "${UPLOAD_DISCORD_WEBHOOK:-}" ] && echo "Missing UPLOAD_DISCORD_WEBHOOK. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
+[ -z "${UPLOAD_GITHUB_TOKEN:-}" ] && echo "ERROR: Missing UPLOAD_GITHUB_TOKEN. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
+[ -z "${UPLOAD_MODRINTH_TOKEN:-}" ] && echo "ERROR: Missing UPLOAD_MODRINTH_TOKEN. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
+[ -z "${UPLOAD_CURSEFORGE_TOKEN:-}" ] && echo "ERROR: Missing UPLOAD_CURSEFORGE_TOKEN. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
+[ -z "${UPLOAD_DISCORD_WEBHOOK:-}" ] && echo "ERROR: Missing UPLOAD_DISCORD_WEBHOOK. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
 echo 'All tokens found.'
 
-# Confirm.
-read -rp 'Press Enter to confirm, terminate (CTRL+C) to cancel.' _
-echo
-
 # Create a temporary file for changelog.
+echo 'Preparing a changelog template...'
 UPLOAD_CHANGELOG_FILE=$(mktemp -t ksyxis.upload-changelog.XXXXXXX.md)
+echo "Created a changelog template: ${UPLOAD_CHANGELOG_FILE}"
 
 # Hint for changelog.
+echo 'Writing the changelog template...'
 echo "What's new:
 
 - [CHANGELOG]
 
 **Full Changelog**: [PREV]...${UPLOAD_VERSION}" > "${UPLOAD_CHANGELOG_FILE}"
+echo 'Written the changelog template.'
 
 # Edit that file with an editor. (fallback to an unquittable one)
-"${EDITOR:-vi}" "${UPLOAD_CHANGELOG_FILE}"
+echo 'Opening the changelog file in the editor...'
+"${EDITOR:-vi}" -- "${UPLOAD_CHANGELOG_FILE}"
+echo 'Finished editing the changelog file.'
+
+# Check if changelog is not empty.
+echo 'Checking the changelog...'
+grep -Eq '\S' -- "${UPLOAD_CHANGELOG_FILE}" || { echo 'ERROR: Empty changelog.' && exit 1; }
 
 # Read the changelog.
-UPLOAD_CHANGELOG=$(sed -e '/^Enter the changelog: (Markdown)$/d' -e 's/Enter the changelog: (Markdown)//g' "${UPLOAD_CHANGELOG_FILE}")
+UPLOAD_CHANGELOG=$(cat -- "${UPLOAD_CHANGELOG_FILE}")
 UPLOAD_CHANGELOG_JSON=$(echo "${UPLOAD_CHANGELOG}" | jq --raw-input --slurp --compact-output)
 UPLOAD_CHANGELOG_MODIFIED=$(echo "${UPLOAD_CHANGELOG}" | sed -Ee 's/^\*\*Full Changelog\*\*: (.*)$/**Full Changelog**: [\1](https:\/\/github.com\/VidTu\/Ksyxis\/compare\/\1)/g' -e 's/(issue|PR): #([0-9]+)/\1: [#\2](https:\/\/github.com\/VidTu\/Ksyxis\/issues\/\2)/g')
 UPLOAD_CHANGELOG_MODIFIED_JSON=$(echo "${UPLOAD_CHANGELOG_MODIFIED}" | jq --raw-input --slurp --compact-output)
 UPLOAD_CHANGELOG_DISCORD=$(echo "${UPLOAD_CHANGELOG_MODIFIED}" | tr '\n' '\r' | sed 's/\r\r/\r/g' | tr '\r' '\n')
 UPLOAD_CHANGELOG_DISCORD_JSON=$(echo "${UPLOAD_CHANGELOG_DISCORD}" | jq --raw-input --slurp --compact-output)
+rm -r -- "${UPLOAD_CHANGELOG_FILE}"
+
+# Print the changelog.
+echo '===== CHANGELOG START ====='
+echo "${UPLOAD_CHANGELOG}"
+echo '===== CHANGELOG END ====='
+
+# Confirm.
+read -rp 'Ready to upload. Press Enter to confirm, terminate (CTRL+C) to cancel.' _
+echo
 
 # Create a GitHub release draft.
+if false; then
 echo 'Creating a GitHub release draft...'
 UPLOAD_GITHUB_DRAFT=$(curl --fail-with-body --max-time 30 --retry 3 --request POST --header 'Content-Type: application/json' --header "Authorization: Bearer ${UPLOAD_GITHUB_TOKEN}" --data-raw "{\"tag_name\":${UPLOAD_VERSION_JSON},\"name\":${UPLOAD_NAME_JSON},\"body\":${UPLOAD_CHANGELOG_JSON},\"draft\":true,\"prerelease\":${UPLOAD_VERSION_PRE}}" 'https://api.github.com/repos/VidTu/Ksyxis/releases')
 echo 'Created a GitHub release draft.'
@@ -109,7 +230,7 @@ echo 'Created a GitHub release draft.'
 # Extract the ID.
 echo 'Extracting the GitHub release draft ID...'
 UPLOAD_GITHUB_ID=$(echo "${UPLOAD_GITHUB_DRAFT}" | jq --raw-output '.id')
-#echo "Extracted the GitHub release draft ID: ${UPLOAD_GITHUB_ID}"
+echo "Extracted the GitHub release draft ID: ${UPLOAD_GITHUB_ID}"
 
 # Upload the file to the GitHub release draft.
 echo 'Uploading file to the GitHub release draft...'
@@ -125,11 +246,33 @@ echo 'Published a GitHub release from the draft.'
 echo 'Publishing a Modrinth release...'
 curl --fail-with-body --max-time 30 --retry 3 --request POST --header "Authorization: ${UPLOAD_MODRINTH_TOKEN}" --form-string "data={\"name\":${UPLOAD_NAME_JSON},\"version_number\":${UPLOAD_VERSION_JSON},\"changelog\":${UPLOAD_CHANGELOG_MODIFIED_JSON},\"dependencies\":[],\"game_versions\":[\"26.1.2\",\"26.1.1\",\"26.1\",\"1.21.11\",\"1.21.10\",\"1.21.9\",\"1.21.8\",\"1.21.7\",\"1.21.6\",\"1.21.5\",\"1.21.4\",\"1.21.3\",\"1.21.2\",\"1.21.1\",\"1.21\",\"1.20.6\",\"1.20.5\",\"1.20.4\",\"1.20.3\",\"1.20.2\",\"1.20.1\",\"1.20\",\"1.19.4\",\"1.19.3\",\"1.19.2\",\"1.19.1\",\"1.19\",\"1.18.2\",\"1.18.1\",\"1.18\",\"1.17.1\",\"1.17\",\"1.16.5\",\"1.16.4\",\"1.16.3\",\"1.16.2\",\"1.16.1\",\"1.16\",\"1.15.2\",\"1.15.1\",\"1.15\",\"1.14.4\",\"1.14.3\",\"1.14.2\",\"1.14.1\",\"1.14\",\"1.13.2\",\"1.13.1\",\"1.13\",\"1.12.2\",\"1.12.1\",\"1.12\",\"1.11.2\",\"1.11.1\",\"1.11\",\"1.10.2\",\"1.10.1\",\"1.10\",\"1.9.4\",\"1.9.3\",\"1.9.2\",\"1.9.1\",\"1.9\",\"1.8.9\",\"1.8.8\",\"1.8.7\",\"1.8.6\",\"1.8.5\",\"1.8.4\",\"1.8.3\",\"1.8.2\",\"1.8.1\",\"1.8\"],\"version_type\":\"${UPLOAD_VERSION_TYPE}\",\"loaders\":[\"fabric\",\"forge\",\"neoforge\",\"quilt\",\"legacy-fabric\",\"ornithe\"],\"featured\":false,\"status\":\"listed\",\"requested_status\":\"listed\",\"project_id\":\"2ecVyZ49\",\"file_parts\":[\"${UPLOAD_FILENAME}\"],\"primary_file\":\"${UPLOAD_FILENAME}\"}" --form "${UPLOAD_FILENAME}=@${UPLOAD_FILE}" 'https://api.modrinth.com/v2/version'
 echo 'Published a Modrinth release.'
+fi
 
 # Create a CurseForge release.
 # Obtain versions: curl https://api.curseforge.com/v1/minecraft/version | jq -r '.data.[] | .versionString + ": " + (.gameVersionId|tostring)'
 echo 'Publishing a CurseForge release...'
-curl --fail-with-body --max-time 30 --retry 3 --request POST --header "X-Api-Token: ${UPLOAD_CURSEFORGE_TOKEN}" --form-string "metadata={\"changelog\":${UPLOAD_CHANGELOG_MODIFIED_JSON},\"changelogType\":\"markdown\",\"displayName\":${UPLOAD_NAME_JSON},\"gameVersions\":[16082,16021,15933,14406,13964,13927,13620,13506,13422,12934,12281,12084,12079,11779,11457,11198,11163,10407,10395,10236,9990,9971,9776,9550,9366,9259,9186,9008,8857,8830,8516,8152,8203,8134,8056,8010,7892,7890,7722,7675,7664,7469,7413,7361,7344,7318,7132,7107,7081,6756,6711,6580,6452,6451,6317,6170,6160,6144,6084,6085,5997,5998,5946,5806,5703,5642,4480,4479,4478,4466,4465,4463,4455,7499,7498,10150,9153],\"releaseType\":\"${UPLOAD_VERSION_TYPE}\"}" --form "file=@${UPLOAD_FILE}" 'https://minecraft.curseforge.com/api/projects/537533/upload-file'
+UPLOAD_CURSEFORGE_RESPONSE=$(curl --write-out '\n%{http_code}' --max-time 30 --retry 3 --request POST --header "X-Api-Token: ${UPLOAD_CURSEFORGE_TOKEN}" --form-string "metadata={\"changelog\":${UPLOAD_CHANGELOG_MODIFIED_JSON},\"changelogType\":\"markdown\",\"displayName\":${UPLOAD_NAME_JSON},\"gameVersions\":[16082,16021,15933,14406,13964,13927,13620,13506,13422,12934,12281,12084,12079,11779,11457,11198,11163,10407,10395,10236,9990,9971,9776,9550,9366,9259,9186,9008,8857,8830,8516,8152,8203,8134,8056,8010,7892,7890,7722,7675,7664,7469,7413,7361,7344,7318,7132,7107,7081,6756,6711,6580,6452,6451,6317,6170,6160,6144,6084,6085,5997,5998,5946,5806,5703,5642,4480,4479,4478,4466,4465,4463,4455,7499,7498,10150,9153],\"releaseType\":\"${UPLOAD_VERSION_TYPE}\"}" --form "file=@${UPLOAD_FILE}" 'https://minecraft.curseforge.com/api/projects/537533/upload-file')
+UPLOAD_CURSEFORGE_RESPONSE_CODE=$(echo "${UPLOAD_CURSEFORGE_RESPONSE}" | tail -n1)
+UPLOAD_CURSEFORGE_RESPONSE_BODY=$(echo "${UPLOAD_CURSEFORGE_RESPONSE}" | head -n-1)
+if [ "${UPLOAD_CURSEFORGE_RESPONSE_CODE}" -eq "403" ] && echo "${UPLOAD_CURSEFORGE_RESPONSE_BODY}" | grep -Fq 'challenges.cloudflare.com'; then
+    # CurseForge CloudFlare Turnstile kicked in.
+    echo 'CurseForge requires passing the bot check (lol) on the API endpoint (lmao).'
+
+    # Confirm.
+    read -rp 'Will need to use a Chromium browser to pass the "not a robot" check. This is a shady action, proceed at your own risk. Press Enter to confirm, terminate (CTRL+C) to cancel.' _
+    echo
+
+    # Get the clearance headers.
+    echo 'Attempting to get CurseForge clearance...'
+    upload_curseforge_clearance
+    echo "Got CurseForge clearance."
+
+    # Upload.
+    curl --fail-with-body --max-time 30 --retry 3 --request POST --header "User-Agent: ${UPLOAD_CURSEFORGE_SHADY_USER_AGENT}" --header "Cookie: ${UPLOAD_CURSEFORGE_SHADY_COOKIE}" --header "X-Api-Token: ${UPLOAD_CURSEFORGE_TOKEN}" --form-string "metadata={\"changelog\":${UPLOAD_CHANGELOG_MODIFIED_JSON},\"changelogType\":\"markdown\",\"displayName\":${UPLOAD_NAME_JSON},\"gameVersions\":[16082,16021,15933,14406,13964,13927,13620,13506,13422,12934,12281,12084,12079,11779,11457,11198,11163,10407,10395,10236,9990,9971,9776,9550,9366,9259,9186,9008,8857,8830,8516,8152,8203,8134,8056,8010,7892,7890,7722,7675,7664,7469,7413,7361,7344,7318,7132,7107,7081,6756,6711,6580,6452,6451,6317,6170,6160,6144,6084,6085,5997,5998,5946,5806,5703,5642,4480,4479,4478,4466,4465,4463,4455,7499,7498,10150,9153],\"releaseType\":\"${UPLOAD_VERSION_TYPE}\"}" --form "file=@${UPLOAD_FILE}" 'https://minecraft.curseforge.com/api/projects/537533/upload-file'
+elif [ "${UPLOAD_CURSEFORGE_RESPONSE_CODE}" -lt 200] || [ "${UPLOAD_CURSEFORGE_RESPONSE_CODE}" -ge 300 ]; then
+    echo "Failed CurseForge upload: ${UPLOAD_CURSEFORGE_RESPONSE}"
+    exit 1
+fi
 echo 'Published a CurseForge release.'
 
 # Notify via Discord webhook.

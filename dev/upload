@@ -222,7 +222,6 @@ read -rp 'Ready to upload. Press Enter to confirm, terminate (CTRL+C) to cancel.
 echo
 
 # Create a GitHub release draft.
-if false; then
 echo 'Creating a GitHub release draft...'
 UPLOAD_GITHUB_DRAFT=$(curl --fail-with-body --max-time 30 --retry 3 --request POST --header 'Content-Type: application/json' --header "Authorization: Bearer ${UPLOAD_GITHUB_TOKEN}" --data-raw "{\"tag_name\":${UPLOAD_VERSION_JSON},\"name\":${UPLOAD_NAME_JSON},\"body\":${UPLOAD_CHANGELOG_JSON},\"draft\":true,\"prerelease\":${UPLOAD_VERSION_PRE}}" 'https://api.github.com/repos/VidTu/Ksyxis/releases')
 echo 'Created a GitHub release draft.'
@@ -246,7 +245,6 @@ echo 'Published a GitHub release from the draft.'
 echo 'Publishing a Modrinth release...'
 curl --fail-with-body --max-time 30 --retry 3 --request POST --header "Authorization: ${UPLOAD_MODRINTH_TOKEN}" --form-string "data={\"name\":${UPLOAD_NAME_JSON},\"version_number\":${UPLOAD_VERSION_JSON},\"changelog\":${UPLOAD_CHANGELOG_MODIFIED_JSON},\"dependencies\":[],\"game_versions\":[\"26.1.2\",\"26.1.1\",\"26.1\",\"1.21.11\",\"1.21.10\",\"1.21.9\",\"1.21.8\",\"1.21.7\",\"1.21.6\",\"1.21.5\",\"1.21.4\",\"1.21.3\",\"1.21.2\",\"1.21.1\",\"1.21\",\"1.20.6\",\"1.20.5\",\"1.20.4\",\"1.20.3\",\"1.20.2\",\"1.20.1\",\"1.20\",\"1.19.4\",\"1.19.3\",\"1.19.2\",\"1.19.1\",\"1.19\",\"1.18.2\",\"1.18.1\",\"1.18\",\"1.17.1\",\"1.17\",\"1.16.5\",\"1.16.4\",\"1.16.3\",\"1.16.2\",\"1.16.1\",\"1.16\",\"1.15.2\",\"1.15.1\",\"1.15\",\"1.14.4\",\"1.14.3\",\"1.14.2\",\"1.14.1\",\"1.14\",\"1.13.2\",\"1.13.1\",\"1.13\",\"1.12.2\",\"1.12.1\",\"1.12\",\"1.11.2\",\"1.11.1\",\"1.11\",\"1.10.2\",\"1.10.1\",\"1.10\",\"1.9.4\",\"1.9.3\",\"1.9.2\",\"1.9.1\",\"1.9\",\"1.8.9\",\"1.8.8\",\"1.8.7\",\"1.8.6\",\"1.8.5\",\"1.8.4\",\"1.8.3\",\"1.8.2\",\"1.8.1\",\"1.8\"],\"version_type\":\"${UPLOAD_VERSION_TYPE}\",\"loaders\":[\"fabric\",\"forge\",\"neoforge\",\"quilt\",\"legacy-fabric\",\"ornithe\"],\"featured\":false,\"status\":\"listed\",\"requested_status\":\"listed\",\"project_id\":\"2ecVyZ49\",\"file_parts\":[\"${UPLOAD_FILENAME}\"],\"primary_file\":\"${UPLOAD_FILENAME}\"}" --form "${UPLOAD_FILENAME}=@${UPLOAD_FILE}" 'https://api.modrinth.com/v2/version'
 echo 'Published a Modrinth release.'
-fi
 
 # Create a CurseForge release.
 # Obtain versions: curl https://api.curseforge.com/v1/minecraft/version | jq -r '.data.[] | .versionString + ": " + (.gameVersionId|tostring)'

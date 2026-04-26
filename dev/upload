@@ -74,6 +74,14 @@
 # If it will be used in other projects, it might be adapted to their needs.
 # You can use it (or parts of it) too under the MIT License. Some other
 # projects of mine have it relicensed, but in general, credit me and it's fine.
+#
+# Required CLI tools:
+#  sh cat curl grep jq mktemp sed tr
+# Additional required CLI tools for shady CurseForge tactic:
+#  chrome/chromium kill mkfifo websocat
+#
+# Any POSIX shell should work, no bash-isms used (intentionally). The script
+# should be system-agnostic, but was tested with MinGW (Windows) and Debian.
 
 # Fail on error, fail on unbound variable, pipefail mode.
 set -euo pipefail

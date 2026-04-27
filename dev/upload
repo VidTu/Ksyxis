@@ -131,8 +131,8 @@ upload_curseforge_clearance() {
 
     # Create helper FIFOs.
     echo 'Creating helper FIFOs...'
-    UPLOAD_CURSEFORGE_SHADY_FIFO1="${UPLOAD_CURSEFORGE_SHADY_DIR}/wsfifo1"
-    UPLOAD_CURSEFORGE_SHADY_FIFO2="${UPLOAD_CURSEFORGE_SHADY_DIR}/wsfifo2"
+    UPLOAD_CURSEFORGE_SHADY_FIFO1="${UPLOAD_CURSEFORGE_SHADY_DIR}/fifo1"
+    UPLOAD_CURSEFORGE_SHADY_FIFO2="${UPLOAD_CURSEFORGE_SHADY_DIR}/fifo2"
     mkfifo "${UPLOAD_CURSEFORGE_SHADY_FIFO1}"
     mkfifo "${UPLOAD_CURSEFORGE_SHADY_FIFO2}"
     echo "Created helper FIFOs: ${UPLOAD_CURSEFORGE_SHADY_FIFO1} ${UPLOAD_CURSEFORGE_SHADY_FIFO2}"
@@ -158,14 +158,16 @@ upload_curseforge_clearance() {
 
     # Kill the websocket.
     echo 'Killing the websocket...'
-    kill -15 "${UPLOAD_CURSEFORGE_SHADY_ID2}"
-    wait -f "${UPLOAD_CURSEFORGE_SHADY_ID3}" "${UPLOAD_CURSEFORGE_SHADY_ID2}" >/dev/null 2>&1 || true
+    kill -9 "${UPLOAD_CURSEFORGE_SHADY_ID2}"
+    wait "${UPLOAD_CURSEFORGE_SHADY_ID2}" >/dev/null 2>&1 || true
+    kill -15 "${UPLOAD_CURSEFORGE_SHADY_ID3}"
+    wait "${UPLOAD_CURSEFORGE_SHADY_ID3}" >/dev/null 2>&1 || true
     echo 'Killed the websocket.'
 
     # Kill the Chromium.
     echo 'Killing Chromium...'
     kill -1 "${UPLOAD_CURSEFORGE_SHADY_ID1}"
-    wait -f "${UPLOAD_CURSEFORGE_SHADY_ID1}" >/dev/null 2>&1 || true
+    wait "${UPLOAD_CURSEFORGE_SHADY_ID1}" >/dev/null 2>&1 || true
     echo 'Killed Chromium.'
 
     # Clean the workdir.
@@ -279,7 +281,8 @@ echo "${UPLOAD_CHANGELOG}"
 echo '===== CHANGELOG END ====='
 
 # Confirm.
-read -rp 'Ready to upload. Press Enter to confirm, terminate (CTRL+C) to cancel.' _
+echo 'Ready to upload. Press Enter to confirm, terminate (CTRL+C) to cancel.'
+read -r _
 echo
 
 # Create a GitHub release draft.
@@ -318,7 +321,8 @@ if [ "${UPLOAD_CURSEFORGE_RESPONSE_CODE}" -eq "403" ] && echo "${UPLOAD_CURSEFOR
     echo 'CurseForge requires passing the bot check (lol) on the API endpoint (lmao).'
 
     # Confirm.
-    read -rp 'Will need to use a Chromium browser to pass the "not a robot" check. This is a shady action, proceed at your own risk. Press Enter to confirm, terminate (CTRL+C) to cancel.' _
+    echo 'Will need to use a Chromium browser to pass the "not a robot" check. This is a shady action, proceed at your own risk. Press Enter to confirm, terminate (CTRL+C) to cancel.'
+    read -r _
     echo
 
     # Get the clearance headers.
@@ -328,7 +332,7 @@ if [ "${UPLOAD_CURSEFORGE_RESPONSE_CODE}" -eq "403" ] && echo "${UPLOAD_CURSEFOR
 
     # Upload.
     curl --fail-with-body --max-time 30 --retry 3 --request POST --header "User-Agent: ${UPLOAD_CURSEFORGE_SHADY_USER_AGENT}" --header "Cookie: ${UPLOAD_CURSEFORGE_SHADY_COOKIE}" --header "X-Api-Token: ${UPLOAD_CURSEFORGE_TOKEN}" --form-string "metadata={\"changelog\":${UPLOAD_CHANGELOG_MODIFIED_JSON},\"changelogType\":\"markdown\",\"displayName\":${UPLOAD_NAME_JSON},\"gameVersions\":[16082,16021,15933,14406,13964,13927,13620,13506,13422,12934,12281,12084,12079,11779,11457,11198,11163,10407,10395,10236,9990,9971,9776,9550,9366,9259,9186,9008,8857,8830,8516,8152,8203,8134,8056,8010,7892,7890,7722,7675,7664,7469,7413,7361,7344,7318,7132,7107,7081,6756,6711,6580,6452,6451,6317,6170,6160,6144,6084,6085,5997,5998,5946,5806,5703,5642,4480,4479,4478,4466,4465,4463,4455,7499,7498,10150,9153],\"releaseType\":\"${UPLOAD_VERSION_TYPE}\"}" --form "file=@${UPLOAD_FILE}" 'https://minecraft.curseforge.com/api/projects/537533/upload-file'
-elif [ "${UPLOAD_CURSEFORGE_RESPONSE_CODE}" -lt 200] || [ "${UPLOAD_CURSEFORGE_RESPONSE_CODE}" -ge 300 ]; then
+elif [ "${UPLOAD_CURSEFORGE_RESPONSE_CODE}" -lt 200 ] || [ "${UPLOAD_CURSEFORGE_RESPONSE_CODE}" -ge 300 ]; then
     echo "Failed CurseForge upload: ${UPLOAD_CURSEFORGE_RESPONSE}"
     exit 1
 fi

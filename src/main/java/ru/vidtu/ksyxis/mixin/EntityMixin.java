@@ -32,6 +32,7 @@ package ru.vidtu.ksyxis.mixin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.UnknownNullability;
 import org.jspecify.annotations.NullMarked;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -68,6 +69,7 @@ public final class EntityMixin {
      * Logger for this class.
      */
     @Unique
+    @UnknownNullability
     private static final Logger KSYXIS_LOGGER = (KCompile.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/EntityMixin") : null);
 
     /**
@@ -129,7 +131,7 @@ public final class EntityMixin {
             } catch (final Throwable t) {
                 // Log. (**TRACE**)
                 if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) {
-                    KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Field error, skipping in EntityMixin. (field: {})", new Object[]{field, t}); // <- Array for compat with older Log4j2.
+                    KSYXIS_LOGGER.trace(Ksyxis.KSYXIS_MARKER, "Ksyxis: Field error, skipping in EntityMixin. (field: {})", new Object[]{field, t}); // <- Array for compat with older Log4j2.
                 }
             }
         }

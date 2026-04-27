@@ -15,19 +15,26 @@
       <w>cnfe</w>
       <w>configureondemand</w>
       <w>coremod</w>
+      <w>curseforge</w>
       <w>endlocal</w>
       <w>entrypoints</w>
       <w>errorlevel</w>
       <w>fmlcoreplugin</w>
       <w>fmlcoreplugincontainsfmlmod</w>
       <w>gamerule</w>
+      <w>hackery</w>
       <w>javacmd</w>
       <w>jvmargs</w>
       <w>ksyxis</w>
       <w>minecraft</w>
+      <w>mkfifo</w>
+      <w>mktemp</w>
       <w>modid</w>
       <w>modmenu</w>
+      <w>modrinth</w>
       <w>neoforge</w>
+      <w>ornithe</w>
+      <w>pipefail</w>
       <w>porkchop</w>
       <w>readarray</w>
       <w>readmes</w>
@@ -35,9 +42,12 @@
       <w>setlocal</w>
       <w>setspawnpos</w>
       <w>shellness</w>
+      <w>startswith</w>
+      <w>tostring</w>
       <w>ulimit</w>
       <w>vidtu</w>
       <w>wcdfzsgy</w>
+      <w>websocat</w>
       <w>Дебаггинг</w>
       <w>модов</w>
       <w>прогружать</w>

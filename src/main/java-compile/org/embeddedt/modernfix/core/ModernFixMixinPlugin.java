@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Contract;
 
 /**
  * Stub entrypoint interface for ModernFix. This is a
- * compatibility hack for Ksyxis, see {@code Ksyxis} class.
+ * compatibility hack for Ksyxis, see {@code KCompat} class.
  *
  * @author VidTu
  * @author embeddedt

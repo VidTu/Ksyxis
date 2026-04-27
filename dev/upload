@@ -283,7 +283,6 @@ echo '===== CHANGELOG END ====='
 # Confirm.
 echo 'Ready to upload. Press Enter to confirm, terminate (CTRL+C) to cancel.'
 read -r _
-echo
 
 # Create a GitHub release draft.
 echo 'Creating a GitHub release draft...'
@@ -323,7 +322,6 @@ if [ "${UPLOAD_CURSEFORGE_RESPONSE_CODE}" -eq "403" ] && echo "${UPLOAD_CURSEFOR
     # Confirm.
     echo 'Will need to use a Chromium browser to pass the "not a robot" check. This is a shady action, proceed at your own risk. Press Enter to confirm, terminate (CTRL+C) to cancel.'
     read -r _
-    echo
 
     # Get the clearance headers.
     echo 'Attempting to get CurseForge clearance...'

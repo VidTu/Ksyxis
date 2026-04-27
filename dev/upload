@@ -222,6 +222,7 @@ echo "NOTE: Version Type (Modrinth/CurseForge): ${UPLOAD_VERSION_TYPE}"
 # Find the JAR.
 echo 'Checking the JAR file...'
 UPLOAD_FILENAME="Ksyxis-${UPLOAD_VERSION}.jar"
+UPLOAD_FILENAME_URI=$(echo "${UPLOAD_FILENAME}" | jq --raw-input --raw-output '@uri')
 UPLOAD_FILE="../build/libs/${UPLOAD_FILENAME}"
 [ ! -f "${UPLOAD_FILE}" ] && echo "ERROR: Missing '${UPLOAD_FILENAME}' JAR file." && exit 1
 echo "JAR file '${UPLOAD_FILENAME}' found at '${UPLOAD_FILE}'."
@@ -296,7 +297,7 @@ echo "Extracted the GitHub release draft ID: ${UPLOAD_GITHUB_ID}"
 
 # Upload the file to the GitHub release draft.
 echo 'Uploading file to the GitHub release draft...'
-curl --fail-with-body --max-time 30 --retry 3 --request POST --header 'Content-Type: application/java-archive' --header "Authorization: Bearer ${UPLOAD_GITHUB_TOKEN}" --data-binary "@${UPLOAD_FILE}" "https://uploads.github.com/repos/VidTu/Ksyxis/releases/${UPLOAD_GITHUB_ID}/assets?name=${UPLOAD_FILENAME}"
+curl --fail-with-body --max-time 30 --retry 3 --request POST --header 'Content-Type: application/java-archive' --header "Authorization: Bearer ${UPLOAD_GITHUB_TOKEN}" --data-binary "@${UPLOAD_FILE}" "https://uploads.github.com/repos/VidTu/Ksyxis/releases/${UPLOAD_GITHUB_ID}/assets?name=${UPLOAD_FILENAME_URI}"
 echo 'Uploaded file to the GitHub release draft.'
 
 # Publish a GitHub release from the draft.

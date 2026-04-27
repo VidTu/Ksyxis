@@ -37,6 +37,7 @@ import org.jetbrains.annotations.CheckReturnValue;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -69,13 +70,28 @@ public final class KPlugin implements IMixinConfigPlugin {
     private final IClassBytecodeProvider provider = MixinService.getService().getBytecodeProvider();
 
     /**
+     * Whether the code data should be skipped in {@link ClassReader} when checking the class data. {@code true}
+     * is used whenever possible for performance, {@code false} is used if not yet supported by current provider.
+     */
+    private final boolean skipCode = (IClassBytecodeProvider.class.getMethods().length >= 3);
+
+    /**
+     * Whether the transformers should be ran when checking the class data. {@code false} is used whenever possible
+     * for performance, {@code true} is used if current bytecode provider doesn't support untransformed classes.
+     */
+    private final boolean runTransformers;
+
+    /**
      * Creates a new plugin.
      *
      * @apiNote Do not call, called by Mixin
      */
     @Contract(pure = true)
     public KPlugin() {
-        // Empty.
+        // Determine the transformers.
+        final String providerClass = provider.getClass().getName();
+        this.runTransformers = ("org.spongepowered.asm.launch.MixinLaunchPluginLegacy".equals(providerClass) ||
+                "org.spongepowered.asm.launch.MixinLaunchPlugin".equals(providerClass));
     }
 
     /**
@@ -115,7 +131,11 @@ public final class KPlugin implements IMixinConfigPlugin {
             // Get the node:
             // - It returns the class node, if the class exists.
             // - It throws ClassNotFoundException if the class doesn't exist.
-            this.provider.getClassNode(targetClassName); // Implicit NPE for 'targetClassName'
+            if (this.skipCode) {
+                this.provider.getClassNode(targetClassName, runTransformers, ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES); // Implicit NPE for 'targetClassName'
+            } else {
+                this.provider.getClassNode(targetClassName, runTransformers); // Implicit NPE for 'targetClassName'
+            }
 
             // Log. (**DEBUG**)
             if (KCompile.DEBUG_LOGS && LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
@@ -281,6 +301,8 @@ public final class KPlugin implements IMixinConfigPlugin {
     public String toString() {
         return "Ksyxis/KPlugin{" +
                 "provider=" + this.provider +
+                ", skipCode=" + this.skipCode +
+                ", runTransformers=" + this.runTransformers +
                 '}';
     }
 }

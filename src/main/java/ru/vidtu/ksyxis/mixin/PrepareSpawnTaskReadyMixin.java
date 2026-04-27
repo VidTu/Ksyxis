@@ -40,8 +40,8 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import ru.vidtu.ksyxis.Ksyxis;
 import ru.vidtu.ksyxis.platform.KCompile;
+import ru.vidtu.ksyxis.platform.KPlugin;
 
 /**
  * Mixin for {@code PrepareSpawnTask$Ready} that disables spawn chunk tickets after removal of
@@ -110,8 +110,8 @@ public final class PrepareSpawnTaskReadyMixin {
         }
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
-            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Adding zero-level ticket in PrepareSpawnTaskReadyMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Adding zero-level ticket in PrepareSpawnTaskReadyMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
         }
 
         // Add zero-level ticket.
@@ -144,8 +144,8 @@ public final class PrepareSpawnTaskReadyMixin {
         }
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
-            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Waiting for zero-level ticket in PrepareSpawnTaskReadyMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Waiting for zero-level ticket in PrepareSpawnTaskReadyMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
         }
 
         // Wait for zero-level ticket.

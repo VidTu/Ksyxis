@@ -31,11 +31,14 @@ package ru.vidtu.ksyxis.platform;
 
 import com.google.errorprone.annotations.DoNotCall;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import ru.vidtu.ksyxis.Ksyxis;
+import org.spongepowered.asm.launch.MixinBootstrap;
+import org.spongepowered.asm.mixin.Mixins;
 
 import java.util.Map;
 
@@ -44,7 +47,6 @@ import java.util.Map;
  *
  * @author VidTu
  * @apiNote Internal use only
- * @see Ksyxis
  * @see KForge
  */
 @ApiStatus.Internal
@@ -116,16 +118,51 @@ public final class KCore implements IFMLLoadingPlugin {
     }
 
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="fml"} and {@code manual=true}.
+     * Manually bootstraps the Mixin and injects the configuration.
      *
      * @param data Injection data, ignored
      * @apiNote Do not call, called by FML
-     * @see Ksyxis#init(String, boolean)
      */
     @DoNotCall("Called by FML")
     @Override
     public void injectData(final Map<String, Object> data) {
-        Ksyxis.init("fml", /*manual=*/true);
+        // Create a temporary logger. (there's no sense in keeping it after)
+        final Logger logger = LogManager.getLogger("Ksyxis/KCore");
+        try {
+            // Log.
+            if (KCompile.DEBUG_LOGS) {
+                logger.info(KPlugin.MARKER, "Ksyxis: Performing manual Mixin bootstrap... (version: " + KCompile.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+            } else {
+                logger.info("Ksyxis: Performing manual Mixin bootstrap... (version: " + KCompile.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+            }
+
+            // Bootstrap Mixin.
+            MixinBootstrap.init();
+
+            // Log. (**DEBUG**)
+            if (KCompile.DEBUG_LOGS) {
+                logger.debug(KPlugin.MARKER, "Ksyxis: Mixin bootstrapped. Adding the config...");
+            }
+
+            // Add the config.
+            Mixins.addConfiguration("ksyxis.mixins.json");
+
+            // Log.
+            if (KCompile.DEBUG_LOGS) {
+                logger.info(KPlugin.MARKER, "Ksyxis: Manual Mixin bootstrap done.");
+            } else {
+                logger.info("Ksyxis: Manual Mixin bootstrap done.");
+            }
+        } catch (final Throwable t) {
+            // Check if Mixin is absent.
+            if (t.getClass() == NoClassDefFoundError.class && "org/spongepowered/asm/launch/MixinBootstrap".equals(t.getMessage())) {
+                throw new RuntimeException("Ksyxis: No Mixin found. (core)", t);
+            }
+
+            // Rethrow.
+            throw new RuntimeException("Ksyxis: Unexpected core error.", t);
+        }
+
     }
 
     @Contract(pure = true)

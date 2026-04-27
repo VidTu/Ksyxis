@@ -40,8 +40,8 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import ru.vidtu.ksyxis.Ksyxis;
 import ru.vidtu.ksyxis.platform.KCompile;
+import ru.vidtu.ksyxis.platform.KPlugin;
 
 /**
  * Mixin for {@code Minecraft} that disables fake load screens for single-player.
@@ -110,8 +110,8 @@ public final class MinecraftMixin {
         }
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
-            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Removing fake delay in MinecraftMixin. (delay: {}, client: {})", new Object[]{delay, this}); // <- Array for compat with older Log4j2.
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Removing fake delay in MinecraftMixin. (delay: {}, client: {})", new Object[]{delay, this}); // <- Array for compat with older Log4j2.
         }
 
         // Remove fake delay.

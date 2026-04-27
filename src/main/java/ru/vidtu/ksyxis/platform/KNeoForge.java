@@ -30,17 +30,18 @@
 package ru.vidtu.ksyxis.platform;
 
 import net.neoforged.fml.common.Mod;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
-import ru.vidtu.ksyxis.Ksyxis;
+import org.spongepowered.asm.launch.MixinBootstrap;
 
 /**
  * Main Ksyxis class for NeoForge.
  *
  * @author VidTu
  * @apiNote Internal use only
- * @see Ksyxis
  * @see KForge
  */
 @ApiStatus.Internal
@@ -48,13 +49,18 @@ import ru.vidtu.ksyxis.Ksyxis;
 @NullMarked
 public final class KNeoForge {
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="neoforge"} and {@code manual=false}.
+     * Logs the platform info.
      *
      * @apiNote Do not call, called by NeoForge
-     * @see Ksyxis#init(String, boolean)
      */
     public KNeoForge() {
-        Ksyxis.init("neoforge", /*manual=*/false);
+        // Log. (there's no sense in keeping the logger after that)
+        final Logger logger = LogManager.getLogger("Ksyxis/KNeoForge");
+        if (KCompile.DEBUG_LOGS) {
+            logger.info(KPlugin.MARKER, "Ksyxis: Ready to remove unneeded chunks. (platform: neoforge, version: " + KCompile.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+        } else {
+            logger.info("Ksyxis: Ready to remove unneeded chunks. (platform: neoforge, version: " + KCompile.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+        }
     }
 
     @Contract(pure = true)

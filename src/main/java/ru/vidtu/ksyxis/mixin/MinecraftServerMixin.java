@@ -43,8 +43,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import ru.vidtu.ksyxis.Ksyxis;
+import ru.vidtu.ksyxis.KCompat;
 import ru.vidtu.ksyxis.platform.KCompile;
+import ru.vidtu.ksyxis.platform.KPlugin;
 
 /**
  * Mixin for {@code ServerLevel} that disables waiting for spawn chunks and sets {@code spawnChunkRadius} to {@code 0}.
@@ -68,15 +69,6 @@ public final class MinecraftServerMixin {
      */
     @Unique
     private static final Logger KSYXIS_LOGGER = LogManager.getLogger("Ksyxis/MinecraftServerMixin");
-
-    /**
-     * Amount of loaded chunks to report. Usually {@code 0}, {@code 441} with ModernFix.
-     *
-     * @see Ksyxis#compatHackReportChunks()
-     */
-    // This MUST be below LOGGER, otherwise deadlocks will screw us up.
-    @Unique
-    private static final int KSYXIS_REPORT_CHUNKS = Ksyxis.compatHackReportChunks();
 
     /**
      * An instance of this class cannot be created.
@@ -118,8 +110,8 @@ public final class MinecraftServerMixin {
         }
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
-            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Reporting 0 as spawnChunkRadius gamerule in MinecraftServerMixin. (spawnChunks: {}, server: {})", new Object[]{spawnChunks, this}); // <- Array for compat with older Log4j2.
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Reporting 0 as spawnChunkRadius gamerule in MinecraftServerMixin. (spawnChunks: {}, server: {})", new Object[]{spawnChunks, this}); // <- Array for compat with older Log4j2.
         }
 
         // Report spawnChunkRadius gamerule as 0.
@@ -164,9 +156,9 @@ public final class MinecraftServerMixin {
     private void ksyxis_prepareLevels_head(final CallbackInfo ci) {
         // Log.
         if (KCompile.DEBUG_LOGS) {
-            KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: Speeding up the world loading... Delete the mod, if it got stuck after this message. (ci: {}, server: {})", new Object[]{ci, this}); // <- Array for compat with older Log4j2.
+            KSYXIS_LOGGER.info(KPlugin.MARKER, "Ksyxis: Speeding up the world loading... Delete the mod, if it got stuck after this message. (ci: {}, server: {})", new Object[]{ci, this}); // <- Array for compat with older Log4j2.
         } else {
-            KSYXIS_LOGGER.info(Ksyxis.KSYXIS_MARKER, "Ksyxis: Speeding up the world loading... Delete the mod, if it got stuck after this message. ({} {})", new Object[]{this.getClass().getName(), ci.getId()}); // <- Array for compat with older Log4j2.
+            KSYXIS_LOGGER.info("Ksyxis: Speeding up the world loading... Delete the mod, if it got stuck after this message. ({} {})", new Object[]{this.getClass().getName(), ci.getId()}); // <- Array for compat with older Log4j2.
         }
     }
 
@@ -202,8 +194,8 @@ public final class MinecraftServerMixin {
         }
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
-            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Adding zero-level ticket in MinecraftServerMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Adding zero-level ticket in MinecraftServerMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
         }
 
         // Add zero-level ticket.
@@ -244,11 +236,11 @@ public final class MinecraftServerMixin {
         }
 
         // Get the amount of chunks to wait.
-        final int chunks = KSYXIS_REPORT_CHUNKS;
+        final int chunks = KCompat.REPORT_CHUNKS;
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
-            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Reporting fake loaded chunks in MinecraftServerMixin. (oldChunks: {}, chunks: {}, server: {})", new Object[]{oldChunks, chunks, this}); // <- Array for compat with older Log4j2.
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Reporting fake loaded chunks in MinecraftServerMixin. (oldChunks: {}, chunks: {}, server: {})", new Object[]{oldChunks, chunks, this}); // <- Array for compat with older Log4j2.
         }
 
         // Wait for 0 OR 441 chunks to load.
@@ -291,8 +283,8 @@ public final class MinecraftServerMixin {
         final int loop = ((oldLoop < 0) ? 1 : -1);
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
-            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Hijacking loop constant to prevent looping in MinecraftServerMixin. (oldLoop: {}, loop: {}, server: {})", new Object[]{oldLoop, loop, this}); // <- Array for compat with older Log4j2.
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Hijacking loop constant to prevent looping in MinecraftServerMixin. (oldLoop: {}, loop: {}, server: {})", new Object[]{oldLoop, loop, this}); // <- Array for compat with older Log4j2.
         }
 
         // Return.

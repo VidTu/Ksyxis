@@ -31,17 +31,18 @@ package ru.vidtu.ksyxis.platform;
 
 import com.google.errorprone.annotations.DoNotCall;
 import net.fabricmc.api.ModInitializer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
-import ru.vidtu.ksyxis.Ksyxis;
+import org.spongepowered.asm.launch.MixinBootstrap;
 
 /**
  * Main Ksyxis class for Fabric.
  *
  * @author VidTu
  * @apiNote Internal use only
- * @see Ksyxis
  */
 @ApiStatus.Internal
 @NullMarked
@@ -57,15 +58,20 @@ public final class KFabric implements ModInitializer {
     }
 
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="fabric"} and {@code manual=false}.
+     * Logs the platform info.
      *
      * @apiNote Do not call, called by Fabric
-     * @see Ksyxis#init(String, boolean)
      */
     @DoNotCall("Called by Fabric")
     @Override
     public void onInitialize() {
-        Ksyxis.init("fabric", /*manual=*/false);
+        // Log. (there's no sense in keeping the logger after that)
+        final Logger logger = LogManager.getLogger("Ksyxis/KFabric");
+        if (KCompile.DEBUG_LOGS) {
+            logger.info(KPlugin.MARKER, "Ksyxis: Ready to remove unneeded chunks. (platform: fabric, version: " + KCompile.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+        } else {
+            logger.info("Ksyxis: Ready to remove unneeded chunks. (platform: fabric, version: " + KCompile.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+        }
     }
 
     @Contract(pure = true)

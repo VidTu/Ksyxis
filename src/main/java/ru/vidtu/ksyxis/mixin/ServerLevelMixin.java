@@ -42,8 +42,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import ru.vidtu.ksyxis.Ksyxis;
 import ru.vidtu.ksyxis.platform.KCompile;
+import ru.vidtu.ksyxis.platform.KPlugin;
 
 /**
  * Mixin for {@code ServerLevel} that disables spawn chunk tickets and sets {@code spawnChunkRadius} to {@code 0}.
@@ -114,8 +114,8 @@ public final class ServerLevelMixin {
         }
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
-            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Reporting 0 as spawnChunkRadius gamerule in ServerLevelMixin. (spawnChunks: {}, level: {})", new Object[]{spawnChunks, this}); // <- Array for compat with older Log4j2.
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Reporting 0 as spawnChunkRadius gamerule in ServerLevelMixin. (spawnChunks: {}, level: {})", new Object[]{spawnChunks, this}); // <- Array for compat with older Log4j2.
         }
 
         // Report spawnChunkRadius gamerule as 0.
@@ -160,8 +160,8 @@ public final class ServerLevelMixin {
         }
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
-            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Adding zero-level ticket in ServerLevelMixin. (ticket: {}, level: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Adding zero-level ticket in ServerLevelMixin. (ticket: {}, level: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
         }
 
         // Add zero-level chunk loading ticket.

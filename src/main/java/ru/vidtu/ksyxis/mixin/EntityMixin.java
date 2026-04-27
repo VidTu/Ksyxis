@@ -32,16 +32,14 @@ package ru.vidtu.ksyxis.mixin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.UnknownNullability;
 import org.jspecify.annotations.NullMarked;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import ru.vidtu.ksyxis.Ksyxis;
 import ru.vidtu.ksyxis.platform.KCompile;
+import ru.vidtu.ksyxis.platform.KPlugin;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -66,13 +64,6 @@ import java.lang.invoke.MethodHandles;
 @NullMarked
 public final class EntityMixin {
     /**
-     * Logger for this class.
-     */
-    @Unique
-    @UnknownNullability
-    private static final Logger KSYXIS_LOGGER = (KCompile.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/EntityMixin") : null);
-
-    /**
      * An instance of this class cannot be created.
      *
      * @throws AssertionError Always
@@ -95,9 +86,12 @@ public final class EntityMixin {
      */
     @Inject(method = "<clinit>", at = @At("RETURN"), remap = false)
     private static void ksyxis_clinit_return(final CallbackInfo ci) {
+        // Create a temporary logger. (there's no sense in keeping it after)
+        final Logger logger = (KCompile.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/EntityMixin") : null);
+
         // Log. (**DEBUG**)
         if (KCompile.DEBUG_LOGS) {
-            KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Initializing Entity class, making sure first entity ID is not zero. Searching for the field in EntityMixin...");
+            logger.debug(KPlugin.MARKER, "Ksyxis: Initializing Entity class, making sure first entity ID is not zero. Searching for the field in EntityMixin...");
         }
 
         // Create the lookup object.
@@ -122,16 +116,16 @@ public final class EntityMixin {
                 setter.invokeExact((int) 1);
 
                 // Log. (**DEBUG**)
-                if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(Ksyxis.KSYXIS_MARKER)) {
-                    KSYXIS_LOGGER.debug(Ksyxis.KSYXIS_MARKER, "Ksyxis: Set first entity ID to one in EntityMixin. (field: {}, setter: {})", new Object[]{field, setter}); // <- Array for compat with older Log4j2.
+                if (KCompile.DEBUG_LOGS && logger.isDebugEnabled(KPlugin.MARKER)) {
+                    logger.debug(KPlugin.MARKER, "Ksyxis: Set first entity ID to one in EntityMixin. (field: {}, setter: {})", new Object[]{field, setter}); // <- Array for compat with older Log4j2.
                 }
 
                 // Done.
                 return;
             } catch (final Throwable t) {
                 // Log. (**TRACE**)
-                if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) {
-                    KSYXIS_LOGGER.trace(Ksyxis.KSYXIS_MARKER, "Ksyxis: Field error, skipping in EntityMixin. (field: {})", new Object[]{field, t}); // <- Array for compat with older Log4j2.
+                if (KCompile.DEBUG_LOGS && logger.isTraceEnabled(KPlugin.MARKER)) {
+                    logger.trace(KPlugin.MARKER, "Ksyxis: Field error, skipping in EntityMixin. (field: {})", new Object[]{field, t}); // <- Array for compat with older Log4j2.
                 }
             }
         }

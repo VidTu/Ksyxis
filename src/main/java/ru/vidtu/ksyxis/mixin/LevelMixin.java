@@ -41,8 +41,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import ru.vidtu.ksyxis.Ksyxis;
 import ru.vidtu.ksyxis.platform.KCompile;
+import ru.vidtu.ksyxis.platform.KPlugin;
 
 /**
  * Mixin for {@code ServerLevel} that disables spawn chunk tickets in older versions.
@@ -106,8 +106,8 @@ public final class LevelMixin {
     }, at = @At("HEAD"), cancellable = true, require = 0, expect = 0)
     private void ksyxis_isSpawnChunk_head(final int x, final int z, final CallbackInfoReturnable<Boolean> cir) {
         // Log. (**TRACE**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isTraceEnabled(Ksyxis.KSYXIS_MARKER)) {
-            KSYXIS_LOGGER.trace(Ksyxis.KSYXIS_MARKER, "Ksyxis: Forcing chunk to be not spawn chunk in LevelMixin. (x: {}, z: {}, cir: {}, level: {})", new Object[]{x, z, cir, this}); // <- Array for compat with older Log4j2.
+        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isTraceEnabled(KPlugin.MARKER)) {
+            KSYXIS_LOGGER.trace(KPlugin.MARKER, "Ksyxis: Forcing chunk to be not spawn chunk in LevelMixin. (x: {}, z: {}, cir: {}, level: {})", new Object[]{x, z, cir, this}); // <- Array for compat with older Log4j2.
         }
 
         // Always force false to remove any spawn chunks from the world and allow them to be unloaded.

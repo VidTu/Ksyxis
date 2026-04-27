@@ -30,17 +30,18 @@
 package ru.vidtu.ksyxis.platform;
 
 import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
-import ru.vidtu.ksyxis.Ksyxis;
+import org.spongepowered.asm.launch.MixinBootstrap;
 
 /**
  * Main Ksyxis class for Forge. (modern & legacy)
  *
  * @author VidTu
  * @apiNote Internal use only
- * @see Ksyxis
  * @see KNeoForge
  * @see KCore
  */
@@ -49,13 +50,29 @@ import ru.vidtu.ksyxis.Ksyxis;
 @NullMarked
 public final class KForge {
     /**
-     * Calls {@link Ksyxis#init(String, boolean)} with {@code platform="forge"} and {@code manual=false}.
+     * Logs the platform info. Provides a (more) helpful message if Mixin is not installed.
      *
      * @apiNote Do not call, called by Forge
-     * @see Ksyxis#init(String, boolean)
      */
     public KForge() {
-        Ksyxis.init("forge", /*manual=*/false);
+        // Create a temporary logger. (there's no sense in keeping it after)
+        final Logger logger = LogManager.getLogger("Ksyxis/KForge");
+        try {
+            // Log.
+            if (KCompile.DEBUG_LOGS) {
+                logger.info(KPlugin.MARKER, "Ksyxis: Ready to remove unneeded chunks. (platform: forge, version: " + KCompile.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+            } else {
+                logger.info("Ksyxis: Ready to remove unneeded chunks. (platform: forge, version: " + KCompile.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+            }
+        } catch (final NoClassDefFoundError ncdfe) {
+            // Check if Mixin is absent.
+            if ("org/spongepowered/asm/launch/MixinBootstrap".equals(ncdfe.getMessage())) {
+                throw new RuntimeException("Ksyxis: No Mixin found. (boot)", ncdfe);
+            }
+
+            // Rethrow.
+            throw ncdfe;
+        }
     }
 
     @Contract(pure = true)

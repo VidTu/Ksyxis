@@ -27,16 +27,16 @@
 #
 # SPDX-License-Identifier: MIT
 
-# This script helps me publish Ksyxis effortlessly on GitHub,
+# This script helps me publish Ksyxis effortlessly onto GitHub,
 # Modrinth, CurseForge, and Discord. It does the following:
 #
 # 1.  Checks that all required (CLI) tools are installed.
 # 2.  Extracts the actual mod version from 'gradle.properties'.
 # 3.  Guesses the version flavor based on the version string:
 #     - "alpha" or "snapshot" versions will become Alpha
-#        on Modrinth/CurseForge and Pre-Release on GitHub.
+#       on Modrinth/CurseForge and Pre-Release on GitHub.
 #     - "beta" or "rc" versions will become Beta on
-#        Modrinth/CurseForge and Pre-Release on GitHub.
+#       Modrinth/CurseForge and Pre-Release on GitHub.
 #     - Other versions will become Release on GitHub/Modrinth/CurseForge.
 # 4.  Locates and checks the JAR file in the 'build/libs' folder.
 # 5.  Sources the authentication tokens from the environment.
@@ -92,10 +92,10 @@ set -euo pipefail
 # ENDPOINT, but here we are. After challenge is passed, cookies from the
 # Chromium are extracted and used to obtain clearance from the Cloudflare.
 upload_curseforge_clearance() {
-    # Shady mode enabled.
+    # :boar: :closed_lock_with_key:
     echo '>>>>> SHADY MODE ENABLED <<<<<'
 
-    # Test shady tools.
+    # Test the shady tools.
     echo 'Checking shady tools...'
     UPLOAD_CURSEFORGE_SHADY_TOOLS='kill mkfifo websocat'
     for UPLOAD_CURSEFORGE_SHADY_TOOL in $UPLOAD_CURSEFORGE_SHADY_TOOLS; do
@@ -113,7 +113,7 @@ upload_curseforge_clearance() {
     fi
     echo 'Found all needed shady tools.'
 
-    # Create temporary working directory.
+    # Create a temporary working directory.
     echo 'Creating a working directory...'
     UPLOAD_CURSEFORGE_SHADY_DIR=$(mktemp -dt ksyxis.upload-shady.XXXXXXX)
     echo "Created a working directory: ${UPLOAD_CURSEFORGE_SHADY_DIR}"
@@ -124,7 +124,7 @@ upload_curseforge_clearance() {
     UPLOAD_CURSEFORGE_SHADY_ID1="${!}"
     echo "Launched Chromium: ${UPLOAD_CURSEFORGE_SHADY_ID1}"
 
-    # Extract socket data.
+    # Extract the socket data.
     echo 'Extracting the debug endpoint...'
     UPLOAD_CURSEFORGE_SHADY_ENDPOINT=$(curl --fail-with-body --retry 5 --retry-all-errors --max-time 30 'http://localhost:9222/json' | jq --raw-output '.[].webSocketDebuggerUrl')
     echo "Extracted the debug endpoint: ${UPLOAD_CURSEFORGE_SHADY_ENDPOINT}"
@@ -145,11 +145,11 @@ upload_curseforge_clearance() {
     UPLOAD_CURSEFORGE_SHADY_ID2="${!}"
     echo "Opened a websocket: ${UPLOAD_CURSEFORGE_SHADY_ID2}"
 
-    # Start data extractor.
-    echo 'Starting data extractor...'
+    # Start the data extractor.
+    echo 'Starting the data extractor...'
     cat "${UPLOAD_CURSEFORGE_SHADY_FIFO1}" | jq --unbuffered --compact-output 'select(.method == "Network.requestWillBeSentExtraInfo") | select(.params?.headers?.cookie) | select(.params?.headers?.cookie | test("cf_clearance=")) | select(.params.headers.":method" == "GET") | .params.headers | with_entries(select(.key | startswith(":") | not))' > "${UPLOAD_CURSEFORGE_SHADY_FIFO2}" &
     UPLOAD_CURSEFORGE_SHADY_ID3="${!}"
-    echo "Started data extractor: ${UPLOAD_CURSEFORGE_SHADY_ID3}"
+    echo "Started the data extractor: ${UPLOAD_CURSEFORGE_SHADY_ID3}"
 
     # Wait.
     echo 'Waiting for challenge solution...'
@@ -170,7 +170,7 @@ upload_curseforge_clearance() {
     wait "${UPLOAD_CURSEFORGE_SHADY_ID1}" >/dev/null 2>&1 || true
     echo 'Killed Chromium.'
 
-    # Clean the workdir.
+    # Clean the directory.
     echo 'Cleaning the working directory...'
     rm -rf -- "${UPLOAD_CURSEFORGE_SHADY_DIR}"
     echo 'Cleaned the working directory.'
@@ -182,14 +182,14 @@ upload_curseforge_clearance() {
     echo "Shady user agent: ${UPLOAD_CURSEFORGE_SHADY_USER_AGENT}"
     echo "Shady cookie(s): ${UPLOAD_CURSEFORGE_SHADY_COOKIE}"
 
-    # Shady mode disabled.
+    # Done.
     echo '<<<<< SHADY MODE DISABLED >>>>>'
 }
 
 # Begin.
 echo 'NOTE: Uploading Ksyxis...'
 
-# Test tools.
+# Test the tools.
 echo 'Checking tools...'
 UPLOAD_TOOLS='cat curl grep jq mktemp sed tr'
 for UPLOAD_TOOL in $UPLOAD_TOOLS; do
@@ -198,19 +198,19 @@ done
 command -v "${EDITOR:-vi}" >/dev/null || { echo "ERROR: Missing editor set via EDITOR: ${EDITOR:-vi}"; exit 1; }
 echo 'Found all needed tools.'
 
-# Source version.
-echo "Extracting version from 'gradle.properties'..."
+# Source the version.
+echo "Extracting the version from 'gradle.properties'..."
 UPLOAD_VERSION=$(grep -F 'version=' '../gradle.properties' | sed 's/version=//g')
 UPLOAD_VERSION_JSON=$(echo "${UPLOAD_VERSION}" | jq --raw-input --compact-output)
 echo "NOTE: Version: ${UPLOAD_VERSION}"
 
-# Create name.
+# Create a display name.
 UPLOAD_NAME="Ksyxis ${UPLOAD_VERSION}"
 UPLOAD_NAME_JSON=$(echo "${UPLOAD_NAME}" | jq --raw-input --compact-output)
 echo "NOTE: Name: ${UPLOAD_VERSION}"
 
 # Guess version type.
-echo 'Guessing version type...'
+echo 'Guessing the version type...'
 UPLOAD_VERSION_PRE='false'
 UPLOAD_VERSION_TYPE='release'
 echo "${UPLOAD_VERSION}" | grep -Eiq -- '-(beta|rc)' && UPLOAD_VERSION_TYPE='beta'
@@ -219,8 +219,8 @@ echo "${UPLOAD_VERSION}" | grep -Eiq -- '-(alpha|snapshot)' && UPLOAD_VERSION_TY
 echo "NOTE: Version Pre-Release (GitHub): ${UPLOAD_VERSION_PRE}"
 echo "NOTE: Version Type (Modrinth/CurseForge): ${UPLOAD_VERSION_TYPE}"
 
-# Select the JAR.
-echo 'Checking JAR file...'
+# Find the JAR.
+echo 'Checking the JAR file...'
 UPLOAD_FILENAME="Ksyxis-${UPLOAD_VERSION}.jar"
 UPLOAD_FILE="../build/libs/${UPLOAD_FILENAME}"
 [ ! -f "${UPLOAD_FILE}" ] && echo "ERROR: Missing '${UPLOAD_FILENAME}' JAR file." && exit 1
@@ -235,52 +235,52 @@ else
     echo "Missing '.env', not sourced."
 fi
 
-# Verify.
-echo 'Checking tokens...'
+# Verify the tokens.
+echo 'Checking the tokens...'
 [ -z "${UPLOAD_GITHUB_TOKEN:-}" ] && echo "ERROR: Missing UPLOAD_GITHUB_TOKEN. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
 [ -z "${UPLOAD_MODRINTH_TOKEN:-}" ] && echo "ERROR: Missing UPLOAD_MODRINTH_TOKEN. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
 [ -z "${UPLOAD_CURSEFORGE_TOKEN:-}" ] && echo "ERROR: Missing UPLOAD_CURSEFORGE_TOKEN. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
 [ -z "${UPLOAD_DISCORD_WEBHOOK:-}" ] && echo "ERROR: Missing UPLOAD_DISCORD_WEBHOOK. Use '.env' file in 'dev' or your shell's environment variables." && exit 1
 echo 'All tokens found.'
 
-# Create a temporary file for changelog.
+# Create a temporary file for the changelog.
 echo 'Preparing a changelog template...'
 UPLOAD_CHANGELOG_FILE=$(mktemp -t ksyxis.upload-changelog.XXXXXXX.md)
 echo "Created a changelog template: ${UPLOAD_CHANGELOG_FILE}"
 
-# Hint for changelog.
+# Write a hint for the changelog.
 echo 'Writing the changelog template...'
 echo "What's new:
 
 - [CHANGELOG]
 
-**Full Changelog**: [PREV]...${UPLOAD_VERSION}" > "${UPLOAD_CHANGELOG_FILE}"
+**Full Changelog**: https://github.com/VidTu/Ksyxis/compare/[PREV]...${UPLOAD_VERSION}" > "${UPLOAD_CHANGELOG_FILE}"
 echo 'Written the changelog template.'
 
-# Edit that file with an editor. (fallback to an unquittable one)
+# Edit the changelog with an editor. (fallback to an unquittable one)
 echo 'Opening the changelog file in the editor...'
 "${EDITOR:-vi}" -- "${UPLOAD_CHANGELOG_FILE}"
 echo 'Finished editing the changelog file.'
 
-# Check if changelog is not empty.
+# Check if the changelog is not empty.
 echo 'Checking the changelog...'
-grep -Eq '\S' -- "${UPLOAD_CHANGELOG_FILE}" || { echo 'ERROR: Empty changelog.' && exit 1; }
+grep -Eq '\S' -- "${UPLOAD_CHANGELOG_FILE}" || { echo 'ERROR: Empty changelog.' && rm -- "${UPLOAD_CHANGELOG_FILE}" && exit 1; }
 
-# Read the changelog.
+# Read and format the changelog.
 UPLOAD_CHANGELOG=$(cat -- "${UPLOAD_CHANGELOG_FILE}")
+rm -- "${UPLOAD_CHANGELOG_FILE}"
 UPLOAD_CHANGELOG_JSON=$(echo "${UPLOAD_CHANGELOG}" | jq --raw-input --slurp --compact-output)
-UPLOAD_CHANGELOG_MODIFIED=$(echo "${UPLOAD_CHANGELOG}" | sed -Ee 's/^\*\*Full Changelog\*\*: (.*)$/**Full Changelog**: [\1](https:\/\/github.com\/VidTu\/Ksyxis\/compare\/\1)/g' -e 's/(issue|PR): #([0-9]+)/\1: [#\2](https:\/\/github.com\/VidTu\/Ksyxis\/issues\/\2)/g')
+UPLOAD_CHANGELOG_MODIFIED=$(echo "${UPLOAD_CHANGELOG}" | sed -Ee 's/^\*\*Full Changelog\*\*: (https:\/\/github.com\/VidTu\/Ksyxis\/compare\/(.*))$/**Full Changelog**: [\2](\1)/g' -e 's/(issue|PR): #([0-9]+)/\1: [#\2](https:\/\/github.com\/VidTu\/Ksyxis\/issues\/\2)/g')
 UPLOAD_CHANGELOG_MODIFIED_JSON=$(echo "${UPLOAD_CHANGELOG_MODIFIED}" | jq --raw-input --slurp --compact-output)
 UPLOAD_CHANGELOG_DISCORD=$(echo "${UPLOAD_CHANGELOG_MODIFIED}" | tr '\n' '\r' | sed 's/\r\r/\r/g' | tr '\r' '\n')
 UPLOAD_CHANGELOG_DISCORD_JSON=$(echo "${UPLOAD_CHANGELOG_DISCORD}" | jq --raw-input --slurp --compact-output)
-rm -- "${UPLOAD_CHANGELOG_FILE}"
 
 # Print the changelog.
 echo '===== CHANGELOG START ====='
 echo "${UPLOAD_CHANGELOG}"
 echo '===== CHANGELOG END ====='
 
-# Confirm.
+# Final confirmation.
 echo 'Ready to upload. Press Enter to confirm, terminate (CTRL+C) to cancel.'
 read -r _
 
@@ -289,7 +289,7 @@ echo 'Creating a GitHub release draft...'
 UPLOAD_GITHUB_DRAFT=$(curl --fail-with-body --max-time 30 --retry 3 --request POST --header 'Content-Type: application/json' --header "Authorization: Bearer ${UPLOAD_GITHUB_TOKEN}" --data-raw "{\"tag_name\":${UPLOAD_VERSION_JSON},\"name\":${UPLOAD_NAME_JSON},\"body\":${UPLOAD_CHANGELOG_JSON},\"draft\":true,\"prerelease\":${UPLOAD_VERSION_PRE}}" 'https://api.github.com/repos/VidTu/Ksyxis/releases')
 echo 'Created a GitHub release draft.'
 
-# Extract the ID.
+# Extract the GitHub release ID.
 echo 'Extracting the GitHub release draft ID...'
 UPLOAD_GITHUB_ID=$(echo "${UPLOAD_GITHUB_DRAFT}" | jq --raw-output '.id')
 echo "Extracted the GitHub release draft ID: ${UPLOAD_GITHUB_ID}"
@@ -319,7 +319,7 @@ if [ "${UPLOAD_CURSEFORGE_RESPONSE_CODE}" -eq '403' ] && echo "${UPLOAD_CURSEFOR
     # CurseForge CloudFlare Turnstile kicked in.
     echo 'CurseForge requires passing the bot check (lol) on the API endpoint (lmao).'
 
-    # Confirm.
+    # Shady confirmation.
     echo 'Will need to use a Chromium browser to pass the CAPTCHA. This is a shady tactic, proceed at your own risk. Press Enter to confirm, terminate (CTRL+C) to cancel.'
     read -r _
 
@@ -336,8 +336,8 @@ elif [ "${UPLOAD_CURSEFORGE_RESPONSE_CODE}" -lt 200 ] || [ "${UPLOAD_CURSEFORGE_
 fi
 echo 'Published a CurseForge release.'
 
-# Notify via Discord webhook.
-echo 'Publishing a Discord webhook...'
-UPLOAD_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:00.000Z")
-curl --fail-with-body --max-time 30 --retry 3 --request POST --header 'Content-Type: application/json' --data-raw "{\"embeds\":[{\"title\":${UPLOAD_NAME_JSON},\"description\":${UPLOAD_CHANGELOG_DISCORD_JSON},\"color\":65280,\"fields\":[{\"name\":\"Download\",\"value\":\"<:modrinth:1495154733017595964> Modrinth: https://modrinth.com/mod/ksyxis\n<:curseforge:1495193223180718241> CurseForge: https://curseforge.com/minecraft/mc-mods/ksyxis\n<:github:1495153741412696216> GitHub: https://github.com/VidTu/Ksyxis/releases\"}],\"author\":{\"name\":\"VidTu\",\"url\":\"https://github.com/VidTu\",\"icon_url\":\"https://cdn.discordapp.com/avatars/339357082602176513/f82f8e810b31903775ed304d07319b1f.png?size=2048\"},\"footer\":{\"text\":\"Ksyxis: Speed up your world loading.\",\"icon_url\":\"https://cdn.discordapp.com/avatars/1495197205030768684/8fba8dee41472c524c06b2c4d54aa61f.png?size=2048\"},\"timestamp\":\"${UPLOAD_TIMESTAMP}\"}],\"components\":[{\"type\":1,\"components\":[{\"type\":2,\"style\":5,\"label\":\"Modrinth\",\"url\":\"https://modrinth.com/mod/ksyxis\",\"emoji\":{\"name\":\"modrinth\",\"id\":1495154733017595964}},{\"type\":2,\"style\":5,\"label\":\"CurseForge\",\"url\":\"https://curseforge.com/minecraft/mc-mods/ksyxis\",\"emoji\":{\"name\":\"curseforge\",\"id\":1495193223180718241}},{\"type\":2,\"style\":5,\"url\":\"https://github.com/VidTu/Ksyxis/releases\",\"label\":\"GitHub\",\"emoji\":{\"name\":\"github\",\"id\":1495153741412696216}}]}]}" "${UPLOAD_DISCORD_WEBHOOK}?with_components=true"
-echo "Published a Discord webhook. !!! DON'T FORGET TO CLICK 'PUBLISH' ON IT. !!!"
+# Notify via a Discord webhook notification.
+echo 'Publishing a Discord webhook notification...'
+UPLOAD_DISCORD_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:00.000Z")
+curl --fail-with-body --max-time 30 --retry 3 --request POST --header 'Content-Type: application/json' --data-raw "{\"embeds\":[{\"title\":${UPLOAD_NAME_JSON},\"description\":${UPLOAD_CHANGELOG_DISCORD_JSON},\"color\":65280,\"fields\":[{\"name\":\"Download\",\"value\":\"<:modrinth:1495154733017595964> Modrinth: https://modrinth.com/mod/ksyxis\n<:curseforge:1495193223180718241> CurseForge: https://curseforge.com/minecraft/mc-mods/ksyxis\n<:github:1495153741412696216> GitHub: https://github.com/VidTu/Ksyxis/releases\"}],\"author\":{\"name\":\"VidTu\",\"url\":\"https://github.com/VidTu\",\"icon_url\":\"https://cdn.discordapp.com/avatars/339357082602176513/f82f8e810b31903775ed304d07319b1f.png?size=2048\"},\"footer\":{\"text\":\"Ksyxis: Speed up your world loading.\",\"icon_url\":\"https://cdn.discordapp.com/avatars/1495197205030768684/8fba8dee41472c524c06b2c4d54aa61f.png?size=2048\"},\"timestamp\":\"${UPLOAD_DISCORD_TIMESTAMP}\"}],\"components\":[{\"type\":1,\"components\":[{\"type\":2,\"style\":5,\"label\":\"Modrinth\",\"url\":\"https://modrinth.com/mod/ksyxis\",\"emoji\":{\"name\":\"modrinth\",\"id\":1495154733017595964}},{\"type\":2,\"style\":5,\"label\":\"CurseForge\",\"url\":\"https://curseforge.com/minecraft/mc-mods/ksyxis\",\"emoji\":{\"name\":\"curseforge\",\"id\":1495193223180718241}},{\"type\":2,\"style\":5,\"url\":\"https://github.com/VidTu/Ksyxis/releases\",\"label\":\"GitHub\",\"emoji\":{\"name\":\"github\",\"id\":1495153741412696216}}]}]}" "${UPLOAD_DISCORD_WEBHOOK}?with_components=true"
+echo "Published a Discord webhook notification. !!! DON'T FORGET TO CLICK 'PUBLISH' ON IT. !!!"

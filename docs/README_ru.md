@@ -6,8 +6,8 @@
 
 ## Язык (Language)
 
-- [English 🇬🇧 🇺🇸](README.md)
-- **Русский** 🇷🇺
+- [English](README.md)
+- **Русский**
 
 ## Скачать
 

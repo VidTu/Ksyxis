@@ -6,8 +6,8 @@ Speed up your world loading by removing unneeded chunks.
 
 ## Language
 
-- **English** 🇬🇧 🇺🇸
-- [Русский 🇷🇺](README_ru.md)
+- **English**
+- [Русский](README_ru.md)
 
 ## Downloads
 

@@ -155,7 +155,7 @@ public final class KCore implements IFMLLoadingPlugin {
             }
         } catch (final Throwable t) {
             // Check if Mixin is absent.
-            if (t.getClass() == NoClassDefFoundError.class && "org/spongepowered/asm/launch/MixinBootstrap".equals(t.getMessage())) {
+            if ((t.getClass() == NoClassDefFoundError.class) && "org/spongepowered/asm/launch/MixinBootstrap".equals(t.getMessage())) {
                 throw new RuntimeException("Ksyxis: No Mixin found. (core)", t);
             }
 

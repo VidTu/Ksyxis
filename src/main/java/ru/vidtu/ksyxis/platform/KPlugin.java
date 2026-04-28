@@ -55,7 +55,6 @@ import java.util.Set;
  *
  * @author VidTu
  * @apiNote Internal use only
- * @see Ksyxis
  */
 @ApiStatus.Internal
 @NullMarked
@@ -84,7 +83,7 @@ public final class KPlugin implements IMixinConfigPlugin {
     private final boolean skipCode = (IClassBytecodeProvider.class.getMethods().length >= 3);
 
     /**
-     * Whether the transformers should be ran when checking the class data. {@code false} is used whenever possible
+     * Whether the transformers should be run when checking the class data. {@code false} is used whenever possible
      * for performance, {@code true} is used if current bytecode provider doesn't support untransformed classes.
      */
     private final boolean runTransformers;
@@ -97,7 +96,7 @@ public final class KPlugin implements IMixinConfigPlugin {
     @Contract(pure = true)
     public KPlugin() {
         // Determine the transformers.
-        final String providerClass = provider.getClass().getName();
+        final String providerClass = this.provider.getClass().getName();
         this.runTransformers = ("org.spongepowered.asm.launch.MixinLaunchPluginLegacy".equals(providerClass) ||
                 "org.spongepowered.asm.launch.MixinLaunchPlugin".equals(providerClass));
     }
@@ -140,9 +139,9 @@ public final class KPlugin implements IMixinConfigPlugin {
             // - It returns the class node, if the class exists.
             // - It throws ClassNotFoundException if the class doesn't exist.
             if (this.skipCode) {
-                this.provider.getClassNode(targetClassName, runTransformers, ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES); // Implicit NPE for 'targetClassName'
+                this.provider.getClassNode(targetClassName, this.runTransformers, ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES); // Implicit NPE for 'targetClassName'
             } else {
-                this.provider.getClassNode(targetClassName, runTransformers); // Implicit NPE for 'targetClassName'
+                this.provider.getClassNode(targetClassName, this.runTransformers); // Implicit NPE for 'targetClassName'
             }
 
             // Log. (**DEBUG**)

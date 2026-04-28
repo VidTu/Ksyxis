@@ -26,12 +26,12 @@
       <w>javacmd</w>
       <w>jvmargs</w>
       <w>ksyxis</w>
-      <w>minecraft</w>
       <w>mkfifo</w>
       <w>mktemp</w>
       <w>modid</w>
       <w>modmenu</w>
       <w>modrinth</w>
+      <w>ncdfe</w>
       <w>neoforge</w>
       <w>ornithe</w>
       <w>pipefail</w>
@@ -45,6 +45,7 @@
       <w>startswith</w>
       <w>tostring</w>
       <w>ulimit</w>
+      <w>ungoogled</w>
       <w>vidtu</w>
       <w>wcdfzsgy</w>
       <w>websocat</w>

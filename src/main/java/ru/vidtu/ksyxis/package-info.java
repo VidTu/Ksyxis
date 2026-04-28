@@ -32,7 +32,6 @@
  *
  * @author VidTu
  * @apiNote Internal use only
- * @see ru.vidtu.ksyxis.Ksyxis
  */
 @ApiStatus.Internal
 @NullMarked

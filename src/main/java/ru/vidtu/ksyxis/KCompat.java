@@ -50,10 +50,11 @@ public final class KCompat {
     /**
      * The amount of loaded chunks to report. Usually {@code 0}, because we have no spawn chunks,
      * but if ModernFix is installed, the value might be changed to {@code 441} to prevent deadlocks.
-     *
+     * <p>
      * Equals to either {@code 0} or {@code 441}, depending on the configuration.
      */
     public static final int REPORT_CHUNKS;
+
     static {
         // Create a temporary logger. (there's no sense in keeping it after)
         final Logger logger = LogManager.getLogger("Ksyxis/KCompat");

@@ -56,7 +56,7 @@ public final class MixinBootstrap {
     /**
      * Initializes the Mixin.
      */
-    public static boolean init() {
+    public static void init() {
         throw new AssertionError("Ksyxis: Stub.");
     }
 }

@@ -210,7 +210,7 @@ public final class MinecraftServerMixin {
      * @param oldChunks Previous constant value for logging
      * @return Always {@code 0} without ModernFix, always {@code 441} with ModernFix
      * @apiNote Do not call, called by Mixin
-     * @see #KSYXIS_REPORT_CHUNKS
+     * @see KCompat#REPORT_CHUNKS
      */
     @DoNotCall("Called by Mixin")
     @Contract(pure = true)

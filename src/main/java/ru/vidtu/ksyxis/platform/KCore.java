@@ -129,6 +129,11 @@ public final class KCore implements IFMLLoadingPlugin {
         // Create a temporary logger. (there's no sense in keeping it after)
         final Logger logger = LogManager.getLogger("Ksyxis/KCore");
         try {
+            // Validate.
+            if (KCompile.DEBUG_ASSERTS) {
+                assert (data != null) : "Ksyxis: Parameter 'data' is null. (core: " + this + ')';
+            }
+
             // Log.
             if (KCompile.DEBUG_LOGS) {
                 logger.info(KPlugin.MARKER, "Ksyxis: Performing manual Mixin bootstrap... (version: " + KCompile.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.

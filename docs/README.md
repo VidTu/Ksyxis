@@ -19,7 +19,7 @@ Speed up your world loading by removing unneeded chunks.
 
 - Fabric, Forge, NeoForge, Quilt, Legacy Fabric, or Ornithe
 - Minecraft (1.8 or newer)
-- **Forge 1.8-1.15.2 only**: Any Mixin provider, at your choice (such as
+- **Forge 1.8-1.14.4 only**: Any Mixin provider, at your choice (such as
   [MixinBootstrap](https://modrinth.com/mod/mixinbootstrap),
   [MixinBooter](https://modrinth.com/mod/mixinbooter),
   [UniMixins](https://modrinth.com/mod/unimixins), or any other)

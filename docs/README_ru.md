@@ -19,7 +19,7 @@
 
 - Fabric, Forge, NeoForge, Quilt, Legacy Fabric или Ornithe
 - Minecraft (1.8 или новее)
-- **Только Forge 1.8-1.15.2**: Любой мод для Mixin на ваш выбор (например,
+- **Только Forge 1.8-1.14.4**: Любой мод для Mixin на ваш выбор (например,
   [MixinBootstrap](https://modrinth.com/mod/mixinbootstrap),
   [MixinBooter](https://modrinth.com/mod/mixinbooter),
   [UniMixins](https://modrinth.com/mod/unimixins) или любой другой)

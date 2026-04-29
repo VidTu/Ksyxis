@@ -76,9 +76,10 @@
 # projects of mine have it relicensed, but in general, credit me and it's fine.
 #
 # Required CLI tools:
-#  sh cat curl grep jq mktemp sed tr
+#  cat curl grep jq mktemp sed sh tr
 # Additional required CLI tools for shady CurseForge tactic:
-#  chrome/chromium kill mkfifo websocat
+#  kill mkfifo websocat (+ ANY of the Chromium-alike browsers: chromium
+#  ungoogled-chromium chrome google-chrome brave-browser microsoft-edge)
 #
 # Any POSIX shell should work, no bash-isms used (intentionally). The script
 # should be system-agnostic, but was tested with MinGW (Windows) and Debian.
@@ -100,13 +101,13 @@ upload_curseforge_clearance() {
     UPLOAD_CURSEFORGE_SHADY_TOOLS='kill mkfifo websocat'
     UPLOAD_CURSEFORGE_SHADY_BROWSERS='chromium ungoogled-chromium chrome google-chrome brave-browser microsoft-edge'
     for UPLOAD_CURSEFORGE_SHADY_TOOL in $UPLOAD_CURSEFORGE_SHADY_TOOLS; do
-        command -v "${UPLOAD_CURSEFORGE_SHADY_TOOL}" >/dev/null || { echo "ERROR: Missing command '${UPLOAD_CURSEFORGE_SHADY_TOOL}'. All needed tools: ${UPLOAD_CURSEFORGE_SHADY_TOOLS} (plus any Chromium browser at your choice: ${UPLOAD_CURSEFORGE_SHADY_BROWSERS})"; exit 1; }
+        command -v "${UPLOAD_CURSEFORGE_SHADY_TOOL}" >/dev/null || { echo "ERROR: Missing command '${UPLOAD_CURSEFORGE_SHADY_TOOL}'. All needed shady tools: ${UPLOAD_CURSEFORGE_SHADY_TOOLS} (plus any Chromium-alike browser at your choice: ${UPLOAD_CURSEFORGE_SHADY_BROWSERS})"; exit 1; }
     done
     for UPLOAD_CURSEFORGE_SHADY_BROWSER in $UPLOAD_CURSEFORGE_SHADY_BROWSERS; do
-        command -v "${UPLOAD_CURSEFORGE_SHADY_BROWSER}" >/dev/null && UPLOAD_CURSEFORGE_SHADY_CHROME="${UPLOAD_CURSEFORGE_SHADY_BROWSER}" && echo "Will use '${UPLOAD_CURSEFORGE_SHADY_BROWSER}' as Chromium browser." && break
+        command -v "${UPLOAD_CURSEFORGE_SHADY_BROWSER}" >/dev/null && UPLOAD_CURSEFORGE_SHADY_CHROME="${UPLOAD_CURSEFORGE_SHADY_BROWSER}" && echo "Will use '${UPLOAD_CURSEFORGE_SHADY_BROWSER}' as Chromium-alike browser." && break
     done
     if [ -z "${UPLOAD_CURSEFORGE_SHADY_CHROME:-}" ]; then
-        echo "ERROR: Missing some Chromium browser. All needed tools: ${UPLOAD_CURSEFORGE_SHADY_TOOLS}  (plus any Chromium browser at your choice: ${UPLOAD_CURSEFORGE_SHADY_BROWSERS})"
+        echo "ERROR: Missing some Chromium-alike browser. All needed shady tools: ${UPLOAD_CURSEFORGE_SHADY_TOOLS}. (plus any Chromium-alike browser at your choice: ${UPLOAD_CURSEFORGE_SHADY_BROWSERS})"
         exit 1
     fi
     echo 'Found all needed shady tools.'
@@ -162,7 +163,7 @@ upload_curseforge_clearance() {
     wait "${UPLOAD_CURSEFORGE_SHADY_ID3}" >/dev/null 2>&1 || true
     echo 'Killed the websocket.'
 
-    # Close the Chromium.
+    # Close Chromium.
     echo 'Closing Chromium...'
     echo '{"id":4,"method":"Browser.close"}' | websocat --one-message "${UPLOAD_CURSEFORGE_SHADY_ENDPOINT}"
     wait "${UPLOAD_CURSEFORGE_SHADY_ID1}" >/dev/null 2>&1 || true
@@ -220,7 +221,6 @@ echo "NOTE: Version Type (Modrinth/CurseForge): ${UPLOAD_VERSION_TYPE}"
 # Find the JAR.
 echo 'Checking the JAR file...'
 UPLOAD_FILENAME="Ksyxis-${UPLOAD_VERSION}.jar"
-UPLOAD_FILENAME_URI=$(echo "${UPLOAD_FILENAME}" | jq --raw-input --raw-output '@uri')
 UPLOAD_FILE="../build/libs/${UPLOAD_FILENAME}"
 [ ! -f "${UPLOAD_FILE}" ] && echo "ERROR: Missing '${UPLOAD_FILENAME}' JAR file." && exit 1
 echo "JAR file '${UPLOAD_FILENAME}' found at '${UPLOAD_FILE}'."
@@ -297,7 +297,7 @@ if [ -z "${UPLOAD_GITHUB_SKIP:-}" ]; then
 
     # Upload the file to the GitHub release draft.
     echo 'Uploading file to the GitHub release draft...'
-    curl --fail-with-body --max-time 30 --retry 3 --request POST --header 'Content-Type: application/java-archive' --header "Authorization: Bearer ${UPLOAD_GITHUB_TOKEN}" --data-binary "@${UPLOAD_FILE}" "https://uploads.github.com/repos/VidTu/Ksyxis/releases/${UPLOAD_GITHUB_ID}/assets?name=${UPLOAD_FILENAME_URI}"
+    curl --fail-with-body --max-time 30 --retry 3 --request POST --header 'Content-Type: application/java-archive' --header "Authorization: Bearer ${UPLOAD_GITHUB_TOKEN}" --url-query "name=${UPLOAD_FILENAME}" --data-binary "@${UPLOAD_FILE}" "https://uploads.github.com/repos/VidTu/Ksyxis/releases/${UPLOAD_GITHUB_ID}/assets}"
     echo 'Uploaded file to the GitHub release draft.'
 
     # Publish a GitHub release from the draft.

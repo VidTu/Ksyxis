@@ -119,7 +119,7 @@ upload_curseforge_clearance() {
 
     # Launch Chromium.
     echo 'Launching Chromium...'
-    "${UPLOAD_CURSEFORGE_SHADY_CHROME}" --app='http://0.0.0.0:0/' --window-size=854,480 --user-data-dir="${UPLOAD_CURSEFORGE_SHADY_DIR}/data" --remote-debugging-port=9222 --incognito --disable-gpu --no-first-run --password-store=basic &
+    "${UPLOAD_CURSEFORGE_SHADY_CHROME}" --app='http://0.0.0.0:0/' --window-size=1280,720 --remote-debugging-port=9222 --incognito --guest --force-app-mode --disable-gpu --no-first-run --password-store=basic &
     UPLOAD_CURSEFORGE_SHADY_ID1="${!}"
     echo "Launched Chromium: ${UPLOAD_CURSEFORGE_SHADY_ID1}"
 
@@ -157,10 +157,7 @@ upload_curseforge_clearance() {
 
     # Kill the websocket.
     echo 'Killing the websocket...'
-    kill -9 "${UPLOAD_CURSEFORGE_SHADY_ID2}"
-    wait "${UPLOAD_CURSEFORGE_SHADY_ID2}" >/dev/null 2>&1 || true
-    kill -9 "${UPLOAD_CURSEFORGE_SHADY_ID3}"
-    wait "${UPLOAD_CURSEFORGE_SHADY_ID3}" >/dev/null 2>&1 || true
+    kill -9 "${UPLOAD_CURSEFORGE_SHADY_ID2}" "${UPLOAD_CURSEFORGE_SHADY_ID3}" || true
     echo 'Killed the websocket.'
 
     # Close Chromium.

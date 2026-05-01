@@ -266,7 +266,7 @@ grep -Eq '\S' -- "${UPLOAD_CHANGELOG_FILE}" || { echo 'ERROR: Empty changelog.' 
 UPLOAD_CHANGELOG=$(cat -- "${UPLOAD_CHANGELOG_FILE}")
 rm -- "${UPLOAD_CHANGELOG_FILE}"
 UPLOAD_CHANGELOG_JSON=$(echo "${UPLOAD_CHANGELOG}" | jq --raw-input --slurp --compact-output)
-UPLOAD_CHANGELOG_MODIFIED=$(echo "${UPLOAD_CHANGELOG}" | sed -Ee 's/^\*\*Full Changelog\*\*: (https:\/\/github.com\/VidTu\/Ksyxis\/compare\/(.*))$/**Full Changelog**: [\2](\1)/g' -e 's/(issue|PR): #([0-9]+)/\1: [#\2](https:\/\/github.com\/VidTu\/Ksyxis\/issues\/\2)/g')
+UPLOAD_CHANGELOG_MODIFIED=$(echo "${UPLOAD_CHANGELOG}" | sed -Ee 's/^\*\*Full Changelog\*\*: (https:\/\/github.com\/VidTu\/Ksyxis\/compare\/(.*))$/**Full Changelog**: [\2](\1)/g' -e 's/(issue|PR): #([0-9]+)/\1: [#\2](https:\/\/github.com\/VidTu\/Ksyxis\/issues\/\2)/g' -e 's/thanks to: @([a-zA-Z0-9\-]+)/thanks to: [@\1](https:\/\/github.com\/\1)/g')
 UPLOAD_CHANGELOG_MODIFIED_JSON=$(echo "${UPLOAD_CHANGELOG_MODIFIED}" | jq --raw-input --slurp --compact-output)
 UPLOAD_CHANGELOG_DISCORD=$(echo "${UPLOAD_CHANGELOG_MODIFIED}" | tr '\n' '\r' | sed 's/\r\r/\r/g' | tr '\r' '\n')
 UPLOAD_CHANGELOG_DISCORD_JSON=$(echo "${UPLOAD_CHANGELOG_DISCORD}" | jq --raw-input --slurp --compact-output)

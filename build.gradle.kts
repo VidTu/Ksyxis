@@ -29,6 +29,7 @@
 
 import com.google.gson.Gson
 import com.google.gson.JsonElement
+import java.lang.classfile.ClassFile
 
 // Plugins.
 plugins {
@@ -78,8 +79,8 @@ dependencies {
     }
 }
 
-// Compile with UTF-8, Java 8, and with all debug options.
 tasks.withType<JavaCompile> {
+    // Compile with UTF-8, Java 8, and with all debug options.
     options.encoding = "UTF-8"
     options.compilerArgs.addAll(listOf("-g", "-parameters"))
     // JDK 8 (used by this project) doesn't support the "-release" flag and
@@ -87,6 +88,11 @@ tasks.withType<JavaCompile> {
     // so we must NOT specify it, or the "javac" will fail.
     // If we ever gonna compile on newer Java versions, uncomment this line.
     // options.release = 8
+
+    // Post-process classes. (strip annotations)
+    doLast {
+        // TODO(VidTu): Implement.
+    }
 }
 
 sourceSets.main {
@@ -137,7 +143,7 @@ tasks.withType<Jar> {
     // Exclude compile-only code.
     exclude("net/**")
     exclude("org/**")
-    exclude("ru/vidtu/ksyxis/platform/KCompile.class")
+    exclude("ru/vidtu/ksyxis/compile/**")
 
     // Remove package-info.class, unless package debug is on. (to save space)
     if (!"${findProperty("ru.vidtu.ksyxis.debug.package")}".toBoolean()) {

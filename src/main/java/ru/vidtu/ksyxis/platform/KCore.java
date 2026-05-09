@@ -39,6 +39,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.Mixins;
+import ru.vidtu.ksyxis.compile.KCompileVariables;
 
 import java.util.Map;
 
@@ -130,22 +131,22 @@ public final class KCore implements IFMLLoadingPlugin {
         final Logger logger = LogManager.getLogger("Ksyxis/KCore");
         try {
             // Validate.
-            if (KCompile.DEBUG_ASSERTS) {
+            if (KCompileVariables.DEBUG_ASSERTS) {
                 assert (data != null) : "Ksyxis: Parameter 'data' is null. (core: " + this + ')';
             }
 
             // Log.
-            if (KCompile.DEBUG_LOGS) {
-                logger.info(KPlugin.MARKER, "Ksyxis: Performing manual Mixin bootstrap... (version: " + KCompile.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+            if (KCompileVariables.DEBUG_LOGS) {
+                logger.info(KPlugin.MARKER, "Ksyxis: Performing manual Mixin bootstrap... (version: " + KCompileVariables.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
             } else {
-                logger.info("Ksyxis: Performing manual Mixin bootstrap... (version: " + KCompile.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+                logger.info("Ksyxis: Performing manual Mixin bootstrap... (version: " + KCompileVariables.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
             }
 
             // Bootstrap Mixin.
             MixinBootstrap.init();
 
             // Log. (**DEBUG**)
-            if (KCompile.DEBUG_LOGS) {
+            if (KCompileVariables.DEBUG_LOGS) {
                 logger.debug(KPlugin.MARKER, "Ksyxis: Mixin bootstrapped. Adding the config...");
             }
 
@@ -153,7 +154,7 @@ public final class KCore implements IFMLLoadingPlugin {
             Mixins.addConfiguration("ksyxis.mixins.json");
 
             // Log.
-            if (KCompile.DEBUG_LOGS) {
+            if (KCompileVariables.DEBUG_LOGS) {
                 logger.info(KPlugin.MARKER, "Ksyxis: Manual Mixin bootstrap done.");
             } else {
                 logger.info("Ksyxis: Manual Mixin bootstrap done.");

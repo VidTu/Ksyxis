@@ -40,7 +40,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import ru.vidtu.ksyxis.platform.KCompile;
+import ru.vidtu.ksyxis.compile.KCompileVariables;
 import ru.vidtu.ksyxis.platform.KPlugin;
 
 /**
@@ -66,7 +66,7 @@ public final class PrepareSpawnTaskPreparingMixin {
      */
     @Unique
     @UnknownNullability
-    private static final Logger KSYXIS_LOGGER = (KCompile.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/PrepareSpawnTaskPreparingMixin") : null);
+    private static final Logger KSYXIS_LOGGER = (KCompileVariables.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/PrepareSpawnTaskPreparingMixin") : null);
 
     /**
      * An instance of this class cannot be created.
@@ -78,7 +78,7 @@ public final class PrepareSpawnTaskPreparingMixin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private PrepareSpawnTaskPreparingMixin() {
-        if (KCompile.DEBUG_ASSERTS) {
+        if (KCompileVariables.DEBUG_ASSERTS) {
             throw new AssertionError("Ksyxis: No instances.");
         }
     }
@@ -102,13 +102,13 @@ public final class PrepareSpawnTaskPreparingMixin {
     }, constant = @Constant(intValue = 3), remap = false, require = 0, expect = 0)
     private int ksyxis_lambdaTick0_addTicketAndLoadWithRadius(final int ticket) {
         // Assert.
-        if (KCompile.DEBUG_ASSERTS) {
+        if (KCompileVariables.DEBUG_ASSERTS) {
             // Should never happen on practice, constant Mixin.
             assert (ticket == 3) : "Ksyxis: Added ticket level is not 3 in PrepareSpawnTaskPreparingMixin. (ticket: " + ticket + ", server: " + this + ')';
         }
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+        if (KCompileVariables.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
             KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Adding zero-level ticket in PrepareSpawnTaskPreparingMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
         }
 

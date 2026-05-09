@@ -42,7 +42,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import ru.vidtu.ksyxis.platform.KCompile;
+import ru.vidtu.ksyxis.compile.KCompileVariables;
 import ru.vidtu.ksyxis.platform.KPlugin;
 
 /**
@@ -72,7 +72,7 @@ public final class ServerLevelMixin {
      */
     @Unique
     @UnknownNullability
-    private static final Logger KSYXIS_LOGGER = (KCompile.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/ServerLevelMixin") : null);
+    private static final Logger KSYXIS_LOGGER = (KCompileVariables.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/ServerLevelMixin") : null);
 
     /**
      * An instance of this class cannot be created.
@@ -84,7 +84,7 @@ public final class ServerLevelMixin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private ServerLevelMixin() {
-        if (KCompile.DEBUG_ASSERTS) {
+        if (KCompileVariables.DEBUG_ASSERTS) {
             throw new AssertionError("Ksyxis: No instances.");
         }
     }
@@ -109,12 +109,12 @@ public final class ServerLevelMixin {
     }, at = @At("STORE"), remap = false, require = 0, expect = 0, index = 5)
     private int ksyxis_setDefaultSpawnPos_spawnChunkRadius_getInt(final int spawnChunks) {
         // Assert.
-        if (KCompile.DEBUG_ASSERTS) {
+        if (KCompileVariables.DEBUG_ASSERTS) {
             assert ((spawnChunks >= 0) && (spawnChunks <= 32)) : "Ksyxis: Gamerule 'spawnChunkRadius' is not in the [0..32] range in ServerLevelMixin. (spawnChunks: " + spawnChunks + ", server: " + this + ')';
         }
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+        if (KCompileVariables.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
             KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Reporting 0 as spawnChunkRadius gamerule in ServerLevelMixin. (spawnChunks: {}, level: {})", new Object[]{spawnChunks, this}); // <- Array for compat with older Log4j2.
         }
 
@@ -154,13 +154,13 @@ public final class ServerLevelMixin {
     }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
     private int ksyxis_setDefaultSpawnPos_addRegionTicket(final int ticket) {
         // Assert.
-        if (KCompile.DEBUG_ASSERTS) {
+        if (KCompileVariables.DEBUG_ASSERTS) {
             // Should never happen on practice, constant Mixin.
             assert (ticket == 11) : "Ksyxis: Added ticket level is not 11 in ServerLevelMixin. (ticket: " + ticket + ", level: " + this + ')';
         }
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+        if (KCompileVariables.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
             KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Adding zero-level ticket in ServerLevelMixin. (ticket: {}, level: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
         }
 

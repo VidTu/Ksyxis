@@ -35,7 +35,7 @@ import org.embeddedt.modernfix.core.ModernFixMixinPlugin;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
-import ru.vidtu.ksyxis.platform.KCompile;
+import ru.vidtu.ksyxis.compile.KCompileVariables;
 import ru.vidtu.ksyxis.platform.KPlugin;
 
 /**
@@ -66,7 +66,7 @@ public final class KCompat {
             final boolean removeSpawnChunks = ModernFixMixinPlugin.instance.isOptionEnabled("perf.remove_spawn_chunks.MinecraftServer");
 
             // Log.
-            if (KCompile.DEBUG_LOGS) {
+            if (KCompileVariables.DEBUG_LOGS) {
                 logger.info(KPlugin.MARKER, "Ksyxis: Enabled compatibility hack with ModernFix. (removeSpawnChunks: {})", new Object[]{removeSpawnChunks}); // <- Array for compat with older Log4j2.
             } else {
                 logger.info("Ksyxis: Enabled compatibility hack with ModernFix. (removeSpawnChunks: {})", new Object[]{removeSpawnChunks}); // <- Array for compat with older Log4j2.
@@ -78,7 +78,7 @@ public final class KCompat {
             chunks = (removeSpawnChunks ? 441 : 0);
         } catch (final Throwable t) {
             // Log.
-            if (KCompile.DEBUG_LOGS) {
+            if (KCompileVariables.DEBUG_LOGS) {
                 logger.info(KPlugin.MARKER, "Ksyxis: No compatibility hacks were used.", new Object[]{t}); // <- Array for compat with older Log4j2.
             } else {
                 logger.info("Ksyxis: No compatibility hacks were used.");
@@ -102,7 +102,7 @@ public final class KCompat {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private KCompat() {
-        if (KCompile.DEBUG_ASSERTS) {
+        if (KCompileVariables.DEBUG_ASSERTS) {
             throw new AssertionError("Ksyxis: No instances.");
         }
     }

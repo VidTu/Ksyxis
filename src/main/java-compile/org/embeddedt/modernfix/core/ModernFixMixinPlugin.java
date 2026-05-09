@@ -26,7 +26,7 @@ public final class ModernFixMixinPlugin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private ModernFixMixinPlugin() {
-        throw new AssertionError("Ksyxis: Stub.");
+        throw new AssertionError("Ksyxis: Compile-time code.");
     }
 
     /**
@@ -36,6 +36,6 @@ public final class ModernFixMixinPlugin {
      * @return Whether the ModernFix option is enabled
      */
     public boolean isOptionEnabled(final String option) {
-        throw new AssertionError("Ksyxis: Stub.");
+        throw new AssertionError("Ksyxis: Compile-time code.");
     }
 }

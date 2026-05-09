@@ -40,7 +40,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import ru.vidtu.ksyxis.platform.KCompile;
+import ru.vidtu.ksyxis.compile.KCompileVariables;
 import ru.vidtu.ksyxis.platform.KPlugin;
 
 /**
@@ -67,7 +67,7 @@ public final class PrepareSpawnTaskReadyMixin {
      */
     @Unique
     @UnknownNullability
-    private static final Logger KSYXIS_LOGGER = (KCompile.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/PrepareSpawnTaskReadyMixin") : null);
+    private static final Logger KSYXIS_LOGGER = (KCompileVariables.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/PrepareSpawnTaskReadyMixin") : null);
 
     /**
      * An instance of this class cannot be created.
@@ -79,7 +79,7 @@ public final class PrepareSpawnTaskReadyMixin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private PrepareSpawnTaskReadyMixin() {
-        if (KCompile.DEBUG_ASSERTS) {
+        if (KCompileVariables.DEBUG_ASSERTS) {
             throw new AssertionError("Ksyxis: No instances.");
         }
     }
@@ -104,13 +104,13 @@ public final class PrepareSpawnTaskReadyMixin {
     }, constant = @Constant(intValue = 3), remap = false, require = 0, expect = 0)
     private int ksyxis_keepAlive_addTicketAndLoadWithRadius(final int ticket) {
         // Assert.
-        if (KCompile.DEBUG_ASSERTS) {
+        if (KCompileVariables.DEBUG_ASSERTS) {
             // Should never happen on practice, constant Mixin.
             assert (ticket == 3) : "Ksyxis: Added ticket level is not 3 in PrepareSpawnTaskReadyMixin. (ticket: " + ticket + ", server: " + this + ')';
         }
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+        if (KCompileVariables.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
             KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Adding zero-level ticket in PrepareSpawnTaskReadyMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
         }
 
@@ -138,13 +138,13 @@ public final class PrepareSpawnTaskReadyMixin {
     }, constant = @Constant(intValue = 3), remap = false, require = 0, expect = 0)
     private int ksyxis_spawn_waitForEntities(final int ticket) {
         // Assert.
-        if (KCompile.DEBUG_ASSERTS) {
+        if (KCompileVariables.DEBUG_ASSERTS) {
             // Should never happen on practice, constant Mixin.
             assert (ticket == 3) : "Ksyxis: Waited-for ticket level is not 3 in PrepareSpawnTaskReadyMixin. (ticket: " + ticket + ", server: " + this + ')';
         }
 
         // Log. (**DEBUG**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+        if (KCompileVariables.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
             KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Waiting for zero-level ticket in PrepareSpawnTaskReadyMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
         }
 

@@ -27,7 +27,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-package ru.vidtu.ksyxis.platform;
+package ru.vidtu.ksyxis.compile;
 
 import com.google.errorprone.annotations.CompileTimeConstant;
 import org.jetbrains.annotations.ApiStatus;
@@ -46,7 +46,7 @@ import org.jspecify.annotations.NullMarked;
  */
 @ApiStatus.Internal
 @NullMarked
-public final class KCompile {
+public final class KCompileVariables {
     /**
      * Mod version.
      */
@@ -74,7 +74,7 @@ public final class KCompile {
     @ApiStatus.ScheduledForRemoval
     @Deprecated
     @Contract(value = "-> fail", pure = true)
-    private KCompile() {
-        throw new AssertionError("Ksyxis: No instances.");
+    private KCompileVariables() {
+        throw new AssertionError("Ksyxis: Compile-time code.");
     }
 }

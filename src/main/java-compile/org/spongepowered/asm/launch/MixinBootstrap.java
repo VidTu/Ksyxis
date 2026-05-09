@@ -50,13 +50,13 @@ public final class MixinBootstrap {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private MixinBootstrap() {
-        throw new AssertionError("Ksyxis: Stub.");
+        throw new AssertionError("Ksyxis: Compile-time code");
     }
 
     /**
      * Initializes the Mixin.
      */
     public static void init() {
-        throw new AssertionError("Ksyxis: Stub.");
+        throw new AssertionError("Ksyxis: Compile-time code.");
     }
 }

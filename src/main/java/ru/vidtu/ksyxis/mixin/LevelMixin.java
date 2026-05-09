@@ -41,7 +41,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import ru.vidtu.ksyxis.platform.KCompile;
+import ru.vidtu.ksyxis.compile.KCompileVariables;
 import ru.vidtu.ksyxis.platform.KPlugin;
 
 /**
@@ -67,7 +67,7 @@ public final class LevelMixin {
      */
     @Unique
     @UnknownNullability
-    private static final Logger KSYXIS_LOGGER = (KCompile.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/LevelMixin") : null);
+    private static final Logger KSYXIS_LOGGER = (KCompileVariables.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/LevelMixin") : null);
 
     /**
      * An instance of this class cannot be created.
@@ -79,7 +79,7 @@ public final class LevelMixin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private LevelMixin() {
-        if (KCompile.DEBUG_ASSERTS) {
+        if (KCompileVariables.DEBUG_ASSERTS) {
             throw new AssertionError("Ksyxis: No instances.");
         }
     }
@@ -106,7 +106,7 @@ public final class LevelMixin {
     }, at = @At("HEAD"), cancellable = true, require = 0, expect = 0)
     private void ksyxis_isSpawnChunk_head(final int x, final int z, final CallbackInfoReturnable<Boolean> cir) {
         // Log. (**TRACE**)
-        if (KCompile.DEBUG_LOGS && KSYXIS_LOGGER.isTraceEnabled(KPlugin.MARKER)) {
+        if (KCompileVariables.DEBUG_LOGS && KSYXIS_LOGGER.isTraceEnabled(KPlugin.MARKER)) {
             KSYXIS_LOGGER.trace(KPlugin.MARKER, "Ksyxis: Forcing chunk to be not spawn chunk in LevelMixin. (x: {}, z: {}, cir: {}, level: {})", new Object[]{x, z, cir, this}); // <- Array for compat with older Log4j2.
         }
 

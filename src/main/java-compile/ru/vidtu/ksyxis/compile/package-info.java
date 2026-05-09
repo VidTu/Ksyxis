@@ -32,8 +32,8 @@
  *
  * @author VidTu
  * @apiNote Internal use only
- * @see ru.vidtu.ksyxis.compile.KCompileConstants
- * @see ru.vidtu.ksyxis.compile.KCompileVariables
+ * @see ru.vidtu.ksyxis.compile.KConstants
+ * @see ru.vidtu.ksyxis.compile.KVariables
  * @see <a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.28">Compile-time References</a>
  */
 @ApiStatus.Internal

@@ -35,6 +35,7 @@ import org.embeddedt.modernfix.core.ModernFixMixinPlugin;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
+import ru.vidtu.ksyxis.compile.KCompileConstants;
 import ru.vidtu.ksyxis.compile.KCompileVariables;
 import ru.vidtu.ksyxis.platform.KPlugin;
 
@@ -48,10 +49,10 @@ import ru.vidtu.ksyxis.platform.KPlugin;
 @NullMarked
 public final class KCompat {
     /**
-     * The amount of loaded chunks to report. Usually {@code 0}, because we have no spawn chunks,
-     * but if ModernFix is installed, the value might be changed to {@code 441} to prevent deadlocks.
+     * The amount of loaded chunks to report. Usually {@code 0}, because we have no spawn chunks, but if ModernFix is
+     * installed, the value might be changed to {@link KCompileConstants#CHUNK_AMOUNT_V1} to prevent deadlocks.
      * <p>
-     * Equals to either {@code 0} or {@code 441}, depending on the configuration.
+     * Equals to either {@code 0} or {@link KCompileConstants#CHUNK_AMOUNT_V1}, depending on the configuration.
      */
     public static final int REPORT_CHUNKS;
 
@@ -75,7 +76,7 @@ public final class KCompat {
             // Check what amount of spawn chunks to report back to the game.
             // ModernFix needs 441, because of its own way of doing it.
             // Ksyxis needs 0, because we remove all spawn chunks.
-            chunks = (removeSpawnChunks ? 441 : 0);
+            chunks = (removeSpawnChunks ? KCompileConstants.CHUNK_AMOUNT_V1 : 0);
         } catch (final Throwable t) {
             // Log.
             if (KCompileVariables.DEBUG_LOGS) {

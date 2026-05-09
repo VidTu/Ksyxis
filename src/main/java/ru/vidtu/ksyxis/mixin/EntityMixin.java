@@ -111,7 +111,7 @@ public final class EntityMixin {
                 "f_7990365" // Ornithe Intermediary
         }) {
             try {
-                // Attempt to find and set to one.
+                // Attempt to find and set to one. (instead of zero)
                 final MethodHandle setter = lookup.findStaticSetter(currentClass, field, int.class);
                 setter.invokeExact((int) 1);
 

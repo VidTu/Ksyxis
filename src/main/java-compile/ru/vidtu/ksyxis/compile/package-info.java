@@ -1,6 +1,6 @@
 /*
  * Ksyxis is a third-party mod for Minecraft Java Edition that
- * speed ups your world loading by removing unneeded chunks.
+ * speed ups your world loading by removing spawn chunks.
  *
  * MIT License
  *
@@ -27,55 +27,18 @@
  * SPDX-License-Identifier: MIT
  */
 
-package ru.vidtu.ksyxis.compile;
-
-import com.google.errorprone.annotations.CompileTimeConstant;
-import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NullMarked;
-
 /**
- * A class that contains compile-time variables.
- * <p>
- * <b>Note:</b> This class is NEVER found in the final JAR. It <b>MUST NOT</b>
- * contain any references that are not inlined by the Java compiler.
+ * Ksyxis package with compile-time code.
  *
  * @author VidTu
  * @apiNote Internal use only
+ * @see ru.vidtu.ksyxis.compile.KCompileConstants
+ * @see ru.vidtu.ksyxis.compile.KCompileVariables
  * @see <a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.28">Compile-time References</a>
- * @see KCompileVariables
  */
 @ApiStatus.Internal
 @NullMarked
-public final class KCompileVariables {
-    /**
-     * Mod version.
-     */
-    @CompileTimeConstant
-    public static final String VERSION = "{{ version }}";
+package ru.vidtu.ksyxis.compile;
 
-    /**
-     * Whether the additional Java assertions are enabled.
-     */
-    @CompileTimeConstant
-    public static final boolean DEBUG_ASSERTS = {{ debugAsserts }};
-
-    /**
-     * Whether the {@code DEBUG} and {@code TRACE} logs are generated.
-     */
-    @CompileTimeConstant
-    public static final boolean DEBUG_LOGS = {{ debugLogs }};
-
-    /**
-     * An instance of this class cannot be created.
-     *
-     * @throws AssertionError Always
-     * @deprecated Always throws
-     */
-    @ApiStatus.ScheduledForRemoval
-    @Deprecated
-    @Contract(value = "-> fail", pure = true)
-    private KCompileVariables() {
-        throw new AssertionError("Ksyxis: Compile-time code.");
-    }
-}
+import org.jetbrains.annotations.ApiStatus;
+import org.jspecify.annotations.NullMarked;

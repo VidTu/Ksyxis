@@ -40,6 +40,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import ru.vidtu.ksyxis.compile.KCompileConstants;
 import ru.vidtu.ksyxis.compile.KCompileVariables;
 import ru.vidtu.ksyxis.platform.KPlugin;
 
@@ -84,8 +85,8 @@ public final class MinecraftMixin {
     }
 
     /**
-     * Injects into {@code Minecraft.doWorldLoad} (Mojang mappings) to prevent
-     * fake 500ms delay when creating the world. Used since 1.21.9 (inclusive).
+     * Injects into {@code Minecraft.doWorldLoad} (Mojang mappings) to prevent {@link KCompileConstants#FAKE_DELAY_MS_V3}
+     * when creating the world. Used since 1.21.9 (inclusive).
      *
      * @param delay Previous constant value for logging
      * @return Always {@code 0}
@@ -101,17 +102,17 @@ public final class MinecraftMixin {
 
             // Obfuscated.
             "method_29610(Lnet/minecraft/class_32$class_5143;Lnet/minecraft/class_3283;Lnet/minecraft/class_6904;Z)V" // Fabric Intermediary
-    }, constant = @Constant(longValue = 500L), remap = false, require = 0, expect = 0)
+    }, constant = @Constant(longValue = KCompileConstants.FAKE_DELAY_MS_V3), remap = false, require = 0, expect = 0)
     private long ksyxis_doWorldLoad_closeDelayMs(final long delay) {
         // Assert.
         if (KCompileVariables.DEBUG_ASSERTS) {
             // Should never happen on practice, constant Mixin.
-            assert (delay == 500L) : "Ksyxis: Fake delay is not 500 in MinecraftMixin. (delay: " + delay + ", client: " + this + ')';
+            assert (delay == KCompileConstants.FAKE_DELAY_MS_V3) : "Ksyxis: Fake delay is not " + KCompileConstants.FAKE_DELAY_MS_V3 + " in MinecraftMixin. (delay: " + delay + ", client: " + this + ')';
         }
 
         // Log. (**DEBUG**)
         if (KCompileVariables.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
-            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Removing fake delay in MinecraftMixin. (delay: {}, client: {})", new Object[]{delay, this}); // <- Array for compat with older Log4j2.
+            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Removing fake " + KCompileConstants.FAKE_DELAY_MS_V3 + " delay in MinecraftMixin. (delay: {}, client: {})", new Object[]{delay, this}); // <- Array for compat with older Log4j2.
         }
 
         // Remove fake delay.

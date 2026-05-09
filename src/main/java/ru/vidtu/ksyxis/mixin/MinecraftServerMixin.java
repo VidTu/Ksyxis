@@ -44,6 +44,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import ru.vidtu.ksyxis.KCompat;
+import ru.vidtu.ksyxis.compile.KCompileConstants;
 import ru.vidtu.ksyxis.compile.KCompileVariables;
 import ru.vidtu.ksyxis.platform.KPlugin;
 
@@ -106,7 +107,7 @@ public final class MinecraftServerMixin {
     private int ksyxis_prepareLevels_spawnChunkRadius_getInt(final int spawnChunks) {
         // Assert.
         if (KCompileVariables.DEBUG_ASSERTS) {
-            assert ((spawnChunks >= 0) && (spawnChunks <= 32)) : "Ksyxis: Gamerule 'spawnChunkRadius' is not in the [0..32] range in MinecraftServerMixin. (spawnChunks: " + spawnChunks + ", server: " + this + ')';
+            assert ((spawnChunks >= 0) && (spawnChunks <= KCompileConstants.MAXIMUM_SPAWN_CHUNKS_V2)) : "Ksyxis: Gamerule 'spawnChunkRadius' is not in the [0.." +  KCompileConstants.MAXIMUM_SPAWN_CHUNKS_V2 + "] range in MinecraftServerMixin. (spawnChunks: " + spawnChunks + ", server: " + this + ')';
         }
 
         // Log. (**DEBUG**)
@@ -185,17 +186,17 @@ public final class MinecraftServerMixin {
             "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
             "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V", // Quilt Hashed
             "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Intermediary
-    }, constant = @Constant(intValue = 11), remap = false, require = 0, expect = 0)
+    }, constant = @Constant(intValue = KCompileConstants.TICKET_LEVEL_V1), remap = false, require = 0, expect = 0)
     private int ksyxis_prepareLevels_addRegionTicket(final int ticket) {
         // Assert.
         if (KCompileVariables.DEBUG_ASSERTS) {
             // Should never happen on practice, constant Mixin.
-            assert (ticket == 11) : "Ksyxis: Added ticket level is not 11 in MinecraftServerMixin. (ticket: " + ticket + ", server: " + this + ')';
+            assert (ticket == KCompileConstants.TICKET_LEVEL_V1) : "Ksyxis: Added ticket level is not " + KCompileConstants.TICKET_LEVEL_V1 + " in MinecraftServerMixin. (ticket: " + ticket + ", server: " + this + ')';
         }
 
         // Log. (**DEBUG**)
         if (KCompileVariables.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
-            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Adding zero-level ticket in MinecraftServerMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
+            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Adding zero-level ticket instead of " + KCompileConstants.TICKET_LEVEL_V1 + " level in MinecraftServerMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
         }
 
         // Add zero-level ticket.
@@ -203,9 +204,9 @@ public final class MinecraftServerMixin {
     }
 
     /**
-     * Injects into {@code MinecraftServer.prepareLevels} (Mojang mappings) to prevent game freezing
-     * while trying to wait for {@code 441} chunks that will never load. Returns {@code 0}. Does nothing
-     * with ModernFix and returns {@code 441}. Used in 1.14 (inclusive) through 1.20.4 (inclusive).
+     * Injects into {@code MinecraftServer.prepareLevels} (Mojang mappings) to prevent game freezing while trying to
+     * wait for {@link KCompileConstants#CHUNK_AMOUNT_V1} chunks that will never load. Returns {@code 0}. Does
+     * nothing with ModernFix and returns the original value. Used in 1.14 (inclusive) through 1.20.4 (inclusive).
      *
      * @param oldChunks Previous constant value for logging
      * @return Always {@code 0} without ModernFix, always {@code 441} with ModernFix
@@ -227,12 +228,12 @@ public final class MinecraftServerMixin {
             "m_129940_(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V", // Forge SRG (1.20.x)
             "m_wcdfzsgy(Lnet/minecraft/unmapped/C_jnfclwgd;)V", // Quilt Hashed
             "m_4020281(Lnet/minecraft/unmapped/C_9126287;)V" // Ornithe Intermediary
-    }, constant = @Constant(intValue = 441), remap = false, require = 0, expect = 0)
+    }, constant = @Constant(intValue = KCompileConstants.CHUNK_AMOUNT_V1), remap = false, require = 0, expect = 0)
     private int ksyxis_prepareLevels_getTickingGenerated(final int oldChunks) {
         // Assert.
         if (KCompileVariables.DEBUG_ASSERTS) {
             // Should never happen on practice, constant Mixin.
-            assert (oldChunks == 441) : "Ksyxis: Amount of ticking chunks is not 441 in MinecraftServerMixin. (oldChunks: " + oldChunks + ", server: " + this + ')';
+            assert (oldChunks == KCompileConstants.CHUNK_AMOUNT_V1) : "Ksyxis: Amount of ticking chunks is not " + KCompileConstants.CHUNK_AMOUNT_V1 + " in MinecraftServerMixin. (oldChunks: " + oldChunks + ", server: " + this + ')';
         }
 
         // Get the amount of chunks to wait.
@@ -271,12 +272,12 @@ public final class MinecraftServerMixin {
             "func_71222_d()V", // Forge SRG (1.12)
             "m_4020281(Lnet/minecraft/unmapped/C_8054043;)V", // Ornithe Intermediary (1.13)
             "m_4020281()V" // Ornithe Intermediary (1.12)
-    }, constant = {@Constant(intValue = -192), @Constant(intValue = 192)}, remap = false, require = 0, expect = 0)
+    }, constant = {@Constant(intValue = -KCompileConstants.CHUNK_BLOCK_RADIUS_V1), @Constant(intValue = KCompileConstants.CHUNK_BLOCK_RADIUS_V1)}, remap = false, require = 0, expect = 0)
     private int ksyxis_initialWorldChunkLoad_loop(final int oldLoop) {
         // Assert.
         if (KCompileVariables.DEBUG_ASSERTS) {
             // Should never happen on practice, constant Mixin.
-            assert ((oldLoop == -192) || (oldLoop == 192)) : "Ksyxis: Loop goes not from/to -192/192 in MinecraftServerMixin. (oldLoop: " + oldLoop + ", server: " + this + ')';
+            assert ((oldLoop == -KCompileConstants.CHUNK_BLOCK_RADIUS_V1) || (oldLoop == KCompileConstants.CHUNK_BLOCK_RADIUS_V1)) : "Ksyxis: Loop goes not from/to -" + KCompileConstants.CHUNK_BLOCK_RADIUS_V1 + '/' + KCompileConstants.CHUNK_BLOCK_RADIUS_V1 + " in MinecraftServerMixin. (oldLoop: " + oldLoop + ", server: " + this + ')';
         }
 
         // Loop from 1 to -1 to actually prevent looping.

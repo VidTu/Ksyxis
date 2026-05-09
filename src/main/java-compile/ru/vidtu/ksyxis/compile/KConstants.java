@@ -35,7 +35,7 @@ import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * A class that contains compile-time variables.
+ * A class that contains compile-time constants.
  * <p>
  * <b>Note:</b> This class is NEVER found in the final JAR. It <b>MUST NOT</b>
  * contain any references that are not inlined by the Java compiler.
@@ -43,28 +43,58 @@ import org.jspecify.annotations.NullMarked;
  * @author VidTu
  * @apiNote Internal use only
  * @see <a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.28">Compile-time References</a>
- * @see KCompileVariables
+ * @see KVariables
  */
 @ApiStatus.Internal
 @NullMarked
-public final class KCompileVariables {
+public final class KConstants {
     /**
-     * Mod version.
+     * Amount of spawn chunks in versions {@code <1.20.5}.
+     * <p>
+     * Equals to {@code 441} chunks. ({@code 21x21})
      */
     @CompileTimeConstant
-    public static final String VERSION = "{{ version }}";
+    public static final int CHUNK_AMOUNT_V1 = (21 * 21);
 
     /**
-     * Whether the additional Java assertions are enabled.
+     * Amount of spawn chunks in versions {@code <1.20.5}.
+     * <p>
+     * Equals to {@code 192} chunks. ({@code 12} chunks to each side, inclusive)
      */
     @CompileTimeConstant
-    public static final boolean DEBUG_ASSERTS = {{ debugAsserts }};
+    public static final int CHUNK_BLOCK_RADIUS_V1 = 192;
 
     /**
-     * Whether the {@code DEBUG} and {@code TRACE} logs are generated.
+     * Ticket level for spawn chunks in versions {@code <1.20.5}.
+     * <p>
+     * Equals to {@code 11}.
      */
     @CompileTimeConstant
-    public static final boolean DEBUG_LOGS = {{ debugLogs }};
+    public static final int TICKET_LEVEL_V1 = 11;
+
+    /**
+     * Ticket level for "player" chunks in versions {@code >=1.21.9}.
+     * <p>
+     * Equals to {@code 3}.
+     */
+    @CompileTimeConstant
+    public static final int TICKET_LEVEL_V3 = 3;
+
+    /**
+     * Maximum allowed spawn chunks game-rule value in {@code 1.20.5 -> 1.21.8}.
+     * <p>
+     * Equals to {@code 32}.
+     */
+    @CompileTimeConstant
+    public static final int MAXIMUM_SPAWN_CHUNKS_V2 = 32;
+
+    /**
+     * Fake world creation delay found in versions {@code >=1.21.9}.
+     * <p>
+     * Equals to {@code 500} millis.
+     */
+    @CompileTimeConstant
+    public static final long FAKE_DELAY_MS_V3 = 500L;
 
     /**
      * An instance of this class cannot be created.
@@ -75,7 +105,7 @@ public final class KCompileVariables {
     @ApiStatus.ScheduledForRemoval
     @Deprecated
     @Contract(value = "-> fail", pure = true)
-    private KCompileVariables() {
+    private KConstants() {
         throw new AssertionError("Ksyxis: Compile-time code.");
     }
 }

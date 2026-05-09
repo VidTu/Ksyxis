@@ -40,8 +40,8 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import ru.vidtu.ksyxis.compile.KCompileConstants;
-import ru.vidtu.ksyxis.compile.KCompileVariables;
+import ru.vidtu.ksyxis.compile.KConstants;
+import ru.vidtu.ksyxis.compile.KVariables;
 import ru.vidtu.ksyxis.platform.KPlugin;
 
 /**
@@ -67,7 +67,7 @@ public final class PrepareSpawnTaskPreparingMixin {
      */
     @Unique
     @UnknownNullability
-    private static final Logger KSYXIS_LOGGER = (KCompileVariables.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/PrepareSpawnTaskPreparingMixin") : null);
+    private static final Logger KSYXIS_LOGGER = (KVariables.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/PrepareSpawnTaskPreparingMixin") : null);
 
     /**
      * An instance of this class cannot be created.
@@ -79,7 +79,7 @@ public final class PrepareSpawnTaskPreparingMixin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private PrepareSpawnTaskPreparingMixin() {
-        if (KCompileVariables.DEBUG_ASSERTS) {
+        if (KVariables.DEBUG_ASSERTS) {
             throw new AssertionError("Ksyxis: No instances.");
         }
     }
@@ -100,17 +100,17 @@ public final class PrepareSpawnTaskPreparingMixin {
 
             // Obfuscated.
             "method_72300(Lnet/minecraft/class_1923;)V" // Fabric Intermediary
-    }, constant = @Constant(intValue = KCompileConstants.TICKET_LEVEL_V3), remap = false, require = 0, expect = 0)
+    }, constant = @Constant(intValue = KConstants.TICKET_LEVEL_V3), remap = false, require = 0, expect = 0)
     private int ksyxis_lambdaTick0_addTicketAndLoadWithRadius(final int ticket) {
         // Assert.
-        if (KCompileVariables.DEBUG_ASSERTS) {
+        if (KVariables.DEBUG_ASSERTS) {
             // Should never happen on practice, constant Mixin.
-            assert (ticket == KCompileConstants.TICKET_LEVEL_V3) : "Ksyxis: Added ticket level is not " + KCompileConstants.TICKET_LEVEL_V3 + " in PrepareSpawnTaskPreparingMixin. (ticket: " + ticket + ", server: " + this + ')';
+            assert (ticket == KConstants.TICKET_LEVEL_V3) : "Ksyxis: Added ticket level is not " + KConstants.TICKET_LEVEL_V3 + " in PrepareSpawnTaskPreparingMixin. (ticket: " + ticket + ", server: " + this + ')';
         }
 
         // Log. (**DEBUG**)
-        if (KCompileVariables.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
-            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Adding zero-level ticket instead of " + KCompileConstants.TICKET_LEVEL_V3 + " level in PrepareSpawnTaskPreparingMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
+        if (KVariables.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Adding zero-level ticket instead of " + KConstants.TICKET_LEVEL_V3 + " level in PrepareSpawnTaskPreparingMixin. (ticket: {}, server: {})", new Object[]{ticket, this}); // <- Array for compat with older Log4j2.
         }
 
         // Add zero-level ticket.

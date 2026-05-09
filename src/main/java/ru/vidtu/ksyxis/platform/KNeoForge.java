@@ -36,7 +36,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.spongepowered.asm.launch.MixinBootstrap;
-import ru.vidtu.ksyxis.compile.KCompileVariables;
+import ru.vidtu.ksyxis.compile.KVariables;
 
 /**
  * Main Ksyxis class for NeoForge.
@@ -57,10 +57,10 @@ public final class KNeoForge {
     public KNeoForge() {
         // Log. (there's no sense in keeping the logger after that)
         final Logger logger = LogManager.getLogger("Ksyxis/KNeoForge");
-        if (KCompileVariables.DEBUG_LOGS) {
-            logger.info(KPlugin.MARKER, "Ksyxis: Ready to remove unneeded chunks. (platform: neoforge, version: " + KCompileVariables.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+        if (KVariables.DEBUG_LOGS) {
+            logger.info(KPlugin.MARKER, "Ksyxis: Ready to remove unneeded chunks. (platform: neoforge, version: " + KVariables.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
         } else {
-            logger.info("Ksyxis: Ready to remove unneeded chunks. (platform: neoforge, version: " + KCompileVariables.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+            logger.info("Ksyxis: Ready to remove unneeded chunks. (platform: neoforge, version: " + KVariables.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
         }
     }
 

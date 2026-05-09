@@ -104,7 +104,7 @@ sourceSets.main {
         val fallbackProvider = providers.gradleProperty("ru.vidtu.ksyxis.debug").orElse("false")
         property("debugAsserts", providers.gradleProperty("ru.vidtu.ksyxis.debug.asserts").orElse(fallbackProvider))
         property("debugLogs", providers.gradleProperty("ru.vidtu.ksyxis.debug.logs").orElse(fallbackProvider))
-        property("version", providers.gradleProperty("version").orElse("${version}"))
+        property("version", "${version}")
     }
 }
 

@@ -79,9 +79,13 @@ dependencies {
 }
 
 tasks.withType<JavaCompile> {
-    // Compile with UTF-8, Java 8, and with all debug options.
+    // Compile with UTF-8, Java 8, and with some debug options.
     options.encoding = "UTF-8"
-    options.compilerArgs.addAll(listOf("-g", "-parameters"))
+    if ("${findProperty("ru.vidtu.ksyxis.debug.javac") ?: findProperty("ru.vidtu.ksyxis.debug")}".toBoolean()) {
+        options.compilerArgs.addAll("-g", "-parameters")
+    } else {
+        options.compilerArgs.add("-g:lines,vars")
+    }
     // JDK 8 (used by this project) doesn't support the "-release" flag and
     // uses "-source" and "-target" ones (see the top of the file),
     // so we must NOT specify it, or the "javac" will fail.

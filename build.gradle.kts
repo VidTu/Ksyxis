@@ -82,7 +82,7 @@ tasks.withType<JavaCompile> {
     // Compile with UTF-8, Java 8, and with some debug options.
     options.encoding = "UTF-8"
     if ("${findProperty("ru.vidtu.ksyxis.debug.javac") ?: findProperty("ru.vidtu.ksyxis.debug")}".toBoolean()) {
-        options.compilerArgs.addAll("-g", "-parameters")
+        options.compilerArgs.addAll(listOf("-g", "-parameters"))
     } else {
         options.compilerArgs.add("-g:lines,vars")
     }

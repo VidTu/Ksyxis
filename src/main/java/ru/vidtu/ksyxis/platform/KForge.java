@@ -68,7 +68,7 @@ public final class KForge {
         } catch (final NoClassDefFoundError ncdfe) {
             // Check if Mixin is absent.
             if ("org/spongepowered/asm/launch/MixinBootstrap".equals(ncdfe.getMessage())) {
-                throw new RuntimeException("Ksyxis: No Mixin found. (boot)", ncdfe);
+                throw new RuntimeException("Ksyxis: No Mixin found.", ncdfe);
             }
 
             // Rethrow.

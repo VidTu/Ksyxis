@@ -137,7 +137,7 @@ public final class KCore implements IFMLLoadingPlugin {
 
             // Log.
             if (KVariables.DEBUG_LOGS) {
-                logger.info(KPlugin.MARKER, "Ksyxis: Performing manual Mixin bootstrap... (version: " + KVariables.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+                logger.info(KPlugin.MARKER, "Ksyxis: Performing manual Mixin bootstrap... (version: " + KVariables.VERSION + ", data: {}, mixin: {})", new Object[]{data, MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
             } else {
                 logger.info("Ksyxis: Performing manual Mixin bootstrap... (version: " + KVariables.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
             }
@@ -162,11 +162,11 @@ public final class KCore implements IFMLLoadingPlugin {
         } catch (final Throwable t) {
             // Check if Mixin is absent.
             if ((t.getClass() == NoClassDefFoundError.class) && "org/spongepowered/asm/launch/MixinBootstrap".equals(t.getMessage())) {
-                throw new RuntimeException("Ksyxis: No Mixin found. (core)", t);
+                throw new RuntimeException("Ksyxis: No Mixin found. (data: " + data + ')', t);
             }
 
             // Rethrow.
-            throw new RuntimeException("Ksyxis: Unexpected core error.", t);
+            throw new RuntimeException("Ksyxis: Unexpected core error. (data: " + data + ')', t);
         }
 
     }

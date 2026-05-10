@@ -84,7 +84,7 @@ tasks.withType<JavaCompile> {
     if ("${findProperty("ru.vidtu.ksyxis.debug.javac") ?: findProperty("ru.vidtu.ksyxis.debug")}".toBoolean()) {
         options.compilerArgs.addAll(listOf("-g", "-parameters"))
     } else {
-        options.compilerArgs.add("-g:lines,vars")
+        options.compilerArgs.add("-g")
     }
     // JDK 8 (used by this project) doesn't support the "-release" flag and
     // uses "-source" and "-target" ones (see the top of the file),

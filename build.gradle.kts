@@ -29,7 +29,6 @@
 
 import com.google.gson.Gson
 import com.google.gson.JsonElement
-import java.lang.classfile.ClassFile
 
 // Plugins.
 plugins {
@@ -146,7 +145,7 @@ tasks.withType<Jar> {
     exclude("ru/vidtu/ksyxis/compile/**")
 
     // Remove package-info.class, unless package debug is on. (to save space)
-    if (!"${findProperty("ru.vidtu.ksyxis.debug.package")}".toBoolean()) {
+    if (!"${findProperty("ru.vidtu.ksyxis.debug.package") ?: findProperty("ru.vidtu.ksyxis.debug")}".toBoolean()) {
         exclude("**/package-info.class")
     }
 

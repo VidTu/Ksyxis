@@ -27,8 +27,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-import org.intellij.lang.annotations.Flow;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
@@ -69,8 +67,6 @@ import java.util.function.Consumer;
 /// from Java classes to reduce the final JAR size.
 ///
 /// @author VidTu
-/// @apiNote Internal use only
-@ApiStatus.Internal
 @NullMarked
 public final class Strip {
     /// An immutable set of annotations VM names to strip.
@@ -181,13 +177,12 @@ public final class Strip {
         throw new AssertionError("Ksyxis: No instances.");
     }
 
-    /// Reads the class-file bytecode from the file, strips the decoration atrributes via
+    /// Reads the class-file bytecode from the file, strips the decoration attributes via
     /// [#STRIP_ATTRIBUTES_TRANSFORM], and writes the bytecode into the same file.
     ///
     /// @param classFile Path of the file to strip
     /// @throws IllegalArgumentException If a JVM bytecode parsing/writing/tranformation fails
     /// @throws IOException              On I/O error
-    @Contract(mutates = "classFile")
     public static void stripBytecode(final Path classFile) throws IOException {
         final ClassFile of = ClassFile.of(ClassFile.ConstantPoolSharingOption.NEW_POOL);
         final ClassModel input = of.parse(classFile); // Implicit NPE for 'classFile'
@@ -201,7 +196,6 @@ public final class Strip {
     /// @param builder Consumer for non-stripped annotations, usually the [ClassFileBuilder]
     /// @param element Element to strip the annotations from
     /// @see #shouldStripTypeless(String)
-    @Flow(source = "element", target = "builder")
     private static void stripInnerClasses(final Consumer<? super InnerClassesAttribute> builder,
                                           final InnerClassesAttribute element) {
         // Extract.
@@ -230,7 +224,6 @@ public final class Strip {
     /// @param element Element to strip the annotations from
     /// @see #stripList(List)
     /// @see #stripVisible(Consumer, RuntimeVisibleAnnotationsAttribute)
-    @Flow(source = "element", target = "builder")
     private static void stripInvisible(final Consumer<? super RuntimeInvisibleAnnotationsAttribute> builder,
                                        final RuntimeInvisibleAnnotationsAttribute element) {
         // Strip.
@@ -250,7 +243,6 @@ public final class Strip {
     /// @param element Element to strip the annotations from
     /// @see #stripParameterList(List)
     /// @see #stripVisibleParameter(Consumer, RuntimeVisibleParameterAnnotationsAttribute)
-    @Flow(source = "element", target = "builder")
     private static void stripInvisibleParameter(final Consumer<? super RuntimeInvisibleParameterAnnotationsAttribute> builder,
                                                 final RuntimeInvisibleParameterAnnotationsAttribute element) {
         // Strip.
@@ -270,7 +262,6 @@ public final class Strip {
     /// @param element Element to strip the annotations from
     /// @see #stripTypeList(List)
     /// @see #stripVisibleType(Consumer, RuntimeVisibleTypeAnnotationsAttribute)
-    @Flow(source = "element", target = "builder")
     private static void stripInvisibleType(final Consumer<? super RuntimeInvisibleTypeAnnotationsAttribute> builder,
                                            final RuntimeInvisibleTypeAnnotationsAttribute element) {
         // Strip.
@@ -290,7 +281,6 @@ public final class Strip {
     /// @param element Element to strip the annotations from
     /// @see #stripList(List)
     /// @see #stripInvisible(Consumer, RuntimeInvisibleAnnotationsAttribute)
-    @Flow(source = "element", target = "builder")
     private static void stripVisible(final Consumer<? super RuntimeVisibleAnnotationsAttribute> builder,
                                      final RuntimeVisibleAnnotationsAttribute element) {
         // Strip.
@@ -310,7 +300,6 @@ public final class Strip {
     /// @param element Element to strip the annotations from
     /// @see #stripParameterList(List)
     /// @see #stripInvisibleParameter(Consumer, RuntimeInvisibleParameterAnnotationsAttribute)
-    @Flow(source = "element", target = "builder")
     private static void stripVisibleParameter(final Consumer<? super RuntimeVisibleParameterAnnotationsAttribute> builder,
                                               final RuntimeVisibleParameterAnnotationsAttribute element) {
         // Strip.
@@ -330,7 +319,6 @@ public final class Strip {
     /// @param element Element to strip the annotations from
     /// @see #stripTypeList(List)
     /// @see #stripInvisibleType(Consumer, RuntimeInvisibleTypeAnnotationsAttribute)
-    @Flow(source = "element", target = "builder")
     private static void stripVisibleType(final Consumer<? super RuntimeVisibleTypeAnnotationsAttribute> builder,
                                          final RuntimeVisibleTypeAnnotationsAttribute element) {
         // Strip.
@@ -354,7 +342,6 @@ public final class Strip {
     /// @see #stripInvisible(Consumer, RuntimeInvisibleAnnotationsAttribute)
     /// @see #stripVisible(Consumer, RuntimeVisibleAnnotationsAttribute)
     @Contract(value = "_ -> new", pure = true)
-    @Flow(source = "annotations", target = Flow.RETURN_METHOD_TARGET)
     private static List<Annotation> stripList(final List<Annotation> annotations) {
         // Create a list.
         final List<Annotation> newAnnotations = new ArrayList<>(annotations.size()); // Implicit NPE for 'annotations'
@@ -380,13 +367,12 @@ public final class Strip {
     /// @see #stripInvisibleParameter(Consumer, RuntimeInvisibleParameterAnnotationsAttribute)
     /// @see #stripVisibleParameter(Consumer, RuntimeVisibleParameterAnnotationsAttribute)
     @Contract(value = "_ -> new", pure = true)
-    @Flow(source = "annotations", target = Flow.RETURN_METHOD_TARGET)
     private static List<List<Annotation>> stripParameterList(final List<List<Annotation>> annotations) {
         // Create a list of lists.
         final List<List<Annotation>> newAnnotations = new ArrayList<>(annotations.size()); // Implicit NPE for 'annotations'
 
         // See below.
-        /*non-final*/ boolean skipParameterAnnotations = true;
+        /*non-final*/ boolean noAnnotations = true;
 
         // Filter the old list of lists into the new list of lists.
         for (final List<Annotation> list : annotations) {
@@ -397,7 +383,7 @@ public final class Strip {
             for (final Annotation annotation : list) {
                 if (shouldStripTyped(annotation.className().stringValue())) continue;
                 newList.add(annotation);
-                skipParameterAnnotations = false;
+                noAnnotations = false;
             }
 
             // Add the new list into the new list of lists.
@@ -406,7 +392,7 @@ public final class Strip {
 
         // If no annotations are preserved, we can skip parameter list fully.
         // This is done by returning an empty list.
-        if (skipParameterAnnotations) return List.of(); // PERF: Singleton.
+        if (noAnnotations) return List.of(); // PERF: Singleton.
 
         // Return the new list of lists.
         return newAnnotations;
@@ -423,7 +409,6 @@ public final class Strip {
     /// @see #stripInvisibleType(Consumer, RuntimeInvisibleTypeAnnotationsAttribute)
     /// @see #stripVisibleType(Consumer, RuntimeVisibleTypeAnnotationsAttribute)
     @Contract(value = "_ -> new", pure = true)
-    @Flow(source = "annotations", target = Flow.RETURN_METHOD_TARGET)
     private static List<TypeAnnotation> stripTypeList(final List<TypeAnnotation> annotations) {
         // Create a list.
         final List<TypeAnnotation> newAnnotations = new ArrayList<>(annotations.size()); // Implicit NPE for 'annotations'

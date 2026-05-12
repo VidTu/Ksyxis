@@ -92,10 +92,12 @@ tasks.withType<JavaCompile> {
     // If we ever gonna compile on newer Java versions, uncomment this line.
     // options.release = 8
 
-    // Post-process classes. (strip annotations)
-    doLast {
-        destinationDirectory.asFileTree.forEach {
-            Strip.stripBytecode(it.toPath())
+    // Post-process classes. (strip metadata)
+    if (!"${findProperty("ru.vidtu.ksyxis.debug.metadata") ?: findProperty("ru.vidtu.ksyxis.debug")}".toBoolean()) {
+        doLast {
+            destinationDirectory.asFileTree.forEach {
+                Strip.stripBytecode(it.toPath())
+            }
         }
     }
 }

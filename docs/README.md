@@ -198,3 +198,33 @@ offer a simple development environment. Good luck!
 The recommended IDE for development is IntelliJ IDEA (Community or Ultimate)
 with the Minecraft Development plugin. This is not a strict requirement,
 however. Any IDE/editor should work just fine.
+
+### Debug JARs
+
+The `ru.vidtu.ksyxis.debug` boolean Gradle property allows producing
+more debuggable JARs. It controls the following sub-properties:
+
+- `ru.vidtu.ksyxis.debug.javac`: Tell `javac` to emit `-parameters`
+  data for reflection. Reflective data includes method parameter flags
+  and names, which might be useful for debugging or decompilation.
+- `ru.vidtu.ksyxis.debug.metadata`: Don't use the custom post-processor
+  (see the `buildSrc` folder) to strip annotations and other metadata
+  from class-files like `SourceFile` attributes and `@deprecated` tags.
+- `ru.vidtu.ksyxis.debug.asserts`: Keep `assert` statements after
+  compilation for better debuggability. Note that assertions must
+  be enabled using `-enableassertions` VM flag on most JVMs.
+- `ru.vidtu.ksyxis.debug.logs`: Change logging calls:
+  - Enable `debug` and `trace` logging calls and create loggers for them
+    in some classes where loggers are not created during normal execution.
+  - Add a `MOD_KSYXIS` marker to every logging call.
+  - Always produce stack-traces for exceptions.
+  - Produce more logging details. (more context, more parameters, etc.)
+- `ru.vidtu.ksyxis.debug.package`: Don't strip `package-info.class` files.
+
+More specific debug properties will override the global one.
+All debug properties are *disabled* by default. See the
+[Gradle documentation](https://docs.gradle.org/current/userguide/build_environment.html#sec:project_properties)
+for more information on how to set Gradle properties.
+
+For example, you can compile the "JAR with all debug properties"
+using `./gradlew -Pru.vidtu.ksyxis.debug=true assemble`.

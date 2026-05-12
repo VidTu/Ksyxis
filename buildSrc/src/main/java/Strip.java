@@ -28,8 +28,10 @@
  */
 
 import org.intellij.lang.annotations.Flow;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Unmodifiable;
+import org.jspecify.annotations.NullMarked;
 
 import java.io.IOException;
 import java.lang.classfile.Annotation;
@@ -63,6 +65,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
+/// A build-time class that performs metadata stripping
+/// from Java classes to reduce the final JAR size.
+///
+/// @author VidTu
+/// @apiNote Internal use only
+@ApiStatus.Internal
+@NullMarked
 public final class Strip {
     /// An immutable set of annotations VM names to strip.
     ///

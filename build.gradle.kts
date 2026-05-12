@@ -94,7 +94,9 @@ tasks.withType<JavaCompile> {
 
     // Post-process classes. (strip annotations)
     doLast {
-        // TODO(VidTu): Implement.
+        destinationDirectory.asFileTree.forEach {
+            Strip.stripBytecode(it.toPath())
+        }
     }
 }
 

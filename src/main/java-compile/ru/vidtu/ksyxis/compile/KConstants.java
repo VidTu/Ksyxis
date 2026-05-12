@@ -57,9 +57,9 @@ public final class KConstants {
     public static final int CHUNK_AMOUNT_V1 = (21 * 21);
 
     /**
-     * Amount of spawn chunks in versions {@code <1.20.5}.
+     * Amount of spawn chunks in versions {@code <1.20.5} measured in blocks.
      * <p>
-     * Equals to {@code 192} chunks. ({@code 12} chunks to each side, inclusive)
+     * Equals to {@code 192} blocks. ({@code 12} chunks to each side, inclusive)
      */
     @CompileTimeConstant
     public static final int CHUNK_BLOCK_RADIUS_V1 = 192;

@@ -90,8 +90,8 @@ public final class EntityMixin {
         final Logger logger = (KVariables.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/EntityMixin") : null);
 
         // Log. (**DEBUG**)
-        if (KVariables.DEBUG_LOGS) {
-            logger.debug(KPlugin.MARKER, "Ksyxis: Initializing Entity class, making sure first entity ID is not zero. Searching for the field in EntityMixin...");
+        if (KVariables.DEBUG_LOGS && logger.isDebugEnabled(KPlugin.MARKER)) {
+            logger.debug(KPlugin.MARKER, "Ksyxis: Initializing Entity class, making sure first entity ID is not zero. Searching for the field in EntityMixin... (ci: {})", new Object[]{ci}); // <- Array for compat with older Log4j2.
         }
 
         // Create the lookup object.
@@ -117,7 +117,7 @@ public final class EntityMixin {
 
                 // Log. (**DEBUG**)
                 if (KVariables.DEBUG_LOGS && logger.isDebugEnabled(KPlugin.MARKER)) {
-                    logger.debug(KPlugin.MARKER, "Ksyxis: Set first entity ID to one in EntityMixin. (field: {}, setter: {})", new Object[]{field, setter}); // <- Array for compat with older Log4j2.
+                    logger.debug(KPlugin.MARKER, "Ksyxis: Set first entity ID to one in EntityMixin. (currentClass: {}, field: {}, setter: {}, ci: {})", new Object[]{currentClass, field, setter, ci}); // <- Array for compat with older Log4j2.
                 }
 
                 // Done.
@@ -125,7 +125,7 @@ public final class EntityMixin {
             } catch (final Throwable t) {
                 // Log. (**TRACE**)
                 if (KVariables.DEBUG_LOGS && logger.isTraceEnabled(KPlugin.MARKER)) {
-                    logger.trace(KPlugin.MARKER, "Ksyxis: Field error, skipping in EntityMixin. (field: {})", new Object[]{field, t}); // <- Array for compat with older Log4j2.
+                    logger.trace(KPlugin.MARKER, "Ksyxis: Field error, skipping in EntityMixin. (currentClass: {}, field: {}, ci: {})", new Object[]{currentClass, field, ci, t}); // <- Array for compat with older Log4j2.
                 }
             }
         }

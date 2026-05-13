@@ -220,7 +220,7 @@ more debuggable JARs. It controls the following sub-properties:
   - Always produce stack-traces for exceptions.
   - Produce more logging details. (more context, more parameters, etc.)
 - `ru.vidtu.ksyxis.debug.resources`: Don't minify resource files that are
-  *not* Java classes, such as `.json`, `.toml`, `.mcmod` files and others.
+  *not* Java classes, such as `.json`, `.toml`, `.mcmeta` files and others.
 - `ru.vidtu.ksyxis.debug.package`: Don't strip `package-info.class` files.
 
 More specific debug properties will override the global one.

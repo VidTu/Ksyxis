@@ -73,6 +73,7 @@ import java.util.function.Consumer;
 public final class Strip {
     /// An immutable set of annotations VM names to strip.
     ///
+    /// @see #STRIPPED_PACKAGES
     /// @see #shouldStripTyped(String)
     /// @see #shouldStripTypeless(String)
     @Unmodifiable
@@ -82,6 +83,10 @@ public final class Strip {
 
     /// An immutable list of annotation VM prefixes (packages) to strip.
     ///
+    /// Individual VM annotations are cached via [#STRIPPED_CACHE].
+    ///
+    /// @see #STRIPPED_ANNOTATIONS
+    /// @see #STRIPPED_CACHE
     /// @see #shouldStripTyped(String)
     /// @see #shouldStripTypeless(String)
     @Unmodifiable
@@ -95,7 +100,6 @@ public final class Strip {
     /// A mutable cache for individual annotations for [#STRIPPED_PACKAGES].
     ///
     /// @see #STRIPPED_PACKAGES
-    /// @see #STRIPPED_CACHE
     /// @see #shouldStripTyped(String)
     /// @see #shouldStripTypeless(String)
     private static final Map<String, Boolean> STRIPPED_CACHE = new HashMap<>();

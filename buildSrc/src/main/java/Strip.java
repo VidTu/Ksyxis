@@ -102,7 +102,7 @@ public final class Strip {
     /// @see #STRIPPED_PACKAGES
     /// @see #shouldStripTyped(String)
     /// @see #shouldStripTypeless(String)
-    private static final Map<String, Boolean> STRIPPED_CACHE = new HashMap<>();
+    private static final Map<String, Boolean> STRIPPED_CACHE = new HashMap<>(32);
 
     /// When no source is specified, Java doesn't display line numbers in stack-traces. We want line numbers in
     /// stack-traces, but we want to save JAR size at any cost, but free of charge. Empty string will do!

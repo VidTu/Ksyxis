@@ -104,9 +104,11 @@ public final class Strip {
     /// @see #shouldStripTypeless(String)
     private static final Map<String, Boolean> STRIPPED_CACHE = new HashMap<>(32);
 
+    /// A `SourceFile` attribute made up of an empty string. (`""`)
+    ///
     /// When no source is specified, Java doesn't display line numbers in stack-traces. We want line numbers in
     /// stack-traces, but we want to save JAR size at any cost, but free of charge. Empty string will do!
-    private static final SourceFileAttribute NO_SOURCE_BUT_A_BIT_YES_SOURCE = SourceFileAttribute.of("");
+    private static final SourceFileAttribute EMPTY_SOURCE = SourceFileAttribute.of("");
 
     /// A [ClassTransform] that strips all [strippable][#shouldStripTypeless(String)] annotations from all elements
     /// in the class, including the class itself, class [fields][ClassTransform#transformingFields(FieldTransform)],
@@ -136,7 +138,7 @@ public final class Strip {
                 case final InnerClassesAttribute attribute -> stripInnerClasses(builder, attribute);
 
                 // Strip the source file attribute.
-                case final SourceFileAttribute _ -> builder.with(NO_SOURCE_BUT_A_BIT_YES_SOURCE);
+                case final SourceFileAttribute _ -> builder.with(EMPTY_SOURCE);
 
                 // Pass all other elements as-is.
                 default -> builder.with(element);

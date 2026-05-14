@@ -95,9 +95,9 @@ tasks.withType<JavaCompile> {
     // Post-process classes. (strip metadata)
     if (!"${findProperty("ru.vidtu.ksyxis.debug.metadata") ?: findProperty("ru.vidtu.ksyxis.debug")}".toBoolean()) {
         doLast {
-            destinationDirectory.asFileTree.forEach {
-                Strip.stripBytecode(it.toPath())
-            }
+            destinationDirectory.asFileTree
+                .filter { it.name == "package-info.class" }
+                .forEach { Strip.stripBytecode(it.toPath()) }
         }
     }
 }

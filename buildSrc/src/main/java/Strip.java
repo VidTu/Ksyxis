@@ -59,7 +59,9 @@ import java.lang.classfile.attribute.SourceFileAttribute;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -89,6 +91,14 @@ public final class Strip {
             "org/jetbrains/annotations/",
             "org/jspecify/annotations/"
     );
+
+    /// A mutable cache for individual annotations for [#STRIPPED_PACKAGES].
+    ///
+    /// @see #STRIPPED_PACKAGES
+    /// @see #STRIPPED_CACHE
+    /// @see #shouldStripTyped(String)
+    /// @see #shouldStripTypeless(String)
+    private static final Map<String, Boolean> STRIPPED_CACHE = new HashMap<>();
 
     /// When no source is specified, Java doesn't display line numbers in stack-traces. We want line numbers in
     /// stack-traces, but we want to save JAR size at any cost, but free of charge. Empty string will do!
@@ -459,11 +469,14 @@ public final class Strip {
         // Fast path for exact match: Strip if name directly matches one of desired annotations.
         if (STRIPPED_ANNOTATIONS.contains(name)) return true; // Implicit NPE for 'name'
 
-        // Strip if name starts with package name of desired annotations.
-        for (final String pkg : STRIPPED_PACKAGES) {
-            if (!name.startsWith(pkg)) continue;
-            return true;
-        }
-        return false;
+        // Use the cache if available.
+        return STRIPPED_CACHE.computeIfAbsent(name, (final String _) -> {
+            // Strip if name starts with package name of desired annotations.
+            for (final String pkg : STRIPPED_PACKAGES) {
+                if (!name.startsWith(pkg)) continue;
+                return true;
+            }
+            return false;
+        });
     }
 }

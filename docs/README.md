@@ -26,13 +26,16 @@ Speed up your world loading by removing unneeded chunks.
 
 ## About
 
-Depending on your game version, Minecraft loads some [chunks](https://minecraft.wiki/w/Chunks) when you
-create your world. Sometimes, these chunks are always loaded in the background. Either way, whether
-these chunks being loaded is a one-time performance slowdown, or a constant performance penalty,
-most players don't need any of these chunks. This mod completely disables unneeded chunks in the game.
+Depending on your game version, Minecraft loads some
+[chunks](https://minecraft.wiki/w/Chunks) when you create your world.
+Sometimes, these chunks are always loaded in the background. Either
+way, whether these chunks being loaded is a one-time performance slowdown,
+or a constant performance penalty, most players don't need any of these
+chunks. This mod completely disables unneeded chunks in the game.
 
-*Note*: Unneeded chunks are sometimes used by farms and technical contraptions. If you'll
-need these chunks, you can always delete the mod later to re-enable these chunks.
+*Note*: Unneeded chunks are sometimes used by farms and
+technical contraptions. If you'll need these chunks, you
+can always delete the mod later to re-enable these chunks.
 
 https://github.com/user-attachments/assets/42e65893-6324-46b1-89a4-044eae77802d
 

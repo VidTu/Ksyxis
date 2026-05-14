@@ -190,8 +190,10 @@ To compile the mod from the source code:
 2. Install Java 25 (for Gradle; you'll also need 8 for the compilation,
    download either of those, the other will be automatically downloaded
    via Java toolchains) and dump it into `PATH` and/or `JAVA_HOME`.
-3. Run `./gradlew assemble` from the terminal/PowerShell.
-4. Grab the JAR from the `./build/libs/` folder.
+3. Clone or download the repository. (`.git` folder is *not* required)
+4. Run `./gradlew assemble` from the terminal/PowerShell
+   from within the downloaded repository folder.
+5. Grab the JAR from the `./build/libs/` folder.
 
 ### Developing/Debugging
 

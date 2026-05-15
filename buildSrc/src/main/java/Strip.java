@@ -322,6 +322,9 @@ public final class Strip implements Closeable {
             }
         }
 
+        // Clear the systems.
+        systems.clear();
+
         // Stop if no errors.
         if (errors.isEmpty()) return;
 

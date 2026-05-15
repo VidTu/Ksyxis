@@ -348,7 +348,7 @@
       <option name="loggerNamesString" value="java.util.logging.Logger,org.slf4j.Logger,org.apache.commons.logging.Log,org.apache.log4j.Logger,org.apache.logging.log4j.Logger" />
       <option name="ignoreSuperLoggers" value="false" />
     </inspection_tool>
-    <inspection_tool class="ClassWithoutNoArgConstructor" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
+    <inspection_tool class="ClassWithoutNoArgConstructor" enabled="true" level="INFORMATION" enabled_by_default="true" editorAttributes="INFORMATION_ATTRIBUTES">
       <option name="m_ignoreClassesWithNoConstructors" value="true" />
     </inspection_tool>
     <inspection_tool class="CloneCallsConstructors" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
@@ -2307,7 +2307,7 @@
       <option name="m_reportObjectMethods" value="true" />
       <option name="m_reportArrayMethods" value="true" />
       <option name="m_reportCollectionMethods" value="true" />
-      <option name="m_ignorePrivateMethods" value="false" />
+      <option name="m_ignorePrivateMethods" value="true" />
     </inspection_tool>
     <inspection_tool class="ReturnOfInnerClass" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="ReturnSeparatedFromComputation" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />

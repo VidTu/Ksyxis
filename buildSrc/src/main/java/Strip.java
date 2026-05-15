@@ -31,12 +31,12 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 
-import java.io.IOException;
 import java.lang.classfile.Annotation;
 import java.lang.classfile.ClassBuilder;
 import java.lang.classfile.ClassElement;
 import java.lang.classfile.ClassFile;
 import java.lang.classfile.ClassFileBuilder;
+import java.lang.classfile.ClassHierarchyResolver;
 import java.lang.classfile.ClassModel;
 import java.lang.classfile.ClassTransform;
 import java.lang.classfile.FieldBuilder;
@@ -56,6 +56,7 @@ import java.lang.classfile.attribute.RuntimeVisibleAnnotationsAttribute;
 import java.lang.classfile.attribute.RuntimeVisibleParameterAnnotationsAttribute;
 import java.lang.classfile.attribute.RuntimeVisibleTypeAnnotationsAttribute;
 import java.lang.classfile.attribute.SourceFileAttribute;
+import java.lang.constant.ClassDesc;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -183,27 +184,78 @@ public final class Strip {
         STRIP_ATTRIBUTES_TRANSFORM = stripClass.andThen(stripFields).andThen(stripMethods);
     }
 
-    /// An instance of this class cannot be created.
+    /// Class-file context with a [new pool][ClassFile.ConstantPoolSharingOption#NEW_POOL] for each class
+    /// and a custom [hierarchy resolver][ClassFile.ClassHierarchyResolverOption] with the code class-path.
+    private final ClassFile context;
+
+    /// Creates a new strip.
     ///
-    /// @throws AssertionError Always
-    /// @deprecated Always throws
-    @Deprecated(forRemoval = true)
-    @Contract(value = "-> fail", pure = true)
-    private Strip() {
-        throw new AssertionError("Ksyxis: No instances.");
+    /// @param classPath Compilation class-path directory for [hierarchy resolving][ClassFile.ClassHierarchyResolverOption]
+    @Contract(pure = true)
+    public Strip(final Path classPath) {
+        // Create the resolver from the compilation class-path.
+        final ClassHierarchyResolver classPathResolver = ClassHierarchyResolver.ofResourceParsing((final ClassDesc desc) -> {
+            // Wrap.
+            try {
+                // Skip non-classes.
+                if (!desc.isClassOrInterface()) return null;
+
+                // Resolve the name.
+                final String descriptor = desc.descriptorString();
+                final String name = (descriptor.substring(1, descriptor.length() - 1) + ".class");
+
+                // Resolve the file, skip if it doesn't exist.
+                final Path file = classPath.resolve(name);
+                if (!Files.isRegularFile(file)) return null;
+
+                // Create the stream.
+                return Files.newInputStream(file);
+            } catch (final Throwable t) {
+                // Rethrow.
+                throw new RuntimeException("Ksyxis: Unable to perform the class-path search for a class hierarchy. (desc: " + desc + ", classPath: " + classPath + ", strip: " + this + ')', t);
+            }
+        });
+
+        // Create the general resolver. It:
+        // 1. Searches the system classes. (Java classes)
+        // 2. Searches the compilation class-path. (see above)
+        // 3. Caches that data for future re-use.
+        final ClassHierarchyResolver resolver = ClassHierarchyResolver.defaultResolver()
+                .orElse(classPathResolver)
+                .cached();
+
+        // Create the context.
+        this.context = ClassFile.of(ClassFile.ConstantPoolSharingOption.NEW_POOL, ClassFile.ClassHierarchyResolverOption.of(resolver));
     }
 
     /// Reads the class-file bytecode from the file, strips the decoration attributes via
     /// [#STRIP_ATTRIBUTES_TRANSFORM], and writes the bytecode into the same file.
     ///
     /// @param classFile Path of the file to strip
-    /// @throws IllegalArgumentException If a JVM bytecode parsing/writing/tranformation fails
-    /// @throws IOException              On I/O error
-    public static void stripBytecode(final Path classFile) throws IOException {
-        final ClassFile of = ClassFile.of(ClassFile.ConstantPoolSharingOption.NEW_POOL);
-        final ClassModel input = of.parse(classFile); // Implicit NPE for 'classFile'
-        final byte[] output = of.transformClass(input, STRIP_ATTRIBUTES_TRANSFORM);
-        Files.write(classFile, output);
+    /// @throws RuntimeException If class transformation fails
+    public void stripBytecode(final Path classFile) {
+        // Wrap.
+        try {
+            // Parse.
+            final ClassModel input = this.context.parse(classFile); // Implicit NPE for 'classFile'
+
+            // Transform.
+            final byte[] output = this.context.transformClass(input, STRIP_ATTRIBUTES_TRANSFORM);
+
+            // Write.
+            Files.write(classFile, output);
+        } catch (final Throwable t) {
+            // Rethrow.
+            throw new RuntimeException("Ksyxis: Unable to strip class-file bytecode. (classFile: " + classFile + ", strip: " + this + ')', t);
+        }
+    }
+
+    @Contract(pure = true)
+    @Override
+    public String toString() {
+        return "Ksyxis/Strip{" +
+                "context=" + this.context +
+                '}';
     }
 
     /// Strips the [inner class metadata][InnerClassInfo] with rules from [#shouldStripTypeless(String)].

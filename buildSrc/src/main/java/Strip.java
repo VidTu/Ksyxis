@@ -242,6 +242,16 @@ public final class Strip {
             // Transform.
             final byte[] output = this.context.transformClass(input, STRIP_ATTRIBUTES_TRANSFORM);
 
+            // Validate.
+            final List<VerifyError> errors = this.context.verify(output);
+            if (!errors.isEmpty()) {
+                final RuntimeException wrapper = new RuntimeException("Ksyxis: Class failed verification, see suppressed errors for more details.");
+                for (final VerifyError error : errors) {
+                    wrapper.addSuppressed(error);
+                }
+                throw wrapper;
+            }
+
             // Write.
             Files.write(classFile, output);
         } catch (final Throwable t) {

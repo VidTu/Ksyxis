@@ -235,3 +235,13 @@ for more information on how to set Gradle properties.
 
 For example, you can compile the "JAR with all debug properties"
 using `./gradlew -Pru.vidtu.ksyxis.debug=true assemble`.
+
+### Slim JARs
+
+If you want to produce extra-small JARs at the cost of debuggability, you
+can set the `ru.vidtu.ksyxis.slim` boolean Gradle property to `true`.
+
+This property is incompatible with the Debug JARs options.
+
+**Note**: This option *will* make it harder to know what parts of the mod are
+causing issues. Do *not* enable this option unless you know what you're doing!

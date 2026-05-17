@@ -57,6 +57,8 @@ import java.util.Map;
 ///
 /// When the resolver is done being used, call the [#close()] method.
 ///
+/// Instances of this class are **not** thread-safe.
+///
 /// @author VidTu
 /// @apiNote Internal use only
 @ApiStatus.Internal

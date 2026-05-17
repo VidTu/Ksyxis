@@ -71,6 +71,9 @@ import java.util.function.Consumer;
 ///
 /// When the strip is done being used, call the [#close()] method.
 ///
+/// Both the instances and the static logic of this class are **not** thread-safe
+/// and therefore this class is not suitable for parallel Gradle executions.
+///
 /// @author VidTu
 @NullMarked
 public final class Strip implements Closeable {

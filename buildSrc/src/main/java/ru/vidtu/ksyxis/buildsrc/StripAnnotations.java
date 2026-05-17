@@ -40,6 +40,8 @@ import java.util.Set;
 
 /// A collection of data about annotations to be stripped.
 ///
+/// Static logic of this class is **not** thread-safe.
+///
 /// @author VidTu
 /// @apiNote Internal use only
 @ApiStatus.Internal

@@ -27,18 +27,15 @@
  * SPDX-License-Identifier: MIT
  */
 
-import com.google.errorprone.annotations.MustBeClosed;
-import org.jetbrains.annotations.CheckReturnValue;
+package ru.vidtu.ksyxis.buildsrc;
+
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
 
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.UncheckedIOException;
 import java.lang.classfile.Annotation;
 import java.lang.classfile.ClassBuilder;
 import java.lang.classfile.ClassElement;
@@ -64,10 +61,7 @@ import java.lang.classfile.attribute.RuntimeVisibleAnnotationsAttribute;
 import java.lang.classfile.attribute.RuntimeVisibleParameterAnnotationsAttribute;
 import java.lang.classfile.attribute.RuntimeVisibleTypeAnnotationsAttribute;
 import java.lang.classfile.attribute.SourceFileAttribute;
-import java.lang.constant.ClassDesc;
 import java.nio.file.Files;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,7 +88,7 @@ public final class Strip implements Closeable {
             "java/lang/Deprecated"
     );
 
-    /// An immutable list of annotation VM prefixes (packages) to strip.
+    /// An array of annotation VM prefixes (packages) to strip.
     ///
     /// Individual VM annotations are cached via [#STRIPPED_CACHE].
     ///
@@ -102,13 +96,12 @@ public final class Strip implements Closeable {
     /// @see #STRIPPED_CACHE
     /// @see #shouldStripTyped(String)
     /// @see #shouldStripTypeless(String)
-    @Unmodifiable
-    private static final List<String> STRIPPED_PACKAGES = List.of(
+    private static final String @Unmodifiable [] STRIPPED_PACKAGES = {
             "com/google/errorprone/annotations/",
             "org/intellij/lang/annotations/",
             "org/jetbrains/annotations/",
             "org/jspecify/annotations/"
-    );
+    };
 
     /// A mutable cache for individual annotations for [#STRIPPED_PACKAGES].
     ///
@@ -148,40 +141,40 @@ public final class Strip implements Closeable {
         STRIP_ATTRIBUTES_TRANSFORM = stripClass.andThen(stripFields).andThen(stripMethods);
     }
 
+    /// Resolver for the hierarchies for class transformation and
+    /// verification using the compiled classes and the classpath.
+    private final CompileHierarchyResolver resolver;
+
     /// Class-file context with a [new pool][ClassFile.ConstantPoolSharingOption#NEW_POOL] for each class
     /// and a custom [hierarchy resolver][ClassFile.ClassHierarchyResolverOption] with the code class-path.
     private final ClassFile context;
-
-    /// Cache of open JAR file systems.
-    private final Map<File, FileSystem> systems = new HashMap<>(0);
 
     /// Creates a new strip.
     ///
     /// When the strip is done being used, call the [#close()] method.
     ///
-    /// @param classesFolder Compilation destination folder with all the compiles classes for [hierarchy resolving][ClassFile.ClassHierarchyResolverOption]
-    /// @param classpathJars A collection of the JARs on the class-path
+    /// @param classes   Compilation destination folder with classes
+    /// @param classpath A collection of the classpath entries (JARs)
     @Contract(pure = true)
-    public Strip(final File classesFolder, final Iterable<File> classpathJars) {
+    public Strip(final File classes, final Iterable<File> classpath) {
         // Validate.
-        assert (classesFolder != null) : "Ksyxis: Parameter 'classesFolder' is null. (classpathJars: " + classpathJars + ", strip: " + this + ')';
-        assert (classpathJars != null) : "Ksyxis: Parameter 'classpathJars' is null. (classesFolder: " + classesFolder + ", strip: " + this + ')';
+        assert (classes != null) : "Ksyxis: Parameter 'classes' is null. (classpath: " + classpath + ", strip: " + this + ')';
+        assert (classpath != null) : "Ksyxis: Parameter 'classpath' is null. (classes: " + classes + ", strip: " + this + ')';
 
-        // Create the resolver from the compilation folder.
-        final Path classesFolderPath = classesFolder.toPath(); // Implicit NPE for 'classesFolder'
-        final ClassHierarchyResolver classPathResolver = ClassHierarchyResolver.ofResourceParsing((final ClassDesc desc)
-                -> this.resolveClassData(desc, classesFolderPath, classpathJars));
+        // Create the resolver.
+        final Path classesPath = classes.toPath(); // Implicit NPE for 'classes'
+        final CompileHierarchyResolver resolver = this.resolver = new CompileHierarchyResolver(classesPath, classpath);
 
-        // Create the general resolver. It:
+        // Create the caching general resolver. It:
         // 1. Searches the system classes. (Java classes)
         // 2. Searches the compilation class-path. (see above)
         // 3. Caches that data for future re-use.
-        final ClassHierarchyResolver resolver = ClassHierarchyResolver.defaultResolver()
-                .orElse(classPathResolver)
+        final ClassHierarchyResolver generalResolver = ClassHierarchyResolver.defaultResolver()
+                .orElse(resolver)
                 .cached();
 
         // Create the context.
-        this.context = ClassFile.of(ClassFile.ConstantPoolSharingOption.NEW_POOL, ClassFile.ClassHierarchyResolverOption.of(resolver));
+        this.context = ClassFile.of(ClassFile.ConstantPoolSharingOption.NEW_POOL, ClassFile.ClassHierarchyResolverOption.of(generalResolver));
     }
 
     /// Reads the class-file bytecode from the file, strips the decoration attributes via
@@ -194,7 +187,7 @@ public final class Strip implements Closeable {
         try {
             // Validate.
             assert (classFile != null) : "Ksyxis: Parameter 'classFile' is null. (strip: " + this + ')';
-            assert (classFile.isFile()) : "Class-file is not a file. (classFile: " + classFile + ", strip: " + this + ')';
+            assert (classFile.isFile()) : "Ksyxis: Class-file is not a file. (classFile: " + classFile + ", strip: " + this + ')';
 
             // Parse.
             final Path classFilePath = classFile.toPath(); // Implicit NPE for 'classFile'
@@ -226,109 +219,16 @@ public final class Strip implements Closeable {
     /// @throws IOException If an I/O error occurs
     @Override
     public void close() throws IOException {
-        // Shortcut.
-        final Map<File, FileSystem> systems = this.systems;
-        if (systems.isEmpty()) return;
-
-        // Create an error list.
-        final List<RuntimeException> errors = new ArrayList<>(systems.size());
-
-        // Try to close each.
-        for (final FileSystem system : systems.values()) {
-            // Wrap.
-            try {
-                // Close.
-                system.close();
-            } catch (final Throwable t) {
-                // Store.
-                errors.add(new RuntimeException("Ksyxis: Unable to close the filesystem. (system: " + system + ')', t));
-            }
-        }
-
-        // Clear the systems.
-        systems.clear();
-
-        // Stop if no errors.
-        if (errors.isEmpty()) return;
-
-        // Throw all errors.
-        final IOException wrapper = new IOException("Ksyxis: Unable to close some filesystems, see suppressed errors for more details.");
-        for (final RuntimeException error : errors) {
-            wrapper.addSuppressed(error);
-        }
-        throw wrapper;
-    }
-
-    /// Resolves the raw class data (as an open stream) from the [descriptor][ClassDesc].
-    ///
-    /// This resolves only the class data from the provided classes folder and classpath of JARs,
-    /// it doesn't even do the internal JVM/JDK class resolving, use [ClassHierarchyResolver#defaultResolver()]
-    /// for that (you can [chain][ClassHierarchyResolver#orElse(ClassHierarchyResolver)] it).
-    ///
-    /// Caller must [close][InputStream#close()] the returned stream, unless it is `null`.
-    ///
-    /// @param desc          Class descriptor
-    /// @param classesFolder Folder with all the compiled classes
-    /// @param classpathJars All the classpath JARs
-    /// @return A newly opened input stream with raw class data, `null` if the class wasn't found
-    /// @throws RuntimeException If any error was encountered during classpath/classes scanning
-    @Contract("_, _, _ -> new")
-    @CheckReturnValue
-    @MustBeClosed
-    @Nullable
-    private InputStream resolveClassData(final ClassDesc desc, final Path classesFolder,
-                                         final Iterable<File> classpathJars) {
-        // Wrap.
-        try {
-            // Validate.
-            assert (desc != null) : "Ksyxis: Parameter 'desc' is null. (classesFolder: " + classesFolder + ", classpathJars: " + classpathJars + ", strip: " + this + ')';
-            assert (classesFolder != null) : "Ksyxis: Parameter 'classesFolder' is null. (desc: " + desc + ", classpathJars: " + classpathJars + ", strip: " + this + ')';
-            assert (classpathJars != null) : "Ksyxis: Parameter 'classpathJars' is null. (desc: " + desc + ", classesFolder: " + classesFolder + ", strip: " + this + ')';
-
-            // Skip non-classes.
-            if (!desc.isClassOrInterface()) return null; // Implicit NPE for 'desc'
-
-            // Resolve the name.
-            final String descriptor = desc.descriptorString();
-            final String name = (descriptor.substring(1, descriptor.length() - 1) + ".class");
-
-            // Resolve the file from the classes folder, if exists.
-            final Path file = classesFolder.resolve(name); // Implicit NPE for 'classesFolder'
-            if (Files.isRegularFile(file)) {
-                // Create the stream.
-                return Files.newInputStream(file);
-            }
-
-            // Search class-path JARs.
-            for (final File classpathJar : classpathJars) { // Implicit NPE for 'classpathJars'
-                // Validate.
-                assert (classpathJar != null) : "Ksyxis: Classpath JAR is null. (desc: " + desc + ", classesFolder: " + classesFolder + ", classpathJars: " + classpathJars + ", strip: " + this + ')';
-
-                // Get or create the file-system.
-                final FileSystem fs = this.systems.computeIfAbsent(classpathJar, Strip::openJarFileSystem);
-
-                // Search for a file, skip if doesn't exist.
-                final Path innerFile = fs.getPath(name);
-                if (!Files.isRegularFile(innerFile)) continue;
-
-                // Create the stream.
-                return Files.newInputStream(innerFile);
-            }
-
-            // Nothing found.
-            return null;
-        } catch (final Throwable t) {
-            // Rethrow.
-            throw new RuntimeException("Ksyxis: Unable to perform the class-path search for a class hierarchy. (desc: " + desc + ", classesFolder: " + classesFolder + ", classpathJars: " + classpathJars + ", strip: " + this + ')', t);
-        }
+        // Delegate.
+        this.resolver.close();
     }
 
     @Contract(pure = true)
     @Override
     public String toString() {
         return "Ksyxis/Strip{" +
-                "context=" + this.context +
-                ", systems=" + this.systems +
+                "resolver=" + this.resolver +
+                ", context=" + this.context +
                 '}';
     }
 
@@ -816,35 +716,5 @@ public final class Strip implements Closeable {
             }
             return false;
         });
-    }
-
-    /// Opens the specified JAR file as a [ZIP file-system][FileSystems#newFileSystem(Path)].
-    ///
-    /// This method is essentially a wrapper for the aforementioned call with two changes:
-    ///
-    /// 1. It accepts a [File] instead of a [Path].
-    /// 2. It wraps any [IOException] into an [UncheckedIOException].
-    ///
-    /// It is designed to be used as a method reference.
-    ///
-    /// Caller must [close][FileSystem#close()] the returned system.
-    ///
-    /// @return A newly created file system
-    /// @throws UncheckedIOException If an I/O error occurs
-    @Contract("_ -> new")
-    @CheckReturnValue
-    @MustBeClosed
-    private static FileSystem openJarFileSystem(final File jar) {
-        // Validate.
-        assert (jar != null) : "Ksyxis: Parameter 'jar' is null.";
-
-        // Wrap.
-        try {
-            // Open.
-            return FileSystems.newFileSystem(jar.toPath()); // Implicit NPE for 'jar'
-        } catch (final IOException ioe) {
-            // Rethrow.
-            throw new UncheckedIOException("Ksyxis: Unable to open JAR as a filesystem. (jar: " + jar + ')', ioe);
-        }
     }
 }

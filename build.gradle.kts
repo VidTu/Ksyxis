@@ -29,6 +29,7 @@
 
 import com.google.gson.Gson
 import com.google.gson.JsonElement
+import ru.vidtu.ksyxis.buildsrc.Strip
 
 // Plugins.
 plugins {

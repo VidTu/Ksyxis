@@ -293,7 +293,7 @@
     <inspection_tool class="ClashingTraitMethods" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="ClassCanBeRecord" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="ClassComplexity" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
-      <option name="m_limit" value="80" />
+      <option name="m_limit" value="85" />
     </inspection_tool>
     <inspection_tool class="ClassCoupling" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
       <option name="m_includeJavaClasses" value="false" />
@@ -428,6 +428,7 @@
       <option name="myConstantShouldGoLeft" value="false" />
     </inspection_tool>
     <inspection_tool class="ConstantValue" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
+      <option name="DONT_REPORT_TRUE_ASSERT_STATEMENTS" value="true" />
       <option name="IGNORE_ASSERT_STATEMENTS" value="true" />
     </inspection_tool>
     <inspection_tool class="ConstantValueVariableUse" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
@@ -759,7 +760,9 @@
     <inspection_tool class="ExtendsUtilityClass" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="ExternalizableWithSerializationMethods" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="ExternalizableWithoutPublicNoArgConstructor" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
-    <inspection_tool class="ExtractMethodRecommender" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
+    <inspection_tool class="ExtractMethodRecommender" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
+      <option name="minLength" value="750" />
+    </inspection_tool>
     <inspection_tool class="FabricModJsonEntrypointsValidation" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="FakeJvmFieldConstant" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="FallThroughInSwitchStatementJS" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
@@ -1160,7 +1163,7 @@
     <inspection_tool class="ImplicitNullableNothingType" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="ImplicitNumericConversion" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
       <option name="ignoreWideningConversions" value="false" />
-      <option name="ignoreCharConversions" value="false" />
+      <option name="ignoreCharConversions" value="true" />
       <option name="ignoreConstantConversions" value="false" />
     </inspection_tool>
     <inspection_tool class="ImplicitSubclassInspection" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
@@ -1481,7 +1484,7 @@
     <inspection_tool class="KubernetesUnknownValues" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="LabeledStatement" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="LabeledStatementJS" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
-    <inspection_tool class="LambdaBodyCanBeCodeBlock" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
+    <inspection_tool class="LambdaBodyCanBeCodeBlock" enabled="true" level="INFORMATION" enabled_by_default="true" editorAttributes="INFORMATION_ATTRIBUTES" />
     <inspection_tool class="LambdaCanBeMethodCall" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="LambdaCanBeReplacedWithAnonymous" enabled="true" level="INFORMATION" enabled_by_default="true" editorAttributes="INFORMATION_ATTRIBUTES" />
     <inspection_tool class="LambdaParameterHidingMemberVariable" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
@@ -1656,7 +1659,7 @@
     <inspection_tool class="MethodOverloadsParentMethod" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="MethodOverridesInaccessibleMethodOfSuper" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="MethodOverridesStaticMethod" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
-    <inspection_tool class="MethodRefCanBeReplacedWithLambda" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
+    <inspection_tool class="MethodRefCanBeReplacedWithLambda" enabled="true" level="INFORMATION" enabled_by_default="true" editorAttributes="INFORMATION_ATTRIBUTES" />
     <inspection_tool class="MethodReturnAlwaysConstant" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="MethodSideOnly" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="MethodWithMultipleLoops" enabled="true" level="INFORMATION" enabled_by_default="true" editorAttributes="INFORMATION_ATTRIBUTES" />
@@ -1752,7 +1755,7 @@
     <inspection_tool class="MultipleReturnPointsPerMethod" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
       <option name="ignoreGuardClauses" value="false" />
       <option name="ignoreEqualsMethod" value="false" />
-      <option name="m_limit" value="3" />
+      <option name="m_limit" value="4" />
     </inspection_tool>
     <inspection_tool class="MultipleTopLevelClassesInFile" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
     <inspection_tool class="MultipleVariablesInDeclaration" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES" />
@@ -1952,7 +1955,7 @@
       <option name="m_limit" value="64" />
     </inspection_tool>
     <inspection_tool class="OverlyLongLambda" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
-      <option name="m_limit" value="20" />
+      <option name="m_limit" value="5" />
     </inspection_tool>
     <inspection_tool class="OverlyStrongTypeCast" enabled="true" level="ERROR" enabled_by_default="true" editorAttributes="ERRORS_ATTRIBUTES">
       <option name="ignoreInMatchingInstanceof" value="false" />

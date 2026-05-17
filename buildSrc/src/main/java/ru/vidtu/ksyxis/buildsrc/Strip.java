@@ -63,6 +63,7 @@ import java.lang.classfile.attribute.SourceFileAttribute;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -138,7 +139,7 @@ public final class Strip implements Closeable {
         // 3. Caches that data for future re-use.
         final ClassHierarchyResolver generalResolver = ClassHierarchyResolver.defaultResolver()
                 .orElse(resolver)
-                .cached();
+                .cached(() -> new HashMap<>(16));
 
         // Create the context.
         this.context = ClassFile.of(ClassFile.ConstantPoolSharingOption.NEW_POOL, ClassFile.ClassHierarchyResolverOption.of(generalResolver));

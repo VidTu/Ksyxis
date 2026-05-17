@@ -30,7 +30,6 @@
 package ru.vidtu.ksyxis.buildsrc;
 
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 
 import java.io.Closeable;
@@ -64,10 +63,7 @@ import java.lang.classfile.attribute.SourceFileAttribute;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
 
 /// A build-time class that performs metadata stripping
@@ -78,38 +74,6 @@ import java.util.function.Consumer;
 /// @author VidTu
 @NullMarked
 public final class Strip implements Closeable {
-    /// An immutable set of annotations VM names to strip.
-    ///
-    /// @see #STRIPPED_PACKAGES
-    /// @see #shouldStripTyped(String)
-    /// @see #shouldStripTypeless(String)
-    @Unmodifiable
-    private static final Set<String> STRIPPED_ANNOTATIONS = Set.of(
-            "java/lang/Deprecated"
-    );
-
-    /// An array of annotation VM prefixes (packages) to strip.
-    ///
-    /// Individual VM annotations are cached via [#STRIPPED_CACHE].
-    ///
-    /// @see #STRIPPED_ANNOTATIONS
-    /// @see #STRIPPED_CACHE
-    /// @see #shouldStripTyped(String)
-    /// @see #shouldStripTypeless(String)
-    private static final String @Unmodifiable [] STRIPPED_PACKAGES = {
-            "com/google/errorprone/annotations/",
-            "org/intellij/lang/annotations/",
-            "org/jetbrains/annotations/",
-            "org/jspecify/annotations/"
-    };
-
-    /// A mutable cache for individual annotations for [#STRIPPED_PACKAGES].
-    ///
-    /// @see #STRIPPED_PACKAGES
-    /// @see #shouldStripTyped(String)
-    /// @see #shouldStripTypeless(String)
-    private static final Map<String, Boolean> STRIPPED_CACHE = new HashMap<>(32);
-
     /// A `SourceFile` attribute made up of an empty string. (`""`)
     ///
     /// When no source is specified, Java doesn't display line numbers in stack-traces. We want line numbers in
@@ -118,8 +82,8 @@ public final class Strip implements Closeable {
     /// @see #stripClass(ClassBuilder, ClassElement)
     private static final SourceFileAttribute EMPTY_SOURCE = SourceFileAttribute.of("");
 
-    /// A [ClassTransform] that strips all [strippable][#shouldStripTypeless(String)] annotations from all elements
-    /// in the class, including the class itself, class [fields][ClassTransform#transformingFields(FieldTransform)],
+    /// A [ClassTransform] that strips all [strippable][StripAnnotations#shouldStripInternal(String)] annotations from
+    /// all elements in the class, including the class itself, class [fields][ClassTransform#transformingFields(FieldTransform)],
     /// class [methods][ClassTransform#transformingMethods(MethodTransform)] (including their parameters).
     /// Method code is not being transformed. (for now)
     ///
@@ -253,8 +217,8 @@ public final class Strip implements Closeable {
             // Remove the deprecated attribute, it serves no VM purpose.
             case final DeprecatedAttribute _ -> {}
 
-            // Strip the annotations. This doesn't remove all annotations,
-            // only those subjected by the "shouldStripTyped(String)" method.
+            // Strip the annotations. This doesn't remove all annotations, only those
+            // subjected to the "StripAnnotations.shouldStripDescriptor(String)" method.
             case final RuntimeInvisibleAnnotationsAttribute attribute -> stripInvisible(builder, attribute); // Implicit NPE for 'builder'
             case final RuntimeInvisibleTypeAnnotationsAttribute attribute -> stripInvisibleType(builder, attribute); // Implicit NPE for 'builder'
             case final RuntimeVisibleAnnotationsAttribute attribute -> stripVisible(builder, attribute); // Implicit NPE for 'builder'
@@ -294,8 +258,8 @@ public final class Strip implements Closeable {
             // Remove the deprecated attribute, it serves no VM purpose.
             case final DeprecatedAttribute _ -> {}
 
-            // Strip the annotations. This doesn't remove all annotations,
-            // only those subjected by the "shouldStripTyped(String)" method.
+            // Strip the annotations. This doesn't remove all annotations, only those
+            // subjected to the "StripAnnotations.shouldStripDescriptor(String)" method.
             case final RuntimeInvisibleAnnotationsAttribute attribute -> stripInvisible(builder, attribute); // Implicit NPE for 'builder'
             case final RuntimeInvisibleTypeAnnotationsAttribute attribute -> stripInvisibleType(builder, attribute); // Implicit NPE for 'builder'
             case final RuntimeVisibleAnnotationsAttribute attribute -> stripVisible(builder, attribute); // Implicit NPE for 'builder'
@@ -329,8 +293,8 @@ public final class Strip implements Closeable {
             // Remove the deprecated attribute, it serves no VM purpose.
             case final DeprecatedAttribute _ -> {}
 
-            // Strip the annotations. This doesn't remove all annotations,
-            // only those subjected by the "shouldStripTyped(String)" method.
+            // Strip the annotations. This doesn't remove all annotations, only those
+            // subjected to the "StripAnnotations.shouldStripDescriptor(String)" method.
             case final RuntimeInvisibleAnnotationsAttribute attribute -> stripInvisible(builder, attribute); // Implicit NPE for 'builder'
             case final RuntimeInvisibleParameterAnnotationsAttribute attribute -> stripInvisibleParameter(builder, attribute); // Implicit NPE for 'builder'
             case final RuntimeInvisibleTypeAnnotationsAttribute attribute -> stripInvisibleType(builder, attribute); // Implicit NPE for 'builder'
@@ -343,12 +307,12 @@ public final class Strip implements Closeable {
         }
     }
 
-    /// Strips the [inner class metadata][InnerClassInfo] with rules from [#shouldStripTypeless(String)].
+    /// Strips the [inner class metadata][InnerClassInfo] with rules from [StripAnnotations#shouldStripInternal(String)].
     /// Non-stripped class attributers will be passed to the `builder` for processing.
     ///
     /// @param builder Consumer for non-stripped annotations, usually the [ClassFileBuilder]
     /// @param element Element to strip the annotations from
-    /// @see #shouldStripTypeless(String)
+    /// @see StripAnnotations#shouldStripInternal(String)
     private static void stripInnerClasses(final Consumer<? super InnerClassesAttribute> builder,
                                           final InnerClassesAttribute element) {
         // Validate.
@@ -371,7 +335,7 @@ public final class Strip implements Closeable {
             assert (clazz != null) : "Ksyxis: Class is null. (classes: " + classes + ", builder: " + builder + ", element: " + element + ')';
 
             // Check, strip if needed.
-            if (shouldStripTypeless(clazz.innerClass().asInternalName())) continue; // Implicit NPE for 'clazz'
+            if (StripAnnotations.shouldStripInternal(clazz.innerClass().asInternalName())) continue; // Implicit NPE for 'clazz'
 
             // Add if not stripped.
             newClasses.add(clazz);
@@ -522,16 +486,16 @@ public final class Strip implements Closeable {
         builder.accept(RuntimeVisibleTypeAnnotationsAttribute.of(stripped)); // Implicit NPE for 'builder'
     }
 
-    /// Strips the [annotations][Annotation] from the list according
-    /// to the rules described in [#shouldStripTyped(String)].
+    /// Strips the [annotations][Annotation] from the list according to
+    /// the rules described in [StripAnnotations#shouldStripDescriptor(String)].
     ///
     /// @param annotations Annotations list to strip
     /// @return A new list of annotations without stripped ones, an empty list if all were stripped
     /// @see #stripParameterList(List)
     /// @see #stripTypeList(List)
-    /// @see #shouldStripTyped(String)
     /// @see #stripInvisible(Consumer, RuntimeInvisibleAnnotationsAttribute)
     /// @see #stripVisible(Consumer, RuntimeVisibleAnnotationsAttribute)
+    /// @see StripAnnotations#shouldStripDescriptor(String)
     @Contract(value = "_ -> new", pure = true)
     private static List<Annotation> stripList(final List<Annotation> annotations) {
         // Validate.
@@ -549,7 +513,7 @@ public final class Strip implements Closeable {
             assert (annotation != null) : "Ksyxis: Annotation is null. (annotations: " + annotations + ')';
 
             // Check, strip if needed.
-            if (shouldStripTyped(annotation.className().stringValue())) continue; // Implicit NPE for 'annotation'
+            if (StripAnnotations.shouldStripDescriptor(annotation.className().stringValue())) continue; // Implicit NPE for 'annotation'
 
             // Add if not stripped.
             newAnnotations.add(annotation);
@@ -559,16 +523,16 @@ public final class Strip implements Closeable {
         return newAnnotations;
     }
 
-    /// Strips the [parameter annotations][Annotation] from the list of lists
-    /// according to the rules described in [#shouldStripTyped(String)].
+    /// Strips the [parameter annotations][Annotation] from the list of lists according
+    /// to the rules described in [StripAnnotations#shouldStripDescriptor(String)].
     ///
     /// @param annotations Parameter annotations list of lists to strip
     /// @return A new list of parameter annotations without stripped ones, an empty list if all were stripped
     /// @see #stripList(List)
     /// @see #stripTypeList(List)
-    /// @see #shouldStripTyped(String)
     /// @see #stripInvisibleParameter(Consumer, RuntimeInvisibleParameterAnnotationsAttribute)
     /// @see #stripVisibleParameter(Consumer, RuntimeVisibleParameterAnnotationsAttribute)
+    /// @see StripAnnotations#shouldStripDescriptor(String)
     @Contract(value = "_ -> new", pure = true)
     private static List<List<Annotation>> stripParameterList(final List<List<Annotation>> annotations) {
         // Validate.
@@ -603,7 +567,7 @@ public final class Strip implements Closeable {
                 assert (annotation != null) : "Ksyxis: Annotation is null. (list: " + list + ", annotations: " + annotations + ')';
 
                 // Check, strip if needed.
-                if (shouldStripTyped(annotation.className().stringValue())) continue; // Implicit NPE for 'annotation'
+                if (StripAnnotations.shouldStripDescriptor(annotation.className().stringValue())) continue; // Implicit NPE for 'annotation'
 
                 // Add if not stripped. Set the flag.
                 newList.add(annotation);
@@ -622,16 +586,16 @@ public final class Strip implements Closeable {
         return newAnnotations;
     }
 
-    /// Strips the [type annotations][TypeAnnotation] from the list
-    /// according to the rules described in [#shouldStripTyped(String)].
+    /// Strips the [type annotations][TypeAnnotation] from the list according
+    /// to the rules described in [StripAnnotations#shouldStripDescriptor(String)].
     ///
     /// @param annotations Type annotations list to strip
     /// @return A new list of type annotations without stripped ones, an empty list if all were stripped
     /// @see #stripList(List)
     /// @see #stripParameterList(List)
-    /// @see #shouldStripTyped(String)
     /// @see #stripInvisibleType(Consumer, RuntimeInvisibleTypeAnnotationsAttribute)
     /// @see #stripVisibleType(Consumer, RuntimeVisibleTypeAnnotationsAttribute)
+    /// @see StripAnnotations#shouldStripDescriptor(String)
     @Contract(value = "_ -> new", pure = true)
     private static List<TypeAnnotation> stripTypeList(final List<TypeAnnotation> annotations) {
         // Validate.
@@ -649,7 +613,7 @@ public final class Strip implements Closeable {
             assert (annotation != null) : "Ksyxis: Annotation is null. (annotations: " + annotations + ')';
 
             // Check, strip if needed.
-            if (shouldStripTyped(annotation.annotation().className().stringValue())) continue; // Implicit NPE for 'annotation'
+            if (StripAnnotations.shouldStripDescriptor(annotation.annotation().className().stringValue())) continue; // Implicit NPE for 'annotation'
 
             // Add if not stripped.
             newAnnotations.add(annotation);
@@ -657,64 +621,5 @@ public final class Strip implements Closeable {
 
         // Return the new list.
         return newAnnotations;
-    }
-
-    /// Checks if the internal annotation VM name should be stripped.
-    ///
-    /// Annotations will be stripped if their name is found in [#STRIPPED_ANNOTATIONS],
-    /// or their name starts with a prefix (package) found in [#STRIPPED_PACKAGES].
-    ///
-    /// Unlike [#shouldStripTypeless(String)], this method **IS** intended
-    /// for whole types, containing `L` at the beginning and `;` at the end.
-    ///
-    /// @param name Annotation internal VM name to check
-    /// @return `true` if the annotation should be stripped, `false` otherwise
-    /// @see #STRIPPED_ANNOTATIONS
-    /// @see #STRIPPED_PACKAGES
-    /// @see #shouldStripTypeless(String)
-    @Contract(pure = true)
-    private static boolean shouldStripTyped(final String name) {
-        // Validate.
-        assert (name != null) : "Ksyxis: Parameter 'name' is null.";
-        assert (!name.isBlank()) : "Ksyxis: Blank name. (name: " + name + ')';
-        assert ((name.charAt(0) == 'L') && (name.charAt(name.length() - 1) == ';')) : "Ksyxis: Typeless name used in typed stripping. (name: " + name + ')';
-
-        // Delegate.
-        final String typeless = name.substring(1, (name.length() - 1)); // Implicit NPE for 'name'
-        return shouldStripTypeless(typeless);
-    }
-
-    /// Checks if the internal annotation VM name should be stripped.
-    ///
-    /// Annotations will be stripped if their name is found in [#STRIPPED_ANNOTATIONS],
-    /// or their name starts with a prefix (package) found in [#STRIPPED_PACKAGES].
-    ///
-    /// Unlike [#shouldStripTyped(String)], this method is **NOT** intended for whole
-    /// types, so it should **NOT** contain `L` at the beginning and `;` at the end.
-    ///
-    /// @param name Annotation internal VM name to check
-    /// @return `true` if the annotation should be stripped, `false` otherwise
-    /// @see #STRIPPED_ANNOTATIONS
-    /// @see #STRIPPED_PACKAGES
-    /// @see #shouldStripTyped(String)
-    @Contract(pure = true)
-    private static boolean shouldStripTypeless(final String name) {
-        // Validate.
-        assert (name != null) : "Ksyxis: Parameter 'name' is null.";
-        assert (!name.isBlank()) : "Ksyxis: Blank name. (name: " + name + ')';
-        assert ((name.charAt(0) != 'L') || (name.charAt(name.length() - 1) != ';')) : "Ksyxis: Typed name used in typeless stripping. (name: " + name + ')';
-
-        // Fast path for exact match: Strip if name directly matches one of desired annotations.
-        if (STRIPPED_ANNOTATIONS.contains(name)) return true; // Implicit NPE for 'name'
-
-        // Use the cache if available.
-        return STRIPPED_CACHE.computeIfAbsent(name, (final String _) -> {
-            // Strip if name starts with package name of desired annotations.
-            for (final String pkg : STRIPPED_PACKAGES) {
-                if (!name.startsWith(pkg)) continue;
-                return true;
-            }
-            return false;
-        });
     }
 }

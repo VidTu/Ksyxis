@@ -155,6 +155,22 @@
                 <pgp value="077E8893A6DCC33DD4A4D5B256E73BA9A0B592D0"/>
             </artifact>
         </component>
+        <component group="org.gradle" name="github-dependency-graph-gradle-plugin" version="1.4.1">
+            <artifact name="github-dependency-graph-gradle-plugin-1.4.1.jar">
+                <md5 value="f139f4480a7ca1a87b36030f4568badb"/>
+                <sha1 value="73bb745340493cf47a4c6c92478fab25c2bbcd46"/>
+                <sha256 value="571cc95ec821649ca14c3895d637e8071af8f219f1f2aa4588cff3a95ea429c5"/>
+                <sha512 value="e82d3145f2cb9b498f264ef382fd070e49164aaa3e96766b2b947d5555017d044dbd83c39a25a0648c6fe9692687742d01a510b073d62a0d79b0100930fb7bb5"/>
+                <pgp value="7B79ADD11F8A779FE90FD3D0893A028475557671"/>
+            </artifact>
+            <artifact name="github-dependency-graph-gradle-plugin-1.4.1.module">
+                <md5 value="7cb84c96e969e1c9147bf7ac61a4816d"/>
+                <sha1 value="99234c148049c414980f7af65cfa6c3fbc85c421"/>
+                <sha256 value="ed793bb8d17435a8b37260a5d72808b76db832e9ca58d136980e34336b2c18b2"/>
+                <sha512 value="013aaeccdca2f8bd4a46896d5691e514472d2d20bbf32b48851a1a87cdde87eeead2943c4c0724698ce016577d6d4839f2e4dccf74145d5a6362bb43dd31d1ce"/>
+                <pgp value="7B79ADD11F8A779FE90FD3D0893A028475557671"/>
+            </artifact>
+        </component>
         <component group="org.gradle.toolchains" name="foojay-resolver" version="1.0.0">
             <artifact name="foojay-resolver-1.0.0.jar">
                 <md5 value="a21809036a0b6aa013ff7d6c51737a25"/>

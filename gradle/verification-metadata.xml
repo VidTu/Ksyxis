@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<verification-metadata xmlns="https://schema.gradle.org/dependency-verification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://schema.gradle.org/dependency-verification https://schema.gradle.org/dependency-verification/dependency-verification-1.3.xsd">
+    <configuration>
+        <verify-metadata>true</verify-metadata>
+        <verify-signatures>true</verify-signatures>
+        <keyring-format>armored</keyring-format>
+        <key-servers enabled="false"/>
+    </configuration>
+    <components>
+        <component group="com.google.code.gson" name="gson" version="2.14.0">
+            <artifact name="gson-2.14.0.jar">
+                <md5 value="43b20830936ec97d8df6b174e3509d9e"/>
+                <sha1 value="efc0e34ede4e3204eaefb84a00e55e8c86634382"/>
+                <sha256 value="2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f"/>
+                <sha512 value="d040d19a47ca2df33365493f9813a1d0a40b91685f7d87ca445b98d37b4c1b801314aef87940dc8b43dd1b0b96f6d5e6e4296778bf1af8dbfb1091425b37da21"/>
+                <pgp value="C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7"/>
+            </artifact>
+            <artifact name="gson-2.14.0.pom">
+                <md5 value="85d4ad89a943af1e8bb25a977c0ecf98"/>
+                <sha1 value="b64d82caaaff2b6738542937315c4fbded69e4e5"/>
+                <sha256 value="1fa0122c0e3733192642861c36be4c6f799a795327a23bdd2922691b6e9ba480"/>
+                <sha512 value="e4658b6de3de50bd47a79fe9ca7d6795d78e7d5223782db95ef23aaf4c5f878b81a09ef7096f9888d2e84e5d112ee437c9c85e9153c507b7c21bd6bd88dadb26"/>
+                <pgp value="C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7"/>
+            </artifact>
+        </component>
+        <component group="com.google.code.gson" name="gson-parent" version="2.14.0">
+            <artifact name="gson-parent-2.14.0.pom">
+                <md5 value="59a04d5c00abb8c4f99830830a2952bb"/>
+                <sha1 value="68e3b333bb1f2594e68d6daa05ed730118c3e394"/>
+                <sha256 value="82b0f6694c5758ab8bb07e05630208d50f589d4b5e04fd0a046d59cdf7ba3d1d"/>
+                <sha512 value="8f2498a254bcb6aa92563a3fdec533039055e1559a91a49be354b1cc4ffb39de2623a2c590308930d34eddf929567463baeafa0e91baf98c2bb0495260bba8d4"/>
+                <pgp value="C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7"/>
+            </artifact>
+        </component>
+        <component group="com.google.errorprone" name="error_prone_annotations" version="2.49.0">
+            <artifact name="error_prone_annotations-2.49.0.jar">
+                <md5 value="f15f20dc5df752e2c0f8e37f7cdd9b1d"/>
+                <sha1 value="8b42a2e3865f6e0576da3fad51dbb96732ff0f14"/>
+                <sha256 value="3b1003e51b8ae56fdbd7c71073e81d1683b97e6c4dff5a9151164d59b769d13c"/>
+                <sha512 value="88ad711b9c573a4f44a0e4c230104845ddf92b51d0955e390736bff1fe7afda6718c3d8b9d73349054668ecd83ceb174ef0021f10cf369df600aec4ac50998d4"/>
+                <pgp value="EE0CA873074092F806F59B65D364ABAA39A47320"/>
+            </artifact>
+            <artifact name="error_prone_annotations-2.49.0.pom">
+                <md5 value="ca15fb698dd4bb4c17ecbc99d179f80e"/>
+                <sha1 value="30d86155eaedaedf6382309a1f70cb1006fa7d4b"/>
+                <sha256 value="601d673cb736ccadecc8acca5d47d88d31d8e8775be45ae6bedcd8b2359c9cc5"/>
+                <sha512 value="76af37a2c966200577ea2e3b1c95b5a5c84391762fa51d9802bb85d75b588c9596d5906e7796d5ea5a010564991731547ff254fda260983fb9f74932d091aecf"/>
+                <pgp value="EE0CA873074092F806F59B65D364ABAA39A47320"/>
+            </artifact>
+        </component>
+        <component group="com.google.errorprone" name="error_prone_parent" version="2.49.0">
+            <artifact name="error_prone_parent-2.49.0.pom">
+                <md5 value="8218bbd39cb78245585fd13c00048371"/>
+                <sha1 value="6b9833cf3821f8227cdc2970eda195807c7abcb0"/>
+                <sha256 value="7313bdb222d17ff3cd02ada01c3f344e9a0d8ad121a93ae26964ed286279028d"/>
+                <sha512 value="186dc21ded2cbccc946332542d2bf858f3fa16d9e7dcf64b032adeae7ac2d3887b950b6c6a5b9956fe4bafa4c8569dac551dbbe5ba65870e1d245ae1c45735a3"/>
+                <pgp value="EE0CA873074092F806F59B65D364ABAA39A47320"/>
+            </artifact>
+        </component>
+        <component group="gradle.plugin.org.jetbrains.gradle.plugin.idea-ext" name="gradle-idea-ext" version="1.4.1">
+            <artifact name="gradle-idea-ext-1.4.1.jar">
+                <md5 value="60c1143769fc8a0dacb5eb5493c921bd"/>
+                <sha1 value="7bbf25db12b5fef50567b142a0f2e44286966614"/>
+                <sha256 value="ba7a051e4c151cfe1d4a8c460a3200d587a6970c08ff2b843233dae1287b1576"/>
+                <sha512 value="e025e97b9adc4e127aa06541c6353d64fb907150c00cb0a99b81e3babc5c0cd7743e86102cf6a09cd146e1eb68b8c0ea48c790b9ea098d8ea86fb784b51df074"/>
+                <pgp value="33FD4BFD33554634053D73C0C2148900BCD3C2AF"/>
+            </artifact>
+            <artifact name="gradle-idea-ext-1.4.1.pom">
+                <md5 value="58f21ef6e5db7dce8ddf83babdb8fb06"/>
+                <sha1 value="1b87e5ef1918ec46c5399e08d99efb2c8f60794d"/>
+                <sha256 value="3bdd332f58bebd8520d86dbc258a21f322e59b5140707f71155c64e37a9bb4ea"/>
+                <sha512 value="8ec3bcb08a44f2a8384dcc0859d448a0f836a62284d51bb0ad4fbc3b393c5218f40de8b21150bbd973e6fc4ae1a9bb3546145e0ab8afb605453b8efe6749cd4a"/>
+                <pgp value="33FD4BFD33554634053D73C0C2148900BCD3C2AF"/>
+            </artifact>
+        </component>
+        <component group="io.pebbletemplates" name="pebble" version="3.2.4">
+            <artifact name="pebble-3.2.4.jar">
+                <md5 value="053bd6ae2e9718c56f2b8ac6b5fafa63"/>
+                <sha1 value="87ec0d52f0836b526f2482897e7f9886d98f6901"/>
+                <sha256 value="2070dc71dc31f4bff37cf92d18df5f68e73073c65cfb623cdd06d725ce9b7a8b"/>
+                <sha512 value="d233b3e21a749930c75053993e309eec64c78c453e95bccc99622ed34dbdbef13a7311997597c765bdd7091b27acaddb6b046eb2f50c6fc7d2f87e82a08cb6dc"/>
+                <pgp value="4548945A7793445B67F8F8723B17BFC1FCC1B644"/>
+            </artifact>
+            <artifact name="pebble-3.2.4.pom">
+                <md5 value="70836e227c9f5b87a8e7c20a8c215953"/>
+                <sha1 value="2c3860f66cf35cb7d89d4f7083e6609675cc3bfe"/>
+                <sha256 value="bc61f49ffc076a82873c20b27723b261c4756550bf4e7c0c15db1570ad0744cd"/>
+                <sha512 value="9ecf8a75da8ac6b69dd69458b9c4978a82e227dc3ccfa453a1d1666d14dc4a39fdc6d8728c8c9528d831352a8e2bffab66ad27d5a5bff7ccbde7d20b29e20aec"/>
+                <pgp value="4548945A7793445B67F8F8723B17BFC1FCC1B644"/>
+            </artifact>
+        </component>
+        <component group="io.pebbletemplates" name="pebble-project" version="3.2.4">
+            <artifact name="pebble-project-3.2.4.pom">
+                <md5 value="1dfe26087d040dc7c35f68874a73f7db"/>
+                <sha1 value="875d0fcb8c304b489ab06fd58d6fe027223d8181"/>
+                <sha256 value="c5afbcc35846aeeeb0e5d6c5ba2a30c7e3531422346b8f3d3290eee5d62e3892"/>
+                <sha512 value="fc2163f3044ec59b2ada92ba469f40e169f0d519eb09cd5741cdd3750dc8460cc01a782b1e6d00121638b06159a9fe744326d175380ee0def95ae19fd642b575"/>
+                <pgp value="4548945A7793445B67F8F8723B17BFC1FCC1B644"/>
+            </artifact>
+        </component>
+        <component group="net.kyori" name="blossom" version="2.2.0">
+            <artifact name="blossom-2.2.0.jar">
+                <md5 value="29c2b5d74b0efc1e9e1716427c792f89"/>
+                <sha1 value="9f1f5b3c343b473501a24c5551b2e6fd5271942f"/>
+                <sha256 value="2f8bd5edf8cda89130b6ab17c6d2f5b7f1107cb466c683ef7e463fbee1a7a172"/>
+                <sha512 value="33fa4794f9825380edba8c36f62d5c3f3abaff30dfe938b8a7e4df64c078d69dd274554920427aef1b1317b1733443afe7d7952e0a40fe76ad2a6e4a9ccaf18c"/>
+                <pgp value="6F5FA671802022946C77C01550E021B142D5CDAB"/>
+            </artifact>
+            <artifact name="blossom-2.2.0.module">
+                <md5 value="2809c740f26e89e7520a51f094aaefa5"/>
+                <sha1 value="a5e27afbc7420adbb6bd66f75a0f3f4313714457"/>
+                <sha256 value="4a099eee34491859b4b89b26244daa63e412bd67eac3e6e823da775fe112269e"/>
+                <sha512 value="e0b83a8da25b72447aca2b7b59cecb7d4106a9fd6a149766aa3d958a026758e7af0a4cadfd256d7af6efe2f5c57a37e12b7acbd946b96e6892a7a95141b0fdfb"/>
+                <pgp value="6F5FA671802022946C77C01550E021B142D5CDAB"/>
+            </artifact>
+        </component>
+        <component group="net.kyori" name="mammoth" version="1.5.0">
+            <artifact name="mammoth-1.5.0.jar">
+                <md5 value="eb86e8d20131dc9c79fc4ac2caa94b73"/>
+                <sha1 value="e7b1825425c215725f685e35c273c4f1d1c21402"/>
+                <sha256 value="55600387838948034385408152569b3f8f27f4d8f6b7ecd0d35c8ab621456bea"/>
+                <sha512 value="b724a8e50e32a70d97788df1d06baedd84cf2f17688072354e9b5d67dfd5604408b93c163219a2ba7e3fa625a4216fe6e416382b139f39dccfa15fe6b09af66c"/>
+                <pgp value="6F5FA671802022946C77C01550E021B142D5CDAB"/>
+            </artifact>
+            <artifact name="mammoth-1.5.0.module">
+                <md5 value="60156970b8ed200be55384b28e1322d2"/>
+                <sha1 value="bd8cb0e4bd71237ca2e31ea55c6206f59305060a"/>
+                <sha256 value="530680d8faeb0fc81a492dbf1f2a74b093a5b2ac83790a1187318c333bcf629b"/>
+                <sha512 value="7e1be23ab2dd9ce58e3346b045eab4f407cc2d80c817d3f1260e428eb23810bf72f4dbb57ac1f7a945d18db0b77fcc682694ee43f7fcda06c6b31d35644a14f6"/>
+                <pgp value="6F5FA671802022946C77C01550E021B142D5CDAB"/>
+            </artifact>
+        </component>
+        <component group="net.kyori.blossom" name="net.kyori.blossom.gradle.plugin" version="2.2.0">
+            <artifact name="net.kyori.blossom.gradle.plugin-2.2.0.pom">
+                <md5 value="b60fa65f0d1231e51787151f799f2467"/>
+                <sha1 value="afef1a6f0971bf8bcc91f68e951528e1e4bccfd3"/>
+                <sha256 value="3bba4911c1f154b8e7f5d5307630d9a4f559df5b301250aa8b56c60850baeea6"/>
+                <sha512 value="edf4a1ff150e244f602acb5843cb230d6195794846dca471813f39ccf1c61008adcb4256c2518b4784f1db07283df7ce9df4723fa958806c01cd68488c733744"/>
+                <pgp value="6F5FA671802022946C77C01550E021B142D5CDAB"/>
+            </artifact>
+        </component>
+        <component group="org.apache.logging.log4j" name="log4j-api" version="2.26.0">
+            <artifact name="log4j-api-2.26.0.jar">
+                <md5 value="564bc06e0f03e37193227b698acaa257"/>
+                <sha1 value="ad52af0ecf054a7e3f275a2e180ee06d9c490951"/>
+                <sha256 value="820de7bbaf430eaf2e3e5ccb92f23e2085797c5ac4d4f7fc6c8b660fbefa1dbc"/>
+                <sha512 value="86516750d5a43428b977da45d403718e903451bf0b9401ba306a35f001e812b8366c73978fbf6c628a93949d9386e3a21661f85672291111e5397e94ca1cc78f"/>
+                <pgp value="077E8893A6DCC33DD4A4D5B256E73BA9A0B592D0"/>
+            </artifact>
+            <artifact name="log4j-api-2.26.0.module">
+                <md5 value="fd1e946f1de569946a67297551c59161"/>
+                <sha1 value="fb3be4530e04c37f06210659ea4b90dc1eeb3bbb"/>
+                <sha256 value="a124f0264f630a45fb6f419f4614742978b5b51728f09e6403035f1d63dc4c21"/>
+                <sha512 value="d4e7b45c34567fe946d8cf1b64d6ad46cae60d1b7f66f787fac8751d7d3169c44177b7832cdeedde29374c5940009a1cf41c27d0e98f10c6a0da23e459b52c58"/>
+                <pgp value="077E8893A6DCC33DD4A4D5B256E73BA9A0B592D0"/>
+            </artifact>
+        </component>
+        <component group="org.gradle.toolchains" name="foojay-resolver" version="1.0.0">
+            <artifact name="foojay-resolver-1.0.0.jar">
+                <md5 value="a21809036a0b6aa013ff7d6c51737a25"/>
+                <sha1 value="72c0af50bc9156fb2a9429ed152abb4417bb6eaf"/>
+                <sha256 value="78b86a47dfdf7697c9bd15da78983fd80da7247d6e02fc106bdf07e0388b60a8"/>
+                <sha512 value="b88512eaf3aeda8862ba52b7b1a7cc5d3b232eb09f02bb288521910f018c8ede7acfe56fbceb167ad01a3a4f0092c07f675b5ae7d7906284e04f14414fb643f9"/>
+                <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
+            </artifact>
+            <artifact name="foojay-resolver-1.0.0.module">
+                <md5 value="58240f100709fd48eed8ba20b341843a"/>
+                <sha1 value="a76fe92fbd5951488cacb66e8f8d31c11d30243c"/>
+                <sha256 value="6190cf0e42e664c11e1ac0a785699ab02b549cea34392c679f36d8a2c550fcb9"/>
+                <sha512 value="1e40f52c1d48034b6a76cb72065b7c4c033bf04e45c2bed3f81d759a2b207ae7ebc1b4b33688285e91b5a9b5d486da3509ad753227415ea0ea0969bac3260186"/>
+                <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
+            </artifact>
+        </component>
+        <component group="org.gradle.toolchains.foojay-resolver-convention" name="org.gradle.toolchains.foojay-resolver-convention.gradle.plugin" version="1.0.0">
+            <artifact name="org.gradle.toolchains.foojay-resolver-convention.gradle.plugin-1.0.0.pom">
+                <md5 value="b3ad64e0d48f6986dfdb3ed3ec4cc55e"/>
+                <sha1 value="91e01a9c41dbfd22a8cb9ee318e388554b2d72e1"/>
+                <sha256 value="f133249a18754ae6a1d2701d00d849b1afba7b0683ddb5fc1b18a70071cec2fa"/>
+                <sha512 value="57b924377d3c62fe9b5758c662f0d51c96bb2790b47551225958888d47abd2b04d1741c8b2d845001b3c5e1442f19c47864de11dbfa89f45bfa961521e696e20"/>
+                <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
+            </artifact>
+        </component>
+        <component group="org.jetbrains" name="annotations" version="26.1.0">
+            <artifact name="annotations-26.1.0.jar">
+                <md5 value="29c6b7959db13e3ac50ef35cf815368e"/>
+                <sha1 value="c1e9226d7ca6661020c58c94397da0cc3673d5e4"/>
+                <sha256 value="ebc7aec252ed0c7d2d04c039d7f00e69f7b86b1f493c741d67b3ef31b986b054"/>
+                <sha512 value="f1ccde58143b38ce7d064b1e9800cd84c438d3f992727620a136e86151fe2839e10a77fd2a1424fd4e7516aa4465cae1692b9cc0d57fd35c41651c90c591ad00"/>
+                <pgp value="33FD4BFD33554634053D73C0C2148900BCD3C2AF"/>
+            </artifact>
+            <artifact name="annotations-26.1.0.module">
+                <md5 value="5a0aeeb8adf6f15f45c69c71ecd8d8a9"/>
+                <sha1 value="a8655f238558b3926980d9b3e93f98decd72f987"/>
+                <sha256 value="5b4eeb8dba61e753816153e0c73f562b20e017e39393952d4de4dd31b77260bb"/>
+                <sha512 value="11acdf608c6b23415a1f019309db1985ce302e43a196c1a406023c49b90285f75316b046c3677e354ccbd68d4917fad62f797341dcaeda0e0705165c2f7ea7ab"/>
+                <pgp value="33FD4BFD33554634053D73C0C2148900BCD3C2AF"/>
+            </artifact>
+        </component>
+        <component group="org.jetbrains.gradle.plugin.idea-ext" name="org.jetbrains.gradle.plugin.idea-ext.gradle.plugin" version="1.4.1">
+            <artifact name="org.jetbrains.gradle.plugin.idea-ext.gradle.plugin-1.4.1.pom">
+                <md5 value="66cfac5abd0e8224d195b12c7e773964"/>
+                <sha1 value="7a2ea575b75c87e3540875ebfa937436beb60fff"/>
+                <sha256 value="bb80bdafa6b5632ebb836425e46ae592bd9a14f073ef5de05c7e6ffcc73c8f30"/>
+                <sha512 value="16fef2ce6415409692bbb3c8615c38d817a6aefb8376925476bee89d576cd3155dc8c4c160a6278a0a29e89beefb799fb354dae1d18ae392833a506604e3a526"/>
+                <pgp value="33FD4BFD33554634053D73C0C2148900BCD3C2AF"/>
+            </artifact>
+        </component>
+        <component group="org.jspecify" name="jspecify" version="1.0.0">
+            <artifact name="jspecify-1.0.0.jar">
+                <md5 value="9133aba420d0ca3b001dbb6ae9992cf6"/>
+                <sha1 value="7425a601c1c7ec76645a78d22b8c6a627edee507"/>
+                <sha256 value="1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab"/>
+                <sha512 value="efded31ef5b342f09422935076e599789076431e93a746685c0607e7de5592719ba6aacde0be670b3f064d1e85630d58d5bce6b34aed2a288fdb34f745efb7bc"/>
+                <pgp value="41CD49B4EF5876F9E9F691DABAC30622339994C4"/>
+            </artifact>
+            <artifact name="jspecify-1.0.0.module">
+                <md5 value="0116a34913d0d648102d7af8f2a323eb"/>
+                <sha1 value="9c18ac54a30620fdc216c01faf87c0f7effbeec7"/>
+                <sha256 value="d307ca77a54e18ac1ef1aaed4e5bbe014bd2f49f29e1d2f813e47c278283195b"/>
+                <sha512 value="02669b1c62e0c6988dd812b89201acbe6dad796f3573d6e626d2f56d2194896e198bf3998f0618019b722c7b0c93f013528bff1118f835154f2bd61c17e67b77"/>
+                <pgp value="41CD49B4EF5876F9E9F691DABAC30622339994C4"/>
+            </artifact>
+        </component>
+        <component group="org.ow2" name="ow2" version="1.5.1">
+            <artifact name="ow2-1.5.1.pom">
+                <md5 value="7b47414bd7f5886dc5a652d117a3e182"/>
+                <sha1 value="bda66fa5f1b68fa7d2de3d569bdc8508b2af82d4"/>
+                <sha256 value="321ddbb7ee6fe4f53dea6b4cd6db74154d6bfa42391c1f763b361b9f485acf05"/>
+                <sha512 value="5dbdf60bace26f9dbe2610d3de178e729fae77d65f57cb8238a828d020aaf1b4cc3d3d804bbdcf4a385c141b14fbf92ff689d9caa1f9e86542b5c47b0b1e9288"/>
+                <pgp value="10F3C7A02ECA55E502BADCF3991EFB94DB91127D"/>
+            </artifact>
+        </component>
+        <component group="org.ow2.asm" name="asm" version="9.10">
+            <artifact name="asm-9.10.jar">
+                <md5 value="23f22ec6f7c5efa82513d6b5955801a9"/>
+                <sha1 value="a7bb37d71a6e5ca0dd1e66983ba8cc6bb8894332"/>
+                <sha256 value="34f38c5d5e8bcb32cbd2d11e44bc12725be1ccdb87c3c96000af57fd81df6e64"/>
+                <sha512 value="e479d613cbd72b66b8a02472fb207e5c7f97addf53283f1e9e7e64cb60505be34a5c5a1f38a31970a6369ef92cc4a7bff6118d89fe836ff88eed160ef71d25ad"/>
+                <pgp value="A5BD02B93E7A40482EB1D66A5F69AD087600B22C"/>
+            </artifact>
+            <artifact name="asm-9.10.pom">
+                <md5 value="2fb07fbc821b5b0df807c255f0c1ba21"/>
+                <sha1 value="258574b28ae3b295ed4d223b67f6bb15c3ca0da8"/>
+                <sha256 value="bc038dcf0d45d16b71270eddeef39119672147306b661705fe4b568aa5d487e7"/>
+                <sha512 value="acb398c34bdb528367f9c78f050cf9a77551bd97b067805034906e660f85c60075d8ecf9e99262baf25541aa34f710ec54f2db707ac71dbf7feda0d6ddb10f0c"/>
+                <pgp value="A5BD02B93E7A40482EB1D66A5F69AD087600B22C"/>
+            </artifact>
+        </component>
+        <component group="org.ow2.asm" name="asm-tree" version="9.10">
+            <artifact name="asm-tree-9.10.jar">
+                <md5 value="72a0f266cc94faba95edf4951d1d27c5"/>
+                <sha1 value="adcfe5104041e599764a657b6531252da8aaccd0"/>
+                <sha256 value="02a58618b38c7748e9ce4adff00d1080ced507f309e50b8643b703532ef347e0"/>
+                <sha512 value="e79414d8f657f5ef2fd4b39114451047a00b0dbf29aadc0811eea6b43c2a6b1bbb9c342fbc35af80c1be1994154d644852899df187345138b199d0bc11d8c5ec"/>
+                <pgp value="A5BD02B93E7A40482EB1D66A5F69AD087600B22C"/>
+            </artifact>
+            <artifact name="asm-tree-9.10.pom">
+                <md5 value="ddfa32fb96c52c1933c9babb01a87815"/>
+                <sha1 value="a885629e65f54fc2db7d62a2f555d901bcd651b2"/>
+                <sha256 value="e7e130b878f385b6a91e8d921d80c83780a9bd48e60c7f6cd4611080fa1f1d58"/>
+                <sha512 value="835f3027890c451f94049229f3a64331e6cabe2c456117220765a49a97ce39eb9ac28f944d883fe776526e6c22c2a7a672d5cc6ad489214c48969c5c2da612e2"/>
+                <pgp value="A5BD02B93E7A40482EB1D66A5F69AD087600B22C"/>
+            </artifact>
+        </component>
+        <component group="org.slf4j" name="slf4j-api" version="1.7.25">
+            <artifact name="slf4j-api-1.7.25.jar">
+                <md5 value="caafe376afb7086dcbee79f780394ca3"/>
+                <sha1 value="da76ca59f6a57ee3102f8f9bd9cee742973efa8a"/>
+                <sha256 value="18c4a0095d5c1da6b817592e767bb23d29dd2f560ad74df75ff3961dbde25b79"/>
+                <sha512 value="5dd6271fd5b34579d8e66271bab75c89baca8b2ebeaa9966de391284bd08f2d720083c6e0e1edda106ecf8a04e9a32116de6873f0f88c19c049c0fe27e5d820b"/>
+                <pgp value="475F3B8E59E6E63AA78067482C7B12F2A511E325"/>
+            </artifact>
+            <artifact name="slf4j-api-1.7.25.pom">
+                <md5 value="53f7013d37871f9bc0445619999c09bf"/>
+                <sha1 value="df51c4a85dd6acf8b6cdc9323596766b3d577c28"/>
+                <sha256 value="7cd9d7a0b5d93dfd461a148891b43509cf403a9c7f9fb49060d3554df1c81e1e"/>
+                <sha512 value="3ab9cd3e61a3f9416cddf08cba6fe2e3a22e2cd10e81014387be4ee7be407ddb8ec2bce32eb378e015ee36f454ec26a2f3a2ebca021d43f74af979eb5a86a1e4"/>
+                <pgp value="475F3B8E59E6E63AA78067482C7B12F2A511E325"/>
+            </artifact>
+        </component>
+        <component group="org.slf4j" name="slf4j-parent" version="1.7.25">
+            <artifact name="slf4j-parent-1.7.25.pom">
+                <md5 value="c45fce7c042d39eab1c82642a9abfeda"/>
+                <sha1 value="8521938f0f43c60b79f9f73a9409d10e4bac649a"/>
+                <sha256 value="18f5c52120db036e88d6136f8839c832d074bdda95c756c6f429249d2db54ac6"/>
+                <sha512 value="33467b621d8f2f13ffd4f478565148ffede6163850be87e87295007888e436016cec9fc410315a06e7bff4723308a67387aae7bd6dfb238e515f68ffefacbf80"/>
+                <pgp value="475F3B8E59E6E63AA78067482C7B12F2A511E325"/>
+            </artifact>
+        </component>
+        <component group="org.snakeyaml" name="snakeyaml-engine" version="2.10">
+            <artifact name="snakeyaml-engine-2.10.jar">
+                <md5 value="95875a00407428c54e9d7123cb8730ab"/>
+                <sha1 value="20f311f742d6894de0750b92414b3c27a40bb9d5"/>
+                <sha256 value="c99d9fd66c7c251d881a9cd95089b7c8044c29a1b02983d7036981bd4354ec37"/>
+                <sha512 value="2e5ab51ee5e170a4ea01c1586e07610fc63fb00e51321a35d04609ca78326d4bf6b7fb3c32b45a9388349cce3c0453a20d77213e33cb9b65b8244c7c54c80e4c"/>
+                <pgp value="2FC53E6B1F681184F4CCD637F5C81DE10A0B8ECC"/>
+            </artifact>
+            <artifact name="snakeyaml-engine-2.10.pom">
+                <md5 value="6afc137f26e12517da40a7f5d2191a98"/>
+                <sha1 value="083b0ef2cc5f9e455daa4aaf7f9464a642fb124f"/>
+                <sha256 value="56142ca298988cf64da65ae2bdc19834921d738d75ab23761a8fac4b5f583149"/>
+                <sha512 value="c5677ea77c3b2c98f54de73f1223fa13514a7d6d1bf8f42686e2a9889e40ad2a2b481a87f698cf295025aef6aaf43cbc90e6b6a05fd00c4600b797f93c78c531"/>
+                <pgp value="2FC53E6B1F681184F4CCD637F5C81DE10A0B8ECC"/>
+            </artifact>
+        </component>
+        <component group="org.spongepowered" name="mixin" version="0.8.7">
+            <artifact name="mixin-0.8.7.jar">
+                <md5 value="b433b4dfbad09313e143c6097cd0b676"/>
+                <sha1 value="8ab114ac385e6dbdad5efafe28aba4df8120915f"/>
+                <sha256 value="87aaa7ee080465ed7ea13616679534abcdbfdd636b4752d0eff0a00017e235c0"/>
+                <sha512 value="449ba3fb3a3cee1816791825b05309ab16ce583c513e717f4032a686782595024b6beba6e84df4ed1a2b084f98ae9ed56b69c3d19bcef652f2076a5b408c17a7"/>
+            </artifact>
+            <artifact name="mixin-0.8.7.pom">
+                <md5 value="6c56cdf94202b3f60b1adcf4c4bee684"/>
+                <sha1 value="a49d54d97f150a5b9b89d7f610b18746615aa6c4"/>
+                <sha256 value="10b4f80eb1079c9ce60ebd2727c016a13b2e8b82d8915263f2800658de1c6fe5"/>
+                <sha512 value="d9128bd3a52bc2994b4651b003c16349190a2b3228db3d712f2f30ea67126704e36184e9559795702bc5f1488160d5806037926059758f030fcfc8ddddffc64e"/>
+            </artifact>
+        </component>
+        <component group="org.unbescape" name="unbescape" version="1.1.6.RELEASE">
+            <artifact name="unbescape-1.1.6.RELEASE.jar">
+                <md5 value="d95ed94e1624e307a1958ee105ccbf39"/>
+                <sha1 value="7b90360afb2b860e09e8347112800d12c12b2a13"/>
+                <sha256 value="597cf87d5b1a4f385b9d1cec974b7b483abb3ee85fc5b3f8b62af8e4bec95c2c"/>
+                <sha512 value="6918e9579b06721942fdcd91e401f5b996fb4eac13056dbafdf594661f355a34874eb5266784bc2c4f82df9fdd9e219d71a96f52945a354f01665f85f8166bb3"/>
+                <pgp value="839323A4780D5BF9A6978970152888E10EF880B3"/>
+            </artifact>
+            <artifact name="unbescape-1.1.6.RELEASE.pom">
+                <md5 value="37ff348024ddbe7fa9d3ba41e5dbc42e"/>
+                <sha1 value="e3dcc4b62560bc467cb839976dc1c49033b55453"/>
+                <sha256 value="02039562bb327d541c0f050767e91898fa389747926688cc213bd11bc75127d1"/>
+                <sha512 value="01bbc400bba9ac7826c9b5240204724345e0b6ae401086dad936f1a84c4857d672e04928b9d8e2b18e23df9b96d0551902e3b07f77e9bb8061f39ad0c61d3829"/>
+                <pgp value="839323A4780D5BF9A6978970152888E10EF880B3"/>
+            </artifact>
+        </component>
+    </components>
+</verification-metadata>

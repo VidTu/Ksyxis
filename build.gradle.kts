@@ -50,18 +50,24 @@ group = "ru.vidtu.ksyxis"
 base.archivesName = "Ksyxis"
 description = "Speed up your world loading by removing unneeded chunks."
 
-// Add GSON to buildscript classpath, we use it for minifying JSON files.
+// Buildscript dependencies.
 buildscript {
     dependencies {
+        // Add GSON to buildscript classpath, we use it for minifying JSON files.
         classpath(libs.gson)
+
+        // Override GSON's outdated annotations.
+        classpath(libs.error.prone.annotations)
     }
 }
 
+// Repositories for dependencies.
 repositories {
     mavenCentral()
     maven("https://repo.spongepowered.org/repository/maven-public/") // Mixin.
 }
 
+// Dependencies.
 dependencies {
     // Annotations.
     compileOnly(libs.jspecify)

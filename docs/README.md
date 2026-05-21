@@ -246,3 +246,5 @@ If you want to produce extra-small JARs at the cost of debuggability, you
 can set the `ru.vidtu.ksyxis.slim` boolean Gradle property to `true`.
 
 This property is incompatible with the Debug JARs options.
+
+###### Check out [SECURITY.md](SECURITY.md) if you're insecure. <3

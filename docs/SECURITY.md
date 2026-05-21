@@ -56,7 +56,7 @@ signatures (namely PGP). Sorry!
 Ksyxis has implemented supply chain validation where possible:
 
 - Gradle Wrapper (`gradle/wrapper/gradle-wrapper.jar`) is
-  verified on [GitHub CI](../.github/workflows/) on every
+  verified on [GitHub CI](../.github/workflows) on every
   commit by `gradle/actions/setup-gradle` action. Verify
   [it](https://gradle.org/release-checksums/) locally too.
 - Gradle distribution is verified by the wrapper via `distributionSha256Sum` in
@@ -67,7 +67,7 @@ Ksyxis has implemented supply chain validation where possible:
   fetching keys for signatures, the local PGP keystore is used from armored
   [verification-keyring.keys](../gradle/verification-keyring.keys). You can
   disable or replace the keyring if you want to use your own pubkeys.
-- All [GitHub CI](../.github/workflows/) workflows are SHA-pinned.
+- All [GitHub CI](../.github/workflows) workflows are SHA-pinned.
 
 However, Gradle Java Toolchains and Foojay Disco API Resolver
 are missing supply-chain verification. Therefore, you must

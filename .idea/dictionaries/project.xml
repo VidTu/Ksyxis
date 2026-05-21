@@ -10,6 +10,7 @@
       <w>aarch</w>
       <w>alnum</w>
       <w>appname</w>
+      <w>astbuilder</w>
       <w>cdpath</w>
       <w>clinit</w>
       <w>cnfe</w>
@@ -17,12 +18,15 @@
       <w>configureondemand</w>
       <w>coremod</w>
       <w>curseforge</w>
+      <w>dateutil</w>
       <w>endlocal</w>
       <w>entrypoints</w>
       <w>errorlevel</w>
       <w>fmlcoreplugin</w>
       <w>fmlcoreplugincontainsfmlmod</w>
+      <w>foojay</w>
       <w>gamerule</w>
+      <w>gson</w>
       <w>hackery</w>
       <w>javacmd</w>
       <w>jvmargs</w>
@@ -46,6 +50,7 @@
       <w>startswith</w>
       <w>tostring</w>
       <w>ulimit</w>
+      <w>unbescape</w>
       <w>ungoogled</w>
       <w>vidtu</w>
       <w>wcdfzsgy</w>

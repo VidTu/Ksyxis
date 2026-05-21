@@ -26,14 +26,14 @@
 # SPDX-License-Identifier: MIT
 
 [versions]
-asm = "9.10"
+asm-tree = "9.10"
 blossom = "2.2.0"
 error_prone_annotations = "2.49.0"
 gson = "2.14.0"
 idea-ext = "1.4.1"
 jetbrains-annotations = "26.1.0"
 jspecify = "1.0.0"
-log4j = "2.26.0"
+log4j-api = "2.26.0"
 mixin = "0.8.7"
 
 [plugins]
@@ -41,10 +41,10 @@ blossom = { id = "net.kyori.blossom", version.ref = "blossom" }
 idea-ext = { id = "org.jetbrains.gradle.plugin.idea-ext", version.ref = "idea-ext" }
 
 [libraries]
-asm-tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
+asm-tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm-tree" }
 error_prone_annotations = { module = "com.google.errorprone:error_prone_annotations", version.ref = "error_prone_annotations" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
 jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecify" }
-log4j-api = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j" }
+log4j-api = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j-api" }
 mixin = { module = "org.spongepowered:mixin", version.ref = "mixin" }

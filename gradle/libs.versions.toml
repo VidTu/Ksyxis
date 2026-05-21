@@ -41,10 +41,10 @@ blossom = { id = "net.kyori.blossom", version.ref = "blossom" }
 idea-ext = { id = "org.jetbrains.gradle.plugin.idea-ext", version.ref = "idea-ext" }
 
 [libraries]
-asm = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
+asm-tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
 error_prone_annotations = { module = "com.google.errorprone:error_prone_annotations", version.ref = "error_prone_annotations" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
 jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecify" }
-log4j = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j" }
+log4j-api = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j" }
 mixin = { module = "org.spongepowered:mixin", version.ref = "mixin" }

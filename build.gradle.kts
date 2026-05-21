@@ -76,8 +76,8 @@ dependencies {
 
     // Minecraft.
     compileOnly(libs.mixin)
-    compileOnly(libs.asm) // Required for Mixin.
-    compileOnly(libs.log4j) { // Not SLF4J for compatibility with pre-1.18.
+    compileOnly(libs.asm.tree) // Required for Mixin.
+    compileOnly(libs.log4j.api) { // Not SLF4J for compatibility with pre-1.18.
         exclude("biz.aQute.bnd")
         exclude("com.github.spotbugs")
         exclude("com.google.errorprone")

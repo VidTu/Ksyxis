@@ -35,7 +35,7 @@ Ksyxis supports reproducible builds/binaries since
 
 Versions [1.3.3](https://github.com/VidTu/Ksyxis/releases/tag/1.3.0)
 and [1.3.4](https://github.com/VidTu/Ksyxis/releases/tag/1.3.4) were
-dependant on system's `umask=022`, but otherwise are reproducible too.
+dependant on `umask` being `022`, but otherwise are reproducible too.
 
 Older versions have modification time stored in
 the archives and therefore they aren't reproducible.

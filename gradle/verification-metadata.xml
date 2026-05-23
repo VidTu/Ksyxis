@@ -1099,63 +1099,63 @@
                 <pgp value="10F3C7A02ECA55E502BADCF3991EFB94DB91127D"/>
             </artifact>
         </component>
-        <component group="org.ow2.asm" name="asm" version="9.10">
-            <artifact name="asm-9.10.jar">
-                <md5 value="23f22ec6f7c5efa82513d6b5955801a9"/>
-                <sha1 value="a7bb37d71a6e5ca0dd1e66983ba8cc6bb8894332"/>
-                <sha256 value="34f38c5d5e8bcb32cbd2d11e44bc12725be1ccdb87c3c96000af57fd81df6e64"/>
-                <sha512 value="e479d613cbd72b66b8a02472fb207e5c7f97addf53283f1e9e7e64cb60505be34a5c5a1f38a31970a6369ef92cc4a7bff6118d89fe836ff88eed160ef71d25ad"/>
+        <component group="org.ow2.asm" name="asm" version="9.10.1">
+            <artifact name="asm-9.10.1.jar">
+                <md5 value="9cb72080438acf27f2607002e1444a7b"/>
+                <sha1 value="ada2141c0cc52ee8f5c48cd5fa4ce0e794f22236"/>
+                <sha256 value="ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"/>
+                <sha512 value="8db6efa37d4d569bf2b95d90931b8064f87ed928d20bbf8d8e7fa6182e9a11d32e6a2cc034a3d173a38ee70ce2ea9f20f52f9d8730d9401d2bc6060674c18928"/>
                 <pgp value="A5BD02B93E7A40482EB1D66A5F69AD087600B22C"/>
             </artifact>
-            <artifact name="asm-9.10-javadoc.jar">
-                <md5 value="205c7c8a9baf37cb39e3c3205a7ea9e9"/>
-                <sha1 value="d5da4839c8215c69cc55547e5c8f93dee9891fc6"/>
-                <sha256 value="5ffdc514351bc8ddce1ae0ff11856bb7076cdad20bd13e2973c522711838646f"/>
-                <sha512 value="2fc2d7d0056f0c0834a8028493b679d725058ff0ce8a21bfafc84052f4978196842afe3ba056a2ce66802f1bee9b202a1a5fbd0c3084ef34c28da5db18e97869"/>
+            <artifact name="asm-9.10.1-javadoc.jar">
+                <md5 value="f9e822422520af891def2402546c1fc9"/>
+                <sha1 value="f9a1c24644762077e7c144a3b7c004e4968d70ce"/>
+                <sha256 value="05684ed698d980c9a4b489ba42799a2f8f45f8fa19d36f8304652085bcfa3dae"/>
+                <sha512 value="ee87b829f2c744e657ba1cc2bd5769e0bab155c160f2692629cbc2edcc31b0508d84293f89d70075c0bd11761032f1bb153d771de476ac7b37c44cbcaeec217f"/>
                 <pgp value="A5BD02B93E7A40482EB1D66A5F69AD087600B22C"/>
             </artifact>
-            <artifact name="asm-9.10-sources.jar">
+            <artifact name="asm-9.10.1-sources.jar">
                 <md5 value="b3d71465d783008515efa592f371c936"/>
                 <sha1 value="9f9a96aa17fd1113b218fa2dd6c4dc075192aa2e"/>
                 <sha256 value="cb29bf42b4008972c566944d377192aa1b2d90275b9cfa9a7fa86de669fde11c"/>
                 <sha512 value="332a6f84b38c78dc6a8b80f63ff6cc772ad871f95eaab68cf57b64da95a699317ff877184c4be3b3020c34d4b9900e33068a34db9299768a9230da4f08465806"/>
                 <pgp value="A5BD02B93E7A40482EB1D66A5F69AD087600B22C"/>
             </artifact>
-            <artifact name="asm-9.10.pom">
-                <md5 value="2fb07fbc821b5b0df807c255f0c1ba21"/>
-                <sha1 value="258574b28ae3b295ed4d223b67f6bb15c3ca0da8"/>
-                <sha256 value="bc038dcf0d45d16b71270eddeef39119672147306b661705fe4b568aa5d487e7"/>
-                <sha512 value="acb398c34bdb528367f9c78f050cf9a77551bd97b067805034906e660f85c60075d8ecf9e99262baf25541aa34f710ec54f2db707ac71dbf7feda0d6ddb10f0c"/>
+            <artifact name="asm-9.10.1.pom">
+                <md5 value="934a5023e018acbb73201d7953ed05a9"/>
+                <sha1 value="507e7f8821c58fc995a057b63ad4008b96bafa4d"/>
+                <sha256 value="e1b1c3832ca3ac0a9e563c405f4c760118b5556a4920daee14058886197e094d"/>
+                <sha512 value="b4de3d72c93ef85499e69cb24693e92dec0818a9381e322e0c0c7c5e7dcf7071e6a309c788426a865552b31a356b594169de99df06e7cd0f0a71c898fad71ddf"/>
                 <pgp value="A5BD02B93E7A40482EB1D66A5F69AD087600B22C"/>
             </artifact>
         </component>
-        <component group="org.ow2.asm" name="asm-tree" version="9.10">
-            <artifact name="asm-tree-9.10.jar">
-                <md5 value="72a0f266cc94faba95edf4951d1d27c5"/>
-                <sha1 value="adcfe5104041e599764a657b6531252da8aaccd0"/>
-                <sha256 value="02a58618b38c7748e9ce4adff00d1080ced507f309e50b8643b703532ef347e0"/>
-                <sha512 value="e79414d8f657f5ef2fd4b39114451047a00b0dbf29aadc0811eea6b43c2a6b1bbb9c342fbc35af80c1be1994154d644852899df187345138b199d0bc11d8c5ec"/>
+        <component group="org.ow2.asm" name="asm-tree" version="9.10.1">
+            <artifact name="asm-tree-9.10.1.jar">
+                <md5 value="62541e1dc62331408ef31317555bf4fa"/>
+                <sha1 value="e244332a17564c1d1572449399a842de35881be2"/>
+                <sha256 value="3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"/>
+                <sha512 value="2ffe5bbfac53bbacc1e4e474628b4247fb1c5f592017f393a327b3f2d2a72a338263f2f6549a42cea57a42f676b967153a10a22aae46affed83608f74daf3768"/>
                 <pgp value="A5BD02B93E7A40482EB1D66A5F69AD087600B22C"/>
             </artifact>
-            <artifact name="asm-tree-9.10-javadoc.jar">
-                <md5 value="25f661692e786bf06d30f5c4471df083"/>
-                <sha1 value="350462b5cd6f7618a4fa41c9b9c9b4b4cbb63fd6"/>
-                <sha256 value="f996d9061e6bc555406ed996f0464c7560ee4d32bfe771872e7a4f4486255572"/>
-                <sha512 value="582f143b980001f98f79c88515ac508dfd6ff3f011a33ab63f254c867a44a4c579412949690d13101e4b98a73caf956942db6f5d25061c34bdd1d268fa34c30d"/>
+            <artifact name="asm-tree-9.10.1-javadoc.jar">
+                <md5 value="3e289ea55bba532e6a7e60cba6e16cfa"/>
+                <sha1 value="cd1b0e38c494f17caee94a9a06f17bfaee1625f2"/>
+                <sha256 value="d343447fd5eb04315e03fe8c7ef7412a68ef6239919ed2683f5aea555de9f512"/>
+                <sha512 value="a74e44e75b5d34dcfa1b58c30747ad4df31b1f26ca9e88d3494d04112abb245a154008016659162d6942b4887ecf136e6aedb0a255a3acaee5726b6020a1ae08"/>
                 <pgp value="A5BD02B93E7A40482EB1D66A5F69AD087600B22C"/>
             </artifact>
-            <artifact name="asm-tree-9.10-sources.jar">
+            <artifact name="asm-tree-9.10.1-sources.jar">
                 <md5 value="53b17bbf697d18afb4eda6c7b453eaf3"/>
                 <sha1 value="868e297f64cade189fff6600060ae8418b77bb92"/>
                 <sha256 value="93a9406bb68abff43f491891625e0d3c7edce87b70d2370ec1ea4627c9ead090"/>
                 <sha512 value="6c1476f55d47f46cee756f99275ef1557d68b7685996521e6917c3d4580f3c105c2105fa254e1090dda808c48d1654216d2f4bc550d670bd2c86d9d17db28d01"/>
                 <pgp value="A5BD02B93E7A40482EB1D66A5F69AD087600B22C"/>
             </artifact>
-            <artifact name="asm-tree-9.10.pom">
-                <md5 value="ddfa32fb96c52c1933c9babb01a87815"/>
-                <sha1 value="a885629e65f54fc2db7d62a2f555d901bcd651b2"/>
-                <sha256 value="e7e130b878f385b6a91e8d921d80c83780a9bd48e60c7f6cd4611080fa1f1d58"/>
-                <sha512 value="835f3027890c451f94049229f3a64331e6cabe2c456117220765a49a97ce39eb9ac28f944d883fe776526e6c22c2a7a672d5cc6ad489214c48969c5c2da612e2"/>
+            <artifact name="asm-tree-9.10.1.pom">
+                <md5 value="e3759e689a1c3a94ba099f9cd56e8160"/>
+                <sha1 value="0fe218ecae48cabf4e53295d64ae4e01e5ddfb33"/>
+                <sha256 value="963eebdea6e2e1ff25c9068b64a238e1585c99f8acd455595ac159a7f52b6c41"/>
+                <sha512 value="1d8eade6bb000d540065c92f02fbb23bc763ce44be25ee4e5a1f9b9ca3ad0a0e8c3ad02c4eabf3dc8521c4f527c54d957f5ca98c4bdb45ef8e509d11375e9a37"/>
                 <pgp value="A5BD02B93E7A40482EB1D66A5F69AD087600B22C"/>
             </artifact>
         </component>

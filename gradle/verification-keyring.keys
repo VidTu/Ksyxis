@@ -418,6 +418,7 @@ pub   rsa4096/56E73BA9A0B592D0 2023-01-10 [SC]
 uid                            ASF Logging Services RM <private@logging.apache.org>
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: org.apache.logging.log4j:log4j,org.apache.logging.log4j:log4j-api,org.apache.logging.log4j:log4j-bom
+Comment: https://downloads.apache.org/logging/KEYS
 
 mQINBGO9IPgBEADHCB2evKGSjQutTtIjODtaYUoU634Tl4Iv4DYsOR+MyOQBJ3Eo
 9okST4azX6r9Fspgmc4LxpFnGm9OSEGn4NZ9ZxiTrmKaGsoXzj2w4JKtgAip4F5h

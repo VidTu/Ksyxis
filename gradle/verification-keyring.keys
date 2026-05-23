@@ -2,6 +2,7 @@ pub   rsa4096/3D12CA2AC19F3181 2022-08-13 [SC] [expires: 2027-08-12]
       28118C070CB22A0175A2E8D43D12CA2AC19F3181
 uid                            Tatu Saloranta (cowtowncoder) <tatu.saloranta@iki.fi>
 sub   rsa4096/575D6C921D84AC76 2022-08-13 [E] [expires: 2027-08-12]
+      7DA98E27815D614B98781F5C575D6C921D84AC76
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: com.fasterxml:oss-parent,com.fasterxml.jackson:jackson-bom,com.fasterxml.jackson:jackson-parent
 Comment: https://github.com/FasterXML/jackson/blob/main/KEYS
@@ -61,6 +62,7 @@ pub   rsa2048/B0F3710FA64900E7 2016-06-10 [SC]
       C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7
 uid                            \xc3\x61monn McManus <eamonn@mcmanus.net>
 sub   rsa2048/7892707E9657EBD4 2016-06-10 [E]
+      279DCFBE6B5FFB4C32EB5F817892707E9657EBD
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: com.google.code.gson:gson,com.google.code.gson:gson-parent
 
@@ -96,6 +98,7 @@ pub   rsa4096/D364ABAA39A47320 2022-01-28 [SC]
       EE0CA873074092F806F59B65D364ABAA39A47320
 uid                            Liam Miller-Cushon (Error Prone releases) <cushon@google.com>
 sub   rsa4096/3F606403DCA455C8 2022-01-28 [E]
+      72698241B4362188030EDEC23F606403DCA455C8
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: com.google.errorprone:error_prone_annotations,com.google.errorprone:error_prone_parent
 Comment: https://github.com/google/error-prone/blob/v2.49.0/KEYS.txt
@@ -155,6 +158,7 @@ pub   rsa2048/3B17BFC1FCC1B644 2018-05-01 [SC]
       4548945A7793445B67F8F8723B17BFC1FCC1B644
 uid                            Pebble Templates (Pebble Templates release keys) <postmaster@pebbletemplates.io>
 sub   rsa2048/AB1D1A77026CB606 2018-05-01 [E]
+      569EB7AC46F1C0F605758C49AB1D1A77026CB606
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: io.pebbletemplates:pebble,io.pebbletemplates:pebble-project
 
@@ -191,6 +195,7 @@ pub   rsa4096/049FE94F2D5DAD9D 2019-02-14 [SCEA] [expired: 2024-02-13]
       71C524683EEC78CCAD6D5554049FE94F2D5DAD9D
 uid                            Eclipse Jakarta EE Platform <jakarta-platform-dev@eclipse.org>
 sub   rsa4096/953E02E4F573B46F 2019-02-14 [S] [expired: 2024-02-13]
+      2B34821418CF19CF1F2A8352953E02E4F573B46F
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: jakarta.platform:jakarta.jakartaee-bom,jakarta.platform:jakartaee-api-parent
 
@@ -261,6 +266,7 @@ pub   ed25519/50E021B142D5CDAB 2023-05-14 [SC] [expired: 2025-05-13]
       6F5FA671802022946C77C01550E021B142D5CDAB
 uid                            KyoriPowered <staff@kyori.net>
 sub   cv25519/D0E5374E46879180 2023-05-14 [E] [expired: 2025-05-13]
+      338EA28A6132A330D309E553D0E5374E46879180
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: net.kyori:blossom,net.kyori:mammoth,net.kyori.blossom:net.kyori.blossom.gradle.plugin
 
@@ -284,7 +290,9 @@ uid                            Paul King <paul.king.asert@gmail.com>
 uid                            Paul King <kingp@ociweb.com>
 uid                            keybase.io/paulk_asert <paulk_asert@keybase.io>
 sub   rsa2048/CA890A5FA09CFD80 2016-10-23 [E] [expired: 2024-10-21]
+      297A57B020EF30EBB6DC93EFCA890A5FA09CFD80
 sub   rsa2048/EA8543C570FAF804 2016-10-23 [SA] [expired: 2024-10-21]
+      5697E2DF257752D9ED0CD127EA8543C570FAF804
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: org.apache.groovy:groovy,org.apache.groovy:groovy-ant,org.apache.groovy:groovy-astbuilder,org.apache.groovy:groovy-bom,org.apache.groovy:groovy-datetime,org.apache.groovy:groovy-dateutil,org.apache.groovy:groovy-groovydoc,org.apache.groovy:groovy-json,org.apache.groovy:groovy-nio,org.apache.groovy:groovy-templates,org.apache.groovy:groovy-xml
 Comment: https://downloads.apache.org/groovy/KEYS
@@ -452,6 +460,7 @@ pub   rsa4096/5796E91EE6619C69 2018-04-27 [SCEA] [expires: 2028-05-29]
       C3F530A8FDE7926E0F6C71475796E91EE6619C69
 uid                            Eclipse EE4J Project <ee4j-dev@eclipse.org>
 sub   rsa4096/153E7A3C2B4E5118 2018-04-27 [S] [expires: 2028-05-29]
+      AA70C7C433D501636392EC02153E7A3C2B4E5118
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: org.eclipse.ee4j:project
 
@@ -568,6 +577,7 @@ pub   rsa4096/893A028475557671 2023-09-28 [SC]
 uid                            Gradle Inc. <info@gradle.com>
 uid                            Gradle Inc. <maven-publishing@gradle.com>
 sub   rsa4096/5E9AEEBA28836032 2023-09-28 [E]
+      33940151C154D2F6A5AE37A35E9AEEBA28836032
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: org.gradle:github-dependency-graph-gradle-plugin
 
@@ -639,6 +649,7 @@ pub   rsa4096/E2F38302C8075E3D 2022-12-29 [SC]
       1BD97A6A154E7810EE0BC832E2F38302C8075E3D
 uid                            Gradle Inc. <maven-publishing@gradle.com>
 sub   rsa4096/1B80C80E07BC7190 2022-12-29 [E]
+      9D8D1019F7D0F832983158F71B80C80E07BC7190
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: gradle:gradle,org.gradle.toolchains:foojay-resolver,org.gradle.toolchains.foojay-resolver-convention:org.gradle.toolchains.foojay-resolver-convention.gradle.plugin
 Comment: https://gradle.org/keys/
@@ -698,8 +709,11 @@ pub   rsa3072/1F7A8F87B9D8F501 2021-03-15 [C] [expires: 2029-03-15]
       B46DC71E03FEEB7F89D1F2491F7A8F87B9D8F501
 uid                            Download <download@jetbrains.com>
 sub   rsa3072/CFF46EE3C17E53E9 2021-03-15 [A] [expires: 2029-03-15]
+      C9A09CC1616CFA4AA012D9CFCFF46EE3C17E53E9
 sub   rsa3072/C2148900BCD3C2AF 2021-03-15 [S] [expires: 2029-03-15]
+      33FD4BFD33554634053D73C0C2148900BCD3C2AF
 sub   rsa3072/7D1BE4480B61E2A7 2021-03-15 [E] [expires: 2029-03-15]
+      2EE102EB4D5A91136393CF1D7D1BE4480B61E2A7
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: gradle.plugin.org.jetbrains.gradle.plugin.idea-ext:gradle-idea-ext,org.jetbrains:annotations,org.jetbrains.gradle.plugin.idea-ext:org.jetbrains.gradle.plugin.idea-ext.gradle.plugin
 Comment: https://download.jetbrains.com/KEYS
@@ -858,8 +872,11 @@ pub   rsa3072/0729A0AFF8999A87 2019-06-01 [C] [expires: 2027-04-11]
       2FBA29D08D2E25EE84C132C30729A0AFF8999A87
 uid                            Kotlin Release <kt-a@jetbrains.com>
 sub   rsa3072/3FF44D37464BBB7E 2019-06-01 [A] [expires: 2027-04-11]
+      3CA67B5BA77F4B7B5400E6C23FF44D37464BBB7E
 sub   rsa3072/6A0975F8B1127B83 2019-06-01 [S] [expires: 2027-04-11]
+      6F538074CCEBF35F28AF9B066A0975F8B1127B83
 sub   rsa3072/6005789E24E5AD1E 2019-06-01 [E] [expires: 2027-04-11]
+      596228E0B645DC4CAE1454E86005789E24E5AD1E
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: org.jetbrains.kotlin:kotlin-reflect,org.jetbrains.kotlin:kotlin-stdlib
 Comment: https://kotlinlang.org/docs/security.html
@@ -1140,6 +1157,7 @@ pub   rsa2048/BAC30622339994C4 2017-06-22 [SC]
       41CD49B4EF5876F9E9F691DABAC30622339994C4
 uid                            Chris Povirk <cpovirk@google.com>
 sub   rsa2048/FC9BDC25FB378008 2017-06-22 [E]
+      E1B178D4896A4FC443BD1D53FC9BDC25FB378008
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: org.jspecify:jspecify
 Comment: https://github.com/jspecify/jspecify/issues/725#issuecomment-2679489927
@@ -1176,6 +1194,7 @@ pub   rsa4096/85911F425EC61B51 2018-04-08 [SC]
       FF6E2C001948C5F2F38B0CC385911F425EC61B51
 uid                            Open Source Development <mail@marcphilipp.de>
 sub   rsa4096/8B2A34A7D4A9B8B3 2018-04-08 [E]
+      4B3845F032F193D1BD7C9A618B2A34A7D4A9B8B3
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: org.junit:junit-bom
 Comment: https://github.com/junit-team/junit-framework/blob/r6.1.0/KEYS
@@ -1235,6 +1254,7 @@ pub   rsa3072/689CBE64F4BC997F 2021-02-14 [SC] [expired: 2023-02-14]
       147B691A19097624902F4EA9689CBE64F4BC997F
 uid                            Szczepan Faber <szczepiq@gmail.com>
 sub   rsa3072/C0058C509A81C102 2021-02-14 [E] [expired: 2023-02-14]
+      251AE196A5B326556BA3B943C0058C509A81C102
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: org.mockito:mockito-bom
 
@@ -1282,6 +1302,7 @@ pub   rsa4096/991EFB94DB91127D 2020-04-15 [SC]
       10F3C7A02ECA55E502BADCF3991EFB94DB91127D
 uid                            Antoine Mottier <gpg@mottier.xyz>
 sub   rsa4096/C327DD2B96A50E1C 2020-04-15 [E]
+      EA78BC0CEC08B4525D35C4C3C327DD2B96A50E1C
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: org.ow2:ow2
 
@@ -1339,6 +1360,7 @@ pub   rsa2048/5F69AD087600B22C 2011-11-20 [SC]
       A5BD02B93E7A40482EB1D66A5F69AD087600B22C
 uid                            Eric Bruneton <ebruneton@free.fr>
 sub   rsa2048/0440006D577EAE4B 2011-11-20 [E]
+      D6419D03A2ABA9BA0D7D14FB0440006D577EAE4B
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: org.ow2.asm:asm,org.ow2.asm:asm-tree
 Comment: https://asm.ow2.io/KEY.txt
@@ -1375,6 +1397,7 @@ pub   rsa2048/2C7B12F2A511E325 2012-04-26 [SC]
       475F3B8E59E6E63AA78067482C7B12F2A511E325
 uid                            Ceki Gulcu <ceki@qos.ch>
 sub   rsa2048/10DA72CD7FBFA159 2012-04-26 [E]
+      D127A2A5F2B5666A6E85DC8B10DA72CD7FBFA159
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: org.slf4j:slf4j-api,org.slf4j:slf4j-parent
 Comment: https://www.slf4j.org/public-keys/ceki-public-key.pgp
@@ -1443,6 +1466,7 @@ uid                            Spring Builds (JAR Signing) <buildmaster@springfr
 uid                            Spring Builds (JAR Signing) <1134463+spring-builds@users.noreply.github.com>
 uid                            Spring Builds (JAR Signing) <spring-builds@vmware.com>
 sub   rsa4096/6F7BF836151F097C 2024-02-22 [S]
+      D63F3244F7CC5285D99AC9FA6F7BF836151F097C
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: org.springframework:spring-framework-bom
 Comment: https://spring.io/GPG-KEY-spring.txt
@@ -1581,6 +1605,7 @@ pub   rsa2048/152888E10EF880B3 2010-02-01 [SC]
       839323A4780D5BF9A6978970152888E10EF880B3
 uid                            Daniel Fernandez <dfernandez@users.sourceforge.net>
 sub   rsa2048/1CB037909F7E059F 2010-02-01 [E]
+      5989D825E19C1763B781B5ED1CB037909F7E059F
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: org.unbescape.unbescape
 

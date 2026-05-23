@@ -32,12 +32,12 @@ The only supported versions for vulnerability reporting are:
 
 Status of reproducible builds/binaries:
 
-- >=[1.4.0](https://github.com/VidTu/Ksyxis/releases/tag/1.4.0):
+- \>=[1.4.0](https://github.com/VidTu/Ksyxis/releases/tag/1.4.0):
   All builds should be fully reproducible.
-- >=[1.3.3](https://github.com/VidTu/Ksyxis/releases/tag/1.3.3)
-  <=[1.3.4](https://github.com/VidTu/Ksyxis/releases/tag/1.3.4):
+- \>=[1.3.3](https://github.com/VidTu/Ksyxis/releases/tag/1.3.3)
+  \<=[1.3.4](https://github.com/VidTu/Ksyxis/releases/tag/1.3.4):
   All builds require `umask` to be `022` to be reproducible.
-- <=[1.3.2](https://github.com/VidTu/Ksyxis/releases/tag/1.3.2):
+- \<=[1.3.2](https://github.com/VidTu/Ksyxis/releases/tag/1.3.2):
   Builds are *not* reproducible, modification timestamps are stored in JARs.
 
 For better results, every release should be compiled with:

@@ -12,7 +12,7 @@ you can report it privately via any of the following methods:
 - GitHub Private vulnerability reporting (**Recommended**):
   Head over to the [Security](https://github.com/VidTu/Ksyxis/security)
   tab and click "*Report a vulnerability*".
-- Mail: `imvidtu@proton.me`
+- Mail: `imvidtu <at> proton <dot> me`
 
 ### Supported Versions
 
@@ -30,15 +30,15 @@ The only supported versions for vulnerability reporting are:
 
 ### Reproducible Builds
 
-Ksyxis supports reproducible builds/binaries since
-[1.4.0](https://github.com/VidTu/Ksyxis/releases/tag/1.4.0).
+Status of reproducible builds/binaries:
 
-Versions [1.3.3](https://github.com/VidTu/Ksyxis/releases/tag/1.3.0)
-and [1.3.4](https://github.com/VidTu/Ksyxis/releases/tag/1.3.4) were
-dependant on `umask` being `022`, but otherwise are reproducible too.
-
-Older versions have modification time stored in
-the archives and therefore they aren't reproducible.
+- >=[1.4.0](https://github.com/VidTu/Ksyxis/releases/tag/1.4.0):
+  All builds should be fully reproducible.
+- >=[1.3.3](https://github.com/VidTu/Ksyxis/releases/tag/1.3.3)
+  <=[1.3.4](https://github.com/VidTu/Ksyxis/releases/tag/1.3.4):
+  All builds require `umask` to be `022` to be reproducible.
+- <=[1.3.2](https://github.com/VidTu/Ksyxis/releases/tag/1.3.2):
+  Builds are *not* reproducible, modification timestamps are stored in JARs.
 
 For better results, every release should be compiled with:
 
@@ -66,10 +66,13 @@ Ksyxis has implemented supply chain validation where possible:
   [verification-metadata.xml](../gradle/verification-metadata.xml). To avoid
   fetching keys for signatures, the local PGP keystore is used from armored
   [verification-keyring.keys](../gradle/verification-keyring.keys). You can
-  disable or replace the keyring if you want to use your own pubkeys.
+  disable or replace the keyring if you want to use your own pubkey keystore.
 - All [GitHub CI](../.github/workflows) workflows are SHA-pinned.
 
 However, Gradle Java Toolchains and Foojay Disco API Resolver
 are missing supply-chain verification. Therefore, you must
 install Java 8 and Java 25 from your preferred vendors and
 [disable auto-provisioning](https://docs.gradle.org/current/userguide/toolchains.html#sub:disable_auto_provision).
+You can disable it per-repository (in `./gradle.properties` file), per-build (by
+using `./gradlew -Dorg.gradle.java.installations.auto-download=false [...]`),
+or system-wide (in `$GRADLE_HOME/gradle.properties` file), at your choice.

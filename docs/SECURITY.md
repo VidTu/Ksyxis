@@ -9,10 +9,14 @@ Additionally, the niche/role of Ksyxis isn't very prone to vulnerabilities.
 However, if you think the bug you have found is a vulnerability,
 you can report it privately via any of the following methods:
 
-- GitHub Private vulnerability reporting (**Recommended**):
-  Head over to the [Security](https://github.com/VidTu/Ksyxis/security)
+- GitHub Private vulnerability reporting: Head over to the
+  [Security](https://github.com/VidTu/Ksyxis/security)
   tab and click "*Report a vulnerability*".
 - Mail: `imvidtu <at> proton <dot> me`
+
+Where possible, **prefer** GitHub Private vulnerability reporting.
+
+There are no public keys (e.g, PGP) to encrypt communication, sorry.[^2]
 
 ### Supported Versions
 
@@ -48,8 +52,7 @@ For better results, every release should be compiled with:
 
 ### Signing
 
-Ksyxis is not signed by digital
-signatures (namely PGP). Sorry!
+Ksyxis is not signed by digital signatures (namely PGP). Sorry![^2]
 
 ### Supply Chain
 
@@ -76,3 +79,7 @@ install Java 8 and Java 25 from your preferred vendors and
 You can disable it per-repository (in `./gradle.properties` file), per-build (by
 using `./gradlew -Dorg.gradle.java.installations.auto-download=false [...]`),
 or system-wide (in `$GRADLE_HOME/gradle.properties` file), at your choice.
+
+[^2]: PGP is on my TODO/TBD list. If you really want to use it,
+      you should use the same public key I sign my commits with.
+      It is *not* uploaded to any public keyserver.

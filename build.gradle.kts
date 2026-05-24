@@ -149,8 +149,7 @@ tasks.withType<ProcessResources> {
                     it.writeText(Gson().fromJson(it.readText(), JsonElement::class.java).toString())
                 } else if (it.name.endsWith(".toml", ignoreCase = true)) {
                     it.writeText(it.readLines()
-                        .filter { !it.startsWith('#') }
-                        .filter { it.isNotBlank() }
+                        .filter { it.isNotEmpty() && !it.startsWith('#') }
                         .joinToString("\n")
                         .replace(" = ", "="))
                 }

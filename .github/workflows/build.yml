@@ -39,6 +39,8 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: 'read'
+    env:
+      GRADLE_OPTS: '-Dorg.gradle.java.installations.auto-download=false'
     steps:
       - name: 'Checkout'
         timeout-minutes: 1

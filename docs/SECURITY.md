@@ -19,7 +19,7 @@ Where possible, **prefer** GitHub Private vulnerability reporting.
 There are no public keys (e.g, PGP) to encrypt communication, sorry.[^1]
 
 [^1]: PGP encryption is on my TODO/TBD list. If you really want
-      to use it,you should use the same public key I sign my
+      to use it, you should use the same public key I sign my
       commits with. It is *not* uploaded to any public keyserver.
 
 ### Supported Versions

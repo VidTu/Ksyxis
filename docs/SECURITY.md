@@ -16,18 +16,22 @@ you can report it privately via any of the following methods:
 
 Where possible, **prefer** GitHub Private vulnerability reporting.
 
-There are no public keys (e.g, PGP) to encrypt communication, sorry.[^2]
+There are no public keys (e.g, PGP) to encrypt communication, sorry.[^1]
+
+[^1]: PGP encryption is on my TODO/TBD list. If you really want
+      to use it,you should use the same public key I sign my
+      commits with. It is *not* uploaded to any public keyserver.
 
 ### Supported Versions
 
 The only supported versions for vulnerability reporting are:
 
 - The latest release published to Modrinth, CurseForge, and/or GitHub.
-- The latest pre-release published to GitHub[^1].
-- The latest alpha and/or beta published to Modrinth and/or GitHub[^1].
+- The latest pre-release published to GitHub[^2].
+- The latest alpha and/or beta published to Modrinth and/or GitHub[^2].
 - The latest Git commit build.
 
-[^1]: Pre-release, alpha and beta versions are supported *only*
+[^2]: Pre-release, alpha and beta versions are supported *only*
       if they were published after the latest *stable* release.
 
 ## Artifacts (Binaries/JARs)
@@ -52,7 +56,9 @@ For better results, every release should be compiled with:
 
 ### Signing
 
-Ksyxis is not signed by digital signatures (namely PGP). Sorry![^2]
+Ksyxis is not signed by digital signatures (namely PGP). Sorry![^3]
+
+[^3]: PGP signing is on my TODO/TBD list.
 
 ### Supply Chain
 
@@ -79,7 +85,3 @@ install Java 8 and Java 25 from your preferred vendors and
 You can disable it per-repository (in `./gradle.properties` file), per-build (by
 using `./gradlew -Dorg.gradle.java.installations.auto-download=false [...]`),
 or system-wide (in `$GRADLE_HOME/gradle.properties` file), at your choice.
-
-[^2]: PGP is on my TODO/TBD list. If you really want to use it,
-      you should use the same public key I sign my commits with.
-      It is *not* uploaded to any public keyserver.

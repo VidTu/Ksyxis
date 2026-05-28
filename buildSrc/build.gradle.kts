@@ -44,10 +44,12 @@ group = "ru.vidtu.ksyxis.build"
 base.archivesName = "Ksyxis_buildSrc"
 description = "Speed up your world loading by removing unneeded chunks. (buildSrc)"
 
+// Repositories for dependencies.
 repositories {
     mavenCentral()
 }
 
+// Dependencies.
 dependencies {
     // Annotations.
     compileOnly(libs.jspecify)

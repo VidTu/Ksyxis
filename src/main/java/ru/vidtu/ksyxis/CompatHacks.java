@@ -35,8 +35,8 @@ import org.embeddedt.modernfix.core.ModernFixMixinPlugin;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
-import ru.vidtu.ksyxis.compile.KConstants;
-import ru.vidtu.ksyxis.compile.KVariables;
+import ru.vidtu.ksyxis.compile.Constants;
+import ru.vidtu.ksyxis.compile.Variables;
 import ru.vidtu.ksyxis.platform.KPlugin;
 
 /**
@@ -47,12 +47,12 @@ import ru.vidtu.ksyxis.platform.KPlugin;
  */
 @ApiStatus.Internal
 @NullMarked
-public final class KCompat {
+public final class CompatHacks {
     /**
      * The amount of loaded chunks to report. Usually {@code 0}, because we have no spawn chunks, but if ModernFix is
-     * installed, the value might be changed to {@link KConstants#CHUNK_AMOUNT_V1} to prevent deadlocks.
+     * installed, the value might be changed to {@link Constants#CHUNK_AMOUNT_V1} to prevent deadlocks.
      * <p>
-     * Equals to either {@code 0} or {@link KConstants#CHUNK_AMOUNT_V1}, depending on the configuration.
+     * Equals to either {@code 0} or {@link Constants#CHUNK_AMOUNT_V1}, depending on the configuration.
      */
     public static final int REPORT_CHUNKS;
 
@@ -67,7 +67,7 @@ public final class KCompat {
             final boolean removeSpawnChunks = ModernFixMixinPlugin.instance.isOptionEnabled("perf.remove_spawn_chunks.MinecraftServer");
 
             // Log.
-            if (KVariables.DEBUG_LOGS) {
+            if (Variables.DEBUG_LOGS) {
                 logger.info(KPlugin.MARKER, "Ksyxis: Enabled compatibility hack with ModernFix. (removeSpawnChunks: {})", new Object[]{removeSpawnChunks}); // <- Array for compat with older Log4j2.
             } else {
                 logger.info("Ksyxis: Enabled compatibility hack with ModernFix. (removeSpawnChunks: {})", new Object[]{removeSpawnChunks}); // <- Array for compat with older Log4j2.
@@ -76,10 +76,10 @@ public final class KCompat {
             // Check what amount of spawn chunks to report back to the game.
             // ModernFix needs 441, because of its own way of doing it.
             // Ksyxis needs 0, because we remove all spawn chunks.
-            chunks = (removeSpawnChunks ? KConstants.CHUNK_AMOUNT_V1 : 0);
+            chunks = (removeSpawnChunks ? Constants.CHUNK_AMOUNT_V1 : 0);
         } catch (final Throwable t) {
             // Log.
-            if (KVariables.DEBUG_LOGS) {
+            if (Variables.DEBUG_LOGS) {
                 logger.info(KPlugin.MARKER, "Ksyxis: No compatibility hacks were used.", new Object[]{t}); // <- Array for compat with older Log4j2.
             } else {
                 logger.info("Ksyxis: No compatibility hacks were used.");
@@ -102,8 +102,8 @@ public final class KCompat {
     @ApiStatus.ScheduledForRemoval
     @Deprecated
     @Contract(value = "-> fail", pure = true)
-    private KCompat() {
-        if (KVariables.DEBUG_ASSERTS) {
+    private CompatHacks() {
+        if (Variables.DEBUG_ASSERTS) {
             throw new AssertionError("Ksyxis: No instances.");
         }
     }

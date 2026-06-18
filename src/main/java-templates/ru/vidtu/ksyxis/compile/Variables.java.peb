@@ -43,11 +43,11 @@ import org.jspecify.annotations.NullMarked;
  * @author VidTu
  * @apiNote Internal use only
  * @see <a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.28">Compile-time References</a>
- * @see KConstants
+ * @see Constants
  */
 @ApiStatus.Internal
 @NullMarked
-public final class KVariables {
+public final class Variables {
     /**
      * Mod version.
      */
@@ -75,7 +75,7 @@ public final class KVariables {
     @ApiStatus.ScheduledForRemoval
     @Deprecated
     @Contract(value = "-> fail", pure = true)
-    private KVariables() {
+    private Variables() {
         throw new AssertionError("Ksyxis: Compile-time code.");
     }
 }

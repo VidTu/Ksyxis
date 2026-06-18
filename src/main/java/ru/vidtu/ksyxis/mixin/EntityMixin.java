@@ -38,7 +38,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import ru.vidtu.ksyxis.compile.KVariables;
+import ru.vidtu.ksyxis.compile.Variables;
 import ru.vidtu.ksyxis.platform.KPlugin;
 
 import java.lang.invoke.MethodHandle;
@@ -73,7 +73,7 @@ public final class EntityMixin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private EntityMixin() {
-        if (KVariables.DEBUG_ASSERTS) {
+        if (Variables.DEBUG_ASSERTS) {
             throw new AssertionError("Ksyxis: No instances.");
         }
     }
@@ -87,10 +87,10 @@ public final class EntityMixin {
     @Inject(method = "<clinit>", at = @At("RETURN"), remap = false)
     private static void ksyxis_clinit_return(final CallbackInfo ci) {
         // Create a temporary logger. (there's no sense in keeping it after)
-        final Logger logger = (KVariables.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/EntityMixin") : null);
+        final Logger logger = (Variables.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/EntityMixin") : null);
 
         // Log. (**DEBUG**)
-        if (KVariables.DEBUG_LOGS && logger.isDebugEnabled(KPlugin.MARKER)) {
+        if (Variables.DEBUG_LOGS && logger.isDebugEnabled(KPlugin.MARKER)) {
             logger.debug(KPlugin.MARKER, "Ksyxis: Initializing Entity class, making sure first entity ID is not zero. Searching for the field in EntityMixin... (ci: {})", new Object[]{ci}); // <- Array for compat with older Log4j2.
         }
 
@@ -116,7 +116,7 @@ public final class EntityMixin {
                 setter.invokeExact((int) 1);
 
                 // Log. (**DEBUG**)
-                if (KVariables.DEBUG_LOGS && logger.isDebugEnabled(KPlugin.MARKER)) {
+                if (Variables.DEBUG_LOGS && logger.isDebugEnabled(KPlugin.MARKER)) {
                     logger.debug(KPlugin.MARKER, "Ksyxis: Set first entity ID to one in EntityMixin. (currentClass: {}, field: {}, setter: {}, ci: {})", new Object[]{currentClass, field, setter, ci}); // <- Array for compat with older Log4j2.
                 }
 
@@ -124,7 +124,7 @@ public final class EntityMixin {
                 return;
             } catch (final Throwable t) {
                 // Log. (**TRACE**)
-                if (KVariables.DEBUG_LOGS && logger.isTraceEnabled(KPlugin.MARKER)) {
+                if (Variables.DEBUG_LOGS && logger.isTraceEnabled(KPlugin.MARKER)) {
                     logger.trace(KPlugin.MARKER, "Ksyxis: Field error, skipping in EntityMixin. (currentClass: {}, field: {}, ci: {})", new Object[]{currentClass, field, ci, t}); // <- Array for compat with older Log4j2.
                 }
             }

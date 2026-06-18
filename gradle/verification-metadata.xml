@@ -467,6 +467,22 @@
             <sha512 value="50c3d4108e48058c9a0761c6bde742defedc393df49d110f51208f32b156085309420386d83a4474c31460620d2a44f3cfdcb4387311b9d50af62ac75f61f04f"/>
          </artifact>
       </component>
+      <component group="org.apache.groovy" name="groovy-bom" version="4.0.29">
+         <artifact name="groovy-bom-4.0.29.module">
+            <pgp value="34441E504A937F43EB0DAEF96A65176A0FB1CD0B"/>
+            <md5 value="c625ed292e549e4ca57eb6ea5f2aedd1"/>
+            <sha1 value="48b7d101a866cb7c19edb57f9d2e0c89d671ffcf"/>
+            <sha256 value="2392853c20ff3b7474791d66f831909f25396cb397cf63bf15e1998a5c0b82fc"/>
+            <sha512 value="c1e336413dbeabb6df6a8ebd797e7c16220176d6ecbe023b145090f415c38064f830a1471d6f5f839734d145487ff8d7cf2c9351e6aba26e1b706a352d373024"/>
+         </artifact>
+         <artifact name="groovy-bom-4.0.29.pom">
+            <pgp value="34441E504A937F43EB0DAEF96A65176A0FB1CD0B"/>
+            <md5 value="fdb76d0900129488d4e785de49398428"/>
+            <sha1 value="28e01939d9c9e1ff7c2670f5733b1a95824c6411"/>
+            <sha256 value="c24277dec93f146bcda25f5ae4391d6527e384e2132efa32184c1e852b42bca9"/>
+            <sha512 value="3237c85bacd47349d2c63361beb56e43d1fe612c5b36d8a4fbbf53dd5efb7a6d29c52d02acbbac90b1d7bd6ecac55af3d0dcef1df4668419c74f6f24799128e1"/>
+         </artifact>
+      </component>
       <component group="org.apache.groovy" name="groovy-datetime" version="4.0.29">
          <artifact name="groovy-datetime-4.0.29-groovydoc.jar">
             <pgp value="34441E504A937F43EB0DAEF96A65176A0FB1CD0B"/>

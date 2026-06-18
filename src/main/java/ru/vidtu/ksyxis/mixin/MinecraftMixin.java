@@ -40,8 +40,8 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import ru.vidtu.ksyxis.compile.KConstants;
-import ru.vidtu.ksyxis.compile.KVariables;
+import ru.vidtu.ksyxis.compile.Constants;
+import ru.vidtu.ksyxis.compile.Variables;
 import ru.vidtu.ksyxis.platform.KPlugin;
 
 /**
@@ -67,7 +67,7 @@ public final class MinecraftMixin {
      */
     @Unique
     @UnknownNullability
-    private static final Logger KSYXIS_LOGGER = (KVariables.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/MinecraftMixin") : null);
+    private static final Logger KSYXIS_LOGGER = (Variables.DEBUG_LOGS ? LogManager.getLogger("Ksyxis/MinecraftMixin") : null);
 
     /**
      * An instance of this class cannot be created.
@@ -79,13 +79,13 @@ public final class MinecraftMixin {
     @Deprecated
     @Contract(value = "-> fail", pure = true)
     private MinecraftMixin() {
-        if (KVariables.DEBUG_ASSERTS) {
+        if (Variables.DEBUG_ASSERTS) {
             throw new AssertionError("Ksyxis: No instances.");
         }
     }
 
     /**
-     * Injects into {@code Minecraft.doWorldLoad} (Mojang mappings) to prevent {@link KConstants#FAKE_DELAY_MS_V3}
+     * Injects into {@code Minecraft.doWorldLoad} (Mojang mappings) to prevent {@link Constants#FAKE_DELAY_MS_V3}
      * when creating the world. Used since 1.21.9 (inclusive).
      *
      * @param delay Previous constant value for logging
@@ -102,17 +102,17 @@ public final class MinecraftMixin {
 
             // Obfuscated.
             "method_29610(Lnet/minecraft/class_32$class_5143;Lnet/minecraft/class_3283;Lnet/minecraft/class_6904;Z)V" // Fabric Intermediary
-    }, constant = @Constant(longValue = KConstants.FAKE_DELAY_MS_V3), remap = false, require = 0, expect = 0)
+    }, constant = @Constant(longValue = Constants.FAKE_DELAY_MS_V3), remap = false, require = 0, expect = 0)
     private long ksyxis_doWorldLoad_closeDelayMs(final long delay) {
         // Assert.
-        if (KVariables.DEBUG_ASSERTS) {
+        if (Variables.DEBUG_ASSERTS) {
             // Should never happen on practice, constant Mixin.
-            assert (delay == KConstants.FAKE_DELAY_MS_V3) : "Ksyxis: Fake delay is not " + KConstants.FAKE_DELAY_MS_V3 + " in MinecraftMixin. (delay: " + delay + ", client: " + this + ')';
+            assert (delay == Constants.FAKE_DELAY_MS_V3) : "Ksyxis: Fake delay is not " + Constants.FAKE_DELAY_MS_V3 + " in MinecraftMixin. (delay: " + delay + ", client: " + this + ')';
         }
 
         // Log. (**DEBUG**)
-        if (KVariables.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
-            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Removing fake " + KConstants.FAKE_DELAY_MS_V3 + " delay in MinecraftMixin. (delay: {}, client: {})", new Object[]{delay, this}); // <- Array for compat with older Log4j2.
+        if (Variables.DEBUG_LOGS && KSYXIS_LOGGER.isDebugEnabled(KPlugin.MARKER)) {
+            KSYXIS_LOGGER.debug(KPlugin.MARKER, "Ksyxis: Removing fake " + Constants.FAKE_DELAY_MS_V3 + " delay in MinecraftMixin. (delay: {}, client: {})", new Object[]{delay, this}); // <- Array for compat with older Log4j2.
         }
 
         // Remove fake delay.

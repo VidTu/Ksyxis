@@ -39,7 +39,7 @@ import org.spongepowered.asm.launch.MixinBootstrap;
 import ru.vidtu.ksyxis.compile.Variables;
 
 /**
- * Main Ksyxis class for Forge. (modern & legacy)
+ * Main Ksyxis class for Forge. (modern and legacy)
  *
  * @author VidTu
  * @apiNote Internal use only

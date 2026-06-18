@@ -129,6 +129,12 @@ sourceSets.main {
     }
 }
 
+// Configure custom Javadoc tags.
+tasks.withType<Javadoc> {
+    val fullOptions = (options as StandardJavadocDocletOptions)
+    fullOptions.addStringOption("tag", "apiNote:a:API Note:")
+}
+
 tasks.withType<ProcessResources> {
     // Filter with UTF-8.
     filteringCharset = "UTF-8"
@@ -158,19 +164,31 @@ tasks.withType<ProcessResources> {
     }
 }
 
+// Create additional JARs.
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 tasks.withType<Jar> {
     // Add LICENSE.
     from("LICENSE")
 
-    // Exclude compile-only code.
-    exclude("net/**")
-    exclude("org/**")
-    exclude("ru/vidtu/ksyxis/compile/**")
+    // Specific handling for the main JAR. (excl. Javadoc/Sources)
+    if (name == "jar") {
+        // Exclude compile-only code.
+        exclude("net/**")
+        exclude("org/**")
+        exclude("ru/vidtu/ksyxis/compile/**")
 
-    // Remove package-info.class, unless package debug is on. (to save space)
-    if (!"${findProperty("ru.vidtu.ksyxis.debug.package") ?: findProperty("ru.vidtu.ksyxis.debug")}".toBoolean()) {
-        exclude("**/package-info.class")
+        // Remove package-info.class, unless package debug is on. (to save space)
+        if (!"${findProperty("ru.vidtu.ksyxis.debug.package") ?: findProperty("ru.vidtu.ksyxis.debug")}".toBoolean()) {
+            exclude("**/package-info.class")
+        }
     }
+
+    // Set output directory.
+    destinationDirectory = rootDir.resolve("build/libs/${name}")
 
     // Add manifest.
     manifest {

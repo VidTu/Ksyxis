@@ -68,24 +68,24 @@ jobs:
       - name: 'Build'
         timeout-minutes: 15
         run: './gradlew assemble'
+      - name: 'Build Debug'
+        timeout-minutes: 15
+        run: './gradlew -Pru.vidtu.ksyxis.debug=true assemble'
       - name: 'Upload Main JAR'
         timeout-minutes: 1
         uses: 'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a' # v7.0.1
         with:
-          path: 'build/libs/jar/*.jar'
+          path: 'build/libs/*.jar'
           if-no-files-found: 'error'
           archive: false
-      - name: 'Upload Javadoc JAR'
+      - name: 'Upload Debug JARs'
         timeout-minutes: 1
         uses: 'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a' # v7.0.1
         with:
-          path: 'build/libs/javadocJar/*.jar'
+          name: 'Debug JARs'
+          path: |
+            build/libs/jar/*.jar
+            build/libs/javadocJar/*.jar
+            build/libs/sourcesJar/*.jar
+          compression-level: 9
           if-no-files-found: 'error'
-          archive: false
-      - name: 'Upload Sources JAR'
-        timeout-minutes: 1
-        uses: 'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a' # v7.0.1
-        with:
-          path: 'build/libs/sourcesJar/*.jar'
-          if-no-files-found: 'error'
-          archive: false

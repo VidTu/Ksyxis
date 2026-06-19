@@ -227,6 +227,8 @@ more debuggable JARs. It controls the following sub-properties:
 - `ru.vidtu.ksyxis.debug.resources`: Don't minify resource files that are
   *not* Java classes, such as `.json`, `.toml`, `.mcmeta` files and others.
 - `ru.vidtu.ksyxis.debug.package`: Don't strip `package-info.class` files.
+- `ru.vidtu.ksyxis.debug.jars`: Create additional two JARs with with
+  Javadocs and sources. Will cause the `build/libs` folder to split.
 
 More specific debug properties will override the global one.
 All debug properties are *disabled* by default. See the

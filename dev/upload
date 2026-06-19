@@ -218,7 +218,7 @@ echo "NOTE: Version Type (Modrinth/CurseForge): ${UPLOAD_VERSION_TYPE}"
 # Find the JAR.
 echo 'Checking the JAR file...'
 UPLOAD_FILENAME="Ksyxis-${UPLOAD_VERSION}.jar"
-UPLOAD_FILE="../build/libs/jar/${UPLOAD_FILENAME}"
+UPLOAD_FILE="../build/libs/${UPLOAD_FILENAME}"
 [ ! -f "${UPLOAD_FILE}" ] && echo "ERROR: Missing '${UPLOAD_FILENAME}' JAR file." && exit 1
 echo "JAR file '${UPLOAD_FILENAME}' found at '${UPLOAD_FILE}'."
 

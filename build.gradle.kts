@@ -166,8 +166,10 @@ tasks.withType<ProcessResources> {
 
 // Create additional JARs.
 java {
-    withJavadocJar()
-    withSourcesJar()
+    if ("${findProperty("ru.vidtu.ksyxis.debug.jars") ?: findProperty("ru.vidtu.ksyxis.debug")}".toBoolean()) {
+        withJavadocJar()
+        withSourcesJar()
+    }
 }
 
 tasks.withType<Jar> {
@@ -188,7 +190,9 @@ tasks.withType<Jar> {
     }
 
     // Set output directory.
-    destinationDirectory = rootDir.resolve("build/libs/${name}")
+    if ("${findProperty("ru.vidtu.ksyxis.debug.jars") ?: findProperty("ru.vidtu.ksyxis.debug")}".toBoolean()) {
+        destinationDirectory = rootDir.resolve("build/libs/${name}")
+    }
 
     // Add manifest.
     manifest {

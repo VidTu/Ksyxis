@@ -60,6 +60,6 @@ dependencies {
 // Compile with UTF-8, Java 25, and with all debug options.
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
-    options.compilerArgs.addAll(listOf("-g", "-parameters"))
+    options.compilerArgs.addAll(listOf("-g", "-parameters", "-Xlint:all"))
     options.release = 25
 }

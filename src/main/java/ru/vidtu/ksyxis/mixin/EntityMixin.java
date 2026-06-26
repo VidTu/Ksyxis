@@ -113,7 +113,7 @@ public final class EntityMixin {
             try {
                 // Attempt to find and set to one. (instead of zero)
                 final MethodHandle setter = lookup.findStaticSetter(currentClass, field, int.class);
-                setter.invokeExact((int) 1);
+                setter.invokeExact(1);
 
                 // Log. (**DEBUG**)
                 if (Variables.DEBUG_LOGS && logger.isDebugEnabled(KPlugin.MARKER)) {

@@ -5,6 +5,25 @@
       <verify-signatures>true</verify-signatures>
       <keyring-format>armored</keyring-format>
       <key-servers enabled="false"/>
+      <trusted-keys>
+         <trusted-key id="077E8893A6DCC33DD4A4D5B256E73BA9A0B592D0" group="org.apache.logging.log4j"/>
+         <trusted-key id="1BD97A6A154E7810EE0BC832E2F38302C8075E3D" group="org.gradle.toolchains" name="foojay-resolver" version="1.0.0"/>
+         <trusted-key id="28118C070CB22A0175A2E8D43D12CA2AC19F3181" group="^com[.]fasterxml($|([.].*))" regex="true"/>
+         <trusted-key id="2B34821418CF19CF1F2A8352953E02E4F573B46F" group="jakarta.platform"/>
+         <trusted-key id="2FC53E6B1F681184F4CCD637F5C81DE10A0B8ECC" group="org.snakeyaml" name="snakeyaml-engine" version="2.10"/>
+         <trusted-key id="33FD4BFD33554634053D73C0C2148900BCD3C2AF" group="org.jetbrains" name="annotations" version="26.1.0"/>
+         <trusted-key id="34441E504A937F43EB0DAEF96A65176A0FB1CD0B" group="org.apache.groovy" name="groovy-bom" version="4.0.27"/>
+         <trusted-key id="41CD49B4EF5876F9E9F691DABAC30622339994C4" group="org.jspecify" name="jspecify" version="1.0.0"/>
+         <trusted-key id="4548945A7793445B67F8F8723B17BFC1FCC1B644" group="io.pebbletemplates"/>
+         <trusted-key id="475F3B8E59E6E63AA78067482C7B12F2A511E325" group="org.slf4j"/>
+         <trusted-key id="48B086A7D843CFA258E83286928FBF39003C0425" group="org.springframework" name="spring-framework-bom" version="5.3.39"/>
+         <trusted-key id="6F5FA671802022946C77C01550E021B142D5CDAB" group="net.kyori"/>
+         <trusted-key id="839323A4780D5BF9A6978970152888E10EF880B3" group="org.unbescape" name="unbescape" version="1.1.6.RELEASE"/>
+         <trusted-key id="A5BD02B93E7A40482EB1D66A5F69AD087600B22C" group="org.ow2.asm"/>
+         <trusted-key id="C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7" group="com.google.code.gson"/>
+         <trusted-key id="EE0CA873074092F806F59B65D364ABAA39A47320" group="com.google.errorprone"/>
+         <trusted-key id="FF6E2C001948C5F2F38B0CC385911F425EC61B51" group="org.junit" name="junit-bom" version="5.13.4"/>
+      </trusted-keys>
    </configuration>
    <components>
       <component group="com.fasterxml" name="oss-parent" version="69">
@@ -848,43 +867,6 @@
             <sha512 value="b33f5cf3404c4f9f5cbb69a43dcde2d6f06d6cb3d00444dbce879a1bf14f0be4e3093f21be1aa85104cf45ae86ba69374949e35ed567f82f6ede5812140628de" origin="" reason=""/>
          </artifact>
       </component>
-      <component group="org.gradle.toolchains" name="foojay-resolver" version="1.0.0">
-         <artifact name="foojay-resolver-1.0.0-javadoc.jar">
-            <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
-            <md5 value="8c9253a318b1d26c392723caf24e6514" origin="" reason=""/>
-            <sha1 value="39b29630638266c4c66882d4eeef985a035ceb8b" origin="" reason=""/>
-            <sha256 value="0c315e730b3f2510b5d4d6cf9c6ae47e1e197e63f14090e8cbae87c0f514dbca" origin="" reason=""/>
-            <sha512 value="13014457cc1f72b030cb21bcd7c54196cdb2fc0a664f653716e409d7f54201be7e06b8e72559d940ed310de75cf2e3bb84923b738d0e44814bf5775f37ba8b96" origin="" reason=""/>
-         </artifact>
-         <artifact name="foojay-resolver-1.0.0-sources.jar">
-            <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
-            <md5 value="dce28e852b9dd008788f2aca5a325539" origin="" reason=""/>
-            <sha1 value="00488183445640913b40e622c513323ced549530" origin="" reason=""/>
-            <sha256 value="eb6b5a258cbeac827029a9515c9fba3b982da7ba9821ad23393e25afce2f74fd" origin="" reason=""/>
-            <sha512 value="e4a3c4bd2649ccd1502cf45af4aaeeea15891dbc0c0696d9cc30b385a8fdd97ca9d36382ff399820a8ef17a3d2af447c2d4b89aec05ded01574985c4a644638f" origin="" reason=""/>
-         </artifact>
-         <artifact name="foojay-resolver-1.0.0.jar">
-            <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
-            <md5 value="a21809036a0b6aa013ff7d6c51737a25" origin="" reason=""/>
-            <sha1 value="72c0af50bc9156fb2a9429ed152abb4417bb6eaf" origin="" reason=""/>
-            <sha256 value="78b86a47dfdf7697c9bd15da78983fd80da7247d6e02fc106bdf07e0388b60a8" origin="" reason=""/>
-            <sha512 value="b88512eaf3aeda8862ba52b7b1a7cc5d3b232eb09f02bb288521910f018c8ede7acfe56fbceb167ad01a3a4f0092c07f675b5ae7d7906284e04f14414fb643f9" origin="" reason=""/>
-         </artifact>
-         <artifact name="foojay-resolver-1.0.0.module">
-            <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
-            <md5 value="58240f100709fd48eed8ba20b341843a" origin="" reason=""/>
-            <sha1 value="a76fe92fbd5951488cacb66e8f8d31c11d30243c" origin="" reason=""/>
-            <sha256 value="6190cf0e42e664c11e1ac0a785699ab02b549cea34392c679f36d8a2c550fcb9" origin="" reason=""/>
-            <sha512 value="1e40f52c1d48034b6a76cb72065b7c4c033bf04e45c2bed3f81d759a2b207ae7ebc1b4b33688285e91b5a9b5d486da3509ad753227415ea0ea0969bac3260186" origin="" reason=""/>
-         </artifact>
-         <artifact name="foojay-resolver-1.0.0.pom">
-            <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
-            <md5 value="1e9a056b64deedda61be55c7517d93ab" origin="" reason=""/>
-            <sha1 value="57de20700b98ad32b5eae4095c5d93690ed850c1" origin="" reason=""/>
-            <sha256 value="9bc48b49e422d9edabc396ac18d8b041dfc22212d7fae8e35667d285d481029a" origin="" reason=""/>
-            <sha512 value="998a97ed6e1785fe0d273bd7e67803d386ca0a6c879c1899cff2590a7a9465a4bd92ceab879514c8cc8922422b608eeca81a0a118296c13da0c55e671b7decdc" origin="" reason=""/>
-         </artifact>
-      </component>
       <component group="org.gradle" name="github-dependency-graph-gradle-plugin" version="1.4.1">
          <artifact name="github-dependency-graph-gradle-plugin-1.4.1-javadoc.jar">
             <pgp value="7B79ADD11F8A779FE90FD3D0893A028475557671"/>
@@ -920,6 +902,43 @@
             <sha1 value="9a0951ffb4085c7da9235c8cd9a8053ae1ab4866" origin="" reason=""/>
             <sha256 value="865deeeab5e59f8912cb3d31fa84869fbcc7640af2321232f92c5db9000ddef0" origin="" reason=""/>
             <sha512 value="05a3b873b36fd4a95218b98395a80378bc4bc3e1b7c22c76a44d9b14fe3208bbab05afd6fdae603550f615f99711b8261123b3ab2501901c1418a007114f916d" origin="" reason=""/>
+         </artifact>
+      </component>
+      <component group="org.gradle.toolchains" name="foojay-resolver" version="1.0.0">
+         <artifact name="foojay-resolver-1.0.0-javadoc.jar">
+            <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
+            <md5 value="8c9253a318b1d26c392723caf24e6514" origin="" reason=""/>
+            <sha1 value="39b29630638266c4c66882d4eeef985a035ceb8b" origin="" reason=""/>
+            <sha256 value="0c315e730b3f2510b5d4d6cf9c6ae47e1e197e63f14090e8cbae87c0f514dbca" origin="" reason=""/>
+            <sha512 value="13014457cc1f72b030cb21bcd7c54196cdb2fc0a664f653716e409d7f54201be7e06b8e72559d940ed310de75cf2e3bb84923b738d0e44814bf5775f37ba8b96" origin="" reason=""/>
+         </artifact>
+         <artifact name="foojay-resolver-1.0.0-sources.jar">
+            <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
+            <md5 value="dce28e852b9dd008788f2aca5a325539" origin="" reason=""/>
+            <sha1 value="00488183445640913b40e622c513323ced549530" origin="" reason=""/>
+            <sha256 value="eb6b5a258cbeac827029a9515c9fba3b982da7ba9821ad23393e25afce2f74fd" origin="" reason=""/>
+            <sha512 value="e4a3c4bd2649ccd1502cf45af4aaeeea15891dbc0c0696d9cc30b385a8fdd97ca9d36382ff399820a8ef17a3d2af447c2d4b89aec05ded01574985c4a644638f" origin="" reason=""/>
+         </artifact>
+         <artifact name="foojay-resolver-1.0.0.jar">
+            <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
+            <md5 value="a21809036a0b6aa013ff7d6c51737a25" origin="" reason=""/>
+            <sha1 value="72c0af50bc9156fb2a9429ed152abb4417bb6eaf" origin="" reason=""/>
+            <sha256 value="78b86a47dfdf7697c9bd15da78983fd80da7247d6e02fc106bdf07e0388b60a8" origin="" reason=""/>
+            <sha512 value="b88512eaf3aeda8862ba52b7b1a7cc5d3b232eb09f02bb288521910f018c8ede7acfe56fbceb167ad01a3a4f0092c07f675b5ae7d7906284e04f14414fb643f9" origin="" reason=""/>
+         </artifact>
+         <artifact name="foojay-resolver-1.0.0.module">
+            <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
+            <md5 value="58240f100709fd48eed8ba20b341843a" origin="" reason=""/>
+            <sha1 value="a76fe92fbd5951488cacb66e8f8d31c11d30243c" origin="" reason=""/>
+            <sha256 value="6190cf0e42e664c11e1ac0a785699ab02b549cea34392c679f36d8a2c550fcb9" origin="" reason=""/>
+            <sha512 value="1e40f52c1d48034b6a76cb72065b7c4c033bf04e45c2bed3f81d759a2b207ae7ebc1b4b33688285e91b5a9b5d486da3509ad753227415ea0ea0969bac3260186" origin="" reason=""/>
+         </artifact>
+         <artifact name="foojay-resolver-1.0.0.pom">
+            <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
+            <md5 value="1e9a056b64deedda61be55c7517d93ab" origin="" reason=""/>
+            <sha1 value="57de20700b98ad32b5eae4095c5d93690ed850c1" origin="" reason=""/>
+            <sha256 value="9bc48b49e422d9edabc396ac18d8b041dfc22212d7fae8e35667d285d481029a" origin="" reason=""/>
+            <sha512 value="998a97ed6e1785fe0d273bd7e67803d386ca0a6c879c1899cff2590a7a9465a4bd92ceab879514c8cc8922422b608eeca81a0a118296c13da0c55e671b7decdc" origin="" reason=""/>
          </artifact>
       </component>
       <component group="org.gradle.toolchains.foojay-resolver-convention" name="org.gradle.toolchains.foojay-resolver-convention.gradle.plugin" version="1.0.0">

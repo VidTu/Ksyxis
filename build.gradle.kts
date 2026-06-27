@@ -91,10 +91,13 @@ tasks.withType<JavaCompile> {
 
     // Set the compiler debug options.
     if ("${findProperty("ru.vidtu.ksyxis.debug.javac") ?: findProperty("ru.vidtu.ksyxis.debug")}".toBoolean()) {
+        // Enable local variable names, source file names, line numbers, method parameters, and all compiler warnings.
         options.compilerArgs.addAll(listOf("-g", "-parameters", "-Xlint:all"))
     } else if ("${findProperty("ru.vidtu.ksyxis.slim")}".toBoolean()) {
+        // Enable all compiler warnings.
         options.compilerArgs.addAll(listOf("-g:none", "-Xlint:all"))
     } else {
+        // Enable local variable names, source file names, line numbers, and all compiler warnings.
         options.compilerArgs.addAll(listOf("-g", "-Xlint:all"))
     }
 
@@ -131,8 +134,21 @@ sourceSets.main {
 
 // Configure custom Javadoc tags.
 tasks.withType<Javadoc> {
+    // Use UTF-8.
     val fullOptions = (options as StandardJavadocDocletOptions)
-    fullOptions.addStringOption("tag", "apiNote:a:API Note:")
+    fullOptions.encoding("UTF-8")
+
+    // Use Java 8.
+    fullOptions.source("8")
+
+    // Show all members. (even private ones)
+    fullOptions.showAll()
+
+    // Enable javadoc errors.
+    fullOptions.addBooleanOption("Xdoclint:all", true)
+
+    // Add tags.
+    fullOptions.tags("apiNote:a:API Note:")
 }
 
 tasks.withType<ProcessResources> {

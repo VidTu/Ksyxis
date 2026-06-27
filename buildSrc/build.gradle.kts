@@ -63,3 +63,25 @@ tasks.withType<JavaCompile> {
     options.compilerArgs.addAll(listOf("-g", "-parameters", "-Xlint:all"))
     options.release = 25
 }
+
+// Configure custom Javadoc tags.
+tasks.withType<Javadoc> {
+    // Use UTF-8.
+    val fullOptions = (options as StandardJavadocDocletOptions)
+    fullOptions.encoding("UTF-8")
+
+    // Use Java 25.
+    fullOptions.source("25")
+
+    // Show all members. (even private ones)
+    fullOptions.showAll()
+
+    // Enable javadoc errors.
+    fullOptions.addBooleanOption("Xdoclint:all", true)
+}
+
+// Create additional JARs.
+java {
+    withJavadocJar()
+    withSourcesJar()
+}

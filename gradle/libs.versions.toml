@@ -33,7 +33,7 @@ gson = "2.14.0"
 idea-ext = "1.4.1"
 jetbrains-annotations = "26.1.0"
 jspecify = "1.0.0"
-log4j-api = "2.26.0"
+log4j-api = "2.26.1"
 mixin = "0.8.7"
 
 [plugins]

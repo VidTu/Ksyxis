@@ -791,52 +791,52 @@
             <sha512 value="dcfa357e3bd291ad5387261344014ae3d16672526f0f96f8a8e9c4329e2b3aa4fd50ff3d87bd52e18da7f4ceaa8f3aa095aecc6f2d5921b667dff8c9d65e5391" origin="" reason=""/>
          </artifact>
       </component>
-      <component group="org.apache.logging.log4j" name="log4j" version="2.26.0">
-         <artifact name="log4j-2.26.0.pom">
+      <component group="org.apache.logging.log4j" name="log4j" version="2.26.1">
+         <artifact name="log4j-2.26.1.pom">
             <pgp value="077E8893A6DCC33DD4A4D5B256E73BA9A0B592D0"/>
-            <md5 value="ec1335b45447948ccb8178c8258c0457" origin="" reason=""/>
-            <sha1 value="c985f11114447a949025a830a5a5bf598031ecbb" origin="" reason=""/>
-            <sha256 value="e5fab1fdd146db8980cee0dd1383f5faf8a7926606fac8bdaa9bfef17c98d5c4" origin="" reason=""/>
-            <sha512 value="9ace1bc3d24018ca7df7397d18c7cfd9b6a0fb3af4fe989c9af473568e98a427d27dbdebd78c2e66802beece04bd9e51e63002341f90e493bc51a7c5ca6bb98c" origin="" reason=""/>
+            <md5 value="88000541131e3b8e65f889faec5d14f5" origin="" reason=""/>
+            <sha1 value="43a19710a90782196c9ccf3e09135b904122f5d0" origin="" reason=""/>
+            <sha256 value="ea4705725fd94bf5debe2911d4ea7af20898603f68354e64b2461a0f249e445d" origin="" reason=""/>
+            <sha512 value="9391d7528df8cca60361ae9db8fe1fd7abc8893b75da82f7b86e09cd8f765f3ee92e424ffeb7d8c9f02e1dd785877dd2120e69ebd9bbaa7d4bb38d44d32705e2" origin="" reason=""/>
          </artifact>
       </component>
-      <component group="org.apache.logging.log4j" name="log4j-api" version="2.26.0">
-         <artifact name="log4j-api-2.26.0-sources.jar">
+      <component group="org.apache.logging.log4j" name="log4j-api" version="2.26.1">
+         <artifact name="log4j-api-2.26.1-sources.jar">
             <pgp value="077E8893A6DCC33DD4A4D5B256E73BA9A0B592D0"/>
-            <md5 value="289dfba7c0e06aadd1a7a0a12f5f0658" origin="" reason=""/>
-            <sha1 value="cb19144516299e76c54609315f98e832c9d05577" origin="" reason=""/>
-            <sha256 value="1d99b59e4eb2b28d88ac61928f7d0a1baa259bb0590ba1de1f33012b47e3ebbb" origin="" reason=""/>
-            <sha512 value="615eb890cc99e5eb71890be7d2c2804839476f6d4c8c912417da50cfd5ae08669b799a49e841dd3a645aff543a698f977b10bc07c77a80f35bf5f2dadf4ae15c" origin="" reason=""/>
+            <md5 value="ff6612babeb4a8d933ab48485f7069ba" origin="" reason=""/>
+            <sha1 value="c98d07e79127db91e9bc2004281490ac7c5b8f02" origin="" reason=""/>
+            <sha256 value="d136436fb50076930f99aa5f45a83c661f71b84c4bb99d08ba3850ff794281bd" origin="" reason=""/>
+            <sha512 value="1d392399162d439db2ee25653cf9981fd7e6ed4977b53f3cac758399ac28ab709311ce8bfb25ff8526a321f8bd149a32a8071cff868b2488b6ae18788c2d2311" origin="" reason=""/>
          </artifact>
-         <artifact name="log4j-api-2.26.0.jar">
+         <artifact name="log4j-api-2.26.1.jar">
             <pgp value="077E8893A6DCC33DD4A4D5B256E73BA9A0B592D0"/>
-            <md5 value="564bc06e0f03e37193227b698acaa257" origin="" reason=""/>
-            <sha1 value="ad52af0ecf054a7e3f275a2e180ee06d9c490951" origin="" reason=""/>
-            <sha256 value="820de7bbaf430eaf2e3e5ccb92f23e2085797c5ac4d4f7fc6c8b660fbefa1dbc" origin="" reason=""/>
-            <sha512 value="86516750d5a43428b977da45d403718e903451bf0b9401ba306a35f001e812b8366c73978fbf6c628a93949d9386e3a21661f85672291111e5397e94ca1cc78f" origin="" reason=""/>
+            <md5 value="8ed35fc9ea449bc9e21a8139842d6233" origin="" reason=""/>
+            <sha1 value="b9864ed8d0c01f65f3b0bf70f1447e5cc1b49c24" origin="" reason=""/>
+            <sha256 value="f1810a4704ccce019d02bba029dc02a4f2ac0c997f647b465e7d409c1927f822" origin="" reason=""/>
+            <sha512 value="f29f7697ee8d8d824e5dad33abbd9d1bdea49e69c39484362a40779e8d120800ef37b3702c49589ad1fc5639b704faef2bfb592001b413e8a09e6d5947ebae1e" origin="" reason=""/>
          </artifact>
-         <artifact name="log4j-api-2.26.0.module">
+         <artifact name="log4j-api-2.26.1.module">
             <pgp value="077E8893A6DCC33DD4A4D5B256E73BA9A0B592D0"/>
-            <md5 value="fd1e946f1de569946a67297551c59161" origin="" reason=""/>
-            <sha1 value="fb3be4530e04c37f06210659ea4b90dc1eeb3bbb" origin="" reason=""/>
-            <sha256 value="a124f0264f630a45fb6f419f4614742978b5b51728f09e6403035f1d63dc4c21" origin="" reason=""/>
-            <sha512 value="d4e7b45c34567fe946d8cf1b64d6ad46cae60d1b7f66f787fac8751d7d3169c44177b7832cdeedde29374c5940009a1cf41c27d0e98f10c6a0da23e459b52c58" origin="" reason=""/>
+            <md5 value="e63a842b3c493f13b4c0647cbfb24dc0" origin="" reason=""/>
+            <sha1 value="02dfd374297c59d8da8c78804d3e3cb6363f237a" origin="" reason=""/>
+            <sha256 value="5ed93f6fb5334bf7ee52943d1a654bc3a1f3f10765ae2fd4bbd387333be6678a" origin="" reason=""/>
+            <sha512 value="26f2bbae8c144e8bbc8150025ae13e0d300e509e7e8c50f81fce0fdee6e645053a865e3a1a6f73af27f38b2ff6d8a244db890e5d7b3b58c05c0b5411ea089e99" origin="" reason=""/>
          </artifact>
-         <artifact name="log4j-api-2.26.0.pom">
+         <artifact name="log4j-api-2.26.1.pom">
             <pgp value="077E8893A6DCC33DD4A4D5B256E73BA9A0B592D0"/>
-            <md5 value="b456daeb09f48ebc079a5b91979cd204" origin="" reason=""/>
-            <sha1 value="b3b266d45336d84c43d8900d39eba00a085f781b" origin="" reason=""/>
-            <sha256 value="a4b8723c1e605eedc2b396ddb532fa061af242e7e2e2698ecad502b0c35c57b2" origin="" reason=""/>
-            <sha512 value="640942d417125599701d8d6305b16b0af0d60c906ff14fb977eb182d4c823d880d326ef73c813b3491ff8034a11b223585fb505cd3c5f2672e40f08a2399b4c8" origin="" reason=""/>
+            <md5 value="32961b5f220ff13763cc80f077cde9d0" origin="" reason=""/>
+            <sha1 value="d1823dab072c673aa1a0ba7e35b5bb8087be7ea4" origin="" reason=""/>
+            <sha256 value="c8ab868f9c532233bd12f311cea90a3f6de65ea07a7aa470c3e2bbf83b5c79fb" origin="" reason=""/>
+            <sha512 value="bdb6da96b321b04e4e11da111ece140e21db4a2798d5b1ff0bd4417bf1ddbe66ed77a1784730f2c49eb554d2276ec119609e5e4a8e36574be45c91bde227ff09" origin="" reason=""/>
          </artifact>
       </component>
-      <component group="org.apache.logging.log4j" name="log4j-bom" version="2.26.0">
-         <artifact name="log4j-bom-2.26.0.pom">
+      <component group="org.apache.logging.log4j" name="log4j-bom" version="2.26.1">
+         <artifact name="log4j-bom-2.26.1.pom">
             <pgp value="077E8893A6DCC33DD4A4D5B256E73BA9A0B592D0"/>
-            <md5 value="2864259d2787c9f3499f236464aeb4d0" origin="" reason=""/>
-            <sha1 value="0451ad64400670b0e0ca00b5e721f1d5f701e01d" origin="" reason=""/>
-            <sha256 value="d4af18d02dcefc657f5a497f339c14b9fde554686c7c81c5f8072be165db7578" origin="" reason=""/>
-            <sha512 value="abb4e55979d4603498762380c5a2ae3c8dfa4a15cf7ba129e53fad9fa03b21347098504f2e86c285cf94e64a85115cf1e4834ae5bec301a9ca6a14cfbae11e36" origin="" reason=""/>
+            <md5 value="bc72ce5daf07df26dff97df4e1b44d07" origin="" reason=""/>
+            <sha1 value="ea0a9aa33afdba326421d57370c20f22b30c266b" origin="" reason=""/>
+            <sha256 value="4415ad189dd04db54958a43e23b37cc397a1edee9e888214b8bd47fbe819072e" origin="" reason=""/>
+            <sha512 value="28ef6408fb99130d0ec59c6ec98619e6221f00f4e178bfbbfa95ad37b427287c564eb449bbc14d012c8ae8a57e3b9eaca291b5899b4e9be5972ba4e74dbbc2ee" origin="" reason=""/>
          </artifact>
       </component>
       <component group="org.eclipse.ee4j" name="project" version="1.0.7">

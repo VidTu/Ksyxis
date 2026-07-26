@@ -144,7 +144,7 @@ tasks.withType<Javadoc> {
     // Show all members. (even private ones)
     fullOptions.showAll()
 
-    // Enable javadoc errors.
+    // Enable Javadoc errors.
     fullOptions.addBooleanOption("Xdoclint:all", true)
 
     // Add tags.

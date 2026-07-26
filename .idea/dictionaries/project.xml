@@ -1,36 +1,37 @@
 <component name="ProjectDictionaryState">
   <dictionary name="project">
     <words>
+      <w>AARCH</w>
+      <w>CDPATH</w>
+      <w>COMSPEC</w>
+      <w>CURSEFORGE</w>
       <w>Dorg</w>
+      <w>ERRORLEVEL</w>
       <w>Foojay</w>
+      <w>JAVACMD</w>
       <w>Ksyxis</w>
       <w>Kyori</w>
+      <w>MODRINTH</w>
       <w>Modrinth</w>
       <w>Mojang</w>
       <w>Ornithe</w>
+      <w>READMEs</w>
       <w>Xdoclint</w>
-      <w>aarch</w>
       <w>alnum</w>
       <w>appname</w>
       <w>astbuilder</w>
-      <w>cdpath</w>
+      <w>chunki</w>
       <w>clinit</w>
       <w>cnfe</w>
-      <w>comspec</w>
       <w>configureondemand</w>
       <w>coremod</w>
       <w>curseforge</w>
       <w>dateutil</w>
       <w>endlocal</w>
       <w>entrypoints</w>
-      <w>errorlevel</w>
-      <w>fmlcoreplugin</w>
-      <w>fmlcoreplugincontainsfmlmod</w>
       <w>foojay</w>
       <w>gamerule</w>
-      <w>gson</w>
       <w>hackery</w>
-      <w>javacmd</w>
       <w>jvmargs</w>
       <w>ksyxis</w>
       <w>mkfifo</w>
@@ -44,10 +45,7 @@
       <w>pipefail</w>
       <w>porkchop</w>
       <w>readarray</w>
-      <w>readmes</w>
-      <w>setdefaultspawnpos</w>
       <w>setlocal</w>
-      <w>setspawnpos</w>
       <w>shellness</w>
       <w>startswith</w>
       <w>tostring</w>
@@ -61,7 +59,6 @@
       <w>инсекьюр</w>
       <w>логгинга</w>
       <w>логгирования</w>
-      <w>модов</w>
       <w>отладочности</w>
       <w>отладчиваемые</w>
       <w>прогружать</w>

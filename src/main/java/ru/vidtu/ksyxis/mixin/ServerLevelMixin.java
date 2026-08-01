@@ -107,7 +107,7 @@ public final class ServerLevelMixin {
 
             // Obfuscated.
             "method_8554(Lnet/minecraft/class_2338;F)V" // Fabric Intermediary
-    }, at = @At("STORE"), remap = false, require = 0, expect = 0, index = 5)
+    }, at = @At("STORE"), remap = false, require = 0, expect = 0, index = 4)
     private int ksyxis_setDefaultSpawnPos_spawnChunkRadius_getInt(final int spawnChunks) {
         // Assert.
         if (Variables.DEBUG_ASSERTS) {

@@ -31,7 +31,6 @@ build/
 
 # IntelliJ IDEA
 .idea/**
-out/
 !/.idea/codeStyles
 !/.idea/codeStyles/**
 !/.idea/copyright

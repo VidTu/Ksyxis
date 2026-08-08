@@ -43,6 +43,7 @@ catalogueBackground = "ksyxis_background.png"
 itemIcon = "porkchop"
 logoFile = "ksyxis.png"
 authors = "VidTu"
+credits = "Fhilips613"
 displayTest = "IGNORE_ALL_VERSION"
 description = "Speed up your world loading by removing unneeded chunks."
 

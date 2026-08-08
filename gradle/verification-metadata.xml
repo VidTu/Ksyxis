@@ -5,25 +5,6 @@
       <verify-signatures>true</verify-signatures>
       <keyring-format>armored</keyring-format>
       <key-servers enabled="false"/>
-      <trusted-keys>
-         <trusted-key id="077E8893A6DCC33DD4A4D5B256E73BA9A0B592D0" group="org.apache.logging.log4j"/>
-         <trusted-key id="1BD97A6A154E7810EE0BC832E2F38302C8075E3D" group="org.gradle.toolchains" name="foojay-resolver" version="1.0.0"/>
-         <trusted-key id="28118C070CB22A0175A2E8D43D12CA2AC19F3181" group="^com[.]fasterxml($|([.].*))" regex="true"/>
-         <trusted-key id="2B34821418CF19CF1F2A8352953E02E4F573B46F" group="jakarta.platform"/>
-         <trusted-key id="2FC53E6B1F681184F4CCD637F5C81DE10A0B8ECC" group="org.snakeyaml" name="snakeyaml-engine" version="2.10"/>
-         <trusted-key id="33FD4BFD33554634053D73C0C2148900BCD3C2AF" group="org.jetbrains" name="annotations" version="26.1.0"/>
-         <trusted-key id="34441E504A937F43EB0DAEF96A65176A0FB1CD0B" group="org.apache.groovy" name="groovy-bom" version="4.0.27"/>
-         <trusted-key id="41CD49B4EF5876F9E9F691DABAC30622339994C4" group="org.jspecify" name="jspecify" version="1.0.1"/>
-         <trusted-key id="4548945A7793445B67F8F8723B17BFC1FCC1B644" group="io.pebbletemplates"/>
-         <trusted-key id="475F3B8E59E6E63AA78067482C7B12F2A511E325" group="org.slf4j"/>
-         <trusted-key id="48B086A7D843CFA258E83286928FBF39003C0425" group="org.springframework" name="spring-framework-bom" version="5.3.39"/>
-         <trusted-key id="6F5FA671802022946C77C01550E021B142D5CDAB" group="net.kyori"/>
-         <trusted-key id="839323A4780D5BF9A6978970152888E10EF880B3" group="org.unbescape" name="unbescape" version="1.1.6.RELEASE"/>
-         <trusted-key id="A5BD02B93E7A40482EB1D66A5F69AD087600B22C" group="org.ow2.asm"/>
-         <trusted-key id="C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7" group="com.google.code.gson"/>
-         <trusted-key id="EE0CA873074092F806F59B65D364ABAA39A47320" group="com.google.errorprone"/>
-         <trusted-key id="FF6E2C001948C5F2F38B0CC385911F425EC61B51" group="org.junit" name="junit-bom" version="5.13.4"/>
-      </trusted-keys>
    </configuration>
    <components>
       <component group="com.fasterxml" name="oss-parent" version="69">
@@ -131,34 +112,34 @@
             <sha512 value="52e5b1568893e212c1d09d41806a2f79249552ce1dfc82bd547e1301fabe17bf60afdcb2dcc479b04a99419319912c9facf1fc6e4ed82185a1c2758c5e32bbd3" origin="" reason=""/>
          </artifact>
       </component>
-      <component group="gradle" name="gradle" version="9.6.1">
-         <artifact name="gradle-9.6.1-all.zip">
+      <component group="gradle" name="gradle" version="9.7.0">
+         <artifact name="gradle-9.7.0-all.zip">
             <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
-            <md5 value="779dff264bc4534a0c4a1d778fbd3047" origin="" reason=""/>
-            <sha1 value="c78567a591269aadb077d3ec60d38861afe8370a" origin="" reason=""/>
-            <sha256 value="61ba77b3ff7167e60962763eb4bae79db7120c189b9544358d0ade3c1e712a83" origin="" reason=""/>
-            <sha512 value="ef34222779f40a2e9da0c6af81d08b55f299fe7bcf297ac5419289adc780c049672a041d25613bb51b89b8aeaf056ffb775ecbab1cd8b282485f1fc6bbfb0ef0" origin="" reason=""/>
+            <md5 value="4b3cb1550428ba21a37090a5daae1c52" origin="" reason=""/>
+            <sha1 value="ddea3079c3acad413322afb93f220ca915991519" origin="" reason=""/>
+            <sha256 value="a9ecb5ac5c2ca40691e6527724d11d0b43b8c0a52825b77c09899f2a72d2d2bf" origin="" reason=""/>
+            <sha512 value="a41a02ddb34d8aa39d6665b406a224a3d46d0b7a51a85d95f6b258e299bfa0174924f306493e64c48853c4df3338e9b1bbdc186ab121c9f6911b4ebbbe3c7b61" origin="" reason=""/>
          </artifact>
-         <artifact name="gradle-9.6.1-bin.zip">
+         <artifact name="gradle-9.7.0-bin.zip">
             <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
-            <md5 value="18c80f349f77f1e60dd349b39b99af9b" origin="" reason=""/>
-            <sha1 value="175eed14cdb9a431dd5b9afa4b3c98a0123e4d10" origin="" reason=""/>
-            <sha256 value="9c0f7faeeb306cb14e4279a3e084ca6b596894089a0638e68a07c945a32c9e14" origin="" reason=""/>
-            <sha512 value="2a1efccc77114aa841b32ea5f79694d325c0220d4d57d26901f47d2ab41d38aec64f1a3b79a7629b6a925a1ba6c63e34a653f09ed216db2db6ccee28309b159c" origin="" reason=""/>
+            <md5 value="8355b02d3d6e9fa87d4112856cccf80e" origin="" reason=""/>
+            <sha1 value="cfcd2e5744ab6a88e53f76b2191a47f71deac99f" origin="" reason=""/>
+            <sha256 value="84fbba45c7f4c64abc77460e1c00f541e9f960e3c7ed2538f1ede19eacd873ae" origin="" reason=""/>
+            <sha512 value="528c88ac9f09571ee35366d42564ca49ba135440227896211090e7babb368e0260ea5e4a28c99de1ace9023fb8884863bc3a3f17e8f2cda09f76800851b88018" origin="" reason=""/>
          </artifact>
-         <artifact name="gradle-9.6.1-docs.zip">
+         <artifact name="gradle-9.7.0-docs.zip">
             <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
-            <md5 value="5bc90e7ca38d9282d7b117dc9c8a0839" origin="" reason=""/>
-            <sha1 value="024cd269bd2853a539aa7d8ebdcd329573405092" origin="" reason=""/>
-            <sha256 value="42ebb97557428db8c9a17ffad470500f40c1615f4a7c53ab6b1c038dae3b2b4c" origin="" reason=""/>
-            <sha512 value="a6477e2159b5bd222ad6e2712bfab33dfba91dd2b7d4e43128ec6c497e1e7c4cd123c6d86ebf0144eb24db073d1459da5ff5c86800e70959d8171da9219bac9e" origin="" reason=""/>
+            <md5 value="7a166c9b5decc805c313101be1de8205" origin="" reason=""/>
+            <sha1 value="5587d5bd8c7cb6e946fc2d861f00c79aac7e59a6" origin="" reason=""/>
+            <sha256 value="36f2a20866615b84ca7e6aa2058cc9ea1fbe5df4603e546ec7e8f392694194d0" origin="" reason=""/>
+            <sha512 value="712dfc523d2139e15de5a836c458b1b639736dd24ac9bd1f3cb08a875ea6c6c535894558eef2f24befae63fe733c25a8fc470c1257f36f775e9772a2fe7de02a" origin="" reason=""/>
          </artifact>
-         <artifact name="gradle-9.6.1-src.zip">
+         <artifact name="gradle-9.7.0-src.zip">
             <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
-            <md5 value="e610b2f2606a3eb15a19e3dd6e100ee5" origin="" reason=""/>
-            <sha1 value="9aeb51babcab75491737514904ed3b49634285c7" origin="" reason=""/>
-            <sha256 value="bb36bfdbfe960317fd8c3f714784800826ecbb59d760c57af52760c1febd93d1" origin="" reason=""/>
-            <sha512 value="3c94ecaac7e3011732b366b830572175df39beddec1a0408ec4e122e2e8cc393a13135b4456c5e88b9a79b808c0d858bb0dfff128d6f3593160f199fdccf4920" origin="" reason=""/>
+            <md5 value="99d2d77aa8fdbbbbab4fd76eaf20b5c7" origin="" reason=""/>
+            <sha1 value="9552c7e3cd844ca4b0a04a3128a0fa8a394b8acc" origin="" reason=""/>
+            <sha256 value="e4e703098cd27f95cd10b1d5c8466dd9a5bd3cfc1f34098e3a1b4e5e790d7c82" origin="" reason=""/>
+            <sha512 value="2e519640430f16bdb526944d806e12d77d8eb3eb5557a2dcfb3fc5d1b4e227b5b6d9302398cb9ff49facb216edf00635807abdc8107155bfbb62c60924027b33" origin="" reason=""/>
          </artifact>
       </component>
       <component group="gradle.plugin.org.jetbrains.gradle.plugin.idea-ext" name="gradle-idea-ext" version="1.4.1">
@@ -996,71 +977,71 @@
             <sha512 value="16fef2ce6415409692bbb3c8615c38d817a6aefb8376925476bee89d576cd3155dc8c4c160a6278a0a29e89beefb799fb354dae1d18ae392833a506604e3a526" origin="" reason=""/>
          </artifact>
       </component>
-      <component group="org.jetbrains.kotlin" name="kotlin-reflect" version="2.3.21">
-         <artifact name="kotlin-reflect-2.3.21-javadoc.jar">
+      <component group="org.jetbrains.kotlin" name="kotlin-reflect" version="2.4.0">
+         <artifact name="kotlin-reflect-2.4.0-javadoc.jar">
             <pgp value="6F538074CCEBF35F28AF9B066A0975F8B1127B83"/>
             <md5 value="f43436d6bec321290f6af228ad602604" origin="" reason=""/>
             <sha1 value="2ad14aed781c4a73ed4dbb421966d408a0a06686" origin="" reason=""/>
             <sha256 value="c6deada2fac53b8ea6523dbda77597b128006674616f140f04df23264c6d1aa3" origin="" reason=""/>
             <sha512 value="1487e5a20c9e4d74f298e07c42e96a61be11b7a768c3fbc199ee138cd68e1fc2267d1cfe3f11f288acc05df755315344d052cc5f6f751f126ab4fe1caa5125ea" origin="" reason=""/>
          </artifact>
-         <artifact name="kotlin-reflect-2.3.21-sources.jar">
+         <artifact name="kotlin-reflect-2.4.0-sources.jar">
             <pgp value="6F538074CCEBF35F28AF9B066A0975F8B1127B83"/>
-            <md5 value="235212d008dca7cff31d80474cb29949" origin="" reason=""/>
-            <sha1 value="c20f8cf6372e103ee15f7122407a0bcdae020de4" origin="" reason=""/>
-            <sha256 value="8cbdca65092aa6888901e23c08c7d69d141544107a9bcc9aa47b5453d4dbcf7e" origin="" reason=""/>
-            <sha512 value="1f00d8fb0701179b0b4103e7fd6553200594766b90ca690e32ea5a7cd994071a71a9480847e5c94810550af02e2d7ab6295ae9558bd8df65925d6fc023b0ab42" origin="" reason=""/>
+            <md5 value="25cc6fc1a28d78b661f47c9b9652c0eb" origin="" reason=""/>
+            <sha1 value="b9b294a7b2f3dc31caf56eb584f6c583ce337764" origin="" reason=""/>
+            <sha256 value="ff246d790aad39f55779f44e410b477228999cd3c352585c73b56ea5df36549e" origin="" reason=""/>
+            <sha512 value="b5c54f06adc02e4b51f0bb53e1a3b887405997c12b0412b943733bde43dd11c49d44e002a08af40b2264a977ae3c14b2724a496e4a8499c10af1a653ebd39edd" origin="" reason=""/>
          </artifact>
-         <artifact name="kotlin-reflect-2.3.21.jar">
+         <artifact name="kotlin-reflect-2.4.0.jar">
             <pgp value="6F538074CCEBF35F28AF9B066A0975F8B1127B83"/>
-            <md5 value="b2240004c8dce1522cf4c6a4309b1242" origin="" reason=""/>
-            <sha1 value="6acc55c52691ce3fd41b20a0472f3513106521a5" origin="" reason=""/>
-            <sha256 value="33e37d9dfa86c7a29ab34e975b5f4a1287b458878611051f3485652220c1a2cb" origin="" reason=""/>
-            <sha512 value="8251a4c44d9deec972a70bca2a9037401f0d1357c48507894f5ae834b61707237fa8ee75e8fd05be83404dc9796daa58ff2a8bc2ad3e4f51603f353ce75b56ec" origin="" reason=""/>
+            <md5 value="968c019825295e705a967bdb973b1c08" origin="" reason=""/>
+            <sha1 value="0532cc727c0960d12f4c9acb6a6c2c4a3e08187b" origin="" reason=""/>
+            <sha256 value="f0d8e8908624eb4478bb131e9f887366680d2e239741195e548fa5c906963b90" origin="" reason=""/>
+            <sha512 value="47ee249c3fded6aa3ef2632d5bc0abb63c40c03407e792ffc6657a7d9609110b5eb7734c0268e6701d7368f354cae7e8c9b18fd80d352601de338710a81bcc0d" origin="" reason=""/>
          </artifact>
-         <artifact name="kotlin-reflect-2.3.21.pom">
+         <artifact name="kotlin-reflect-2.4.0.pom">
             <pgp value="6F538074CCEBF35F28AF9B066A0975F8B1127B83"/>
-            <md5 value="d5dd8a1e599bddb9936c89e352c19432" origin="" reason=""/>
-            <sha1 value="96bad1aeebe6535972675257dc45f8c16bd9b504" origin="" reason=""/>
-            <sha256 value="7e3c2fe5cf3494a9b47525580c38c35c43d6e3682e6a0b2f565954e19a72d639" origin="" reason=""/>
-            <sha512 value="73c58bce8ca98d5a84665ca18e3aecf25f76fe2857023b4964b8bee0127763bfc10fa8618ebc147d94b7e0b14c396d4e207c09c9b9ce9b3335a2a9c16a3fcbe8" origin="" reason=""/>
+            <md5 value="93d058d9b7c0770433cd587c9a800818" origin="" reason=""/>
+            <sha1 value="b8d662f41ff2c2bada876a33232b91fb7c42a7ea" origin="" reason=""/>
+            <sha256 value="9e181ee4f21d49c5c8550c3cfca7199c17590a8df3d1ea293e396798e4f10842" origin="" reason=""/>
+            <sha512 value="14029783669cad6605b4f604d678d6c05446a9c326129f9036cc1edb1ea32514054b705fe97cf121dac9b56f02d12ce6083dae5360d650a879bc0b42866549ae" origin="" reason=""/>
          </artifact>
       </component>
-      <component group="org.jetbrains.kotlin" name="kotlin-stdlib" version="2.3.21">
-         <artifact name="kotlin-stdlib-2.3.21-javadoc.jar">
-            <pgp value="6F538074CCEBF35F28AF9B066A0975F8B1127B83"/>
+      <component group="org.jetbrains.kotlin" name="kotlin-stdlib" version="2.4.0">
+         <artifact name="kotlin-stdlib-2.4.0-javadoc.jar">
+            <pgp value="0000000000000000000000000000000000000000"/>
             <md5 value="f43436d6bec321290f6af228ad602604" origin="" reason=""/>
             <sha1 value="2ad14aed781c4a73ed4dbb421966d408a0a06686" origin="" reason=""/>
             <sha256 value="c6deada2fac53b8ea6523dbda77597b128006674616f140f04df23264c6d1aa3" origin="" reason=""/>
             <sha512 value="1487e5a20c9e4d74f298e07c42e96a61be11b7a768c3fbc199ee138cd68e1fc2267d1cfe3f11f288acc05df755315344d052cc5f6f751f126ab4fe1caa5125ea" origin="" reason=""/>
          </artifact>
-         <artifact name="kotlin-stdlib-2.3.21-sources.jar">
+         <artifact name="kotlin-stdlib-2.4.0-sources.jar">
             <pgp value="6F538074CCEBF35F28AF9B066A0975F8B1127B83"/>
-            <md5 value="c2a4e8751817394dd448c48c815c67ae" origin="" reason=""/>
-            <sha1 value="e83b401761ec424bd131011507e692dcf053c3ae" origin="" reason=""/>
-            <sha256 value="8693386ae174f7e4a91eb82c5c632d169d236704da24f78b9c8c84d87af2fd64" origin="" reason=""/>
-            <sha512 value="b128f0eac30bdb006d36fb386d127bbfbea532ac4bd2be4b3bc8089e8d133bcfa8c83df8311631913d21b74bbeb257558ed4eeff21f902e0f13cbba63dc82c32" origin="" reason=""/>
+            <md5 value="485d21c3890527aea14af6775b5e36c3" origin="" reason=""/>
+            <sha1 value="8425dbb0afc60557c0fe28e19700b758bc8822cc" origin="" reason=""/>
+            <sha256 value="bca27f834e278d08c1b85a40e636450867e8251c284fd4c24e9879bb99e301c5" origin="" reason=""/>
+            <sha512 value="99ac19710f1dd6a5ebc852d186d1127355807abe9af55a6d140252d217929930afcb5dc103971cbc4048ddbe7dd38384e67f13fe8f5598baf9a0c7f471a8a888" origin="" reason=""/>
          </artifact>
-         <artifact name="kotlin-stdlib-2.3.21.jar">
+         <artifact name="kotlin-stdlib-2.4.0.jar">
             <pgp value="6F538074CCEBF35F28AF9B066A0975F8B1127B83"/>
-            <md5 value="67d962e3bcffbbb88f84b4d49e47fc56" origin="" reason=""/>
-            <sha1 value="a2ee2c4e220fee522f0451b723bab2a43f3481a7" origin="" reason=""/>
-            <sha256 value="6f64eac736db9434dd6925b4a518b9d1d17177652320c37916cf9ba3ce7d7d7a" origin="" reason=""/>
-            <sha512 value="5564b17f006a9fdf93c93439b357e1fb82742c72d23b7aaa2e50d6db730d0b40426257e4e40eca7c70f9d514367b0057e51b84e1d0e49817002bc463939fee59" origin="" reason=""/>
+            <md5 value="c403032c733a8dfa2687d8f1019dc403" origin="" reason=""/>
+            <sha1 value="4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c" origin="" reason=""/>
+            <sha256 value="ccb14ff83fabcb11458b798dbc9824748ccdffeec79c9aba789e6ed1cda86b1c" origin="" reason=""/>
+            <sha512 value="2bac8b87409ae19aa9d91f8e3faabe9090549d05811249d30dd1811112e37f8650ace8cdcb1f21c96552edecd7d700c448b3ddf80cd4db9f61a3bc7ee3435627" origin="" reason=""/>
          </artifact>
-         <artifact name="kotlin-stdlib-2.3.21.module">
+         <artifact name="kotlin-stdlib-2.4.0.module">
             <pgp value="6F538074CCEBF35F28AF9B066A0975F8B1127B83"/>
-            <md5 value="4a48da50cd595b398f48d7dcb3e1c547" origin="" reason=""/>
-            <sha1 value="acffe2fbd185fd287175a8399042ccf59d57c007" origin="" reason=""/>
-            <sha256 value="7b4ea4b2242bb177a4b4abb63c3f3d857331d40d35865e36fcc3db666ec10174" origin="" reason=""/>
-            <sha512 value="ceaf8d68123116dfe1f8dfad705b7e1444d16a3174dcfda85d4b2423c0fed95543e394c8c3f2222cb69a87033d93a8f2c9eccb854d990df3040e10358ae5bd8c" origin="" reason=""/>
+            <md5 value="9dc3cece19ad295e8eec9013b7ec9598" origin="" reason=""/>
+            <sha1 value="4aeee8ad7da035ca42c1def6896ece66ada9f365" origin="" reason=""/>
+            <sha256 value="c24a47dcbd9295d776f443be41d77ac245309601ed053711dee2b0254be02db6" origin="" reason=""/>
+            <sha512 value="c8b8970e1ccf8000b962e1d7aa68d49b50ae2a7d3fb324c532ea798c43d6be65e2f04820778f0edbf00660afcda43d7b660bd6c1d3d620bb3f92284b04fb378c" origin="" reason=""/>
          </artifact>
-         <artifact name="kotlin-stdlib-2.3.21.pom">
+         <artifact name="kotlin-stdlib-2.4.0.pom">
             <pgp value="6F538074CCEBF35F28AF9B066A0975F8B1127B83"/>
-            <md5 value="1284ada5a92b6dd73ed5bfdfc0d9d5c9" origin="" reason=""/>
-            <sha1 value="59339ed4e799172a6709b3e0439254282ccaec7a" origin="" reason=""/>
-            <sha256 value="3e0b48daa14dc73f8029d8d9e15ed32940377caf7b915510f88d33219b350186" origin="" reason=""/>
-            <sha512 value="aa709ce4ae3117e23019eae3ec54faa06157972fdfadceccff1186e61c91391970e9b922b2f0b1009a9b01ee05fa2ae4c4fcd3bbfa011859527299cf4f75048f" origin="" reason=""/>
+            <md5 value="59107b02a080956f098fcff49189c605" origin="" reason=""/>
+            <sha1 value="a599aff66d76d018c3f16c785db702cce854f9f4" origin="" reason=""/>
+            <sha256 value="8194ff79a9ee24a7fa3f74a6b179c04a1859de8b987a4f0983056e59451721de" origin="" reason=""/>
+            <sha512 value="ce37bd679da72a793e1e2c717a1ad792ddf59832e02120c9d358db543916de2991ec2d3a574c05bd08e06afba0b082e5637bb2c2b8f8b3a043d2104e508fc9e1" origin="" reason=""/>
          </artifact>
       </component>
       <component group="org.jspecify" name="jspecify" version="1.0.1">

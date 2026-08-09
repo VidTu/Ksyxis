@@ -22,7 +22,7 @@ The only supported versions for vulnerability reporting are:
 
 - The latest release published to Modrinth, CurseForge, and/or GitHub.
 - The latest pre-release published to GitHub[^2].
-- The latest alpha and/or beta published to Modrinth and/or GitHub[^1].
+- The latest alpha and/or beta published to Modrinth and/or CurseForge[^1].
 - The latest Git commit build.
 
 [^1]: Pre-release, alpha and beta versions are supported *only*

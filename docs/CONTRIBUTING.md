@@ -109,6 +109,30 @@ can set the `ru.vidtu.ksyxis.slim` boolean Gradle property to `true`.
 
 This property is incompatible with the Debug JARs options.
 
+## Contributing
+
+There are no strict requirements for neither issues nor pull requests.
+
+### Issues
+
+The main requirements for issues are basically the bare minumum. Issues must be:
+
+- Descriptive (have all the necessary info)
+- Relevant (related to the project's functionality)
+- Understandable (by both you and project's authors)
+- In English
+
+### Pull Requests (PRs)
+
+The main requirements for PRs are basically the bare minimum. PRs must be:
+
+- Working (compiling and running on all supported
+  versions; preferably they run without bugs)
+- Full (have all the necessary info and code in one PR)
+- Relevant (related to the project's functionality)
+- Understandable (by you and project's authors)
+- In English (both the code and the description)
+
 ## Security
 
 Check out [SECURITY.md](https://github.com/VidTu/Ksyxis/blob/main/docs/SECURITY.md)

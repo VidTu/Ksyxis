@@ -16,22 +16,16 @@ you can report it privately via any of the following methods:
 
 Where possible, **prefer** GitHub Private vulnerability reporting.
 
-There are no public keys (e.g, PGP) to encrypt communication, sorry.[^1]
-
-[^1]: PGP encryption is on my TODO/TBD list. If you really want
-      to use it, you should use the same public key I sign my
-      commits with. It is *not* uploaded to any public keyserver.
-
 ### Supported Versions
 
 The only supported versions for vulnerability reporting are:
 
 - The latest release published to Modrinth, CurseForge, and/or GitHub.
 - The latest pre-release published to GitHub[^2].
-- The latest alpha and/or beta published to Modrinth and/or GitHub[^2].
+- The latest alpha and/or beta published to Modrinth and/or GitHub[^1].
 - The latest Git commit build.
 
-[^2]: Pre-release, alpha and beta versions are supported *only*
+[^1]: Pre-release, alpha and beta versions are supported *only*
       if they were published after the latest *stable* release.
 
 ## Artifacts (Binaries/JARs)
@@ -53,12 +47,6 @@ For better results, every release should be compiled with:
 ```sh
 ./gradlew clean assemble --no-daemon --no-build-cache --no-configuration-cache --rerun-tasks --refresh-dependencies
 ```
-
-### Signing
-
-Ksyxis is not signed by digital signatures (namely PGP). Sorry![^3]
-
-[^3]: PGP signing is on my TODO/TBD list.
 
 ### Supply Chain
 

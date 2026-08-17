@@ -115,7 +115,7 @@ There are no strict requirements for neither issues nor pull requests.
 
 ### Issues
 
-The main requirements for issues are basically the bare minumum. Issues must be:
+The main requirements for issues are basically the bare minimum. Issues must be:
 
 - Descriptive (have all the necessary info)
 - Relevant (related to the project's functionality)

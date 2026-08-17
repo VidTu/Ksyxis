@@ -117,7 +117,7 @@ Mixin-мод на ваш выбор. Если вы используете Forge 
 (или новее) или любую версию Fabric/NeoForge/Quilt/Ornithe,
 то вам ничего не нужно ставить и это баг.
 
-###### Не забудьте посмотреть [Developer FAQ](https://github.com/VidTu/Ksyxis/blob/main/docs/CONTRIBUTING.md#developer-faq) для частых вопросов по внутреннему фукнционированию мода. (на английском языке)
+###### Не забудьте посмотреть [Developer FAQ](https://github.com/VidTu/Ksyxis/blob/main/docs/CONTRIBUTING.md#developer-faq) для частых вопросов по внутреннему функционированию мода. (на английском языке)
 
 ## Лицензия
 

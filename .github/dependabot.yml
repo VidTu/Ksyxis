@@ -39,3 +39,9 @@ updates:
       interval: daily
     labels:
       - 'type:bot'
+  - package-ecosystem: gradle
+    directory: '/buildSrc'
+    schedule:
+      interval: daily
+    labels:
+      - 'type:bot'

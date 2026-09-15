@@ -99,7 +99,8 @@ public final class KPlugin implements IMixinConfigPlugin {
         // Determine the transformers.
         final String providerClass = this.provider.getClass().getName();
         this.runTransformers = ("org.spongepowered.asm.launch.MixinLaunchPluginLegacy".equals(providerClass) ||
-                "org.spongepowered.asm.launch.MixinLaunchPlugin".equals(providerClass));
+                "org.spongepowered.asm.launch.MixinLaunchPlugin".equals(providerClass) ||
+                "net.neoforged.fml.loading.mixin.FMLClassBytecodeProvider".equals(providerClass));
     }
 
     /**

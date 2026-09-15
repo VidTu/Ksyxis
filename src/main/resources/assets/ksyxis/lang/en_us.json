@@ -1,4 +1,6 @@
 {
   "modmenu.descriptionTranslation.ksyxis": "Speed up your world loading by removing unneeded chunks.",
-  "modmenu.summaryTranslation.ksyxis": "Speed up your world loading."
+  "modmenu.summaryTranslation.ksyxis": "Speed up your world loading.",
+  "fml.menu.mods.info.description.ksyxis": "Speed up your world loading by removing unneeded chunks.",
+  "neoforge.screen.mods.info.description.ksyxis": "Speed up your world loading by removing unneeded chunks."
 }

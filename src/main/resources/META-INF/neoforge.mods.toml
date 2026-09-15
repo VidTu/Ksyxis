@@ -28,6 +28,7 @@
 modLoader = "javafml"
 loaderVersion = "*"
 license = "MIT"
+licenseURL = "https://github.com/VidTu/Ksyxis/raw/main/LICENSE"
 issueTrackerURL = "https://github.com/VidTu/Ksyxis/issues"
 
 [[mods]]
@@ -37,14 +38,12 @@ displayName = "Ksyxis"
 updateJSONURL = "https://raw.githubusercontent.com/VidTu/Ksyxis/main/updater_ksyxis_neoforge.json"
 displayURL = "https://modrinth.com/mod/ksyxis"
 issueTrackerURL = "https://github.com/VidTu/Ksyxis/issues"
-catalogueImageIcon = "ksyxis.png"
-catalogueItemIcon = "porkchop"
-catalogueBackground = "ksyxis_background.png"
 itemIcon = "porkchop"
 logoFile = "ksyxis.png"
+logoBlur = true
+iconFile = "ksyxis.png"
 authors = "VidTu"
 credits = "Fhilips613"
-displayTest = "IGNORE_ALL_VERSION"
 description = "Speed up your world loading by removing unneeded chunks."
 
 [[mixins]]
@@ -54,5 +53,3 @@ config = "ksyxis.mixins.json"
 catalogueImageIcon = "ksyxis.png"
 catalogueItemIcon = "porkchop"
 catalogueBackground = "ksyxis_background.png"
-itemIcon = "porkchop"
-logoFile = "ksyxis.png"

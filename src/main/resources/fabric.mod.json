@@ -31,8 +31,8 @@
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.curseforge": "https://curseforge.com/minecraft/mc-mods/ksyxis",
         "modmenu.modrinth": "https://modrinth.com/mod/ksyxis",
+        "modmenu.curseforge": "https://curseforge.com/minecraft/mc-mods/ksyxis",
         "modmenu.github_releases": "https://github.com/VidTu/Ksyxis/releases",
         "modmenu.discord": "https://discord.gg/Q6saSVSuYQ"
       }

@@ -49,8 +49,6 @@ https://github.com/user-attachments/assets/42e65893-6324-46b1-89a4-044eae77802d
 
 ## FAQ
 
-### For Players
-
 **Q**: I need help, have some questions, or have some other feedback.  
 **A**: You can join the [Discord server](https://discord.gg/Q6saSVSuYQ).
 

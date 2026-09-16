@@ -45,7 +45,7 @@ Status of reproducible builds/binaries:
 For better results, every release should be compiled with:
 
 ```sh
-./gradlew clean assemble --no-daemon --no-build-cache --no-configuration-cache --rerun-tasks --refresh-dependencies
+./gradlew clean assemble --no-daemon --no-build-cache --no-configuration-cache --no-isolated-projects --rerun-tasks --refresh-dependencies
 ```
 
 ### Supply Chain

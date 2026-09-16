@@ -331,7 +331,7 @@ public final class Strip implements Closeable {
         if (classes.isEmpty()) return; // PERF: Singleton. // Implicit NPE for 'classes'
 
         // Create a new list.
-        final List<InnerClassInfo> newClasses = new ArrayList<>(classes.size()); 
+        final List<InnerClassInfo> newClasses = new ArrayList<>(classes.size());
 
         // Filter the old list into the new list.
         for (final InnerClassInfo clazz : classes) {

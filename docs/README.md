@@ -139,8 +139,8 @@ but it wouldn't be possible without:
   [SpongePowered](https://github.com/SpongePowered). (and contributors)
 - [Minecraft](https://minecraft.net/) by
   [Mojang](https://mojang.com/).
-- Various CLI tools (`cat, curl, grep, jq, kill, mkfifo, mktemp, sed, sh, tr,
-  websocat`) and Chromium-based browser(s) used by the
+- Various CLI tools (`cat, curl, grep, jq, kill, mkfifo, mktemp, sed,
+  sh, tr, websocat`) and Chromium-based browser(s) used by the
   [upload](https://github.com/VidTu/Ksyxis/blob/main/dev/upload) script.
 
 It also uses [Gradle](https://gradle.org/) and [Java](https://java.com/).

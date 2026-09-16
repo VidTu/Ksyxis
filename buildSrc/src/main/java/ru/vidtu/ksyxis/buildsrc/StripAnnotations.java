@@ -74,7 +74,7 @@ public final class StripAnnotations {
 
     /// A mutable cache for individual annotations for [#STRIPPED_PACKAGES].
     ///
-    /// This cache is **not** thread-safe and it is the only part of the
+    /// This cache is **not** thread-safe, and it is the only part of the
     /// `static`(!) non-thread safe API in the *Strip* implementation.
     ///
     /// @see #STRIPPED_PACKAGES

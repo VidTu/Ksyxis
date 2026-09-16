@@ -160,7 +160,7 @@ final class CompileHierarchyResolver implements ClassHierarchyResolver, Closeabl
                 // Get or create the file-system.
                 final FileSystem system = this.systems.computeIfAbsent(jar, CompileHierarchyResolver::openJarFileSystem);
 
-                // Search for a file, skip if doesn't exist.
+                // Search for a file, skip if it doesn't exist.
                 final Path innerPath = system.getPath(name);
                 if (!Files.isRegularFile(innerPath)) continue;
 

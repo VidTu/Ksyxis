@@ -107,7 +107,7 @@ public final class MinecraftServerMixin {
     private int ksyxis_prepareLevels_spawnChunkRadius_getInt(final int spawnChunks) {
         // Assert.
         if (Variables.DEBUG_ASSERTS) {
-            assert ((spawnChunks >= 0) && (spawnChunks <= Constants.MAXIMUM_SPAWN_CHUNKS_V2)) : "Ksyxis: Gamerule 'spawnChunkRadius' is not in the [0.." +  Constants.MAXIMUM_SPAWN_CHUNKS_V2 + "] range in MinecraftServerMixin. (spawnChunks: " + spawnChunks + ", server: " + this + ')';
+            assert ((spawnChunks >= 0) && (spawnChunks <= Constants.MAXIMUM_SPAWN_CHUNKS_V2)) : "Ksyxis: Gamerule 'spawnChunkRadius' is not in the [0.." + Constants.MAXIMUM_SPAWN_CHUNKS_V2 + "] range in MinecraftServerMixin. (spawnChunks: " + spawnChunks + ", server: " + this + ')';
         }
 
         // Log. (**DEBUG**)

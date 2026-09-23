@@ -43,7 +43,7 @@ logoFile = "ksyxis.png"
 logoBlur = true
 iconFile = "ksyxis.png"
 authors = "VidTu"
-credits = "Fhilips613"
+credits = "Fhilips613, baturax"
 description = "Speed up your world loading by removing unneeded chunks."
 
 [[mixins]]

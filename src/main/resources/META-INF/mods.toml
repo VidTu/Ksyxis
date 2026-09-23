@@ -42,7 +42,7 @@ logoFile = "ksyxis.png"
 logoBlur = true
 iconFile = "ksyxis.png"
 authors = "VidTu"
-credits = "Fhilips613"
+credits = "Fhilips613, baturax"
 displayTest = "IGNORE_ALL_VERSION"
 description = "Speed up your world loading by removing unneeded chunks."
 

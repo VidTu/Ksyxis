@@ -9,7 +9,9 @@
     "updateUrl": "https://raw.githubusercontent.com/VidTu/Ksyxis/main/updater_ksyxis_ancient_forge.json",
     "updateJSON": "https://raw.githubusercontent.com/VidTu/Ksyxis/main/updater_ksyxis_legacy_forge.json",
     "authorList": [
-      "VidTu"
+      "VidTu",
+      "Fhilips613",
+      "baturax"
     ]
   }
 ]

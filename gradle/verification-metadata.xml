@@ -848,41 +848,41 @@
             <sha512 value="b33f5cf3404c4f9f5cbb69a43dcde2d6f06d6cb3d00444dbce879a1bf14f0be4e3093f21be1aa85104cf45ae86ba69374949e35ed567f82f6ede5812140628de" origin="" reason=""/>
          </artifact>
       </component>
-      <component group="org.gradle" name="github-dependency-graph-gradle-plugin" version="1.4.2">
-         <artifact name="github-dependency-graph-gradle-plugin-1.4.2-javadoc.jar">
+      <component group="org.gradle" name="github-dependency-graph-gradle-plugin" version="1.5.0">
+         <artifact name="github-dependency-graph-gradle-plugin-1.5.0-javadoc.jar">
             <pgp value="E2879931BCA1A42E55F2D64DD9B2DFBD9F3298BA"/>
-            <md5 value="49fa40f6774cdb01777c0105a41e1e18" origin="" reason=""/>
-            <sha1 value="4f40010afbe52825651aa4b3d7b309a376ac408a" origin="" reason=""/>
-            <sha256 value="b81b891e0f67da0bfc61b9b0c33bfd1f1e8ff49d81ce392e57195e8c6e80b6e1" origin="" reason=""/>
-            <sha512 value="127887ffa7d03b1eb6228c08215f7c929b64a4a8def049992c217b41202fdff4046f395fd153517af3cacccc2abfa557b25b5d6c16d2cc1b1ebe1428b6e7be74" origin="" reason=""/>
+            <md5 value="237edb3ece6cc1f42793e27ec4e9836d" origin="" reason=""/>
+            <sha1 value="17c9c0ec956055562849bff5b4d76a6ac6fbd6a4" origin="" reason=""/>
+            <sha256 value="25d2cde6e35772ad0903790085303447c89af9ab583e1249efd7bf898675069e" origin="" reason=""/>
+            <sha512 value="213e0ec74636793b77c5611032f2db59d61cd44044b85aebc60c6a637ac5fbb69b09c2235701a6283501ea397818bef531cbf1e22d49be86c28a5cfe622d1b02" origin="" reason=""/>
          </artifact>
-         <artifact name="github-dependency-graph-gradle-plugin-1.4.2-sources.jar">
+         <artifact name="github-dependency-graph-gradle-plugin-1.5.0-sources.jar">
             <pgp value="E2879931BCA1A42E55F2D64DD9B2DFBD9F3298BA"/>
-            <md5 value="49608bf1cee10100f11bf681baee5342" origin="" reason=""/>
-            <sha1 value="284694b39f28d229d89c10d9ec41f2173740b9dd" origin="" reason=""/>
-            <sha256 value="10fe6b1ee88dbe2cac2e066d1bc99e50fa4f3aa592a11c9d7bf95d194d8ea677" origin="" reason=""/>
-            <sha512 value="5ca3987be775f023d086fe123adaff642a5232d358bab678cdd0ad614826430bdc013c3d93f8face40ff1b2e5166fafddec400416c90f17bba2f0beb7ba5aa8f" origin="" reason=""/>
+            <md5 value="43416ea7a52cb24c71aaa1f26514453c" origin="" reason=""/>
+            <sha1 value="be94baad41b9ff464c6e3e92f1dc38bb033bc960" origin="" reason=""/>
+            <sha256 value="7178f58ec8cbe842f1e1cccaebc52de166760b62e886fe221229c60e58b6e143" origin="" reason=""/>
+            <sha512 value="55ea0fd54c8355d1b5e619a5429b419051ff937d87770de3f38dfb32c5ac20ab9b5d453b7aa164035657ce3a5f539084be7c835a75ab0d1f2d3c30a36097b982" origin="" reason=""/>
          </artifact>
-         <artifact name="github-dependency-graph-gradle-plugin-1.4.2.jar">
+         <artifact name="github-dependency-graph-gradle-plugin-1.5.0.jar">
             <pgp value="E2879931BCA1A42E55F2D64DD9B2DFBD9F3298BA"/>
-            <md5 value="8ec7a492218ee87eb30c108688678a1d" origin="" reason=""/>
-            <sha1 value="c450ecb92314df857e7858092e0f33414987088c" origin="" reason=""/>
-            <sha256 value="93e9b38d7e1cdc54dd6a572e36ec44f5653248252e2cdec2a14b95ab56696f21" origin="" reason=""/>
-            <sha512 value="7101349c73afeb0c8f8892f3c1c1f3d71745d12048383027207ef215fa77ac742fede3a36412ce80e19e58434a546b8b99b837db30ae63c987bdd352b03bdc53" origin="" reason=""/>
+            <md5 value="e45292a211fb26ce8c71ae01a6b9f288" origin="" reason=""/>
+            <sha1 value="b31f015d20da88fa5edd670d941ee11bdbc23b21" origin="" reason=""/>
+            <sha256 value="b9f22fb63fcf0e06d0b16c2446ea32442e1fdf7ec2570fe41439c5c8ccc2c1c8" origin="" reason=""/>
+            <sha512 value="16f85107701960df3b39a50e202693e4d0693d99c166a3091593ac7351a2e503b336b359c799a331bc99a38bd6f77efeab2eeeb2614773b3e302a17885ceeb45" origin="" reason=""/>
          </artifact>
-         <artifact name="github-dependency-graph-gradle-plugin-1.4.2.module">
+         <artifact name="github-dependency-graph-gradle-plugin-1.5.0.module">
             <pgp value="E2879931BCA1A42E55F2D64DD9B2DFBD9F3298BA"/>
-            <md5 value="85b4bded2f1105fe30969c0ecfa799ab" origin="" reason=""/>
-            <sha1 value="6bf693d4c040192b47ca7295dc4d24c81b4562f0" origin="" reason=""/>
-            <sha256 value="9c1563fb3695c2a4aa09ecc5e241b5a4cd84160046023dea156c3d0b14ec2079" origin="" reason=""/>
-            <sha512 value="ab17376049316bbf9823c7818fe6b8601657cd6ca512871ee9b3222d64fdca7a1afa5737583221356139b20513a9ae8ce3ac34124a0b216f6e90b6906c8e6bd9" origin="" reason=""/>
+            <md5 value="b9b8c2e7976e668efc7ead93fab42b23" origin="" reason=""/>
+            <sha1 value="43b398de6d87688d89fb87a671543a961df358f4" origin="" reason=""/>
+            <sha256 value="4a7e577689dba205833b01ad8ab90d44ff585b0ced280fc662a1e4a00ecca63b" origin="" reason=""/>
+            <sha512 value="d6d8d6796ac0b56903a7282e20d471b4c391f242fbe3354778af530d7ec1e3fb55b642e493c3db51753c1fd96749124e5fedfea8b1f18d019010f38519737917" origin="" reason=""/>
          </artifact>
-         <artifact name="github-dependency-graph-gradle-plugin-1.4.2.pom">
+         <artifact name="github-dependency-graph-gradle-plugin-1.5.0.pom">
             <pgp value="E2879931BCA1A42E55F2D64DD9B2DFBD9F3298BA"/>
-            <md5 value="d59d77f9a526c082a239cb16b12f8bf5" origin="" reason=""/>
-            <sha1 value="8c9e5024de88281a3dfc2468347b29494a126611" origin="" reason=""/>
-            <sha256 value="a2702c52c158c68e9f4e89240d61a31d3cdefd026338c1d2b1fb017ee97be180" origin="" reason=""/>
-            <sha512 value="d922c678945ef1ef191b561dca947953ef5ef60966a6d4aa6cff3c65540fa2c5121c72d0a72e47a43b4453526b43d11409bb5ade4a4291b245aae69017eb2040" origin="" reason=""/>
+            <md5 value="ee7353157e9ac178c1bff20d54628987" origin="" reason=""/>
+            <sha1 value="29ea721e339a442f4a1b9b4369f992afd37d4827" origin="" reason=""/>
+            <sha256 value="f8555d200cfcebb55af5d6c9222d8b228d06f7a8b8de6dff3fde0c131a120337" origin="" reason=""/>
+            <sha512 value="94ba2de4aa9f3740e12c4aa69a27f841b4fc6252f40a8d710c4d154339016dedcde4f6630af12cfd493fa773aada45c09e7a445ece6464e3a2c4f7225909f2d7" origin="" reason=""/>
          </artifact>
       </component>
       <component group="org.gradle.toolchains" name="foojay-resolver" version="1.0.0">

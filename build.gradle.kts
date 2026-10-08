@@ -159,8 +159,9 @@ tasks.withType<ProcessResources> {
     inputs.property("version", version)
 
     // Expand contributors.
-    val contributors = file("dev/contributors.txt").readLines()
-        .filter { it.isNotEmpty() && !it.startsWith('#') }
+    val contributors = "${findProperty("contributors")}"
+        .split(',')
+        .map { it.trim() }
         .toSet()
     inputs.property("contributorsPlain", contributors.joinToString(", "))
     inputs.property("contributorsJson", contributors.joinToString("\", \""))

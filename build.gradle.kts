@@ -157,6 +157,15 @@ tasks.withType<ProcessResources> {
 
     // Expand version.
     inputs.property("version", version)
+
+    // Expand contributors.
+    val contributors = file("dev/contributors.txt").readLines()
+        .filter { it.isNotEmpty() && !it.startsWith('#') }
+        .toSet()
+    inputs.property("contributorsPlain", contributors.joinToString(", "))
+    inputs.property("contributorsJson", contributors.joinToString("\", \""))
+
+    // Replace properties.
     filesMatching(listOf("fabric.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml", "mcmod.info")) {
         expand(inputs.properties)
     }

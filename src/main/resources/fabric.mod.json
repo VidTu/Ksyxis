@@ -8,9 +8,7 @@
     "VidTu"
   ],
   "contributors": [
-    "Fhilips613",
-    "baturax",
-    "RockChen-create"
+    "${contributorsJson}"
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/ksyxis",

@@ -25,31 +25,10 @@
 #
 # SPDX-License-Identifier: MIT
 
-modLoader = "javafml"
-loaderVersion = "*"
-license = "MIT"
-issueTrackerURL = "https://github.com/VidTu/Ksyxis/issues"
-
-[[mods]]
-modId = "ksyxis"
-version = "${version}"
-displayName = "Ksyxis"
-updateJSONURL = "https://raw.githubusercontent.com/VidTu/Ksyxis/main/updater_ksyxis_forge.json"
-displayURL = "https://modrinth.com/mod/ksyxis"
-issueTrackerURL = "https://github.com/VidTu/Ksyxis/issues"
-itemIcon = "porkchop"
-logoFile = "ksyxis.png"
-logoBlur = true
-iconFile = "ksyxis.png"
-authors = "VidTu"
-credits = "${contributorsPlain}"
-displayTest = "IGNORE_ALL_VERSION"
-description = "Speed up your world loading by removing unneeded chunks."
-
-[[mixins]]
-config = "ksyxis.mixins.json"
-
-[modproperties.ksyxis]
-catalogueImageIcon = "ksyxis.png"
-catalogueItemIcon = "porkchop"
-catalogueBackground = "ksyxis_background.png"
+# List of contributors, sorted chronologically oldest to newest.
+# If you're making a "significant" PR and want to be credited for it,
+# feel free to add your GitHub username to the end of this list.
+# Empty lines and lines starting with "#" are ignored.
+Fhilips613
+baturax
+RockChen-create

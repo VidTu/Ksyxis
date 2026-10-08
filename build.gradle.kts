@@ -162,7 +162,6 @@ tasks.withType<ProcessResources> {
     val contributors = "${findProperty("contributors")}"
         .split(',')
         .map { it.trim() }
-        .toSet()
     inputs.property("contributorsPlain", contributors.joinToString(", "))
     inputs.property("contributorsJson", contributors.joinToString("\", \""))
 

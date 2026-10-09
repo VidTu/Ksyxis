@@ -159,7 +159,7 @@ public final class KPlugin implements IMixinConfigPlugin {
                 LOGGER.debug(MARKER, "Ksyxis: Bytecode provider threw an CNFE, mixin WON'T be applied. (targetClassName: {}, mixinClassName: {}, plugin: {})", new Object[]{targetClassName, mixinClassName, this, cnfe}); // <- Array for compat with older Log4j2.
             }
 
-            // Provider threw an ClassNotFoundException. Don't apply mixin to avoid warnings. 
+            // Provider threw an ClassNotFoundException. Don't apply mixin to avoid warnings.
             return false;
         } catch (final Throwable t) {
             // Rethrow.

@@ -52,19 +52,22 @@ For better results, every release should be compiled with:
 
 Ksyxis has implemented supply chain validation where possible:
 
-- Gradle Wrapper (`gradle/wrapper/gradle-wrapper.jar`) is
-  verified on [GitHub CI](../.github/workflows) on every
-  commit by `gradle/actions/setup-gradle` action. Verify
-  [it](https://gradle.org/release-checksums/) locally too.
+- Gradle Wrapper (`gradle/wrapper/gradle-wrapper.jar`) is verified on
+  [GitHub CI](https://github.com/VidTu/Ksyxis/tree/main/.github/workflows)
+  on every commit by `gradle/actions/setup-gradle` action.
+  Verify [it](https://gradle.org/release-checksums/) locally too.
 - Gradle distribution is verified by the wrapper via `distributionSha256Sum` in
-  [gradle-wrapper.properties](../gradle/wrapper/gradle-wrapper.properties)
+  [gradle-wrapper.properties](https://github.com/VidTu/Ksyxis/blob/main/gradle/wrapper/gradle-wrapper.properties)
   file after downloading.
 - All Gradle plugins and dependencies used are verified via hashes/checksums in
-  [verification-metadata.xml](../gradle/verification-metadata.xml). To avoid
-  fetching keys for signatures, the local PGP keystore is used from armored
-  [verification-keyring.keys](../gradle/verification-keyring.keys). You can
-  disable or replace the keyring if you want to use your own pubkey keystore.
-- All [GitHub CI](../.github/workflows) workflows are SHA-pinned.
+  [verification-metadata.xml](https://github.com/VidTu/Ksyxis/blob/main/gradle/verification-metadata.xml).
+  To avoid fetching keys for signatures, the
+  local PGP keystore is used from armored
+  [verification-keyring.keys](https://github.com/VidTu/Ksyxis/blob/main/gradle/verification-keyring.keys).
+  You can disable or replace the keyring if
+  you want to use your own pubkey keystore.
+- All [GitHub CI](https://github.com/VidTu/Ksyxis/tree/main/.github/workflows)
+  workflows are SHA-pinned.
 
 However, Gradle Java Toolchains and Foojay Disco API Resolver
 are missing supply-chain verification. Therefore, you must

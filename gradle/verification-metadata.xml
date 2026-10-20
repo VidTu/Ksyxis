@@ -112,34 +112,34 @@
             <sha512 value="52e5b1568893e212c1d09d41806a2f79249552ce1dfc82bd547e1301fabe17bf60afdcb2dcc479b04a99419319912c9facf1fc6e4ed82185a1c2758c5e32bbd3" origin="" reason=""/>
          </artifact>
       </component>
-      <component group="gradle" name="gradle" version="9.8.1">
-         <artifact name="gradle-9.8.1-all.zip">
+      <component group="gradle" name="gradle" version="9.8.2">
+         <artifact name="gradle-9.8.2-all.zip">
             <pgp value="F3FF33E96F18AA62DD580F9651FBF517CE6D6B80"/>
-            <md5 value="d7fd4dfe46eee9866f3f410cbeab7c09" origin="" reason=""/>
-            <sha1 value="4123eeb3333cb5ee2f87ea0bcdc6525f0b91f870" origin="" reason=""/>
-            <sha256 value="5ceda8d2425eb2af196dec31b6fc1f38af2fb638fd621f86fa685805f2262224" origin="" reason=""/>
-            <sha512 value="5c7800cda6e66b4fd21b06f41b01d218ad731af88123c69c9d831b03b24c1cffeb279e893e9db94971e2607825ce535b9a8922fb88fb2b03d5a0c701f95e8af4" origin="" reason=""/>
+            <md5 value="64fb333309d8a166f959b8cf66e44d1d" origin="" reason=""/>
+            <sha1 value="64d2c45c91a6f8b6d8ffc839066271c1707127c2" origin="" reason=""/>
+            <sha256 value="a1bb7e9651ef09e4cd9a62d471564e0ee23b5757e5f21fd7358d7cfc21018fdf" origin="" reason=""/>
+            <sha512 value="d5053902fee93ba46cf6c9951ab4af2fce04855cb89388362f704f37d8034bb4e198ef6aa32304449f52a39fbcab1ca3bc9bf15ae079fa66f2953e32746968ec" origin="" reason=""/>
          </artifact>
-         <artifact name="gradle-9.8.1-bin.zip">
+         <artifact name="gradle-9.8.2-bin.zip">
             <pgp value="F3FF33E96F18AA62DD580F9651FBF517CE6D6B80"/>
-            <md5 value="a2e1e2382cc33516314c8ff470812969" origin="" reason=""/>
-            <sha1 value="cbee4086f957b9a3cfdadbc0b9d3d5db19a263ea" origin="" reason=""/>
-            <sha256 value="dce76f55f8e251a3a1f130eb120f30b3d271de2b76c9b0729d316b5a1b6dc01f" origin="" reason=""/>
-            <sha512 value="f11f3fdb96f03fdf3b4d463048a73daddc6afd8c53229fb3d2684a0e88c4714b4453386034b156392aef2d84b0aa9429abd3970d587983e307518acef2015472" origin="" reason=""/>
+            <md5 value="aca2bf408dd81f0949aaccc115721af8" origin="" reason=""/>
+            <sha1 value="4035c5da907a1f602c315e0ec4e51ad7ebefd54c" origin="" reason=""/>
+            <sha256 value="21bd5da2de49b642904077f38c0efdc7778e92b3ed0889392dca61b97e389607" origin="" reason=""/>
+            <sha512 value="452e0bcede625910b32bf5b4dbfe137ec937bb1c31259bc3d9dce6a00abcf3a596b61cd7e4fd09f5fb624ad48463904bbb6fe5be2a4e94caccfea33b7237887e" origin="" reason=""/>
          </artifact>
-         <artifact name="gradle-9.8.1-docs.zip">
+         <artifact name="gradle-9.8.2-docs.zip">
             <pgp value="F3FF33E96F18AA62DD580F9651FBF517CE6D6B80"/>
-            <md5 value="6697666129e64387a6f89f8e108aade6" origin="" reason=""/>
-            <sha1 value="6d3c641ebc4714c93f52c3ebab09330485b824a5" origin="" reason=""/>
-            <sha256 value="0a65cfebb46bf66549f2c3777a602b22f3ed5b25d25cac9f6d0ee087d5bb0f91" origin="" reason=""/>
-            <sha512 value="42fa8d42130761e1218e679fd171ac7a77e55ae1ea0738188d4beb55c0bf49f8957243608b146a802f35349623eabf1a58609dd0a3c42f77820045a16df43197" origin="" reason=""/>
+            <md5 value="cef65e10f213fdd5eacbcc892ce43e81" origin="" reason=""/>
+            <sha1 value="ae052dedfdbffdc9354b53552df9536d3ceff36d" origin="" reason=""/>
+            <sha256 value="b3846cf5293626f1b680f13263091dc4e9b9fc2c2fbf4755c44d6e5ffbffad48" origin="" reason=""/>
+            <sha512 value="39b6f59c5f93f68911e0095cdb002119de6fbc72d8dcf4298de6cdc456f2c19b1064df3f090458a18d9ac91ff43053d695f461929441876219633edbad580b3b" origin="" reason=""/>
          </artifact>
-         <artifact name="gradle-9.8.1-src.zip">
+         <artifact name="gradle-9.8.2-src.zip">
             <pgp value="F3FF33E96F18AA62DD580F9651FBF517CE6D6B80"/>
-            <md5 value="1928b7940afad2e04ee41ab3941f9072" origin="" reason=""/>
-            <sha1 value="03cdf244a5d2a812733322cce78870175b0b94c1" origin="" reason=""/>
-            <sha256 value="6c5598a3253d0a61a39b27363aef32780cf235dc07ad50bafb30c7c0f309c49c" origin="" reason=""/>
-            <sha512 value="8d5b8f1d62b2933d74418101c0888adfcac68f923a71bfe40e0deed617a963335dfc6c17c7e0319c2c40b6c372bde0b5b1db6fbdf3f4333395b4d5170b460007" origin="" reason=""/>
+            <md5 value="c0763d6d3c1dc1895cdb97aa1d59b9a0" origin="" reason=""/>
+            <sha1 value="3b884788c35b50321577cadecdeb985f9e192afc" origin="" reason=""/>
+            <sha256 value="96c9aba0564daa2998f578b589eba9ae1f6656e368fde85f7132e05321bab553" origin="" reason=""/>
+            <sha512 value="6edc5e010d60efb61beea38e37de327143794a7b2e5fda5d7f76dc0e617e9710e03dbc6466afa6bbe22dceab9e51d75da08b091eea1d05d4436c3bd552896026" origin="" reason=""/>
          </artifact>
       </component>
       <component group="gradle.plugin.org.jetbrains.gradle.plugin.idea-ext" name="gradle-idea-ext" version="1.4.1">

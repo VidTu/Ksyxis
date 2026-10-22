@@ -73,43 +73,43 @@
             <sha512 value="8f2498a254bcb6aa92563a3fdec533039055e1559a91a49be354b1cc4ffb39de2623a2c590308930d34eddf929567463baeafa0e91baf98c2bb0495260bba8d4" origin="" reason=""/>
          </artifact>
       </component>
-      <component group="com.google.errorprone" name="error_prone_annotations" version="2.50.0">
-         <artifact name="error_prone_annotations-2.50.0-javadoc.jar">
+      <component group="com.google.errorprone" name="error_prone_annotations" version="2.51.0">
+         <artifact name="error_prone_annotations-2.51.0-javadoc.jar">
             <pgp value="EE0CA873074092F806F59B65D364ABAA39A47320"/>
-            <md5 value="9185ace7b73435d30e2e218139e60b2e" origin="" reason=""/>
-            <sha1 value="aef1f107957bb4e361f59ae8575a80113010c6be" origin="" reason=""/>
-            <sha256 value="4ce91b4bf526be4740e48424a8c010264ff05c2cd8d39adbf1b03ce0d05a25c2" origin="" reason=""/>
-            <sha512 value="373db982c0b08aac522e308cb0a0c75416d70b3f930eef9d478cb813ad0c29b2d02f909d9799861f25d3b9109d22282bb9ae3c4e41fe00ba5b412e1a67cad984" origin="" reason=""/>
+            <md5 value="57854f092a0ec21afe6e710c65c080c2" origin="" reason=""/>
+            <sha1 value="97037dab3d222601ed494a20f36db86e364b0a10" origin="" reason=""/>
+            <sha256 value="239a1036c3747e731b492e0de780fefbca5735bc671b438100c95a4b42f3ba05" origin="" reason=""/>
+            <sha512 value="9ebb994e871f02f917e7866a8647a983fe84647e9b3af742d32c6684647cb9a586b5ef99081426473da2722cccd7a8bcc6c5581b9ba7e3494f26bdb3d9e92ebb" origin="" reason=""/>
          </artifact>
-         <artifact name="error_prone_annotations-2.50.0-sources.jar">
+         <artifact name="error_prone_annotations-2.51.0-sources.jar">
             <pgp value="EE0CA873074092F806F59B65D364ABAA39A47320"/>
-            <md5 value="ffeedd303439307908f433ae99886811" origin="" reason=""/>
-            <sha1 value="af21e9b138b01efccae9fd17fb9ed5930bf63d1f" origin="" reason=""/>
-            <sha256 value="f7f5b870d5f18bcdcd9d8dc44d6ae3593cc299d32f888aeb29fefe87661473d7" origin="" reason=""/>
-            <sha512 value="393f685d2d5a43e868cbc929839411316264f601c35be17be236cad230cf6b14239e9fb828927680e91d253230b3de849fbd4f4ac3a4bfb9e8659543ff87cfc3" origin="" reason=""/>
+            <md5 value="87a3e77e71fb45e81605bacc2e53c642" origin="" reason=""/>
+            <sha1 value="7f926d21c4e45804db56224159674a9c32728f1a" origin="" reason=""/>
+            <sha256 value="bb2412a58d45a34b5cdd1baef3f9f5e3ca5a5d6754174f7ba0789dfe164a4afe" origin="" reason=""/>
+            <sha512 value="f52e94baa7ab58321080cebcef7b1a8144fe7b498a901e3874ac55136b2ed7d4ba28bd5723a6db3a97bfd6dfdaa1d188c56a9b964ed44df403045244b1d0a85e" origin="" reason=""/>
          </artifact>
-         <artifact name="error_prone_annotations-2.50.0.jar">
+         <artifact name="error_prone_annotations-2.51.0.jar">
             <pgp value="EE0CA873074092F806F59B65D364ABAA39A47320"/>
-            <md5 value="1ded1848cfd4f5167e00824faf9c4d3b" origin="" reason=""/>
-            <sha1 value="74ba43e49ab1184d41634af2ef0047e82c4064b0" origin="" reason=""/>
-            <sha256 value="4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a" origin="" reason=""/>
-            <sha512 value="f867b1a1fbc057fcfc37c2fa86082f5965ad6a1c45373eac6cfa6ec058cedbf7b348ab4f3d4fea2d4d105ecc401c14f24d9b16f344507e126a221d50532cb8b2" origin="" reason=""/>
+            <md5 value="8bceb3a73c8aa0d386e0df54be5ed111" origin="" reason=""/>
+            <sha1 value="1aca080cb0adead565c6cf4ce45f8071aa78c14c" origin="" reason=""/>
+            <sha256 value="51a6d8348c7e307e47183859c07597dc8a2899c5d1b6f18a471bccaa3203d5cf" origin="" reason=""/>
+            <sha512 value="9f8c8828f2afec5b99122447feb0c7cc653f2da3097c70f93b89bb2d6d9c04e5079a2524ca0f57b2b1ed1640e60bd8b3173651da227822a5876a1038957c024a" origin="" reason=""/>
          </artifact>
-         <artifact name="error_prone_annotations-2.50.0.pom">
+         <artifact name="error_prone_annotations-2.51.0.pom">
             <pgp value="EE0CA873074092F806F59B65D364ABAA39A47320"/>
-            <md5 value="f19763ceb6a070b68f0bda75922db281" origin="" reason=""/>
-            <sha1 value="99e2454fb122cc003933b3db9779b347517caa90" origin="" reason=""/>
-            <sha256 value="71a0680d277324bab46bec4b00f6f111c1b794a931d0d8cda79bcb9246982f92" origin="" reason=""/>
-            <sha512 value="ee01bc4f864400ab1d2eebf7488fb3dae05735dcaada63481f4a6d341c7ba58a6f91065ce67da645c7830f3f059561871d58ff4e4d09eac21715de010eb1d0a6" origin="" reason=""/>
+            <md5 value="e21e6ff438f1a7f4d76d275cc0a92af6" origin="" reason=""/>
+            <sha1 value="d65bbde5039de1a8f7178cfbef0f050a51a470a7" origin="" reason=""/>
+            <sha256 value="77314f3f9bc693cbdf14b9bd8ba9a02d9a2c336431541bf798ef5c71cff483f3" origin="" reason=""/>
+            <sha512 value="a2bcc42ded74825593f7120bce7da35c02ce8a311ce4c50afac09a108065f8fdd80aa59841c6e64b5feb2dfc52fe3095b2c8cb87ccbdde361d740edc1394a233" origin="" reason=""/>
          </artifact>
       </component>
-      <component group="com.google.errorprone" name="error_prone_parent" version="2.50.0">
-         <artifact name="error_prone_parent-2.50.0.pom">
+      <component group="com.google.errorprone" name="error_prone_parent" version="2.51.0">
+         <artifact name="error_prone_parent-2.51.0.pom">
             <pgp value="EE0CA873074092F806F59B65D364ABAA39A47320"/>
-            <md5 value="c0c9787a4563f19ac494307f04c9fda0" origin="" reason=""/>
-            <sha1 value="cda4405b7a45510d6b373442b0855a87a5a05175" origin="" reason=""/>
-            <sha256 value="abf45a019db125b50ff55134ec2af94ae3519761038adf0a60b9bd7b4b8b6254" origin="" reason=""/>
-            <sha512 value="52e5b1568893e212c1d09d41806a2f79249552ce1dfc82bd547e1301fabe17bf60afdcb2dcc479b04a99419319912c9facf1fc6e4ed82185a1c2758c5e32bbd3" origin="" reason=""/>
+            <md5 value="d99977c0a594692d5baadab8910c8156" origin="" reason=""/>
+            <sha1 value="7309bc796f0cf07899d62d930400478c997334d7" origin="" reason=""/>
+            <sha256 value="124642638c795ab1a030a56cc01017957de4415468f47c89109973d63c7643eb" origin="" reason=""/>
+            <sha512 value="26089c9668c1d60b29d374ddd54795ce3fab7daedd0e4829c2c48ed5b4d337492b03dde8580316ab7f462ce31d06477b0eac7b33d26a7f476c611c1243a84e09" origin="" reason=""/>
          </artifact>
       </component>
       <component group="gradle" name="gradle" version="9.8.2">

@@ -34,43 +34,43 @@
             <sha512 value="6910a1e7830f54db78a8a364f7571dfa04ab903aa2e0bec08ffca03cb0bb9ab9fc7cc788c7074cfb9401a7b235ee9b43e4b93c499673c836d0734dcb70e69d44" origin="" reason=""/>
          </artifact>
       </component>
-      <component group="com.google.code.gson" name="gson" version="2.14.0">
-         <artifact name="gson-2.14.0-javadoc.jar">
+      <component group="com.google.code.gson" name="gson" version="2.15.0">
+         <artifact name="gson-2.15.0-javadoc.jar">
             <pgp value="C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7"/>
-            <md5 value="14fb0f9495173ddf4b01cb4107d37ed5" origin="" reason=""/>
-            <sha1 value="8af87a45899617573bf2cd25a9b26ca2c43e0a3c" origin="" reason=""/>
-            <sha256 value="6a99679a5a6a3448571834f56d8614b37327d5e5fceb930d26a40a7734134301" origin="" reason=""/>
-            <sha512 value="364bef833ba4370a8706fb65f1467794d0d3344226b6fce0a0631d6be82ce7608e3ff662b071fa0bd77c73747d8a3cf346c91633f12d033b2447a6a9c99c3224" origin="" reason=""/>
+            <md5 value="7dcbb631bdf7cefdce1008c6b59203a1" origin="" reason=""/>
+            <sha1 value="7ae7d1827fe8350ad16714ae788e040cc36afc1f" origin="" reason=""/>
+            <sha256 value="cda506154cf2f252673c93b3f78ee41323955e89455fb1148aa86c97e50de482" origin="" reason=""/>
+            <sha512 value="497f01f2ee50d6d69ad64e25840626a9a63b69cf2ee7b83e8291742efd0172ffb6d2d5008a9a4d70c8a3e386c06aaebf7aa49e5adebc95323cb4dc6942446916" origin="" reason=""/>
          </artifact>
-         <artifact name="gson-2.14.0-sources.jar">
+         <artifact name="gson-2.15.0-sources.jar">
             <pgp value="C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7"/>
-            <md5 value="57bf08a492eeb3cd0aa688ed08a2c25a" origin="" reason=""/>
-            <sha1 value="cc6b911babf29b06357fce701395a9c1b5b44b0d" origin="" reason=""/>
-            <sha256 value="a4873f0ef88981cab520c3d7449cd89a68e605f15e9fe46e1aa2c77d5f87eb6f" origin="" reason=""/>
-            <sha512 value="aa6e370ac369251f2dc87f878d32b74182ea57055f6b46b11a867b283dfebd971c1fa88afe95b44a23db23a0c9ecd56dcf2596dd514aa51f80920f603735b5fb" origin="" reason=""/>
+            <md5 value="83dc6969adbd4352f2f12c8b7bcfb97c" origin="" reason=""/>
+            <sha1 value="e7b8e6617ee5eca3b23ff03b94486bd3ad642223" origin="" reason=""/>
+            <sha256 value="e689856e33f12904741d481825ee582fa160f751c741836601bc16666dbc7249" origin="" reason=""/>
+            <sha512 value="142bcf681fdb8485fb1353d46e7324ea800256c8083259b7996460c3a20c5a193a258d3a843fc7d4a5a11502f93d71c97c229c3832c626ae2e365a47c2c24744" origin="" reason=""/>
          </artifact>
-         <artifact name="gson-2.14.0.jar">
+         <artifact name="gson-2.15.0.jar">
             <pgp value="C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7"/>
-            <md5 value="43b20830936ec97d8df6b174e3509d9e" origin="" reason=""/>
-            <sha1 value="efc0e34ede4e3204eaefb84a00e55e8c86634382" origin="" reason=""/>
-            <sha256 value="2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f" origin="" reason=""/>
-            <sha512 value="d040d19a47ca2df33365493f9813a1d0a40b91685f7d87ca445b98d37b4c1b801314aef87940dc8b43dd1b0b96f6d5e6e4296778bf1af8dbfb1091425b37da21" origin="" reason=""/>
+            <md5 value="4e7fd0c4d1b60fa0997ad421ea23f946" origin="" reason=""/>
+            <sha1 value="3c8f3903bd90f774de74f126be756bbc1408abcb" origin="" reason=""/>
+            <sha256 value="96d3dd843dc2911de01cdabcd50064cb9e860353102a0a78c96fd833d396fc7d" origin="" reason=""/>
+            <sha512 value="63132e39102cd80877a6b61f84d74a39f480ba12db1f1ace86ab8a8b0f98ce26dd43b0830f40496f32700df0156ba3dfe4af4df1565726350107140305287c07" origin="" reason=""/>
          </artifact>
-         <artifact name="gson-2.14.0.pom">
+         <artifact name="gson-2.15.0.pom">
             <pgp value="C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7"/>
-            <md5 value="85d4ad89a943af1e8bb25a977c0ecf98" origin="" reason=""/>
-            <sha1 value="b64d82caaaff2b6738542937315c4fbded69e4e5" origin="" reason=""/>
-            <sha256 value="1fa0122c0e3733192642861c36be4c6f799a795327a23bdd2922691b6e9ba480" origin="" reason=""/>
-            <sha512 value="e4658b6de3de50bd47a79fe9ca7d6795d78e7d5223782db95ef23aaf4c5f878b81a09ef7096f9888d2e84e5d112ee437c9c85e9153c507b7c21bd6bd88dadb26" origin="" reason=""/>
+            <md5 value="1d598e6a7f136d9dcce58320515d8a71" origin="" reason=""/>
+            <sha1 value="95335bcebf48410e4c3c257d295a8f50c8cc8830" origin="" reason=""/>
+            <sha256 value="426bc968a4e521865a58dd17a60389fed6195a1c357e3eb8bcb7cae31387bcae" origin="" reason=""/>
+            <sha512 value="0c491637a27d0e269e515c125fa1e9f00d0fbc357aea3cc8a2424b16aebb977a0994dee5fba4887db1689da3a55b6751bb9cfd481f5e0e8afffefa88e3968cd5" origin="" reason=""/>
          </artifact>
       </component>
-      <component group="com.google.code.gson" name="gson-parent" version="2.14.0">
-         <artifact name="gson-parent-2.14.0.pom">
+      <component group="com.google.code.gson" name="gson-parent" version="2.15.0">
+         <artifact name="gson-parent-2.15.0.pom">
             <pgp value="C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7"/>
-            <md5 value="59a04d5c00abb8c4f99830830a2952bb" origin="" reason=""/>
-            <sha1 value="68e3b333bb1f2594e68d6daa05ed730118c3e394" origin="" reason=""/>
-            <sha256 value="82b0f6694c5758ab8bb07e05630208d50f589d4b5e04fd0a046d59cdf7ba3d1d" origin="" reason=""/>
-            <sha512 value="8f2498a254bcb6aa92563a3fdec533039055e1559a91a49be354b1cc4ffb39de2623a2c590308930d34eddf929567463baeafa0e91baf98c2bb0495260bba8d4" origin="" reason=""/>
+            <md5 value="27ea0e575e8baf1249bc5649f300e6c7" origin="" reason=""/>
+            <sha1 value="883fd3d2d3fcc0ffef2389ccb45a6407819757fa" origin="" reason=""/>
+            <sha256 value="337664b30ade9b66e373b6efca1aba7421c1f8ff63643b8aa8b6d05d8efe8e8b" origin="" reason=""/>
+            <sha512 value="9c67e46232e2a402421e15cca55e67afab56330e1557e2de1e963c2f111b0b47d8ca08224232696b9b36b8add161f576fe62d17470717774ac13935b07eb3bca" origin="" reason=""/>
          </artifact>
       </component>
       <component group="com.google.errorprone" name="error_prone_annotations" version="2.51.0">

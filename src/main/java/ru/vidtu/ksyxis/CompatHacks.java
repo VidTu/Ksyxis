@@ -58,7 +58,7 @@ public final class CompatHacks {
 
     static {
         // Create a temporary logger. (there's no sense in keeping it after)
-        final Logger logger = LogManager.getLogger("Ksyxis/KCompat");
+        final Logger logger = LogManager.getLogger("Ksyxis/CompatHacks");
 
         // Create the chunks variable.
         /*non-final*/ int chunks;

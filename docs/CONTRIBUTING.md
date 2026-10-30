@@ -140,7 +140,7 @@ proofread and correct the documentation you are reading right now.
 
 AI (LLMs and agents) is allowed for creating both pull requests and issues,
 in part or in whole, as long as [contributing requirements](#contributing)
-are met and the AI assistance is disclosed in the issue/PR description.
+are met, and the AI assistance is disclosed in the issue/PR description.
 
 ## Security
 

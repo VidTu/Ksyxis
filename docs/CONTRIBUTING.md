@@ -13,14 +13,9 @@ if you are not a technical person/not a developer. (and not a nerd)**
 **A**: [Yes.](https://github.com/VidTu/Ksyxis) (Licensed
 under [MIT License](https://github.com/VidTu/Ksyxis/blob/main/LICENSE))
 
-**Q**: Why so much yapping in this README?  
-**A**: ~~I paid for the whole LLM, I'm going to use the whole LLM.~~
-Because writing READMEs is easier than writing actual code.
-
-**Q**: Do you use AI/LLM/Code Generation/Copilot/etc.?  
-**A**: No, the code is 99.67% human-written, because AI is generating dumb stuff,
-especially for Minecraft. If you (or some contributors) will use AI, and it will
-magically® work™, good for you. I don't promote AI nor am I against it.
+**Q**: Was any artificial intelligence (AI) or large language model (LLM) used
+in the creation of this project? Does this project allows AI contributions?  
+**A**: See the "[Artificial Intelligence](#artificial-intelligence)" section.
 
 **Q**: Does Ksyxis have a public API?  
 **A**: Nope. There's no public-facing API in this mod.
@@ -132,6 +127,20 @@ The main requirements for PRs are basically the bare minimum. PRs must be:
 - Relevant (related to the project's functionality)
 - Understandable (by you and project's authors)
 - In English (both the code and the description)
+
+## Artificial Intelligence
+
+### Disclosure
+
+Ksyxis is being written by humans for humans. It contains little to
+no AI-generated code or documentation. However, AI was used to
+proofread and correct the documentation you are reading right now.
+
+### Policy
+
+AI (LLMs and agents) is allowed for creating both pull requests and issues,
+in part or in whole, as long as [contributing requirements](#contributing)
+are met and the AI assistance is disclosed in the issue/PR description.
 
 ## Security
 

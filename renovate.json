@@ -5,5 +5,13 @@
   ],
   "labels": [
     "type:bot"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "java-jdk"
+      ],
+      "enabled": false
+    }
   ]
 }

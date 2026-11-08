@@ -172,7 +172,7 @@ tasks.withType<ProcessResources> {
 
     // Minify JSON-alike (including ".mcmeta" and ".info") and TOML files.
     if (!"${findProperty("ru.vidtu.ksyxis.debug.resources") ?: findProperty("ru.vidtu.ksyxis.debug")}".toBoolean()) {
-        var files = fileTree(outputs.files.asPath)
+        val files = fileTree(outputs.files.asPath)
         doLast {
             val jsonAlike = Regex("^.*\\.(?:json|mcmeta|info)$", RegexOption.IGNORE_CASE)
             files.forEach {

@@ -5,18 +5,8 @@
       <w>CDPATH</w>
       <w>COMSPEC</w>
       <w>CURSEFORGE</w>
-      <w>Dorg</w>
       <w>ERRORLEVEL</w>
-      <w>Fhilips</w>
-      <w>Foojay</w>
       <w>JAVACMD</w>
-      <w>Ksyxis</w>
-      <w>Kyori</w>
-      <w>MODRINTH</w>
-      <w>Modrinth</w>
-      <w>Mojang</w>
-      <w>Ornithe</w>
-      <w>Xdoclint</w>
       <w>alnum</w>
       <w>appname</w>
       <w>astbuilder</w>
@@ -28,18 +18,22 @@
       <w>coremod</w>
       <w>curseforge</w>
       <w>dateutil</w>
+      <w>dorg</w>
       <w>endlocal</w>
       <w>entrypoints</w>
+      <w>fhilips</w>
       <w>foojay</w>
       <w>gamerule</w>
       <w>gson</w>
       <w>jvmargs</w>
       <w>ksyxis</w>
+      <w>kyori</w>
       <w>mkfifo</w>
       <w>mktemp</w>
       <w>modid</w>
       <w>modmenu</w>
       <w>modrinth</w>
+      <w>mojang</w>
       <w>ncdfe</w>
       <w>neoforge</w>
       <w>ornithe</w>
@@ -55,6 +49,7 @@
       <w>vidtu</w>
       <w>wcdfzsgy</w>
       <w>websocat</w>
+      <w>xdoclint</w>
       <w>прогружать</w>
       <w>чанки</w>
     </words>

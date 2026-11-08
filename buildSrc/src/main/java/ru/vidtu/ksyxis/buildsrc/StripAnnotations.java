@@ -46,7 +46,7 @@ import java.util.Set;
 /// @apiNote Internal use only
 @ApiStatus.Internal
 @NullMarked
-public final class StripAnnotations {
+final class StripAnnotations {
     /// An immutable set of annotations VM names to strip.
     ///
     /// @see #STRIPPED_PACKAGES

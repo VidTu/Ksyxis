@@ -29,9 +29,9 @@
 
 package ru.vidtu.ksyxis.buildsrc;
 
+import com.google.errorprone.annotations.CheckReturnValue;
 import com.google.errorprone.annotations.MustBeClosed;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.CheckReturnValue;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

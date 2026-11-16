@@ -33,6 +33,8 @@ import com.google.errorprone.annotations.DoNotCall;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
@@ -137,7 +139,8 @@ public final class KCore implements IFMLLoadingPlugin {
 
             // Log.
             if (Variables.DEBUG_LOGS) {
-                logger.info(KPlugin.MARKER, "Ksyxis: Performing manual Mixin bootstrap... (version: " + Variables.VERSION + ", data: {}, mixin: {})", new Object[]{data, MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
+                final Marker marker = MarkerManager.getMarker("MOD_KSYXIS");
+                logger.info(marker, "Ksyxis: Performing manual Mixin bootstrap... (version: " + Variables.VERSION + ", data: {}, mixin: {})", new Object[]{data, MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
             } else {
                 logger.info("Ksyxis: Performing manual Mixin bootstrap... (version: " + Variables.VERSION + ", mixin: {})", new Object[]{MixinBootstrap.VERSION}); // <- Array for compat with older Log4j2.
             }
